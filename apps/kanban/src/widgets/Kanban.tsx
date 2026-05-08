@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useListboxPattern } from '@p/aria-kernel/patterns'
-import { KEYS, matchKey, type UiEvent } from '@p/aria-kernel'
+import { KEYS, type UiEvent } from '@p/aria-kernel'
 import { useZodCrudResource } from '@p/aria-kernel/adapters/zod-crud'
 import { boardResource } from '../features/boardResource'
 import { normalizeBoard } from '../features/normalizeBoard'
@@ -131,22 +131,22 @@ function Column({
       lb.rootProps.onKeyDown?.(e as unknown as KeyboardEvent & { preventDefault(): void })
       return
     }
-    if (matchKey(e, KEYS.Enter)) {
+    if (e.key === KEYS.Enter) {
       e.preventDefault()
       onStartEdit(focusedCard)
       return
     }
-    if (matchKey(e, KEYS.Backspace)) {
+    if (e.key === KEYS.Backspace) {
       e.preventDefault()
       onEvent({ type: 'remove', id: focusedCard })
       return
     }
-    if (matchKey(e, KEYS.ArrowLeft)) {
+    if (e.key === KEYS.ArrowLeft) {
       e.preventDefault()
       onMoveAcrossColumn(focusedCard, -1)
       return
     }
-    if (matchKey(e, KEYS.ArrowRight)) {
+    if (e.key === KEYS.ArrowRight) {
       e.preventDefault()
       onMoveAcrossColumn(focusedCard, 1)
       return
@@ -214,11 +214,11 @@ function CardEditor({
       value={value}
       onChange={(e) => setValue(e.target.value)}
       onKeyDown={(e) => {
-        if (matchKey(e, KEYS.Enter)) {
+        if (e.key === KEYS.Enter) {
           e.preventDefault()
           e.stopPropagation()
           onCommit(value, !e.shiftKey) // Enter = commit + new sibling, Shift+Enter = commit only
-        } else if (matchKey(e, KEYS.Escape)) {
+        } else if (e.key === KEYS.Escape) {
           e.preventDefault()
           e.stopPropagation()
           onCancel()

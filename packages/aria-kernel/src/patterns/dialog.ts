@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState, type RefObject } from 'react'
 import { escapeKeys } from '../axes/escape'
-import { INTENTS } from '../axes'
+import { INTENT_CHORDS } from '../axes/intentChords'
 import { bindGlobalKeyMap } from '../key/bindGlobalKeyMap'
 import { useFocusTrap, focusTrapKeys } from './focusTrap'
 import type { ItemProps, RootProps } from './types'
 
 /**
  * Dialog 가 등록하는 키 — declarative SSOT 합집합.
- * - Escape: `escape` axis 의 chord (INTENTS.escape.close)
+ * - Escape: `escape` axis 의 chord (INTENT_CHORDS.escape.close)
  * - Tab: `useFocusTrap` 의 focusTrapKeys (modal 일 때만)
  *
  * 손으로 적은 사본 0 — 모든 키가 자기 primitive 의 선언에서 도출됨.
@@ -44,7 +44,7 @@ const FOCUSABLE_SELECTOR = [
  * https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
  *
  * 키 처리는 두 declarative primitive 의 합성:
- * - `bindGlobalKeyMap` + `INTENTS.escape.close` → Escape 닫기
+ * - `bindGlobalKeyMap` + `INTENT_CHORDS.escape.close` → Escape 닫기
  * - `useFocusTrap` → Tab/Shift+Tab DOM focus 경계 (modal=true)
  *
  * focus 진입/복귀 는 별도 layer (focus management) — useEffect 잔존.
@@ -79,7 +79,7 @@ export function useDialogPattern(opts: DialogOptions = {}): {
   useEffect(() => {
     if (!open) return
     return bindGlobalKeyMap(
-      [[INTENTS.escape.close, { type: 'open', id: 'dialog', open: false }]],
+      [[INTENT_CHORDS.escape.close, { type: 'open', id: 'dialog', open: false }]],
       (e) => {
         if (e.type === 'open' && e.open === false) setOpen(false)
       },

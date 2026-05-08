@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { Kanban } from '@apps/kanban'
-import { CopyButton } from '../catalog/CopyButton'
-import { HighlightedCode } from '../catalog/HighlightedCode'
-import { buildAppTabs } from '../catalog/buildAppTabs'
+import { CopyButton, HighlightedCode, buildAppTabs } from '@p/source-viewer'
 
 const SOURCES = import.meta.glob<string>(
   '../../../kanban/src/**/*.{ts,tsx}',

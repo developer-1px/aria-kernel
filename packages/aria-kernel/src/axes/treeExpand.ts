@@ -1,5 +1,5 @@
 import { fromKeyMap, type Axis } from './axis'
-import { INTENTS } from './keys'
+import { INTENT_CHORDS } from './intentChords'
 
 /**
  * treeExpand — APG /treeview/ "Right/Left Arrow". axis 는 추상 의도 (`treeStep`)
@@ -11,7 +11,7 @@ import { INTENTS } from './keys'
  *   Enter/Space → {type:'treeStep', dir:'toggle'}
  */
 export const treeExpand: Axis = fromKeyMap([
-  [INTENTS.treeExpand.open,  { type: 'treeStep', dir: 'forward' }],
-  [INTENTS.treeExpand.close, { type: 'treeStep', dir: 'backward' }],
-  [INTENTS.activate.trigger, { type: 'treeStep', dir: 'toggle' }],
+  [INTENT_CHORDS.treeExpand.open,  { type: 'treeStep', dir: 'forward' }],
+  [INTENT_CHORDS.treeExpand.close, { type: 'treeStep', dir: 'backward' }],
+  [INTENT_CHORDS.activate.trigger, { type: 'treeStep', dir: 'toggle' }],
 ] as never)

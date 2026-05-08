@@ -24,7 +24,7 @@ export const enabledSiblings = (d: NormalizedData, id: string): string[] =>
   siblingsOf(d, id).filter((sid) => !d.entities[sid]?.disabled)
 
 export { navigate } from './navigate'
-export { expand, seedExpand } from './expand'
+export { expand } from './expand'
 export { activate } from './activate'
 export { toggle } from './toggle'
 export { submenuOpen, submenuClose, submenuOpenDown, submenuOpenUp } from './submenu'
@@ -39,8 +39,8 @@ export { gridMultiSelect } from './gridMultiSelect'
 export { escape } from './escape'
 export { openControl } from './openControl'
 export { pageNavigate } from './pageNavigate'
-export { KEYS, INTENTS, matchChord, matchKey, type KeyChord, type KeyName } from './keys'
-export { matchAnyChord } from './chord'
+export { matchChord, matchAnyChord, type Chord } from './chord'
+export { KEYS, type KeyName } from './keys'
 export { INTENT_CHORDS } from './intentChords'
 export {
   ALL_AXIS_EMITS,

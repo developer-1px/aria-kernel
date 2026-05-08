@@ -1,10 +1,8 @@
 /**
- * INTENT_CHORDS — INTENTS 의 string mirror (PRD #38 phase 1).
+ * INTENT_CHORDS — axis 별 intent ↔ tinykeys string chord SSOT (PRD #38).
  *
  * 모든 chord 가 tinykeys string 형식. 100% 직렬화 가능, devtools/문서 가독.
- *
- * 기존 INTENTS (KeyChord object 배열) 는 점진 마이그 기간 동안 유지.
- * 신규 코드는 INTENT_CHORDS 사용 권장.
+ * KeyChord object 형식은 폐기됨 — string 만 정본.
  */
 
 import type { Chord } from './chord'

@@ -1,5 +1,5 @@
 import { useEffect, useRef, type KeyboardEvent, type RefObject } from 'react'
-import { KEYS, matchChord } from '../axes/keys'
+import { matchChord } from '../axes/chord'
 
 /**
  * useSpatialNavigation — children 자유 JSX 컴포넌트(Toolbar/Menubar/DataGrid/TreeGrid 등)의
@@ -118,9 +118,9 @@ export function useSpatialNavigation<T extends HTMLElement = HTMLDivElement>(
     if (dir && allowed.has(dir)) {
       const current = (document.activeElement as HTMLElement | null) ?? items[0]
       target = pickInDirection(items, current, dir)
-    } else if (homeEnd && matchChord(e as unknown as globalThis.KeyboardEvent, { key: KEYS.Home })) {
+    } else if (homeEnd && matchChord(e as unknown as globalThis.KeyboardEvent, 'Home')) {
       target = items[0] ?? null
-    } else if (homeEnd && matchChord(e as unknown as globalThis.KeyboardEvent, { key: KEYS.End })) {
+    } else if (homeEnd && matchChord(e as unknown as globalThis.KeyboardEvent, 'End')) {
       target = items[items.length - 1] ?? null
     }
     if (target) { e.preventDefault(); target.focus() }

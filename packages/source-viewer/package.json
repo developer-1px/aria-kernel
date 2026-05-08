@@ -1,0 +1,17 @@
+{
+  "name": "@p/source-viewer",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "exports": { ".": "./src/index.ts", "./*": "./src/*" },
+  "dependencies": {
+    "@p/aria-kernel": "workspace:*",
+    "@babel/parser": "^7.29.2",
+    "@babel/types": "^7.29.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "shiki": "^4.0.0"
+  }
+}

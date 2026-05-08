@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, type RefObject } from 'react'
-import { INTENTS } from '../axes'
+import { INTENT_CHORDS } from '../axes/intentChords'
 import { escapeKeys } from '../axes/escape'
 import { bindGlobalKeyMap } from '../key/bindGlobalKeyMap'
 import type { ItemProps, RootProps } from './types'
@@ -50,7 +50,7 @@ export function useTooltipPattern(opts: TooltipOptions = {}): {
   useEffect(
     () =>
       bindGlobalKeyMap(
-        [[INTENTS.escape.close, { type: 'open', id: 'tooltip', open: false }]],
+        [[INTENT_CHORDS.escape.close, { type: 'open', id: 'tooltip', open: false }]],
         (e) => {
           if (e.type === 'open' && e.open === false) setOpen(false)
         },

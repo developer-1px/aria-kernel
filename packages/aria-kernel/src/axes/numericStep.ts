@@ -1,6 +1,6 @@
 import { fromKeyMap, type Axis, type KeyHandler } from './axis'
 import type { UiEvent } from '../types'
-import { INTENTS } from './keys'
+import { INTENT_CHORDS } from './intentChords'
 
 /** entity 의 value/min/max/step 을 추출. */
 const readBounds = (d: { entities: Record<string, unknown> }, id: string) => {
@@ -25,7 +25,7 @@ const stepValue = (next: (b: ReturnType<typeof readBounds>) => number): KeyHandl
 /**
  * numericStep — Slider/Splitter/Spinbutton Arrow/Page/Home/End → value step.
  *
- * 키 매핑은 `INTENTS.numericStep` (orientation 별 inc/dec, min/max, pageInc/Dec) 에서 import (SSOT).
+ * 키 매핑은 `INTENT_CHORDS.numericStep` (orientation 별 inc/dec, min/max, pageInc/Dec) 에서 import (SSOT).
  * KeyMap form — chord 매핑 선언, value 산수는 KeyHandler factory 캡슐화.
  *
  * APG: https://www.w3.org/WAI/ARIA/apg/patterns/slider/
@@ -33,13 +33,13 @@ const stepValue = (next: (b: ReturnType<typeof readBounds>) => number): KeyHandl
  *      https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/
  */
 export const numericStep = (orientation: 'horizontal' | 'vertical' = 'horizontal'): Axis => {
-  const o = INTENTS.numericStep[orientation]
+  const o = INTENT_CHORDS.numericStep[orientation]
   return fromKeyMap([
     [o.inc, stepValue((b) => Math.min(b.max, b.value + b.step))],
     [o.dec, stepValue((b) => Math.max(b.min, b.value - b.step))],
-    [INTENTS.numericStep.min, stepValue((b) => b.min)],
-    [INTENTS.numericStep.max, stepValue((b) => b.max)],
-    [INTENTS.numericStep.pageInc, stepValue((b) => Math.min(b.max, b.value + b.step * 10))],
-    [INTENTS.numericStep.pageDec, stepValue((b) => Math.max(b.min, b.value - b.step * 10))],
+    [INTENT_CHORDS.numericStep.min, stepValue((b) => b.min)],
+    [INTENT_CHORDS.numericStep.max, stepValue((b) => b.max)],
+    [INTENT_CHORDS.numericStep.pageInc, stepValue((b) => Math.min(b.max, b.value + b.step * 10))],
+    [INTENT_CHORDS.numericStep.pageDec, stepValue((b) => Math.max(b.min, b.value - b.step * 10))],
   ])
 }

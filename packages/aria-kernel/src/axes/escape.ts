@@ -1,20 +1,16 @@
-import { tagAxis, type Axis } from './axis'
-import { parseTrigger } from '../trigger'
-import { INTENTS, matchChord } from './keys'
+import { fromKeyMap, type Axis } from './axis'
+import { INTENT_CHORDS } from './intentChords'
 
 /** escapeKeys — 선언형 SSOT. escape axis 가 응답하는 chord 의 key 이름. */
-export const escapeKeys = (): readonly string[] => INTENTS.escape.close.map((c) => c.key)
+export const escapeKeys = (): readonly string[] => [INTENT_CHORDS.escape.close]
 
 /**
  * escape — Escape 키 → `{type:'open', id, open:false}` 직렬 emit.
  *
- * 키는 `INTENTS.escape.close` 에서 import — SSOT.
+ * 키는 `INTENT_CHORDS.escape.close` 에서 import — SSOT.
  * Menu/Combobox/Dialog 의 닫기 의도를 axis 로 박제. 어느 layer 가 닫힐지는 host 가
  * onEvent 에서 결정.
  */
-export const escape: Axis = tagAxis((_d, id, t) => {
-  const p = parseTrigger(t)
-  if (p.kind !== 'key') return null
-  if (!matchChord(p, INTENTS.escape.close)) return null
-  return [{ type: 'open', id, open: false }]
-}, ['Escape'])
+export const escape: Axis = fromKeyMap([
+  [INTENT_CHORDS.escape.close, { type: 'open', open: false }],
+] as never)

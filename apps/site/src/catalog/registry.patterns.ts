@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react'
 import { KINDS, type Kind } from './kind'
-import { buildAppTabs, type AppTab } from './buildAppTabs'
+import { buildAppTabs, type AppTab } from '@p/source-viewer'
 
 export interface DemoMeta {
   title: string

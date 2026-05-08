@@ -1,5 +1,5 @@
 import { useEffect, type RefObject } from 'react'
-import { KEYS, matchKey } from '../axes/keys'
+import { KEYS } from '../axes/keys'
 
 const FOCUSABLE_SELECTOR = [
   'a[href]', 'area[href]',
@@ -28,7 +28,7 @@ export const useFocusTrap = (
     const root = rootRef.current
     if (!root) return
     const onKey = (e: KeyboardEvent) => {
-      if (!matchKey(e, KEYS.Tab)) return
+      if (e.key !== KEYS.Tab) return
       const focusables = Array.from(root.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR))
       if (!focusables.length) {
         e.preventDefault()

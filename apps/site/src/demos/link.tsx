@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { KEYS, matchKey } from '@p/aria-kernel'
+import { KEYS } from '@p/aria-kernel'
 
 export const meta = {
   title: 'Link',
@@ -37,9 +37,9 @@ export default function LinkDemo() {
             tabIndex={0}
             onClick={() => trace('span → click')}
             onKeyDown={(e) => {
-              if (matchKey(e, KEYS.Enter) || matchKey(e, KEYS.Space)) {
+              if (e.key === KEYS.Enter || e.key === KEYS.Space) {
                 e.preventDefault()
-                trace(`span → ${matchKey(e, KEYS.Space) ? 'Space' : 'Enter'}`)
+                trace(`span → ${e.key === KEYS.Space ? 'Space' : 'Enter'}`)
               }
             }}
             className="cursor-pointer text-stone-700 underline underline-offset-4 hover:text-stone-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-stone-900"

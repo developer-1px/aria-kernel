@@ -36,6 +36,8 @@ export default defineConfig({
       { find: /^@p\/fs\//, replacement: resolve(__dirname, 'packages/fs/src/') + '/' },
       { find: /^@p\/devtools$/, replacement: resolve(__dirname, 'packages/devtools/src/index.ts') },
       { find: /^@p\/devtools\//, replacement: resolve(__dirname, 'packages/devtools/src/') + '/' },
+      { find: /^@p\/source-viewer$/, replacement: resolve(__dirname, 'packages/source-viewer/src/index.ts') },
+      { find: /^@p\/source-viewer\//, replacement: resolve(__dirname, 'packages/source-viewer/src/') + '/' },
       { find: /^@p\/site$/, replacement: resolve(__dirname, 'apps/site/src/main.tsx') },
       { find: /^@p\/site\//, replacement: resolve(__dirname, 'apps/site/src/') + '/' },
       { find: /^@apps\/([^/]+)$/, replacement: resolve(__dirname, 'apps') + '/$1/src/index.ts' },

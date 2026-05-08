@@ -23,9 +23,6 @@
   "peerDependencies": {
     "zod": "^4.0.0"
   },
-  "dependencies": {
-    "@p/aria-kernel": "workspace:*"
-  },
   "devDependencies": {
     "typescript": "^5.0.0",
     "vitest": "^3.0.0",

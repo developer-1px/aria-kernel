@@ -168,7 +168,7 @@ export function useCarouselPattern(opts: CarouselOptions): {
     'aria-label': label ? `${label} · slides` : 'Slides',
     onKeyDown: (e: React.KeyboardEvent) => {
       if (control !== 'tabs') return
-      // switch (e.key) — pattern 내부의 mini-axis. axis 시스템 미통과 (data 없음 — count/index 만으로 동작) 라 fromKeyMap 대신 switch 그대로 유지. KEYS SSOT 사용으로 raw 문자열 비교는 아님.
+      // switch (e.key) — pattern 내부의 mini-axis. axis 시스템 미통과 (data 없음 — count/index 만으로 동작) 라 fromKeyMap 대신 switch 그대로 유지. KEYS SSOT 사용.
       switch (e.key) {
         case KEYS.ArrowRight: e.preventDefault(); next(); break
         case KEYS.ArrowLeft: e.preventDefault(); prev(); break

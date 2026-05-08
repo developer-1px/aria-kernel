@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Outliner, outlineCrud, outlinerSpec } from '@apps/outliner'
-import { SourceTabs } from '../catalog/SourceTabs'
+import { SourceTabs } from '@p/source-viewer'
 import { KeymapPanel } from '../debug/KeymapPanel'
 import { JsonInspector } from '../debug/JsonInspector'
 

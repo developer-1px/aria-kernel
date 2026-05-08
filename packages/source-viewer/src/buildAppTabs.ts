@@ -108,7 +108,6 @@ const collectImports = (ast: ParseResult<File>): ImportInfo[] => {
       const decl = node as ExportNamedDeclaration
       const names = decl.specifiers.map((s) => {
         if (s.type === 'ExportSpecifier') {
-          const exported = s.exported.type === 'Identifier' ? s.exported.name : s.exported.value
           // re-export: 우리가 알고싶은 건 source 안에서의 local 이름. ExportSpecifier.local 이 그것.
           return s.local.name
         }
@@ -164,7 +163,7 @@ const findDefiningFile = (
       }
     }
     // 4) export * from 'sub' — 재귀
-    if (node.type === 'ExportAllDeclaration' && !node.exported) {
+    if (node.type === 'ExportAllDeclaration') {
       const target = resolveSpec(map, dirOf(file), node.source.value)
       if (!target) continue
       const def = findDefiningFile(map, target, name, visited)

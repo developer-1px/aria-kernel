@@ -1,5 +1,5 @@
 import { CatalogRow, PreviewCenter } from './CatalogRow'
-import { labelFor } from './buildAppTabs'
+import { labelFor } from '@p/source-viewer'
 import type { WrapperEntry } from './registry.wrappers'
 
 export function WrapperScreen({

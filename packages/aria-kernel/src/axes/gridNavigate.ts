@@ -1,7 +1,7 @@
 import { fromKeyMap, type Axis } from './axis'
 import { parentOf } from './index'
 import { getChildren, type NormalizedData } from '../types'
-import { INTENTS } from './keys'
+import { INTENT_CHORDS } from './intentChords'
 
 /**
  * gridNavigate — APG `/grid/` 2D 셀 단위 navigation. focus 는 cell 에 있다.
@@ -38,12 +38,12 @@ export const gridCoord = (d: NormalizedData, id: string): Coord | null => {
 }
 
 export const gridNavigate: Axis = fromKeyMap([
-  [INTENTS.gridNavigate.left,      { type: 'navigate', dir: 'gridLeft' }],
-  [INTENTS.gridNavigate.right,     { type: 'navigate', dir: 'gridRight' }],
-  [INTENTS.gridNavigate.up,        { type: 'navigate', dir: 'gridUp' }],
-  [INTENTS.gridNavigate.down,      { type: 'navigate', dir: 'gridDown' }],
-  [INTENTS.gridNavigate.rowStart,  { type: 'navigate', dir: 'rowStart' }],
-  [INTENTS.gridNavigate.rowEnd,    { type: 'navigate', dir: 'rowEnd' }],
-  [INTENTS.gridNavigate.gridStart, { type: 'navigate', dir: 'gridStart' }],
-  [INTENTS.gridNavigate.gridEnd,   { type: 'navigate', dir: 'gridEnd' }],
+  [INTENT_CHORDS.gridNavigate.left,      { type: 'navigate', dir: 'gridLeft' }],
+  [INTENT_CHORDS.gridNavigate.right,     { type: 'navigate', dir: 'gridRight' }],
+  [INTENT_CHORDS.gridNavigate.up,        { type: 'navigate', dir: 'gridUp' }],
+  [INTENT_CHORDS.gridNavigate.down,      { type: 'navigate', dir: 'gridDown' }],
+  [INTENT_CHORDS.gridNavigate.rowStart,  { type: 'navigate', dir: 'rowStart' }],
+  [INTENT_CHORDS.gridNavigate.rowEnd,    { type: 'navigate', dir: 'rowEnd' }],
+  [INTENT_CHORDS.gridNavigate.gridStart, { type: 'navigate', dir: 'gridStart' }],
+  [INTENT_CHORDS.gridNavigate.gridEnd,   { type: 'navigate', dir: 'gridEnd' }],
 ])

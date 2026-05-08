@@ -2,7 +2,7 @@ import { fromKeyMap, tagAxis, type Axis, type KeyHandler } from './axis'
 import { parseTrigger } from '../trigger'
 import { parentOf } from './index'
 import { getChildren, getSelectAnchor, type NormalizedData, type UiEvent } from '../types'
-import { INTENTS } from './keys'
+import { INTENT_CHORDS } from './intentChords'
 import { gridCoord } from './gridNavigate'
 
 /**
@@ -97,14 +97,14 @@ const rangeRect = (
 }
 
 const gridMultiSelectKeys: Axis = fromKeyMap([
-  [INTENTS.gridMultiSelect.selectColumn, selectColumn],
-  [INTENTS.gridMultiSelect.selectRow, selectRow],
-  [INTENTS.gridMultiSelect.selectAll, selectAllCells],
-  [INTENTS.gridMultiSelect.rangeLeft, rangeArrow(0, -1)],
-  [INTENTS.gridMultiSelect.rangeRight, rangeArrow(0, +1)],
-  [INTENTS.gridMultiSelect.rangeUp, rangeArrow(-1, 0)],
-  [INTENTS.gridMultiSelect.rangeDown, rangeArrow(+1, 0)],
-  [INTENTS.gridMultiSelect.toggle, (_d, id) => [{ type: 'select', ids: [id] }]],
+  [INTENT_CHORDS.gridMultiSelect.selectColumn, selectColumn],
+  [INTENT_CHORDS.gridMultiSelect.selectRow, selectRow],
+  [INTENT_CHORDS.gridMultiSelect.selectAll, selectAllCells],
+  [INTENT_CHORDS.gridMultiSelect.rangeLeft, rangeArrow(0, -1)],
+  [INTENT_CHORDS.gridMultiSelect.rangeRight, rangeArrow(0, +1)],
+  [INTENT_CHORDS.gridMultiSelect.rangeUp, rangeArrow(-1, 0)],
+  [INTENT_CHORDS.gridMultiSelect.rangeDown, rangeArrow(+1, 0)],
+  [INTENT_CHORDS.gridMultiSelect.toggle, (_d, id) => [{ type: 'select', ids: [id] }]],
 ])
 
 export const gridMultiSelect: Axis = tagAxis((d, id, t) => {

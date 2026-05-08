@@ -1,5 +1,5 @@
 import { fromKeyMap, type Axis } from './axis'
-import { INTENTS } from './keys'
+import { INTENT_CHORDS } from './intentChords'
 
 /**
  * treeNavigate — DFS visible 순회 (collapse 반영). 단일 부모 prev/next 는 navigate.
@@ -8,11 +8,8 @@ import { INTENTS } from './keys'
  * 다음 id 산수 (visible-flat) 는 reducer (`resolveNavigate`) 가 담당.
  */
 export const treeNavigate: Axis = fromKeyMap([
-  [INTENTS.treeNavigate.next,         { type: 'navigate', dir: 'visibleNext' }],
-  [INTENTS.treeNavigate.prev,         { type: 'navigate', dir: 'visiblePrev' }],
-  [INTENTS.navigate.start,            { type: 'navigate', dir: 'start' }],
-  [INTENTS.navigate.end,              { type: 'navigate', dir: 'end' }],
-  // $mod+Home/End — visible-flat 정점/끝점 (treegrid: first/last row).
-  [INTENTS.treeNavigate.visibleStart, { type: 'navigate', dir: 'start' }],
-  [INTENTS.treeNavigate.visibleEnd,   { type: 'navigate', dir: 'end' }],
+  [INTENT_CHORDS.treeNavigate.next,  { type: 'navigate', dir: 'visibleNext' }],
+  [INTENT_CHORDS.treeNavigate.prev,  { type: 'navigate', dir: 'visiblePrev' }],
+  [INTENT_CHORDS.navigate.start,     { type: 'navigate', dir: 'start' }],
+  [INTENT_CHORDS.navigate.end,       { type: 'navigate', dir: 'end' }],
 ])

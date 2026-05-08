@@ -32,8 +32,8 @@ export {
   composeAxes, axisKeys, tagAxis, parentOf, siblingsOf, enabledSiblings,
   navigate, activate, toggle, expand, escape, typeahead, treeNavigate, treeExpand,
   multiSelect, select, numericStep,
-  KEYS, INTENTS, matchChord, matchKey, gridNavigate, gridMultiSelect,
-  type Axis, type KeyChord, type KeyName,
+  KEYS, matchChord, matchAnyChord, gridNavigate, gridMultiSelect,
+  type Axis, type Chord, type KeyName,
 } from './axes'
 export {
   navigateOnActivate,
