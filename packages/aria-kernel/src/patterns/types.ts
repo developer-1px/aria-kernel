@@ -103,24 +103,50 @@ export interface BuiltinChordDescriptor {
 }
 
 /**
- * TreeCommand — tree pattern 이 실행 가능한 정의된 명령 어휘. 앱이 chord ↔ command
- * 매핑을 자유롭게 바꾸려면 이 union 안에서 선택. 새 명령은 패턴이 추가해야 함 (앱 확장 X).
+ * TreeAxis — focus 노드 기준 관계 selector. resolveAxis 가 NormalizedData 위에서 평가.
+ * 'self' 기본. 다중 결과(`*Siblings`)는 step source 로만 의미 있음.
  */
-export type TreeCommand =
-  | 'editStart'
-  | 'insertAfter'   // root 면 자동으로 appendChild
-  | 'remove'
-  | 'demote'        // 이전 형제의 마지막 자식으로 이동
-  | 'promote'       // 부모의 다음 형제로 이동
-  | 'undo'
-  | 'redo'
-  | 'paste-as-child'
+export type TreeAxis =
+  | 'self' | 'parent'
+  | 'prevSibling' | 'nextSibling'
+  | 'firstChild' | 'lastChild'
+  | 'followingSiblings' | 'precedingSiblings'
 
-/** TreeCommandDescriptor — 앱이 keymap SSOT 로 선언하는 chord ↔ command 매핑 + 설명. */
+/**
+ * EffectStep — 한 atomic UiEvent 를 데이터로 표현. command 의 명령형 분기를 흡수.
+ *  op       : emit 할 UiEvent['type']
+ *  source   : id 결정 axis. default 'self'. 결과가 비면 step skip → fallback 시도.
+ *  target   : move/paste 의 targetId axis. 결과가 비면 step skip.
+ *  mode     : move/paste 의 mode.
+ *  fallback : source/target 미해결 시 대신 실행할 step (예: insertAfter→appendChild).
+ */
+export interface EffectStep {
+  op: 'editStart' | 'insertAfter' | 'appendChild' | 'remove'
+    | 'move' | 'paste' | 'copy' | 'cut' | 'undo' | 'redo'
+  source?: TreeAxis
+  target?: TreeAxis
+  mode?: 'child' | 'sibling-after' | 'sibling-before' | 'auto' | 'overwrite'
+  fallback?: EffectStep
+}
+
+/** Effect — 단일 step 또는 순차 step 배열. multi-step 은 promote 류 합성에 쓰임. */
+export type Effect = EffectStep | readonly EffectStep[]
+
+/**
+ * TreeCommand — 의미 식별자(메뉴/팔레트 라벨링). 라이브러리 switch 에서는 더 이상 사용하지
+ * 않음 — 실제 동작은 descriptor.effect 가 결정. 자유 문자열로 확장 가능.
+ */
+export type TreeCommand = string
+
+/**
+ * TreeCommandDescriptor — chord ↔ effect 매핑 SSOT.
+ *  effect 는 데이터로 표현된 비즈니스 로직 — 새 command 추가 = 라이브러리 변경 없이 entry 1개.
+ */
 export interface TreeCommandDescriptor {
   chord: string
-  command: TreeCommand
+  command?: TreeCommand
   description?: string
+  effect: Effect
 }
 
 /** rootProps — pattern 컨테이너에 spread. role/aria-* 필수, ref/onKey 포함. */

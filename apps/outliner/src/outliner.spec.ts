@@ -60,16 +60,30 @@ export const outlinerSpec = {
    * 메뉴에 자동 노출되는 형태로 확장).
    */
   inputs: [
-    { chord: 'Enter',       command: 'editStart',      label: 'Rename' },
-    { chord: 'Shift+Enter', command: 'insertAfter',    label: 'Insert sibling' },
-    { chord: 'Backspace',   command: 'remove',         label: 'Delete' },
-    { chord: 'Delete',      command: 'remove',         label: 'Delete' },
-    { chord: 'Tab',         command: 'demote',         label: 'Demote' },
-    { chord: 'Shift+Tab',   command: 'promote',        label: 'Promote' },
-    { chord: 'mod+z',       command: 'undo',           label: 'Undo' },
-    { chord: 'mod+shift+z', command: 'redo',           label: 'Redo' },
-    { chord: 'mod+y',       command: 'redo',           label: 'Redo (Win)' },
-    { chord: 'mod+shift+v', command: 'paste-as-child', label: 'Paste as child' },
+    { chord: 'Enter',       command: 'editStart',      label: 'Rename',
+      effect: { op: 'editStart' } },
+    { chord: 'Shift+Enter', command: 'insertAfter',    label: 'Insert sibling',
+      effect: { op: 'insertAfter', source: 'self', fallback: { op: 'appendChild', source: 'self' } } },
+    { chord: 'Backspace',   command: 'remove',         label: 'Delete',
+      effect: { op: 'remove' } },
+    { chord: 'Delete',      command: 'remove',         label: 'Delete',
+      effect: { op: 'remove' } },
+    { chord: 'Tab',         command: 'demote',         label: 'Demote',
+      effect: { op: 'move', source: 'self', target: 'prevSibling', mode: 'child' } },
+    { chord: 'Shift+Tab',   command: 'promote',        label: 'Promote',
+      // Workflowy/Roam 정본 — following siblings → 자식으로 흡수, self → parent 의 sibling-after
+      effect: [
+        { op: 'move', source: 'followingSiblings', target: 'self', mode: 'child' },
+        { op: 'move', source: 'self', target: 'parent', mode: 'sibling-after' },
+      ] },
+    { chord: 'mod+z',       command: 'undo',           label: 'Undo',
+      effect: { op: 'undo' } },
+    { chord: 'mod+shift+z', command: 'redo',           label: 'Redo',
+      effect: { op: 'redo' } },
+    { chord: 'mod+y',       command: 'redo',           label: 'Redo (Win)',
+      effect: { op: 'redo' } },
+    { chord: 'mod+shift+v', command: 'paste-as-child', label: 'Paste as child',
+      effect: { op: 'paste', source: 'self', mode: 'child' } },
   ] as const,
 
   // ── ③ Pattern — ARIA recipe ─────────────────────────────────────────────

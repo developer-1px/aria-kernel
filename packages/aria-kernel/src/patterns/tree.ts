@@ -12,30 +12,46 @@ import { selectionFollowsFocus as applySelectionFollowsFocus } from '../gesture'
 import { useRovingTabIndex } from '../roving/useRovingTabIndex'
 import type {
   BuiltinChordDescriptor, ItemProps, RootProps, TreeItem,
-  TreeCommand, TreeCommandDescriptor,
+  TreeAxis, EffectStep, Effect, TreeCommandDescriptor,
 } from './types'
 
 /**
- * defaultTreeCommands — editable tree 의 기본 keymap. 앱이 시작점으로 spread 해서
- * 일부만 override 하거나, 전체를 자기 spec 으로 대체할 수 있다.
+ * defaultTreeCommands — editable tree 의 기본 keymap (chord ↔ effect SSOT).
+ * 모든 비즈니스 로직이 effect 데이터로 직렬화돼 있음 — 새 command 추가는 entry 한 줄,
+ * 라이브러리(runEffect) 변경 없음 (axis/op 어휘 내에서 표현 가능한 한).
  */
 export const defaultTreeCommands: readonly TreeCommandDescriptor[] = [
-  { chord: 'Enter',       command: 'editStart',     description: 'Rename — enter inline edit' },
-  { chord: 'Shift+Enter', command: 'insertAfter',   description: 'Insert sibling (or child if root)' },
-  { chord: 'Backspace',   command: 'remove',        description: 'Remove focused item' },
-  { chord: 'Delete',      command: 'remove',        description: 'Remove focused item' },
-  { chord: 'Tab',         command: 'demote',        description: 'Demote (move under previous sibling)' },
-  { chord: 'Shift+Tab',   command: 'promote',       description: 'Promote (move out of parent)' },
-  { chord: 'mod+z',       command: 'undo',          description: 'Undo last operation' },
-  { chord: 'mod+shift+z', command: 'redo',          description: 'Redo' },
-  { chord: 'mod+y',       command: 'redo',          description: 'Redo (Windows fallback)' },
-  { chord: 'mod+shift+v', command: 'paste-as-child', description: 'Paste as child of focused item' },
+  { chord: 'Enter',       command: 'editStart',     description: 'Rename — enter inline edit',
+    effect: { op: 'editStart' } },
+  { chord: 'Shift+Enter', command: 'insertAfter',   description: 'Insert sibling (or child if root)',
+    // self has parent → insertAfter sibling; root-level → appendChild on self
+    effect: { op: 'insertAfter', source: 'self', fallback: { op: 'appendChild', source: 'self' } } },
+  { chord: 'Backspace',   command: 'remove',        description: 'Remove focused item',
+    effect: { op: 'remove' } },
+  { chord: 'Delete',      command: 'remove',        description: 'Remove focused item',
+    effect: { op: 'remove' } },
+  { chord: 'Tab',         command: 'demote',        description: 'Demote (move under previous sibling)',
+    effect: { op: 'move', source: 'self', target: 'prevSibling', mode: 'child' } },
+  { chord: 'Shift+Tab',   command: 'promote',       description: 'Promote (move out of parent)',
+    // Workflowy/Roam 정본: following siblings 가 promoted 의 자식으로 흡수된 뒤, self 가 parent 의 sibling-after
+    effect: [
+      { op: 'move', source: 'followingSiblings', target: 'self', mode: 'child' },
+      { op: 'move', source: 'self', target: 'parent', mode: 'sibling-after' },
+    ] },
+  { chord: 'mod+z',       command: 'undo',          description: 'Undo last operation',
+    effect: { op: 'undo' } },
+  { chord: 'mod+shift+z', command: 'redo',          description: 'Redo',
+    effect: { op: 'redo' } },
+  { chord: 'mod+y',       command: 'redo',          description: 'Redo (Windows fallback)',
+    effect: { op: 'redo' } },
+  { chord: 'mod+shift+v', command: 'paste-as-child', description: 'Paste as child of focused item',
+    effect: { op: 'paste', source: 'self', mode: 'child' } },
 ]
 
 /** treeBuiltinChords — backward-compat. KeymapPanel 등이 쓰던 옛 SSOT 의 default keymap 형태. */
 export const treeBuiltinChords: readonly BuiltinChordDescriptor[] = defaultTreeCommands.map((c) => ({
   chord: c.chord,
-  uiEvent: c.command,
+  uiEvent: c.command ?? (Array.isArray(c.effect) ? c.effect[0]?.op : (c.effect as EffectStep).op) ?? '',
   description: c.description ?? '',
   scope: 'item',
 }))
@@ -79,57 +95,123 @@ const singleAxis = treeAxis()
 const multiAxis = treeAxis({ multiSelectable: true })
 
 /**
- * runCommand — TreeCommand 를 UiEvent 로 변환해 relay. id-바인딩 + data 컨텍스트(findParent)를
- * 한 곳에 가둠. 새 command 추가 시 여기에만 case 추가하면 됨.
+ * resolveAxis — focus 노드 기준 TreeAxis 를 NormalizedData 위에서 평가.
+ * 단수 axis 는 string|null, 복수 axis(`*Siblings`)는 string[] 를 반환.
  */
-function runCommand(
-  cmd: TreeCommand,
-  id: string | null,
+function resolveAxis(
+  axis: TreeAxis,
+  focusId: string,
+  data: NormalizedData,
+  containerId: string,
+): string | string[] | null {
+  switch (axis) {
+    case 'self': return focusId
+    case 'parent': {
+      const p = findParent(data, focusId)
+      return p && p !== containerId ? p : null
+    }
+    case 'prevSibling':
+    case 'nextSibling': {
+      const p = findParent(data, focusId) ?? containerId
+      const sibs = data.relationships[p] ?? []
+      const idx = sibs.indexOf(focusId)
+      if (idx < 0) return null
+      const next = axis === 'prevSibling' ? idx - 1 : idx + 1
+      return sibs[next] ?? null
+    }
+    case 'firstChild':
+    case 'lastChild': {
+      const kids = data.relationships[focusId] ?? []
+      return axis === 'firstChild' ? (kids[0] ?? null) : (kids[kids.length - 1] ?? null)
+    }
+    case 'followingSiblings':
+    case 'precedingSiblings': {
+      const p = findParent(data, focusId) ?? containerId
+      const sibs = data.relationships[p] ?? []
+      const idx = sibs.indexOf(focusId)
+      if (idx < 0) return []
+      return axis === 'followingSiblings' ? sibs.slice(idx + 1) : sibs.slice(0, idx)
+    }
+  }
+}
+
+const isEmpty = (r: string | string[] | null): boolean =>
+  r == null || (Array.isArray(r) && r.length === 0)
+
+/**
+ * runStep — Effect 한 step 을 UiEvent 로 변환해 relay. axis 미해결 시 false 반환 → caller 가
+ * fallback 시도. 새 op 어휘 추가는 이 switch 에 case 1줄, 새 axis 는 resolveAxis 에 case 1줄.
+ */
+function runStep(
+  step: EffectStep,
+  focusId: string | null,
+  data: NormalizedData,
+  containerId: string,
+  relay: (e: UiEvent) => void,
+): boolean {
+  if (step.op === 'undo' || step.op === 'redo') {
+    relay({ type: step.op })
+    return true
+  }
+  if (!focusId || focusId === containerId) return false
+
+  const sourceR = resolveAxis(step.source ?? 'self', focusId, data, containerId)
+  if (isEmpty(sourceR)) return false
+  const sources = Array.isArray(sourceR) ? sourceR : [sourceR as string]
+
+  let targetId: string | null = null
+  if (step.target) {
+    const t = resolveAxis(step.target, focusId, data, containerId)
+    if (isEmpty(t)) return false
+    targetId = Array.isArray(t) ? t[0] : t
+  }
+
+  for (const id of sources) {
+    switch (step.op) {
+      case 'editStart':   relay({ type: 'editStart', id }); break
+      case 'insertAfter': relay({ type: 'insertAfter', siblingId: id }); break
+      case 'appendChild': relay({ type: 'appendChild', parentId: id }); break
+      case 'remove':      relay({ type: 'remove', id }); break
+      case 'copy':        relay({ type: 'copy', id }); break
+      case 'cut':         relay({ type: 'cut', id }); break
+      case 'move':
+        if (targetId) relay({ type: 'move', id, targetId, mode: step.mode === 'child' || step.mode === 'sibling-after' || step.mode === 'sibling-before' ? step.mode : 'child' })
+        break
+      case 'paste': {
+        const mode = step.mode === 'child' || step.mode === 'auto' || step.mode === 'overwrite' ? step.mode : undefined
+        relay({ type: 'paste', targetId: targetId ?? id, mode })
+        break
+      }
+    }
+  }
+  return true
+}
+
+/** insertAfter 는 self.parent 가 root 면 의미 없음 → fallback (appendChild) 가 필요. 별도 가드. */
+function runInsertAfterGuard(
+  step: EffectStep,
+  focusId: string,
+  data: NormalizedData,
+  containerId: string,
+): boolean {
+  if (step.op !== 'insertAfter') return true
+  const p = findParent(data, focusId)
+  return Boolean(p && p !== containerId)
+}
+
+/** runEffect — Effect (단일 step | 배열) 를 순차 실행. 미해결 step 은 fallback 시도. */
+function runEffect(
+  effect: Effect,
+  focusId: string | null,
   data: NormalizedData,
   containerId: string,
   relay: (e: UiEvent) => void,
 ): void {
-  if (cmd === 'undo') return relay({ type: 'undo' })
-  if (cmd === 'redo') return relay({ type: 'redo' })
-  if (!id || id === containerId) return  // 이하 cmd 는 focused item 필요
-  switch (cmd) {
-    case 'editStart':
-      relay({ type: 'editStart', id })
-      break
-    case 'insertAfter': {
-      const parentId = findParent(data, id)
-      if (parentId) relay({ type: 'insertAfter', siblingId: id })
-      else relay({ type: 'appendChild', parentId: id })
-      break
-    }
-    case 'remove':
-      relay({ type: 'remove', id })
-      break
-    case 'demote': {
-      const parentId = findParent(data, id)
-      if (parentId) {
-        const siblings = data.relationships[parentId] ?? []
-        const idx = siblings.indexOf(id)
-        const prev = idx > 0 ? siblings[idx - 1] : null
-        if (prev) relay({ type: 'move', id, targetId: prev, mode: 'child' })
-      }
-      break
-    }
-    case 'promote': {
-      const parentId = findParent(data, id)
-      if (parentId && parentId !== containerId) {
-        // Workflowy/Roam 정본 — following siblings 는 promoted 의 자식으로 흡수.
-        const siblings = data.relationships[parentId] ?? []
-        const idx = siblings.indexOf(id)
-        const following = idx >= 0 ? siblings.slice(idx + 1) : []
-        for (const sib of following) relay({ type: 'move', id: sib, targetId: id, mode: 'child' })
-        relay({ type: 'move', id, targetId: parentId, mode: 'sibling-after' })
-      }
-      break
-    }
-    case 'paste-as-child':
-      relay({ type: 'paste', targetId: id, mode: 'child' })
-      break
+  const steps = Array.isArray(effect) ? effect : [effect as EffectStep]
+  for (const step of steps) {
+    const guardOk = focusId ? runInsertAfterGuard(step, focusId, data, containerId) : true
+    const ok = guardOk && runStep(step, focusId, data, containerId, relay)
+    if (!ok && step.fallback) runStep(step.fallback, focusId, data, containerId, relay)
   }
 }
 
@@ -198,12 +280,12 @@ export function useTreePattern(
   walk(containerId, 1)
   const itemMap = new Map(flat.map((it) => [it.id, it]))
 
-  // 단일 chord dispatcher — commands 배열 순회. 매칭되면 preventDefault + runCommand.
+  // 단일 chord dispatcher — commands 배열 순회. 매칭되면 preventDefault + runEffect.
   const dispatchCommandChord = (e: React.KeyboardEvent): boolean => {
     for (const desc of commands) {
       if (matchEventToChord(e.nativeEvent, desc.chord)) {
         e.preventDefault()
-        runCommand(desc.command, focusId, data, containerId, relay)
+        runEffect(desc.effect, focusId, data, containerId, relay)
         return true
       }
     }
