@@ -22,7 +22,7 @@ const spaFallback = () => ({
 
 export default defineConfig({
   root: resolve(__dirname, 'apps/site'),
-  base: process.env.GITHUB_PAGES ? '/interactive-os-3/' : '/',
+  base: process.env.GITHUB_PAGES ? '/aria-kernel/' : '/',
   publicDir: resolve(__dirname, 'apps/site/public'),
   build: {
     outDir: resolve(__dirname, 'dist'),
