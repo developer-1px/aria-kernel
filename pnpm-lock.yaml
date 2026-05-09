@@ -201,10 +201,6 @@ importers:
         version: 4.0.2
 
   packages/zod-crud:
-    dependencies:
-      '@p/aria-kernel':
-        specifier: workspace:*
-        version: link:../aria-kernel
     devDependencies:
       typescript:
         specifier: ^5.0.0
