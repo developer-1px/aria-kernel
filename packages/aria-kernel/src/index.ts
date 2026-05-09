@@ -32,7 +32,7 @@ export {
   composeAxes, axisKeys, tagAxis, parentOf, siblingsOf, enabledSiblings,
   navigate, activate, toggle, expand, escape, typeahead, treeNavigate, treeExpand,
   multiSelect, select, numericStep,
-  KEYS, matchChord, matchAnyChord, gridNavigate, gridMultiSelect,
+  KEYS, matchChord, matchAnyChord, matchEventToChord, gridNavigate, gridMultiSelect,
   type Axis, type Chord, type KeyName,
 } from './axes'
 export {
@@ -47,9 +47,17 @@ export {
 
 // APG ↔ axis 정합 매트릭스 (EPIC #121).
 export { APG_KEYBOARD_SPEC, allApgChords, type ApgEntry } from './spec/apgKeyboardSpec'
+export {
+  APG_PATTERN_EXAMPLE_SPEC,
+  ApgExampleSchema,
+  ApgPatternExampleSchema,
+  ApgPatternExampleSpecSchema,
+  allApgExamples,
+  type ApgExample,
+  type ApgPatternExample,
+} from './spec/apgExampleSpec'
 export { IMPL_CHORDS } from './spec/implChords'
 export { normalizeChord, normalizeChordSet } from './spec/normalizeChord'
 export {
   UNIVERSAL_EXTRA, PATTERN_EXTRA_ALLOW, PATTERN_APG_WAIVE,
 } from './spec/apgCoverageAllowlist'
-

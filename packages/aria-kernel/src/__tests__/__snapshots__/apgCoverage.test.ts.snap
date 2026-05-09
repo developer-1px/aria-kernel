@@ -72,10 +72,19 @@ exports[`APG ↔ axis chord coverage (Issue #123) > coverage matrix matches snap
   {
     "apgGap": [],
     "implExtra": [],
-    "pattern": "link",
+    "pattern": "landmarks",
   },
   {
     "apgGap": [],
+    "implExtra": [],
+    "pattern": "link",
+  },
+  {
+    "apgGap": [
+      "$mod+Shift+End",
+      "$mod+Shift+Home",
+      "Shift+Space",
+    ],
     "implExtra": [],
     "pattern": "listbox",
   },
@@ -137,6 +146,11 @@ exports[`APG ↔ axis chord coverage (Issue #123) > coverage matrix matches snap
     "pattern": "switch",
   },
   {
+    "apgGap": [],
+    "implExtra": [],
+    "pattern": "table",
+  },
+  {
     "apgGap": [
       "Delete",
     ],
@@ -160,6 +174,8 @@ exports[`APG ↔ axis chord coverage (Issue #123) > coverage matrix matches snap
   },
   {
     "apgGap": [
+      "$mod+End",
+      "$mod+Home",
       "F2",
     ],
     "implExtra": [],

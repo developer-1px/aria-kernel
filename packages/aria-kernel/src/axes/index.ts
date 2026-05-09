@@ -39,7 +39,7 @@ export { gridMultiSelect } from './gridMultiSelect'
 export { escape } from './escape'
 export { openControl } from './openControl'
 export { pageNavigate } from './pageNavigate'
-export { matchChord, matchAnyChord, type Chord } from './chord'
+export { matchChord, matchAnyChord, matchEventToChord, type Chord } from './chord'
 export { KEYS, type KeyName } from './keys'
 export { INTENT_CHORDS } from './intentChords'
 export {

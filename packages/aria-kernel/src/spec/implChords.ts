@@ -30,50 +30,55 @@ import { toolbarAxis } from '../patterns/toolbar'
 import { treeAxis } from '../patterns/tree'
 import { treeGridAxis } from '../patterns/treeGrid'
 import { toggle, activate, escape } from '../axes'
+import type { Axis } from '../axes'
+
+const chords = (axis: Axis): readonly string[] => axis.chords
 
 export const IMPL_CHORDS: Record<string, () => readonly string[]> = {
-  accordion: () => accordionAxis().spec.chords,
-  combobox: () => comboboxAxis().spec.chords,
-  comboboxGrid: () => comboboxGridAxis().spec.chords,
-  disclosure: () => disclosureAxis().spec.chords,
-  feed: () => feedAxis().spec.chords,
-  grid: () => gridAxis({ multiSelectable: true }).spec.chords,
-  listbox: () => listboxAxis({ multiSelectable: true }).spec.chords,
-  menu: () => menuAxis({}).spec.chords,
-  menuButton: () => menuButtonAxis().spec.chords,
-  menubar: () => menubarAxis().spec.chords,
-  radioGroup: () => radioGroupAxis().spec.chords,
-  slider: () => sliderAxis({}).spec.chords,
-  sliderRange: () => sliderRangeAxis({}).spec.chords,
-  spinbutton: () => spinbuttonAxis().spec.chords,
-  splitter: () => splitterAxis({}).spec.chords,
-  switch: () => switchAxis().spec.chords,
+  accordion: () => chords(accordionAxis()),
+  combobox: () => chords(comboboxAxis()),
+  comboboxGrid: () => chords(comboboxGridAxis()),
+  disclosure: () => chords(disclosureAxis()),
+  feed: () => chords(feedAxis()),
+  grid: () => chords(gridAxis({ multiSelectable: true })),
+  listbox: () => chords(listboxAxis({ multiSelectable: true })),
+  menu: () => chords(menuAxis({})),
+  menuButton: () => chords(menuButtonAxis()),
+  menubar: () => chords(menubarAxis()),
+  radioGroup: () => chords(radioGroupAxis()),
+  slider: () => chords(sliderAxis({})),
+  sliderRange: () => chords(sliderRangeAxis({})),
+  spinbutton: () => chords(spinbuttonAxis()),
+  splitter: () => chords(splitterAxis({})),
+  switch: () => chords(switchAxis()),
   // tabs/toolbar: orientation 별로 chord 가 다르다 — 양 orientation union (max advertise).
   tabs: () => [
-    ...tabsAxis({ orientation: 'horizontal' }).spec.chords,
-    ...tabsAxis({ orientation: 'vertical' }).spec.chords,
+    ...chords(tabsAxis({ orientation: 'horizontal' })),
+    ...chords(tabsAxis({ orientation: 'vertical' })),
   ],
   toolbar: () => [
-    ...toolbarAxis({ orientation: 'horizontal' }).spec.chords,
-    ...toolbarAxis({ orientation: 'vertical' }).spec.chords,
+    ...chords(toolbarAxis({ orientation: 'horizontal' })),
+    ...chords(toolbarAxis({ orientation: 'vertical' })),
   ],
-  tree: () => treeAxis({ multiSelectable: true }).spec.chords,
-  treeGrid: () => treeGridAxis({ multiSelectable: true }).spec.chords,
+  tree: () => chords(treeAxis({ multiSelectable: true })),
+  treeGrid: () => chords(treeGridAxis({ multiSelectable: true })),
 
   // 단순 axis 직접 사용
-  checkbox: () => toggle.spec.chords,
+  checkbox: () => chords(toggle),
 
   // pattern hook 이 escape axis 사용 (Tab 은 focusTrap 명령형 mechanic — 별도 정책)
-  dialog: () => escape.spec.chords,
-  alertDialog: () => escape.spec.chords,
-  tooltip: () => escape.spec.chords,
+  dialog: () => chords(escape),
+  alertDialog: () => chords(escape),
+  tooltip: () => chords(escape),
 
   // pattern hook 없는 단순 HTML 요소
-  button: () => activate.spec.chords,
-  link: () => activate.spec.chords,
+  button: () => chords(activate),
+  link: () => chords(activate),
   alert: () => [],
+  landmarks: () => [],
   meter: () => [],
   breadcrumb: () => [],
   navigationList: () => [],
   carousel: () => [],
+  table: () => [],
 }

@@ -13,7 +13,7 @@
  * - 본 데이터는 chord 만 spec 정합 비교에 쓰이며 `action` 은 사람 검토용 자연어.
  *
  * 비교 차원 (apg-coverage 테스트가 사용):
- *   APG_KEYBOARD_SPEC[pattern].chord  ↔  axis.spec.chords  ↔  demo.meta.keys
+ *   APG_KEYBOARD_SPEC[pattern].chord  ↔  axis.chords  ↔  demo.meta.keys
  */
 
 export type ApgEntry = {
@@ -164,6 +164,8 @@ export const APG_KEYBOARD_SPEC: Record<string, readonly ApgEntry[]> = {
   ],
   // breadcrumb: APG 페이지 존재하나 keyboard 표 없음 — 표준 링크 탐색 (Tab + Enter)
   breadcrumb: [],
+  // landmarks: semantic regions. Keyboard movement is native document/tab order, not an APG axis.
+  landmarks: [],
   // navigationList: APG 단일 패턴 없음 (HTML <nav> + <a aria-current> 합성 recipe).
   navigationList: [],
 
@@ -281,6 +283,8 @@ export const APG_KEYBOARD_SPEC: Record<string, readonly ApgEntry[]> = {
   ],
   // carousel: 본 라이브러리는 carousel-tabs 변형 위주 (tabs 와 chord 동등) — 추가 chord 없음.
   carousel: [],
+  // table: static tabular structure. Sortable examples use native button activation.
+  table: [],
   // comboboxGrid: combobox + grid (popup 이 grid). chord 는 combobox 베이스 + grid 셀 navigation.
   comboboxGrid: [
     { chord: 'ArrowDown', action: 'Opens grid popup and moves focus down', sourceAnchor: APG('combobox') },
