@@ -8,6 +8,6 @@
   "dependencies": {
     "@p/aria-kernel": "workspace:*",
     "@p/slides": "workspace:*",
-    "zod-crud": "workspace:*"
+    "zod-crud": "file:../../../zod-crud/packages/zod-crud"
   }
 }

@@ -1,4 +1,4 @@
-import { createJsonCrud } from 'zod-crud'
+import { createJsonCrud, type JsonValue } from 'zod-crud'
 import { Board, SAMPLE } from '../entities/board'
 
 /**
@@ -12,7 +12,7 @@ export const crud = createJsonCrud(Board, SAMPLE, {
     const keys = n.children.map((cid) => doc.nodes[cid]?.key)
     return !keys.includes('columns')  // skip board-root, column/card OK
   },
-  defaultFor: (path) => {
+  defaultFor: (path): JsonValue => {
     if (path[path.length - 1] === 'columns') return { title: 'New column', cards: [] }
     if (path[path.length - 1] === 'cards')   return { title: '' }
     return { title: '' }

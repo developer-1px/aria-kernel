@@ -170,6 +170,8 @@
   },
   "active": "825ee3727135bc1f",
   "lastOpenFiles": [
+    "pnpm-lock.yaml.3850218069",
+    "_tmp_45459_e69bf9b46026e9838c207843521c58a4",
     "packages/slides/node_modules/@p",
     "packages/slides/node_modules",
     "apps/slides/node_modules/@p",
@@ -179,8 +181,6 @@
     "pnpm-lock.yaml.1977707457",
     "_tmp_95952_48ab9e571fb2377b509a96a17583a030",
     "dist/_fs/packages/aria-kernel/vitest.config.ts",
-    "dist/_fs/packages/aria-kernel/typedoc.json",
-    "dist/_fs/packages/aria-kernel/tsup.config.ts",
     "dist/_fs/packages/aria-kernel/README.md",
     "dist/_fs/packages/aria-kernel/PATTERNS.md",
     "dist/_fs/packages/aria-kernel/NAMING.md",

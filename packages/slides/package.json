@@ -7,7 +7,7 @@
   "exports": { ".": "./src/index.ts", "./*": "./src/*" },
   "dependencies": {
     "zod": "^4.3.6",
-    "zod-crud": "workspace:*",
+    "zod-crud": "file:../../../zod-crud/packages/zod-crud",
     "@p/aria-kernel": "workspace:*"
   }
 }

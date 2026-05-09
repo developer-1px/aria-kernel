@@ -2,7 +2,7 @@
  * useZodCrudResource — adapter hook 정본.
  *
  * 패턴 ↔ JsonCrud(zod-crud) wiring 1줄. 외부 store 통합(useResource), crud.subscribe →
- * meta.focus 자동 반영, normalize + meta 합성, dispatch 핸들러가 W3C Clipboard Event +
+ * snapshot 동기화, normalize + meta 합성, dispatch 핸들러가 W3C Clipboard Event +
  * UiEvent 어휘를 jsonCrud op + reduce 양쪽으로 라우팅.
  *
  * 시그니처: `useZodCrudResource(resource, crud, normalize, opts?) → [data, dispatch]`.
@@ -27,7 +27,7 @@ type Kind = 'list' | 'tree' | 'grid'
 
 /** crud.subscribe 까지 포함한 minimal duck-type. zod-crud `JsonCrud<T>` 호환. */
 interface CrudWithSubscribe<S = unknown, V = unknown> extends CrudPort<S, V> {
-  subscribe(notify: (changes: unknown[], focusNodeId?: string) => void): () => void
+  subscribe(notify: () => void): () => void
 }
 
 interface OperationResultLike {
@@ -95,11 +95,9 @@ export function useZodCrudResource<
   const [meta, setMeta] = useState<Meta>({})
   const [entityState, setEntityState] = useState<NormalizedData['entities']>({})
 
-  // crud.subscribe → meta.focus 자동 반영. unmount 시 자동 해제.
+  // crud.subscribe → external changes 반영. unmount 시 자동 해제.
   useEffect(() => {
-    return crud.subscribe((_changes, focusNodeId) => {
-      if (focusNodeId) setMeta((prev) => ({...prev, focus: focusNodeId}))
-    })
+    return crud.subscribe(() => baseDispatch({type: 'set', value: crud.snapshot()}))
   }, [crud])
 
   const data = useMemo<NormalizedData<FlatItem>>(() => {
@@ -244,7 +242,7 @@ export function useZodCrudResource<
       const next = routeUiEventToCrud(crud, e)
       if (next !== undefined) {
         baseDispatch({type: 'set', value: next})
-        // crud.subscribe 가 focus 를 push 하므로 별도 setMeta 불필요.
+        // zod-crud subscribe 는 snapshot sync 만 담당한다.
       }
       return
     }
