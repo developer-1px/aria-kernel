@@ -1,4 +1,4 @@
-import { ROOT, getChildren, getLabel, isDisabled, type NormalizedData, type UiEvent } from '../types'
+import { ROOT, getCollectionChildren, getLabel, isDisabled, type NormalizedData, type UiEvent } from '../types'
 import type { BaseItem, ItemProps, RootProps } from './types'
 
 /** Options for {@link navigationListPattern}. */
@@ -34,7 +34,7 @@ export function navigationListPattern(
 } {
   const { label, labelledBy, containerId = ROOT } = opts
 
-  const ids = getChildren(data, containerId)
+  const ids = getCollectionChildren(data, containerId)
   const items = ids.map((id, i) => {
     const ent = data.entities[id] ?? {}
     return {

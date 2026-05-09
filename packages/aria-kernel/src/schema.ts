@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { ROOT, type UiEvent } from './types'
 
 /**
  * Runtime contract for the headless data rail.
@@ -6,17 +7,78 @@ import { z } from 'zod'
  * The public TypeScript types stay intentionally small, but production
  * consumers need a real gate before declarations reach reducers/renderers.
  */
-/** Entity zod schema — `{id, data?}` 런타임 gate. */
-export const EntitySchema = z.object({
-  id: z.string().min(1),
-  data: z.record(z.string(), z.unknown()).optional(),
+const IdSchema = z.string().min(1)
+
+/** Entity zod schema — id 는 record key 가 정본이고, value 는 도메인 데이터 그대로다. */
+export const EntitySchema = z.record(z.string(), z.unknown())
+
+export const MetaSchema = z.object({
+  root: z.array(IdSchema).optional(),
+  focus: IdSchema.nullable().optional(),
+  expanded: z.array(IdSchema).optional(),
+  open: z.array(IdSchema).optional(),
+  typeahead: z.object({
+    buf: z.string(),
+    deadline: z.number().finite(),
+  }).optional(),
+  selectAnchor: IdSchema.nullable().optional(),
+  editing: IdSchema.nullable().optional(),
+}).catchall(z.unknown())
+
+const validateGraphRefs = (
+  value: {
+    entities: Record<string, unknown>
+    relationships: Record<string, string[]>
+    meta?: { root?: string[] }
+  },
+  ctx: z.RefinementCtx,
+) => {
+  const ids = new Set(Object.keys(value.entities))
+  for (const parentId of Object.keys(value.relationships)) {
+    if (!ids.has(parentId)) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['relationships', parentId],
+        message: `relationship parent "${parentId}" must exist in entities`,
+      })
+    }
+    for (const childId of value.relationships[parentId] ?? []) {
+      if (!ids.has(childId)) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['relationships', parentId],
+          message: `relationship child "${childId}" must exist in entities`,
+        })
+      }
+    }
+  }
+  for (const rootId of value.meta?.root ?? []) {
+    if (rootId === ROOT || !ids.has(rootId)) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['meta', 'root'],
+        message: `root id "${rootId}" must exist in entities`,
+      })
+    }
+  }
+}
+
+export const CollectionMetaSchema = MetaSchema.extend({
+  root: z.array(IdSchema),
+})
+
+const NormalizedDataBaseSchema = z.object({
+  entities: z.record(IdSchema, EntitySchema),
+  relationships: z.record(IdSchema, z.array(IdSchema)),
+  meta: MetaSchema.optional(),
 })
 
 /** NormalizedData zod schema — entities + relationships 런타임 gate. */
-export const NormalizedDataSchema = z.object({
-  entities: z.record(z.string(), EntitySchema),
-  relationships: z.record(z.string(), z.array(z.string())),
-})
+export const NormalizedDataSchema = NormalizedDataBaseSchema.superRefine(validateGraphRefs)
+
+export const CollectionDataSchema = NormalizedDataBaseSchema.extend({
+  meta: CollectionMetaSchema,
+}).superRefine(validateGraphRefs)
 
 /**
  * navigate dir 어휘 — axis 마이그레이션이 채워가는 의도형 방향 enum.
@@ -139,6 +201,8 @@ export const UiEventSchema = z.discriminatedUnion('type', [
 export type EntityInput = z.infer<typeof EntitySchema>
 /** NormalizedDataSchema 추론 타입. */
 export type NormalizedDataInput = z.infer<typeof NormalizedDataSchema>
+/** CollectionDataSchema 추론 타입. */
+export type CollectionDataInput = z.infer<typeof CollectionDataSchema>
 /** UiEventSchema 추론 타입. */
 export type UiEventInput = z.infer<typeof UiEventSchema>
 
@@ -146,11 +210,13 @@ export type UiEventInput = z.infer<typeof UiEventSchema>
 export const parseNormalizedData = (value: unknown): NormalizedDataInput =>
   NormalizedDataSchema.parse(value)
 
+/** unknown → collection NormalizedData 검증. `meta.root: []` 는 명시적 empty collection. */
+export const parseCollectionData = (value: unknown): CollectionDataInput =>
+  CollectionDataSchema.parse(value)
+
 /** unknown → UiEvent 검증. 실패 시 ZodError throw. */
 export const parseUiEvent = (value: unknown): UiEventInput =>
   UiEventSchema.parse(value)
-
-import type { UiEvent } from './types'
 
 /** navigate result-form narrowing — `{type:'navigate', id}` 만 true. */
 export const isNavigateById = (

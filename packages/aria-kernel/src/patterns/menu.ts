@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import {
-  ROOT, getChildren, getLabel, isDisabled,
+  ROOT, getChildren, getCollectionChildren, getLabel, isDisabled,
   type NormalizedData, type UiEvent,
 } from '../types'
 import {
@@ -147,7 +147,7 @@ export function useMenuPattern(
   // autoFocus — 마운트 시 첫 enabled child 에 focus.
   useEffect(() => {
     if (!autoFocus || !open) return
-    const first = getChildren(data, containerId).filter((id) => !isDisabled(data, id))[0]
+    const first = getCollectionChildren(data, containerId).filter((id) => !isDisabled(data, id))[0]
     if (first) setActiveId(first)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoFocus, open])
@@ -317,7 +317,7 @@ export function useMenuPattern(
       if (!open && matchAnyChord(e as unknown as KeyboardEvent, TRIGGER_OPEN_CHORDS)) {
         e.preventDefault()
         setOpen(true)
-        const first = getChildren(data, containerId).filter((id) => !isDisabled(data, id))[0]
+        const first = getCollectionChildren(data, containerId).filter((id) => !isDisabled(data, id))[0]
         if (first) setActiveId(first)
       }
     },

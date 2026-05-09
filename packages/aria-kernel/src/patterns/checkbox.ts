@@ -1,5 +1,5 @@
 import {
-  ROOT, getChildren, getLabel, isDisabled,
+  ROOT, getCollectionChildren, getLabel, isDisabled,
   type NormalizedData, type UiEvent, type ValueEvent,
 } from '../types'
 import { matchAnyChord, toggle, axisKeys, INTENT_CHORDS } from '../axes'
@@ -106,7 +106,7 @@ export function useCheckboxGroupPattern(
   items: BaseItem[]
 } {
   const { containerId = ROOT, disabled: optDisabled, label, labelledBy, parentLabel } = opts
-  const ids = getChildren(data, containerId)
+  const ids = getCollectionChildren(data, containerId)
   const items: BaseItem[] = ids.map((id, i) => ({
     id,
     label: getLabel(data, id),

@@ -1,4 +1,4 @@
-import { ROOT, getChildren, getLabel, isDisabled, getExpanded, type NormalizedData, type UiEvent } from '../types'
+import { ROOT, getCollectionChildren, getLabel, isDisabled, getExpanded, type NormalizedData, type UiEvent } from '../types'
 import { activate, composeAxes, navigate } from '../axes'
 import { useRovingTabIndex } from '../roving/useRovingTabIndex'
 import type { BaseItem, ItemProps, RootProps } from './types'
@@ -37,7 +37,7 @@ export function useAccordionPattern(
 } {
   const { mode = 'multiple', autoFocus, idPrefix = 'acc', level = 3 } = opts
 
-  const ids = getChildren(data, ROOT)
+  const ids = getCollectionChildren(data, ROOT)
   const expandedSet = getExpanded(data)
 
   // single mode 는 open 시 형제 자동 collapse 를 emit.

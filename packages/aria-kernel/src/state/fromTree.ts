@@ -1,4 +1,4 @@
-import type { NormalizedData } from '../types'
+import type { CollectionData, NormalizedData } from '../types'
 
 /**
  * fromTree — convention-based tree builder. Input is `{id, children?, ...rest}` —
@@ -8,7 +8,7 @@ import type { NormalizedData } from '../types'
 export function fromTree<T extends { id: string; children?: T[] }>(
   roots: T[],
   opts?: { focusId?: string | null; expanded?: string[] },
-): NormalizedData {
+): CollectionData {
   const entities: NormalizedData['entities'] = {}
   const relationships: NormalizedData['relationships'] = {}
 
@@ -22,7 +22,7 @@ export function fromTree<T extends { id: string; children?: T[] }>(
   }
   for (const r of roots) walk(r)
 
-  const meta: NormalizedData['meta'] = { root: roots.map((r) => r.id) }
+  const meta: CollectionData['meta'] = { root: roots.map((r) => r.id) }
   if (opts?.focusId !== undefined) meta.focus = opts.focusId
   if (opts?.expanded) meta.expanded = opts.expanded
 
@@ -34,7 +34,7 @@ export function fromTree<T extends { id: string; children?: T[] }>(
  * Items may omit `id`; in that case a synthetic id `__0`, `__1`, ... is assigned.
  * All non-id keys become entity data.
  */
-export function fromList(items: Array<Record<string, unknown>>): NormalizedData {
+export function fromList(items: Array<Record<string, unknown>>): CollectionData {
   const entities: NormalizedData['entities'] = {}
   const root: string[] = []
   items.forEach((item, i) => {

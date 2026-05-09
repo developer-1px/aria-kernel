@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import {
-  ROOT, getChildren, getLabel, isDisabled, getFocus, isOpen,
+  ROOT, getChildren, getCollectionChildren, getLabel, isDisabled, getFocus, isOpen,
   type NormalizedData, type UiEvent,
 } from '../types'
 import {
@@ -98,7 +98,7 @@ export function useComboboxGridPattern(
 
   const expanded = isOpen(data, ROOT)
   const activeId = getFocus(data) ?? null
-  const allRowIds = getChildren(data, ROOT)
+  const allRowIds = getCollectionChildren(data, ROOT)
   const gridId = `${idPrefix}-grid`
   const cellDomId = (id: string) => `${idPrefix}-cell-${id}`
   const rowDomId = (id: string) => `${idPrefix}-row-${id}`

@@ -64,7 +64,7 @@ const buildColumns = (tree: FsNode | undefined, url: string, pinned: string) => 
       { focusId: url === pinned ? (files[0]?.path ?? url) : url },
     )
   }
-  if (!tree) return { entities: {}, relationships: {} }
+  if (!tree) return { entities: {}, relationships: {}, meta: { root: [] } }
   const rootNode = pinned === '/' ? tree : (walk(pinned).at(-1) ?? tree)
   return fromTree(
     (rootNode.children ?? []).map((n) => fsToFlat(n, url)),

@@ -3,7 +3,7 @@ import type { Axis } from '../axes'
 import { bindAxis } from '../state/bind'
 import {
   ROOT,
-  getChildren,
+  getCollectionChildren,
   getExpanded,
   getFocus,
   isDisabled,
@@ -19,7 +19,7 @@ const idFrom = (e: { target: EventTarget }): string | null =>
   (e.target as Element).closest<HTMLElement>('[data-id]')?.dataset.id ?? null
 
 const defaultFocusId = (data: NormalizedData, containerId: string): string | null => {
-  const ids = getChildren(data, containerId).filter((id) => !isDisabled(data, id))
+  const ids = getCollectionChildren(data, containerId).filter((id) => !isDisabled(data, id))
   return ids.find((id) => Boolean(data.entities[id]?.selected)) ?? ids[0] ?? null
 }
 

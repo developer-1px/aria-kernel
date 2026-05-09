@@ -2,6 +2,7 @@ import { useCallback } from 'react'
 import {
   ROOT,
   getChildren,
+  getCollectionChildren,
   getLabel,
   isDisabled,
   type NormalizedData,
@@ -130,7 +131,7 @@ export function useGridPattern(
   const multiSelectable = opts.multiSelectable ?? selectionMode !== 'cell'
   // ROOT 자식 중 cell 을 가진 entity 만 row 로 인정. column header 처럼 자식 없는
   // top-level entity (gridSortable 데모 등) 는 row 로 보지 않아야 gridCoord 가 깨지지 않는다.
-  const rowIds = getChildren(data, containerId).filter((id) => getChildren(data, id).length > 0)
+  const rowIds = getCollectionChildren(data, containerId).filter((id) => getChildren(data, id).length > 0)
   // grid 의 focus 단위는 cell. useRovingTabIndex 의 default 계산을 cell 차원에서 하도록
   // 첫 row id 를 focus-container 로 전달 (containerId 자체는 ROOT/grid id 그대로 의미).
   const focusContainerId = rowIds[0] ?? containerId

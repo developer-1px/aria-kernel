@@ -26,6 +26,15 @@ export interface NormalizedData<
   meta?: M
 }
 
+export type CollectionMeta = Meta & { root: string[] }
+
+export type CollectionData<
+  E extends Record<string, unknown> = Record<string, unknown>,
+  M extends Meta = Meta,
+> = NormalizedData<E, M & CollectionMeta> & {
+  meta: M & CollectionMeta
+}
+
 /**
  * Meta — 라이브러리 base 키(focus/expanded/open/typeahead/...)는 라이브러리가 읽고 쓴다.
  * 사용자가 `interface MyMeta extends Meta { window?: ... }` 로 키를 추가하면
@@ -226,6 +235,17 @@ export const UI_EVENT_CATEGORY_ORDER: readonly UiEventCategory[] =
 export const getRoot = (d: NormalizedData): string[] =>
   d.meta?.root ?? []
 
+/** collection pattern 입력에서 의도된 빈 collection 은 `meta.root: []` 로 명시한다. */
+export const hasRoot = (d: NormalizedData): d is CollectionData =>
+  Array.isArray(d.meta?.root)
+
+export const getCollectionRoot = (d: NormalizedData): string[] => {
+  if (hasRoot(d)) return d.meta.root
+  throw new Error(
+    'Collection NormalizedData requires `meta.root`; use `meta: { root: [] }` for an intentionally empty collection.',
+  )
+}
+
 /** 현재 focus id read (없으면 null). */
 export const getFocus = (d: NormalizedData): string | null =>
   d.meta?.focus ?? null
@@ -257,6 +277,12 @@ export const ROOT = '__root__'
 export const getChildren = (d: NormalizedData, id: string): string[] => {
   if (id === ROOT) return d.meta?.root ?? []
   return d.relationships[id] ?? []
+}
+
+/** collection pattern 용 children read. ROOT entrypoint 는 명시된 `meta.root` 만 허용한다. */
+export const getCollectionChildren = (d: NormalizedData, id: string): string[] => {
+  if (id === ROOT) return getCollectionRoot(d)
+  return getChildren(d, id)
 }
 
 /** entity.label read (없으면 id). typeahead 매칭용. */

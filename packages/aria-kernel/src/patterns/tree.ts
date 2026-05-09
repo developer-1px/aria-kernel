@@ -1,7 +1,7 @@
 // editable 모드의 chord 어휘는 commands prop 으로 앱이 선언 (SSOT). default 제공.
 import { useCallback } from 'react'
 import {
-  ROOT, getChildren, getLabel, isDisabled, getExpanded,
+  ROOT, getChildren, getCollectionChildren, getLabel, isDisabled, getExpanded,
   type NormalizedData, type UiEvent,
 } from '../types'
 import { activate, composeAxes, multiSelect, treeExpand, treeNavigate, typeahead } from '../axes'
@@ -261,7 +261,9 @@ export function useTreePattern(
 
   const flat: TreeItem[] = []
   const walk = (parent: string, level: number) => {
-    const children = getChildren(data, parent)
+    const children = parent === containerId
+      ? getCollectionChildren(data, parent)
+      : getChildren(data, parent)
     children.forEach((id, i) => {
       const ent = data.entities[id] ?? {}
       const kids = getChildren(data, id)

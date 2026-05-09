@@ -1,5 +1,5 @@
 import type React from 'react'
-import { getChildren, getLabel, isDisabled, ROOT, type NormalizedData, type UiEvent } from '../types'
+import { getCollectionChildren, getLabel, isDisabled, ROOT, type NormalizedData, type UiEvent } from '../types'
 import { activate, composeAxes, navigate } from '../axes'
 import { matchEventToChord } from '../axes/chord'
 import { usePatternBase } from './usePatternBase'
@@ -58,7 +58,7 @@ export function useToolbarPattern(
 
   // separator 는 roving navigation 에서 skip — ROOT children 에서 제외한 합성 데이터로
   // navigate axis 통과 (APG toolbar: separator MUST be skipped during keyboard nav).
-  const allChildren = getChildren(data, ROOT)
+  const allChildren = getCollectionChildren(data, ROOT)
   const navIds = allChildren.filter((id) => !data.entities[id]?.separator)
   const navData: NormalizedData = navIds.length === allChildren.length
     ? data

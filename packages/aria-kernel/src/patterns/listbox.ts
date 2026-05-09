@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { ROOT, getChildren, getLabel, isDisabled, type NormalizedData, type UiEvent } from '../types'
+import { ROOT, getChildren, getCollectionChildren, getLabel, isDisabled, type NormalizedData, type UiEvent } from '../types'
 import { activate, composeAxes, multiSelect, navigate, typeahead, matchAnyChord } from '../axes'
 import type { InsideEditableMode } from '../key/insideEditable'
 import { usePatternClipboard, type ClipboardOnMiddleware } from './usePatternClipboard'
@@ -134,7 +134,7 @@ export function useListboxPattern(
   )
 
   // groups 모드: ROOT 자식 = group, 각 group 자식 = option. 평면 ids 는 모든 option.
-  const directChildren = getChildren(data, containerId)
+  const directChildren = getCollectionChildren(data, containerId)
   const groupIds = groupsOpt ? directChildren : []
   const ids = groupsOpt
     ? groupIds.flatMap((gid) => getChildren(data, gid))

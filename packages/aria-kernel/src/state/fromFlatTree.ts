@@ -1,4 +1,4 @@
-import type { NormalizedData } from '../types'
+import type { CollectionData, NormalizedData } from '../types'
 
 /**
  * fromFlatTree — flat record + children:id[] 백엔드를 NormalizedData 로 변환.
@@ -15,7 +15,7 @@ export function fromFlatTree<N extends Record<string, unknown>>(
   rootId: string,
   accessors: { children: (n: N) => readonly string[] },
   opts?: { focusId?: string | null; expanded?: string[] },
-): NormalizedData {
+): CollectionData {
   const entities: NormalizedData['entities'] = {}
   const relationships: NormalizedData['relationships'] = {}
 
@@ -31,7 +31,7 @@ export function fromFlatTree<N extends Record<string, unknown>>(
   }
   walk(rootId)
 
-  const meta: NormalizedData['meta'] = { root: [rootId] }
+  const meta: CollectionData['meta'] = { root: [rootId] }
   if (opts?.focusId !== undefined) meta.focus = opts.focusId
   if (opts?.expanded) meta.expanded = opts.expanded
 

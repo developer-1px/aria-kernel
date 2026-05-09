@@ -1,6 +1,6 @@
 // editable 옵션은 디폴트 false. true 일 때만 편집 어휘를 emit (W1 UiEvent 8종 참조).
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { ROOT, getChildren, getLabel, isDisabled, getExpanded, type NormalizedData, type UiEvent } from '../types'
+import { ROOT, getChildren, getCollectionChildren, getLabel, isDisabled, getExpanded, type NormalizedData, type UiEvent } from '../types'
 import { activate, composeAxes, multiSelect, treeExpand, treeNavigate, INTENT_CHORDS, matchAnyChord } from '../axes'
 import { parseChord } from '../axes/chord'
 
@@ -145,7 +145,9 @@ export function useTreeGridPattern(
 
   const flat: TreeItem[] = []
   const walk = (parent: string, level: number) => {
-    const children = getChildren(data, parent)
+    const children = parent === containerId
+      ? getCollectionChildren(data, parent)
+      : getChildren(data, parent)
     children.forEach((id, i) => {
       const ent = data.entities[id] ?? {}
       const kids = getChildren(data, id)

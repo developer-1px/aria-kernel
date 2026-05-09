@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import {
-  ROOT, getChildren, getLabel, isDisabled,
+  ROOT, getChildren, getCollectionChildren, getLabel, isDisabled,
   type NormalizedData, type UiEvent,
 } from '../types'
 import {
@@ -268,7 +268,7 @@ export function useMenuButtonPattern(
       const next = !open
       setOpen(next)
       if (next) {
-        const firstId = getChildren(data, containerId).filter((k) => !isDisabled(data, k))[0] ?? null
+        const firstId = getCollectionChildren(data, containerId).filter((k) => !isDisabled(data, k))[0] ?? null
         setActiveId(firstId)
       } else {
         setActiveId(null)

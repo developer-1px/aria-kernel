@@ -1,6 +1,6 @@
 import { useRef, useMemo } from 'react'
 import {
-  ROOT, getChildren, getLabel, isDisabled, getFocus, isOpen,
+  ROOT, getCollectionChildren, getLabel, isDisabled, getFocus, isOpen,
   type NormalizedData, type UiEvent,
 } from '../types'
 import {
@@ -134,7 +134,7 @@ export function useComboboxPattern(
 
   const expanded = isOpen(data, ROOT)
   const activeId = getFocus(data) ?? null
-  const allIds = getChildren(data, ROOT)
+  const allIds = getCollectionChildren(data, ROOT)
   const listId = `${idPrefix}-list`
   const optionDomId = (id: string) => `${idPrefix}-opt-${id}`
   useActiveDescendant(inputRef, expanded && activeId ? optionDomId(activeId) : null)

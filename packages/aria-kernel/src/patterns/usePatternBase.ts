@@ -1,4 +1,4 @@
-import { ROOT, getChildren, type NormalizedData, type UiEvent } from '../types'
+import { ROOT, getCollectionChildren, type NormalizedData, type UiEvent } from '../types'
 import type { Axis } from '../axes'
 import { useRovingTabIndex } from '../roving/useRovingTabIndex'
 
@@ -37,6 +37,6 @@ export function usePatternBase(
     autoFocus,
     containerId,
   })
-  const ids = getChildren(data, containerId)
+  const ids = getCollectionChildren(data, containerId)
   return { focusId, bindFocus, delegate, ids }
 }

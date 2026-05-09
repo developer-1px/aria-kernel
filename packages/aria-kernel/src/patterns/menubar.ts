@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import {
-  ROOT, getChildren, getLabel, isDisabled,
+  ROOT, getChildren, getCollectionChildren, getLabel, isDisabled,
   type NormalizedData, type UiEvent,
 } from '../types'
 import {
@@ -29,7 +29,7 @@ function crossTopMove(d: NormalizedData, id: string, delta: -1 | 1): UiEvent[] |
   if (!top) return null
   const grand = parentOf(d, top)
   if (grand !== ROOT) return null
-  const tops = getChildren(d, ROOT).filter((t) => !isDisabled(d, t))
+  const tops = getCollectionChildren(d, ROOT).filter((t) => !isDisabled(d, t))
   const i = tops.indexOf(top)
   if (i < 0) return null
   const ni = ((i + delta) % tops.length + tops.length) % tops.length
@@ -134,7 +134,7 @@ export function useMenubarPattern(
   openPath: string[]
 } {
   const { autoFocus, label, labelledBy, idPrefix = 'mbar' } = opts
-  const topIds = getChildren(data, ROOT).filter((id) => !isDisabled(data, id))
+  const topIds = getCollectionChildren(data, ROOT).filter((id) => !isDisabled(data, id))
 
   const [activeTopId, setActiveTopId] = useState<string | null>(autoFocus ? topIds[0] ?? null : null)
   const [openPath, setOpenPath] = useState<string[]>([])
