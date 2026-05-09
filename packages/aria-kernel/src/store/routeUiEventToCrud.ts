@@ -10,6 +10,7 @@ export interface CrudPort<Snap = unknown, Val = unknown> {
   snapshot(): Snap
   read?(id: string): unknown
   insertAfter(siblingId: string, value?: Val): unknown
+  insertBefore?(siblingId: string, value?: Val): unknown
   appendChild(parentId: string, value?: Val): unknown
   update(id: string, value: Val): unknown
   delete(id: string): unknown

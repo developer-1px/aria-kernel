@@ -34,6 +34,8 @@ export default defineConfig({
       { find: /^@p\/aria-kernel\//, replacement: resolve(__dirname, 'packages/aria-kernel/src/') + '/' },
       { find: /^@p\/fs$/, replacement: resolve(__dirname, 'packages/fs/src/index.ts') },
       { find: /^@p\/fs\//, replacement: resolve(__dirname, 'packages/fs/src/') + '/' },
+      { find: /^@p\/slides$/, replacement: resolve(__dirname, 'packages/slides/src/index.ts') },
+      { find: /^@p\/slides\//, replacement: resolve(__dirname, 'packages/slides/src/') + '/' },
       { find: /^@p\/devtools$/, replacement: resolve(__dirname, 'packages/devtools/src/index.ts') },
       { find: /^@p\/devtools\//, replacement: resolve(__dirname, 'packages/devtools/src/') + '/' },
       { find: /^@p\/source-viewer$/, replacement: resolve(__dirname, 'packages/source-viewer/src/index.ts') },

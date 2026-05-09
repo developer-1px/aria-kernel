@@ -1,16 +1,16 @@
 import { fromKeyMap, type Axis } from './axis'
 import { INTENT_CHORDS } from './intentChords'
+import { ROOT } from '../types'
 
 /** escapeKeys — 선언형 SSOT. escape axis 가 응답하는 chord 의 key 이름. */
 export const escapeKeys = (): readonly string[] => [INTENT_CHORDS.escape.close]
 
 /**
- * escape — Escape 키 → `{type:'open', id, open:false}` 직렬 emit.
+ * escape — Escape 키 → `{type:'open', id:ROOT, open:false}` 직렬 emit.
  *
- * 키는 `INTENT_CHORDS.escape.close` 에서 import — SSOT.
- * Menu/Combobox/Dialog 의 닫기 의도를 axis 로 박제. 어느 layer 가 닫힐지는 host 가
- * onEvent 에서 결정.
+ * Esc 의 ARIA 의미는 컨테이너 단위 (popup close) — 항목이 아니다. 따라서 emit id 는
+ * activeId 가 아니라 ROOT 로 고정. dispatcher 의 focusId 자동 주입을 우회.
  */
 export const escape: Axis = fromKeyMap([
-  [INTENT_CHORDS.escape.close, { type: 'open', open: false }],
+  [INTENT_CHORDS.escape.close, { type: 'open', id: ROOT, open: false }],
 ] as never)

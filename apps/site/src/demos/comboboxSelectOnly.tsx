@@ -1,6 +1,6 @@
 import { fromList } from '@p/aria-kernel'
 import { useLocalData } from '@p/aria-kernel/local'
-import { comboboxAxis, useComboboxPattern } from '@p/aria-kernel/patterns'
+import { comboboxSelectAxis, useComboboxSelectPattern } from '@p/aria-kernel/patterns'
 import { axisKeys } from '@p/aria-kernel'
 
 export const meta = {
@@ -8,16 +8,15 @@ export const meta = {
   apg: 'combobox',
   kind: 'collection' as const,
   blurb: 'Button-like combobox without text input — functionally similar to <select>.',
-  keys: () => axisKeys(comboboxAxis()),
+  keys: () => axisKeys(comboboxSelectAxis()),
 }
 
 const ALL = ['Argentina', 'Australia', 'Brazil', 'Canada', 'Denmark', 'France', 'Germany', 'Japan']
 
 export default function ComboboxSelectOnlyDemo() {
   const [data, onEvent] = useLocalData(() => fromList(ALL.map((label) => ({ label }))))
-  const { comboboxProps, listboxProps, optionProps, items, expanded } = useComboboxPattern(data, onEvent, {
+  const { comboboxProps, listboxProps, optionProps, items, expanded } = useComboboxSelectPattern(data, onEvent, {
     label: 'Country',
-    editable: false,
   })
 
   return (

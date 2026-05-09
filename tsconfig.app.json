@@ -28,6 +28,8 @@
       "@p/aria-kernel/*": ["packages/aria-kernel/src/*"],
       "@p/fs": ["packages/fs/src/index.ts"],
       "@p/fs/*": ["packages/fs/src/*"],
+      "@p/slides": ["packages/slides/src/index.ts"],
+      "@p/slides/*": ["packages/slides/src/*"],
       "@p/devtools": ["packages/devtools/src/index.ts"],
       "@p/devtools/*": ["packages/devtools/src/*"],
       "@p/site": ["apps/site/src/main.tsx"],
@@ -35,6 +37,6 @@
       "@apps/*": ["apps/*/src/index.ts", "apps/*/src"]
     }
   },
-  "include": ["apps/site/src", "packages/aria-kernel/src", "apps/*/src"],
+  "include": ["apps/site/src", "packages/aria-kernel/src", "packages/slides/src", "apps/*/src"],
   "exclude": []
 }

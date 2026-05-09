@@ -1,13 +1,13 @@
 {
-  "name": "@apps/slides",
+  "name": "@p/slides",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "main": "src/index.ts",
   "exports": { ".": "./src/index.ts", "./*": "./src/*" },
   "dependencies": {
-    "@p/aria-kernel": "workspace:*",
-    "@p/slides": "workspace:*",
-    "zod-crud": "workspace:*"
+    "zod": "^4.3.6",
+    "zod-crud": "workspace:*",
+    "@p/aria-kernel": "workspace:*"
   }
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useComboboxPattern } from '@p/aria-kernel/patterns'
+import { useComboboxDialogPattern } from '@p/aria-kernel/patterns'
 import { CalendarGrid } from './_calendarGrid'
 
 export const meta = {
@@ -12,8 +12,7 @@ export const meta = {
 
 export default function ComboboxDatepickerDemo() {
   const [date, setDate] = useState('')
-  const { inputProps, popoverProps, triggerProps, open, setOpen } = useComboboxPattern({
-    haspopup: 'dialog',
+  const { inputProps, popoverProps, triggerProps, open, setOpen } = useComboboxDialogPattern({
     label: 'Date',
   })
 

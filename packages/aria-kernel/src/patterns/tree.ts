@@ -86,6 +86,9 @@ const findParent = (data: NormalizedData, id: string): string | null => {
   return null
 }
 
+const eventItemId = (e: React.KeyboardEvent): string | null =>
+  (e.target as Element).closest<HTMLElement>('[data-id]')?.dataset.id ?? null
+
 /** Tree 가 등록하는 axis — SSOT. */
 export const treeAxis = (opts: { multiSelectable?: boolean } = {}) =>
   opts.multiSelectable
@@ -285,7 +288,7 @@ export function useTreePattern(
     for (const desc of commands) {
       if (matchEventToChord(e.nativeEvent, desc.chord)) {
         e.preventDefault()
-        runEffect(desc.effect, focusId, data, containerId, relay)
+        runEffect(desc.effect, eventItemId(e) ?? focusId, data, containerId, relay)
         return true
       }
     }

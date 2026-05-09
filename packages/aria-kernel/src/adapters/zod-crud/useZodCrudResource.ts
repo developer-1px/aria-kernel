@@ -17,6 +17,7 @@
 import {useEffect, useMemo, useState} from 'react'
 import type {ZodType} from 'zod'
 import {reduce} from '../../state/reduce'
+import {reduceWithDefaults, reduceWithMultiSelect} from '../../state/defaults'
 import {useResource, type Resource} from '../../store/data'
 import {routeUiEventToCrud, type CrudPort} from '../../store/routeUiEventToCrud'
 import type {Meta, NormalizedData, UiEvent} from '../../types'
@@ -36,6 +37,8 @@ interface OperationResultLike {
 interface UseZodCrudOptions {
   kind?: Kind
   schema?: ZodType
+  /** View-state reducer preset for selection semantics. Default: single. */
+  selection?: 'single' | 'multi' | 'none'
   /**
    * labelField — `update {id, value:string}` 시, value 를 entity 자체가 아닌
    * entity 의 child 노드(key === labelField) 에 라우팅. nested-text 를 가진
@@ -53,23 +56,44 @@ interface JsonDocLike {
   nodes?: Record<string, JsonNodeLike>
 }
 
+const pickEntityState = (
+  entities: NormalizedData['entities'],
+): NormalizedData['entities'] => {
+  const picked: NormalizedData['entities'] = {}
+  for (const [id, entity] of Object.entries(entities)) {
+    const next: Record<string, unknown> = {}
+    if ('selected' in entity) next.selected = entity.selected
+    if ('current' in entity) next.current = entity.current
+    if ('checked' in entity) next.checked = entity.checked
+    if (Object.keys(next).length > 0) picked[id] = next
+  }
+  return picked
+}
+
 export function useZodCrudResource<
   T,
   FlatItem extends Record<string, unknown> = Record<string, unknown>,
 >(
-  resource: Resource<unknown>,
-  crud: CrudWithSubscribe,
+  resource: Resource<T>,
+  crud: CrudWithSubscribe<T>,
   normalize: (
-    snapshot: ReturnType<CrudWithSubscribe['snapshot']>,
+    snapshot: T,
   ) => Pick<NormalizedData<FlatItem>, 'entities' | 'relationships'> & {meta?: Partial<Meta>},
   opts: UseZodCrudOptions = {},
 ): [data: NormalizedData<FlatItem>, dispatch: (e: UiEvent) => void] {
   const kind: Kind = opts.kind ?? 'tree'
+  const reduceView =
+    opts.selection === 'multi'
+      ? reduceWithMultiSelect
+      : opts.selection === 'none'
+        ? reduce
+        : reduceWithDefaults
 
   const [doc, baseDispatch] = useResource(resource)
-  const snapshot = (doc ?? crud.snapshot()) as ReturnType<CrudWithSubscribe['snapshot']>
+  const snapshot = doc ?? crud.snapshot()
 
   const [meta, setMeta] = useState<Meta>({})
+  const [entityState, setEntityState] = useState<NormalizedData['entities']>({})
 
   // crud.subscribe → meta.focus 자동 반영. unmount 시 자동 해제.
   useEffect(() => {
@@ -80,12 +104,18 @@ export function useZodCrudResource<
 
   const data = useMemo<NormalizedData<FlatItem>>(() => {
     const flat = normalize(snapshot)
+    const entities = Object.fromEntries(
+      Object.entries(flat.entities).map(([id, entity]) => [
+        id,
+        {...entity, ...(entityState[id] ?? {})},
+      ]),
+    ) as NormalizedData<FlatItem>['entities']
     return {
-      entities: flat.entities,
+      entities,
       relationships: flat.relationships,
       meta: {...flat.meta, ...meta},
     }
-  }, [snapshot, meta, normalize])
+  }, [snapshot, meta, entityState, normalize])
 
   const dispatch = (e: UiEvent): void => {
     const ev = (e.type === 'copy' || e.type === 'cut' || e.type === 'paste') ? e.event : undefined
@@ -129,16 +159,20 @@ export function useZodCrudResource<
       let inserted: OperationResultLike | undefined
       if (e.mode === 'child') {
         inserted = crud.appendChild(e.targetId, value as unknown as Parameters<CrudWithSubscribe['appendChild']>[1]) as OperationResultLike
-      } else if (e.mode === 'sibling-after' || e.mode === 'sibling-before') {
-        // insertBefore 미노출 — sibling-before 도 insertAfter 로 근사 (현 zod-crud port 한계).
+      } else if (e.mode === 'sibling-after') {
         inserted = crud.insertAfter(e.targetId, value as unknown as Parameters<CrudWithSubscribe['insertAfter']>[1]) as OperationResultLike
+      } else if (e.mode === 'sibling-before') {
+        inserted = crud.insertBefore?.(e.targetId, value as unknown as Parameters<CrudWithSubscribe['insertAfter']>[1]) as OperationResultLike
+        if (!inserted) {
+          inserted = crud.insertAfter(e.targetId, value as unknown as Parameters<CrudWithSubscribe['insertAfter']>[1]) as OperationResultLike
+        }
       }
       crud.delete(e.id)
       baseDispatch({type: 'set', value: crud.snapshot()})
 
       const newId = inserted?.focusNodeId
       // 새 subtree 의 relationships 를 normalize 으로 재구성해서 path → 새 id 매핑.
-      const newFlat = normalize(crud.snapshot() as ReturnType<CrudWithSubscribe['snapshot']>)
+      const newFlat = normalize(crud.snapshot())
       const findByPath = (rootId: string, path: number[]): string | undefined =>
         path.reduce<string | undefined>((cur, i) => (cur ? (newFlat.relationships[cur] ?? [])[i] : undefined), rootId)
 
@@ -217,7 +251,8 @@ export function useZodCrudResource<
 
     // ── view-state 어휘 — core reduce 위임 (focus/expand/select/typeahead/...) ─
     setMeta((prev) => {
-      const next = reduce({entities: data.entities, relationships: data.relationships, meta: prev}, e)
+      const next = reduceView({entities: data.entities, relationships: data.relationships, meta: prev}, e)
+      setEntityState(pickEntityState(next.entities))
       return next.meta ?? prev
     })
   }

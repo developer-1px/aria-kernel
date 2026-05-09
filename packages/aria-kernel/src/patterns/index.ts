@@ -34,6 +34,14 @@ export {
 export { useMenubarPattern, menubarAxis, menubarKeys, type MenubarOptions } from './menubar'
 export { useComboboxPattern, comboboxAxis, type ComboboxOptions } from './combobox'
 export {
+  useComboboxSelectPattern, comboboxSelectAxis,
+  type ComboboxSelectOptions,
+} from './comboboxSelect'
+export {
+  useComboboxDialogPattern,
+  type ComboboxDialogOptions, type ComboboxDialogReturn,
+} from './comboboxDialog'
+export {
   useComboboxGridPattern, comboboxGridAxis,
   type ComboboxGridOptions, type ComboboxGridCell,
 } from './comboboxGrid'
