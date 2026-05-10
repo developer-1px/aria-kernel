@@ -46,6 +46,10 @@ export interface TabsOptions {
  * https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
  *
  * tabProps(id)·panelProps(id) 가 `aria-controls`/`aria-labelledby` 자동 연결.
+ *
+ * **ARIA-punt 흡수 (INVARIANTS §B-ter.2):**
+ * `active?: string` — controlled selection. 제공 시 `data.entities[id].selected` 무시,
+ * `id === active` 로 도출. 외부 SSOT 와 동기화할 때 data mutation 0. (`/lab/tabs-controlled`)
  */
 export function useTabsPattern(
   data: NormalizedData,

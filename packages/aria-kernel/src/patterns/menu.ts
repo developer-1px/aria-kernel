@@ -99,6 +99,12 @@ export interface MenuOptions {
  * https://www.w3.org/WAI/ARIA/apg/patterns/menu/
  *
  * 키보드: 모두 axis 합성 정본 (`menuAxis`). inline switch 0.
+ *
+ * **ARIA-punt 흡수 (INVARIANTS §B-ter.3):**
+ * `onInteractOutside?: () => void` — open 동안 document mousedown 부착, root 외부 클릭 시
+ * 호출. open=false 또는 onInteractOutside 미제공이면 listener 부착 안 함 (gate + cleanup).
+ * Radix de facto 어휘. (`/lab/menu-outside-close`)
+
  * N-level nested submenu 지원 (path-stack). `data.entities[id].kind` 로
  * menuitem / menuitemcheckbox / menuitemradio 구분.
  *
