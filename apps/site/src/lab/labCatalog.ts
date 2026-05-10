@@ -45,6 +45,14 @@ export const LAB_ENTRIES: LabEntry[] = [
     adoptedBy: ['spredsheet/useSheetGrid.ts', 'spredsheet/useShortcuts.ts'],
   },
   {
+    slug: 'listbox-typeahead',
+    title: 'Listbox — typeahead (printable keys)',
+    invariant: '§B-ter.13',
+    purpose:
+      'APG /listbox/ — printable 키 누적 buffer (500ms window) 로 prefix 매치 navigate. typeahead axis + reduce.',
+    status: 'PoC',
+  },
+  {
     slug: 'radio-sff',
     title: 'RadioGroup — selection follows focus',
     invariant: '§B-ter.12',
