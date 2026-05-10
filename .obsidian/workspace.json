@@ -170,6 +170,7 @@
   },
   "active": "825ee3727135bc1f",
   "lastOpenFiles": [
+    "apps/site/src/lab/CarouselAutoplayDemo.test.tsx",
     "apps/site/src/lab/CarouselAutoplayDemo.tsx",
     "apps/site/src/lab/TooltipDelayDemo.tsx",
     "docs/adr/0003-aria-punt-absorption-line.md",
@@ -181,7 +182,6 @@
     "packages/aria-kernel/dist/chunk-YESBYRHD.js",
     "packages/aria-kernel/dist/chunk-YC2TGCBU.js.map",
     "packages/aria-kernel/dist/chunk-YC2TGCBU.js",
-    "packages/aria-kernel/dist/chunk-W3EDK5TK.cjs.map",
     "packages/aria-kernel/coverage/sort-arrow-sprite.png",
     "packages/aria-kernel/coverage/favicon.png",
     "dist/_fs/packages/aria-kernel/docs/api-md/state/functions/pickNumericValue.md",

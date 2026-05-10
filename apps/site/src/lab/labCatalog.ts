@@ -45,6 +45,14 @@ export const LAB_ENTRIES: LabEntry[] = [
     adoptedBy: ['spredsheet/useSheetGrid.ts', 'spredsheet/useShortcuts.ts'],
   },
   {
+    slug: 'accordion-single',
+    title: 'Accordion — single mode (sibling auto-collapse)',
+    invariant: '§B-ter.8',
+    purpose:
+      'APG punt — 동시 open 허용 여부는 implementation-defined. single mode 에서 kernel 이 형제 자동 collapse emit.',
+    status: 'PoC',
+  },
+  {
     slug: 'carousel-autoplay',
     title: 'Carousel — autoplay + pause rules',
     invariant: '§B-ter.7',

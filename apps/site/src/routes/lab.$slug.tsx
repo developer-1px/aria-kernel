@@ -7,6 +7,7 @@ import { GridEditStartDemo } from '../lab/GridEditStartDemo'
 import { DialogOnKeymapDemo } from '../lab/DialogOnKeymapDemo'
 import { TooltipDelayDemo } from '../lab/TooltipDelayDemo'
 import { CarouselAutoplayDemo } from '../lab/CarouselAutoplayDemo'
+import { AccordionSingleDemo } from '../lab/AccordionSingleDemo'
 
 const DEMOS: Record<string, ComponentType> = {
   'dialog-backdrop': DialogBackdropDemo,
@@ -16,6 +17,7 @@ const DEMOS: Record<string, ComponentType> = {
   'dialog-on-keymap': DialogOnKeymapDemo,
   'tooltip-delay': TooltipDelayDemo,
   'carousel-autoplay': CarouselAutoplayDemo,
+  'accordion-single': AccordionSingleDemo,
 }
 
 class LabErr extends Component<{ children: ReactNode }, { e?: Error; info?: ErrorInfo }> {
