@@ -11,6 +11,7 @@ import { AccordionSingleDemo } from '../lab/AccordionSingleDemo'
 import { ListboxMultiSelectDemo } from '../lab/ListboxMultiSelectDemo'
 import { SliderKeyboardDemo } from '../lab/SliderKeyboardDemo'
 import { SwitchToggleDemo } from '../lab/SwitchToggleDemo'
+import { RadioGroupSffDemo } from '../lab/RadioGroupSffDemo'
 
 const DEMOS: Record<string, ComponentType> = {
   'dialog-backdrop': DialogBackdropDemo,
@@ -24,6 +25,7 @@ const DEMOS: Record<string, ComponentType> = {
   'listbox-multiselect': ListboxMultiSelectDemo,
   'slider-keyboard': SliderKeyboardDemo,
   'switch-toggle': SwitchToggleDemo,
+  'radio-sff': RadioGroupSffDemo,
 }
 
 class LabErr extends Component<{ children: ReactNode }, { e?: Error; info?: ErrorInfo }> {

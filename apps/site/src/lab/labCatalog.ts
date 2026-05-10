@@ -45,6 +45,14 @@ export const LAB_ENTRIES: LabEntry[] = [
     adoptedBy: ['spredsheet/useSheetGrid.ts', 'spredsheet/useShortcuts.ts'],
   },
   {
+    slug: 'radio-sff',
+    title: 'RadioGroup — selection follows focus',
+    invariant: '§B-ter.12',
+    purpose:
+      'APG 강제 — radio 는 항상 selection-follows-focus. Arrow 이동 = checked 전환. reduceWithRadio (singleCheck) host reducer.',
+    status: 'PoC',
+  },
+  {
     slug: 'switch-toggle',
     title: 'Switch — Space/Enter/Click toggle',
     invariant: '§B-ter.11',
