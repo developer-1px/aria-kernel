@@ -3,11 +3,13 @@ import { createFileRoute, notFound } from '@tanstack/react-router'
 import { DialogBackdropDemo } from '../lab/DialogBackdropDemo'
 import { TabsControlledDemo } from '../lab/TabsControlledDemo'
 import { MenuOutsideCloseDemo } from '../lab/MenuOutsideCloseDemo'
+import { GridEditStartDemo } from '../lab/GridEditStartDemo'
 
 const DEMOS: Record<string, ComponentType> = {
   'dialog-backdrop': DialogBackdropDemo,
   'tabs-controlled': TabsControlledDemo,
   'menu-outside-close': MenuOutsideCloseDemo,
+  'grid-edit-start': GridEditStartDemo,
 }
 
 class LabErr extends Component<{ children: ReactNode }, { e?: Error; info?: ErrorInfo }> {

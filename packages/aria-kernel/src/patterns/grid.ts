@@ -44,8 +44,8 @@ export interface GridOptions {
    */
   sortable?: boolean
   /**
-   * F2 시 `{type: 'activate', id: <cellId>}` emit (de facto edit intent). 셀 자체에
-   * `aria-readonly` 가 부여된다. default false.
+   * F2 시 `{type: 'editStart', id: <cellId>}` emit (APG-faithful edit intent — 분리되어
+   * click `activate` 와 구분됨). 셀 자체에 `aria-readonly` 가 부여된다. default false.
    */
   editable?: boolean
   autoFocus?: boolean
@@ -61,6 +61,12 @@ export interface GridOptions {
    * 사용자 chord 미들웨어. default 와 충돌 시 userFn(event, originalFn) 으로 wrap.
    */
   on?: ClipboardOnMiddleware
+  /**
+   * Skip built-in chord descriptors (mod+z, Backspace, Delete, mod+shift+v, F2).
+   * Use when the consumer owns key handling globally (e.g. via aria-kernel/key useShortcut)
+   * so the grid root doesn't intercept Backspace/Delete inside per-cell edit inputs.
+   */
+  disableBuiltinChords?: boolean
 }
 
 /**
@@ -74,7 +80,7 @@ export const gridBuiltinChords: readonly BuiltinChordDescriptor[] = [
   { chord: 'Delete',      uiEvent: 'remove', description: 'Remove focused cell',   scope: 'item' },
   { chord: 'mod+shift+v', uiEvent: 'paste',  description: 'Paste as child of focused cell', scope: 'item' },
   // grid-specific edit-mode (F2 enters cell edit, opts.editable=true 일 때 active)
-  { chord: GRID_EDIT_CHORDS[0], uiEvent: 'activate', description: 'Enter cell edit mode (F2)', scope: 'item' },
+  { chord: GRID_EDIT_CHORDS[0], uiEvent: 'editStart', description: 'Enter cell edit mode (F2)', scope: 'item' },
   // clipboard React events
   { chord: 'clipboard:copy',  uiEvent: 'copy',  description: 'Copy focused cell (React onCopy)',   scope: 'item' },
   { chord: 'clipboard:cut',   uiEvent: 'cut',   description: 'Cut focused cell (React onCut)',     scope: 'item' },
@@ -175,6 +181,7 @@ export function useGridPattern(
     insideEditable,
     on: opts.on,
     builtinChords: gridBuiltinChords,
+    disableBuiltinChords: opts.disableBuiltinChords,
   })
 
   const rootHandleKeyDown = (e: React.KeyboardEvent) => {
@@ -255,7 +262,7 @@ export function useGridPattern(
             onKeyDown: (e: React.KeyboardEvent) => {
               if (matchAnyChord(e as unknown as KeyboardEvent, GRID_EDIT_CHORDS)) {
                 e.preventDefault()
-                onEvent?.({ type: 'activate', id })
+                onEvent?.({ type: 'editStart', id })
               }
             },
           }

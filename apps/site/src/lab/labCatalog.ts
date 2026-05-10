@@ -27,4 +27,11 @@ export const LAB_ENTRIES: LabEntry[] = [
       'ARIA punt 자리 — 외부 클릭 시 menu 닫기를 kernel 이 흡수 (Radix de facto 어휘).',
     status: 'PoC',
   },
+  {
+    slug: 'grid-edit-start',
+    title: 'Grid — activate vs editStart',
+    purpose:
+      'F2 는 editStart, click 은 activate. consumer 가 click→편집 사고 없이 두 의도를 분리.',
+    status: 'PoC',
+  },
 ]
