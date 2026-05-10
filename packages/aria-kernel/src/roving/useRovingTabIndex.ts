@@ -18,6 +18,15 @@ import { useFocusBridge } from '../focus'
 const idFrom = (e: { target: EventTarget }): string | null =>
   (e.target as Element).closest<HTMLElement>('[data-id]')?.dataset.id ?? null
 
+// editable target 안에서 modifier 없는 단일 키는 axis 가 탈취하지 않는다.
+// (bindGlobalKeyMap 의 가드 어휘 그대로 — cell-input 같은 inline 편집을 막지 않기 위함)
+const isEditableTarget = (t: EventTarget | null): boolean => {
+  const el = t as HTMLElement | null
+  if (!el) return false
+  const tag = el.tagName
+  return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || el.isContentEditable
+}
+
 const defaultFocusId = (data: NormalizedData, containerId: string): string | null => {
   const ids = getCollectionChildren(data, containerId).filter((id) => !isDisabled(data, id))
   return ids.find((id) => Boolean(data.entities[id]?.selected)) ?? ids[0] ?? null
@@ -62,6 +71,8 @@ export function useRovingTabIndex(
       if (id) onClick(e, id)
     },
     onKeyDown: (e: KeyboardEvent) => {
+      // editable 안에서 modifier 없는 단일 키는 axis 가 탈취 금지 (cell-input 편집 보호)
+      if (isEditableTarget(e.target) && !e.ctrlKey && !e.altKey && !e.metaKey) return
       const id = idFrom(e)
       if (id) onKey(e, id)
     },
