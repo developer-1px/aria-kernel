@@ -45,6 +45,14 @@ export const LAB_ENTRIES: LabEntry[] = [
     adoptedBy: ['spredsheet/useSheetGrid.ts', 'spredsheet/useShortcuts.ts'],
   },
   {
+    slug: 'combobox-filter',
+    title: 'Combobox — list autocomplete filter',
+    invariant: '§B-ter.15',
+    purpose:
+      'APG punt — filter 알고리즘 implementation-defined. case-insensitive includes default + openOnFocus·autoHighlightFirst·closeOnBlurDelay·Escape 흡수.',
+    status: 'PoC',
+  },
+  {
     slug: 'checkbox-mixed',
     title: 'Checkbox group — mixed (tri-state)',
     invariant: '§B-ter.14',
