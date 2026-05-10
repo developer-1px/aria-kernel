@@ -170,6 +170,7 @@
   },
   "active": "825ee3727135bc1f",
   "lastOpenFiles": [
+    "apps/site/src/lab/AlertDialogCancelDemo.tsx",
     "apps/site/src/lab/ComboboxFilterDemo.test.tsx",
     "apps/site/src/lab/ComboboxFilterDemo.tsx",
     "apps/site/src/lab/CheckboxMixedDemo.tsx",
@@ -180,7 +181,6 @@
     "docs/api/variables/state.setValueHandles.html",
     "docs/api/variables/state.multiSelectToggleHandles.html",
     "docs/api/variables/state.singleCheckHandles.html",
-    "docs/api/variables/patterns.treeGridBuiltinChords.html",
     "docs/adr/0003-aria-punt-absorption-line.md",
     "packages/aria-kernel/coverage/sort-arrow-sprite.png",
     "packages/aria-kernel/coverage/favicon.png",

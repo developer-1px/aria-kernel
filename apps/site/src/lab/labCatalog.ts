@@ -45,6 +45,14 @@ export const LAB_ENTRIES: LabEntry[] = [
     adoptedBy: ['spredsheet/useSheetGrid.ts', 'spredsheet/useShortcuts.ts'],
   },
   {
+    slug: 'alertdialog-cancel',
+    title: 'AlertDialog — cancel-first focus',
+    invariant: '§B-ter.16',
+    purpose:
+      'APG punt — destructive prompt 초기 focus 선정 implementation-defined. cancelRef 우선 (안전 default).',
+    status: 'PoC',
+  },
+  {
     slug: 'combobox-filter',
     title: 'Combobox — list autocomplete filter',
     invariant: '§B-ter.15',

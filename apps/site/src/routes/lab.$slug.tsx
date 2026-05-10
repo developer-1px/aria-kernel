@@ -15,6 +15,7 @@ import { RadioGroupSffDemo } from '../lab/RadioGroupSffDemo'
 import { ListboxTypeaheadDemo } from '../lab/ListboxTypeaheadDemo'
 import { CheckboxMixedDemo } from '../lab/CheckboxMixedDemo'
 import { ComboboxFilterDemo } from '../lab/ComboboxFilterDemo'
+import { AlertDialogCancelDemo } from '../lab/AlertDialogCancelDemo'
 
 const DEMOS: Record<string, ComponentType> = {
   'dialog-backdrop': DialogBackdropDemo,
@@ -32,6 +33,7 @@ const DEMOS: Record<string, ComponentType> = {
   'listbox-typeahead': ListboxTypeaheadDemo,
   'checkbox-mixed': CheckboxMixedDemo,
   'combobox-filter': ComboboxFilterDemo,
+  'alertdialog-cancel': AlertDialogCancelDemo,
 }
 
 class LabErr extends Component<{ children: ReactNode }, { e?: Error; info?: ErrorInfo }> {
