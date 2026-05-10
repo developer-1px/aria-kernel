@@ -79,6 +79,12 @@ export interface MenuOptions {
   closeOnSelect?: boolean
   autoFocus?: boolean
   onEscape?: () => void
+  /**
+   * outside-close — open 인 동안 document mousedown 을 듣고 root menu 외부에서
+   * 클릭이 발생하면 호출. ARIA punt 자리(spec 본문은 backdrop/dismiss 동작 미정의).
+   * Radix `onInteractOutside` 와 동일 이름 — de facto 어휘.
+   */
+  onInteractOutside?: () => void
   label?: string
   labelledBy?: string
   containerId?: string
@@ -115,10 +121,11 @@ export function useMenuPattern(
   openPath: string[]
 } {
   const {
-    autoFocus, onEscape, orientation = 'vertical', label, labelledBy,
+    autoFocus, onEscape, onInteractOutside, orientation = 'vertical', label, labelledBy,
     containerId = ROOT, open: openProp, defaultOpen = false,
     closeOnSelect = true, idPrefix = 'menu',
   } = opts
+  const rootRef = useRef<HTMLElement | null>(null)
 
   const [internalOpen, setInternalOpen] = useState(defaultOpen)
   const isControlled = openProp !== undefined
@@ -151,6 +158,17 @@ export function useMenuPattern(
     if (first) setActiveId(first)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoFocus, open])
+
+  // outside-close — ARIA punt 자리. open 인 동안 root 외부 클릭 시 onInteractOutside.
+  useEffect(() => {
+    if (!open || !onInteractOutside) return
+    const onDoc = (e: MouseEvent) => {
+      const root = rootRef.current
+      if (root && !root.contains(e.target as Node)) onInteractOutside()
+    }
+    document.addEventListener('mousedown', onDoc)
+    return () => document.removeEventListener('mousedown', onDoc)
+  }, [open, onInteractOutside])
 
   const intent = (e: UiEvent) => {
     if (e.type === 'open') {
@@ -254,6 +272,7 @@ export function useMenuPattern(
       'aria-labelledby': isRoot ? labelledBy : itemDomId(parentId),
       hidden: isRoot ? !open || undefined : undefined,
       tabIndex: -1,
+      ...(isRoot ? { ref: ((el: HTMLElement | null) => { rootRef.current = el }) as React.Ref<HTMLElement> } : {}),
     } as unknown as RootProps
 
     const itemProps = (id: string): ItemProps => {

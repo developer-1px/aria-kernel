@@ -20,4 +20,11 @@ export const LAB_ENTRIES: LabEntry[] = [
       '외부 SSOT 가 active tab 인 경우, data.entities mutation 없이 active prop 으로 동기화.',
     status: 'PoC',
   },
+  {
+    slug: 'menu-outside-close',
+    title: 'Menu — onInteractOutside',
+    purpose:
+      'ARIA punt 자리 — 외부 클릭 시 menu 닫기를 kernel 이 흡수 (Radix de facto 어휘).',
+    status: 'PoC',
+  },
 ]
