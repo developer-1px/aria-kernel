@@ -9,6 +9,7 @@ import { TooltipDelayDemo } from '../lab/TooltipDelayDemo'
 import { CarouselAutoplayDemo } from '../lab/CarouselAutoplayDemo'
 import { AccordionSingleDemo } from '../lab/AccordionSingleDemo'
 import { ListboxMultiSelectDemo } from '../lab/ListboxMultiSelectDemo'
+import { SliderKeyboardDemo } from '../lab/SliderKeyboardDemo'
 
 const DEMOS: Record<string, ComponentType> = {
   'dialog-backdrop': DialogBackdropDemo,
@@ -20,6 +21,7 @@ const DEMOS: Record<string, ComponentType> = {
   'carousel-autoplay': CarouselAutoplayDemo,
   'accordion-single': AccordionSingleDemo,
   'listbox-multiselect': ListboxMultiSelectDemo,
+  'slider-keyboard': SliderKeyboardDemo,
 }
 
 class LabErr extends Component<{ children: ReactNode }, { e?: Error; info?: ErrorInfo }> {

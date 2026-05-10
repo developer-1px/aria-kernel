@@ -45,6 +45,14 @@ export const LAB_ENTRIES: LabEntry[] = [
     adoptedBy: ['spredsheet/useSheetGrid.ts', 'spredsheet/useShortcuts.ts'],
   },
   {
+    slug: 'slider-keyboard',
+    title: 'Slider — keyboard step semantics',
+    invariant: '§B-ter.10',
+    purpose:
+      'APG punt — large step 크기 implementation-defined. numericStep axis 가 Arrow=±step, PageUp/Down=±step×10, Home/End=min/max 흡수 + clamping.',
+    status: 'PoC',
+  },
+  {
     slug: 'listbox-multiselect',
     title: 'Listbox — multiselect (Space/Ctrl/Shift)',
     invariant: '§B-ter.9',
