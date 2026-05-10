@@ -45,6 +45,14 @@ export const LAB_ENTRIES: LabEntry[] = [
     adoptedBy: ['spredsheet/useSheetGrid.ts', 'spredsheet/useShortcuts.ts'],
   },
   {
+    slug: 'switch-toggle',
+    title: 'Switch — Space/Enter/Click toggle',
+    invariant: '§B-ter.11',
+    purpose:
+      'WAI-ARIA punt — switch Enter 응답은 optional. activate axis 가 Space/Enter/Click 셋 모두 동일하게 토글 emit.',
+    status: 'PoC',
+  },
+  {
     slug: 'slider-keyboard',
     title: 'Slider — keyboard step semantics',
     invariant: '§B-ter.10',
