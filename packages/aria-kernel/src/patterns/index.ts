@@ -26,7 +26,7 @@ export { useRadioGroupPattern, radioGroupAxis, radioGroupKeys, type RadioGroupOp
 export { useToolbarPattern, toolbarAxis, type ToolbarOptions } from './toolbar'
 
 export { useMenuPattern, menuAxis, menuKeys, menuButtonTriggerKeys, type MenuOptions } from './menu'
-export { useMenuButtonPattern, menuButtonAxis, menuButtonKeys, type MenuButtonOptions } from './menuButton'
+export { useMenuButtonPattern, menuButtonAxis, menuButtonKeys, type MenuButtonOptions, type MenuItem, type MenuItemKind, type MenuLevel } from './menuButton'
 export {
   checkboxPattern, useCheckboxGroupPattern, checkboxKeys,
   type CheckboxOptions, type CheckboxGroupOptions, type CheckboxState,

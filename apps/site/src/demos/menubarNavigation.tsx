@@ -82,7 +82,7 @@ function SubmenuView({
 }
 
 export default function MenubarNavigationDemo() {
-  const [data, onEvent] = useLocalData(() => fromTree(TREE))
+  const [data, onEvent] = useLocalData(() => fromTree(TREE as Parameters<typeof fromTree>[0]))
   const { rootProps, menubarItemProps, topItems, getSubmenu } = useMenubarPattern(data, onEvent, {
     label: 'Mythical University',
   })

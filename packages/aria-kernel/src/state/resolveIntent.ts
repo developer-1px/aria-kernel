@@ -24,11 +24,6 @@ import { resolveNavigate } from './resolveNavigate'
 const firstEnabled = (d: NormalizedData, ids: string[]) =>
   ids.find((c) => !isDisabled(d, c))
 
-const lastEnabled = (d: NormalizedData, ids: string[]) => {
-  for (let i = ids.length - 1; i >= 0; i--) if (!isDisabled(d, ids[i])) return ids[i]
-  return undefined
-}
-
 /** treeStep — branch 분기 + leaf nextVisible (de facto VS Code/Finder). */
 const resolveTreeStep = (d: NormalizedData, e: TreeStepIntent): UiEvent[] => {
   if (isDisabled(d, e.id)) return []

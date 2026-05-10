@@ -30,7 +30,7 @@ export default defineConfig({
   },
   resolve: {
     alias: [
-      { find: /^zod-crud$/, replacement: resolve(__dirname, 'node_modules/zod-crud/dist/index.js') },
+      { find: /^zod-crud$/, replacement: resolve(__dirname, 'tooling/zod-crud-shim.ts') },
       { find: /^@p\/aria-kernel$/, replacement: resolve(__dirname, 'packages/aria-kernel/src/index.ts') },
       { find: /^@p\/aria-kernel\//, replacement: resolve(__dirname, 'packages/aria-kernel/src/') + '/' },
       { find: /^@p\/fs$/, replacement: resolve(__dirname, 'packages/fs/src/index.ts') },

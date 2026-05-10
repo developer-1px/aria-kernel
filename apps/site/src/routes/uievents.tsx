@@ -83,7 +83,6 @@ function buildEmittersIndex(variantTypes: Set<string>): Record<string, string[]>
 
 function UiEventsApp() {
   const variants = extractVariants()
-  const byType = new Map(variants.map((v) => [v.type, v]))
   const emitters = buildEmittersIndex(new Set(variants.map((v) => v.type)))
 
   // SSOT — types.ts 의 UI_EVENT_CATEGORY map 으로 그룹화. 새 variant 추가 시
