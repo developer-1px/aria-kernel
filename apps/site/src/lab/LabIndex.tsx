@@ -19,7 +19,10 @@ export function LabIndex() {
               className="block rounded border border-neutral-200 p-4 hover:bg-neutral-50"
             >
               <div className="flex items-center justify-between">
-                <h2 className="font-semibold">{e.title}</h2>
+                <h2 className="font-semibold">
+                  <span className="text-xs text-neutral-400 font-mono mr-2">{e.invariant}</span>
+                  {e.title}
+                </h2>
                 <span
                   className={
                     'rounded px-2 py-0.5 text-xs ' +
