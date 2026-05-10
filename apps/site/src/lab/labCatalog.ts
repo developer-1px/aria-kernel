@@ -45,6 +45,14 @@ export const LAB_ENTRIES: LabEntry[] = [
     adoptedBy: ['spredsheet/useSheetGrid.ts', 'spredsheet/useShortcuts.ts'],
   },
   {
+    slug: 'tree-arrow',
+    title: 'Tree — Right/Left expand · focus≠expand',
+    invariant: '§B-ter.18',
+    purpose:
+      'APG /tree/ — Right=expand→first child, Left=collapse→parent. ↑/↓ focus 이동은 절대 expand 유발 ❌ (memory feedback_tree_focus_no_expand).',
+    status: 'PoC',
+  },
+  {
     slug: 'toolbar-separator',
     title: 'Toolbar — separator skip + single tab stop',
     invariant: '§B-ter.17',
