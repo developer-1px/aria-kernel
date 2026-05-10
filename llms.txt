@@ -10,6 +10,19 @@ ARIA 행동 인프라(Behavior infrastructure for WAI-ARIA). Roving tabindex, ax
 - [PATTERNS.md](packages/aria-kernel/PATTERNS.md): pattern recipe 시그니처
 - [W3C WAI-ARIA APG](https://www.w3.org/WAI/ARIA/apg/): 정본 어휘 출처
 
+## 책임선 (responsibility line)
+
+kernel = *W3C 표준 어휘로 표현 가능한 모든 행동(behavior) 결정* 흡수 + *입력 이벤트(dialog·keyboard·clipboard) 를 패턴 hook 까지 transport*. ARIA spec 이 "implementation-defined" 로 punt 한 자리(backdrop click, outside-close, edit-mode 전이, controlled prop, chord 미들웨어) 는 kernel 안. 시각·마크업·앱 도메인 어휘는 소비자.
+
+## /lab — ARIA-punt 흡수 PoC
+
+소비자가 자체 구현하던 ad-hoc 코드(`document.addEventListener('mousedown')`, `data.entities[id].selected = ...`, `<input onKeyDown>`) 가 kernel 어디에 흡수됐는지 5 PoC + 25 black-box test 로 가시화.
+- `/lab/dialog-backdrop` — `backdropProps`, mousedown self-target guard
+- `/lab/tabs-controlled` — `active` prop, data.entities mutation 0
+- `/lab/menu-outside-close` — `onInteractOutside`
+- `/lab/grid-edit-start` — `editStart` UiEvent (click `activate` 와 분리; Enter 는 dual-emit)
+- `/lab/dialog-on-keymap` — `on: { 'chord': () => void }` 미들웨어
+
 ## patterns
 
 - **AccordionOptions** — Options for useAccordionPattern.
