@@ -53,6 +53,7 @@ const FOCUSABLE_SELECTOR = [
 export function useDialogPattern(opts: DialogOptions = {}): {
   rootRef: RefObject<HTMLElement | null>
   rootProps: RootProps
+  backdropProps: RootProps
   closeProps: ItemProps
   open: boolean
   setOpen: (open: boolean) => void
@@ -126,5 +127,16 @@ export function useDialogPattern(opts: DialogOptions = {}): {
     onClick: () => setOpen(false),
   } as unknown as ItemProps
 
-  return { rootRef, rootProps, closeProps, open, setOpen }
+  // backdrop — ARIA punt. modal dialog 의 backdrop click 닫기는 spec 본문이 아니라
+  // 플랫폼 관행(Radix Dialog.Overlay · RAC ModalOverlay 의 사실상 표준 위치). kernel 이 흡수.
+  // mousedown 자체 타깃이 backdrop 일 때만 닫는다 — dialog 내부 drag-out 으로 닫히는 사고 방지.
+  const backdropProps: RootProps = {
+    'data-state': open ? 'open' : 'closed',
+    hidden: !open,
+    onMouseDown: (e: React.MouseEvent) => {
+      if (e.target === e.currentTarget) setOpen(false)
+    },
+  } as unknown as RootProps
+
+  return { rootRef, rootProps, backdropProps, closeProps, open, setOpen }
 }

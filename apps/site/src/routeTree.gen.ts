@@ -12,10 +12,13 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WrappersRouteImport } from './routes/wrappers'
 import { Route as UieventsRouteImport } from './routes/uievents'
 import { Route as PatternsRouteImport } from './routes/patterns'
+import { Route as LabRouteImport } from './routes/lab'
 import { Route as DataRouteImport } from './routes/data'
 import { Route as CoverageRouteImport } from './routes/coverage'
 import { Route as AxesRouteImport } from './routes/axes'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LabIndexRouteImport } from './routes/lab.index'
+import { Route as LabSlugRouteImport } from './routes/lab.$slug'
 import { Route as DocsSlugRouteImport } from './routes/docs.$slug'
 import { Route as AppsSlidesSplatRouteImport } from './routes/apps.slides.$'
 import { Route as AppsOutlinerSplatRouteImport } from './routes/apps.outliner.$'
@@ -38,6 +41,11 @@ const PatternsRoute = PatternsRouteImport.update({
   path: '/patterns',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LabRoute = LabRouteImport.update({
+  id: '/lab',
+  path: '/lab',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DataRoute = DataRouteImport.update({
   id: '/data',
   path: '/data',
@@ -57,6 +65,16 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const LabIndexRoute = LabIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LabRoute,
+} as any)
+const LabSlugRoute = LabSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => LabRoute,
 } as any)
 const DocsSlugRoute = DocsSlugRouteImport.update({
   id: '/docs/$slug',
@@ -94,10 +112,13 @@ export interface FileRoutesByFullPath {
   '/axes': typeof AxesRoute
   '/coverage': typeof CoverageRoute
   '/data': typeof DataRoute
+  '/lab': typeof LabRouteWithChildren
   '/patterns': typeof PatternsRoute
   '/uievents': typeof UieventsRoute
   '/wrappers': typeof WrappersRoute
   '/docs/$slug': typeof DocsSlugRoute
+  '/lab/$slug': typeof LabSlugRoute
+  '/lab/': typeof LabIndexRoute
   '/apps/finder/$': typeof AppsFinderSplatRoute
   '/apps/kanban/$': typeof AppsKanbanSplatRoute
   '/apps/markdown/$': typeof AppsMarkdownSplatRoute
@@ -113,6 +134,8 @@ export interface FileRoutesByTo {
   '/uievents': typeof UieventsRoute
   '/wrappers': typeof WrappersRoute
   '/docs/$slug': typeof DocsSlugRoute
+  '/lab/$slug': typeof LabSlugRoute
+  '/lab': typeof LabIndexRoute
   '/apps/finder/$': typeof AppsFinderSplatRoute
   '/apps/kanban/$': typeof AppsKanbanSplatRoute
   '/apps/markdown/$': typeof AppsMarkdownSplatRoute
@@ -125,10 +148,13 @@ export interface FileRoutesById {
   '/axes': typeof AxesRoute
   '/coverage': typeof CoverageRoute
   '/data': typeof DataRoute
+  '/lab': typeof LabRouteWithChildren
   '/patterns': typeof PatternsRoute
   '/uievents': typeof UieventsRoute
   '/wrappers': typeof WrappersRoute
   '/docs/$slug': typeof DocsSlugRoute
+  '/lab/$slug': typeof LabSlugRoute
+  '/lab/': typeof LabIndexRoute
   '/apps/finder/$': typeof AppsFinderSplatRoute
   '/apps/kanban/$': typeof AppsKanbanSplatRoute
   '/apps/markdown/$': typeof AppsMarkdownSplatRoute
@@ -142,10 +168,13 @@ export interface FileRouteTypes {
     | '/axes'
     | '/coverage'
     | '/data'
+    | '/lab'
     | '/patterns'
     | '/uievents'
     | '/wrappers'
     | '/docs/$slug'
+    | '/lab/$slug'
+    | '/lab/'
     | '/apps/finder/$'
     | '/apps/kanban/$'
     | '/apps/markdown/$'
@@ -161,6 +190,8 @@ export interface FileRouteTypes {
     | '/uievents'
     | '/wrappers'
     | '/docs/$slug'
+    | '/lab/$slug'
+    | '/lab'
     | '/apps/finder/$'
     | '/apps/kanban/$'
     | '/apps/markdown/$'
@@ -172,10 +203,13 @@ export interface FileRouteTypes {
     | '/axes'
     | '/coverage'
     | '/data'
+    | '/lab'
     | '/patterns'
     | '/uievents'
     | '/wrappers'
     | '/docs/$slug'
+    | '/lab/$slug'
+    | '/lab/'
     | '/apps/finder/$'
     | '/apps/kanban/$'
     | '/apps/markdown/$'
@@ -188,6 +222,7 @@ export interface RootRouteChildren {
   AxesRoute: typeof AxesRoute
   CoverageRoute: typeof CoverageRoute
   DataRoute: typeof DataRoute
+  LabRoute: typeof LabRouteWithChildren
   PatternsRoute: typeof PatternsRoute
   UieventsRoute: typeof UieventsRoute
   WrappersRoute: typeof WrappersRoute
@@ -222,6 +257,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PatternsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lab': {
+      id: '/lab'
+      path: '/lab'
+      fullPath: '/lab'
+      preLoaderRoute: typeof LabRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/data': {
       id: '/data'
       path: '/data'
@@ -249,6 +291,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/lab/': {
+      id: '/lab/'
+      path: '/'
+      fullPath: '/lab/'
+      preLoaderRoute: typeof LabIndexRouteImport
+      parentRoute: typeof LabRoute
+    }
+    '/lab/$slug': {
+      id: '/lab/$slug'
+      path: '/$slug'
+      fullPath: '/lab/$slug'
+      preLoaderRoute: typeof LabSlugRouteImport
+      parentRoute: typeof LabRoute
     }
     '/docs/$slug': {
       id: '/docs/$slug'
@@ -295,11 +351,24 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface LabRouteChildren {
+  LabSlugRoute: typeof LabSlugRoute
+  LabIndexRoute: typeof LabIndexRoute
+}
+
+const LabRouteChildren: LabRouteChildren = {
+  LabSlugRoute: LabSlugRoute,
+  LabIndexRoute: LabIndexRoute,
+}
+
+const LabRouteWithChildren = LabRoute._addFileChildren(LabRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AxesRoute: AxesRoute,
   CoverageRoute: CoverageRoute,
   DataRoute: DataRoute,
+  LabRoute: LabRouteWithChildren,
   PatternsRoute: PatternsRoute,
   UieventsRoute: UieventsRoute,
   WrappersRoute: WrappersRoute,
