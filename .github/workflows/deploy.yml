@@ -19,6 +19,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: developer-1px/zod-crud
+          path: _zod-crud-checkout
+      - run: |
+          mkdir -p ../zod-crud
+          cp -r _zod-crud-checkout/. ../zod-crud/
+          rm -rf _zod-crud-checkout
+        shell: bash
       - uses: pnpm/action-setup@v4
         with:
           version: 9
@@ -26,6 +35,12 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
+      - name: Build zod-crud sibling
+        working-directory: ../zod-crud
+        run: |
+          npm install --no-audit --no-fund
+          npm run build -w packages/zod-crud
+        shell: bash
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec vite build
         env:
