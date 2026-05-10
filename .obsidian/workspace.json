@@ -170,6 +170,7 @@
   },
   "active": "825ee3727135bc1f",
   "lastOpenFiles": [
+    "apps/site/src/lab/TooltipDelayDemo.tsx",
     "docs/adr/0003-aria-punt-absorption-line.md",
     "packages/aria-kernel/src/patterns/menu.test.ts",
     "packages/aria-kernel/dist/chunk-UBH56JFI.js",
@@ -207,7 +208,6 @@
     "dist/_fs/packages/aria-kernel/docs/api-md/patterns/functions/useTreePattern.md",
     "dist/_fs/packages/aria-kernel/docs/api-md/patterns/functions/useTreeGridPattern.md",
     "dist/_fs/packages/aria-kernel/docs/api-md/patterns/functions/useTooltipPattern.md",
-    "dist/_fs/packages/aria-kernel/docs/api-md/patterns/functions/useToolbarPattern.md",
     "dist/_fs/packages/aria-kernel/docs/api/assets/icons.svg",
     "dist/_fs/packages/aria-kernel/coverage/sort-arrow-sprite.png",
     "dist/_fs/packages/aria-kernel/coverage/favicon.png",

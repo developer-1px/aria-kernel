@@ -35,6 +35,7 @@ B-ter.2. **Tabs controlled selected = `id === active`** — `active` prop 제공
 B-ter.3. **Menu listener gating** — `onInteractOutside` 의 document mousedown 리스너는 open=true ∧ onInteractOutside 제공 둘 다 일 때만 부착, open=false 전환 시 cleanup. (`/lab/menu-outside-close` + `menu.test.ts`)
 B-ter.4. **Grid emit 분리** — click → `activate` 만, F2 → `editStart` 만, Enter → 둘 다 (chord match + activate axis). 소비자가 dedupe 책임. (`/lab/grid-edit-start`)
 B-ter.5. **Dialog `on` keymap = window keydown** — open 인 동안만 부착, modifier-less chord 는 editable-guard 와 동일 규칙으로 입력 위젯 안에서 탈취 안 함. (`/lab/dialog-on-keymap`)
+B-ter.6. **Tooltip delayShow/delayHide** — APG 권장 show ≥ 400ms, hide 짧게. hover/focus 둘 다 show 트리거, blur/mouseleave/Escape 모두 hide. consumer 가 setTimeout 손으로 부착 ❌. (`/lab/tooltip-delay`)
 
 ## B-bis. Props 어휘 — role 우선 명명 규칙
 

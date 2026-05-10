@@ -45,6 +45,14 @@ export const LAB_ENTRIES: LabEntry[] = [
     adoptedBy: ['spredsheet/useSheetGrid.ts', 'spredsheet/useShortcuts.ts'],
   },
   {
+    slug: 'tooltip-delay',
+    title: 'Tooltip — delayShow/delayHide',
+    invariant: '§B-ter.6',
+    purpose:
+      'APG punt — show/hide timing 은 implementation-defined. kernel 이 delayShow/delayHide 옵션으로 흡수.',
+    status: 'PoC',
+  },
+  {
     slug: 'dialog-on-keymap',
     title: 'Dialog — on keymap',
     invariant: '§B-ter.5',
