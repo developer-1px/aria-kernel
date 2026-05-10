@@ -40,7 +40,7 @@ importers:
         version: 4.3.6
       zod-crud:
         specifier: file:../zod-crud/packages/zod-crud
-        version: file:../zod-crud/packages/zod-crud(zod@4.3.6)
+        version: file:../zod-crud/packages/zod-crud(react@19.2.5)(zod@4.3.6)
     devDependencies:
       '@eslint/js':
         specifier: ^9.39.4
@@ -78,6 +78,9 @@ importers:
       globals:
         specifier: ^17.5.0
         version: 17.5.0
+      husky:
+        specifier: ^9.1.7
+        version: 9.1.7
       postcss:
         specifier: ^8.5.13
         version: 8.5.13
@@ -152,7 +155,7 @@ importers:
         version: link:../../packages/slides
       zod-crud:
         specifier: file:../../../zod-crud/packages/zod-crud
-        version: file:../zod-crud/packages/zod-crud(zod@4.3.6)
+        version: file:../zod-crud/packages/zod-crud(react@19.2.5)(zod@4.3.6)
 
   packages/aria-kernel:
     dependencies:
@@ -202,7 +205,7 @@ importers:
         version: 4.3.6
       zod-crud:
         specifier: file:../../../zod-crud/packages/zod-crud
-        version: file:../zod-crud/packages/zod-crud(zod@4.3.6)
+        version: file:../zod-crud/packages/zod-crud(react@19.2.5)(zod@4.3.6)
 
   packages/source-viewer:
     dependencies:
@@ -1914,6 +1917,11 @@ packages:
     resolution: {integrity: sha512-vK9P5/iUfdl95AI+JVyUuIcVtd4ofvtrOr3HNtM2yxC9bnMbEdp3x01OhQNnjb8IJYi38VlTE3mBXwcfvywuSw==}
     engines: {node: '>= 14'}
 
+  husky@9.1.7:
+    resolution: {integrity: sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA==}
+    engines: {node: '>=18'}
+    hasBin: true
+
   ignore@5.3.2:
     resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
     engines: {node: '>= 4'}
@@ -3090,7 +3098,11 @@ packages:
   zod-crud@file:../zod-crud/packages/zod-crud:
     resolution: {directory: ../zod-crud/packages/zod-crud, type: directory}
     peerDependencies:
+      react: '>=18'
       zod: ^4.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
 
   zod-validation-error@4.0.2:
     resolution: {integrity: sha512-Q6/nZLe6jxuU80qb/4uJ4t5v2VEZ44lzQjPDhYJNztRQ4wyWc6VF3D3Kb/fAuPetZQnhS3hnajCf9CsWesghLQ==}
@@ -4765,6 +4777,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  husky@9.1.7: {}
+
   ignore@5.3.2: {}
 
   ignore@7.0.5: {}
@@ -5976,9 +5990,11 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zod-crud@file:../zod-crud/packages/zod-crud(zod@4.3.6):
+  zod-crud@file:../zod-crud/packages/zod-crud(react@19.2.5)(zod@4.3.6):
     dependencies:
       zod: 4.3.6
+    optionalDependencies:
+      react: 19.2.5
 
   zod-validation-error@4.0.2(zod@4.3.6):
     dependencies:
