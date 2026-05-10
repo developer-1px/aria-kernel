@@ -18,6 +18,7 @@ import { ComboboxFilterDemo } from '../lab/ComboboxFilterDemo'
 import { AlertDialogCancelDemo } from '../lab/AlertDialogCancelDemo'
 import { ToolbarSeparatorDemo } from '../lab/ToolbarSeparatorDemo'
 import { TreeArrowDemo } from '../lab/TreeArrowDemo'
+import { MenuButtonOpenDemo } from '../lab/MenuButtonOpenDemo'
 
 const DEMOS: Record<string, ComponentType> = {
   'dialog-backdrop': DialogBackdropDemo,
@@ -38,6 +39,7 @@ const DEMOS: Record<string, ComponentType> = {
   'alertdialog-cancel': AlertDialogCancelDemo,
   'toolbar-separator': ToolbarSeparatorDemo,
   'tree-arrow': TreeArrowDemo,
+  'menubutton-open': MenuButtonOpenDemo,
 }
 
 class LabErr extends Component<{ children: ReactNode }, { e?: Error; info?: ErrorInfo }> {

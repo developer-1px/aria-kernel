@@ -45,6 +45,14 @@ export const LAB_ENTRIES: LabEntry[] = [
     adoptedBy: ['spredsheet/useSheetGrid.ts', 'spredsheet/useShortcuts.ts'],
   },
   {
+    slug: 'menubutton-open',
+    title: 'MenuButton — open + focus 분기',
+    invariant: '§B-ter.19',
+    purpose:
+      'APG punt — trigger open 시 menuitem focus 분기 implementation-defined. ArrowDown/Enter/Space=first, ArrowUp=last.',
+    status: 'PoC',
+  },
+  {
     slug: 'tree-arrow',
     title: 'Tree — Right/Left expand · focus≠expand',
     invariant: '§B-ter.18',
