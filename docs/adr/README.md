@@ -2,6 +2,14 @@
 
 이 폴더는 아키텍처 결정 기록(ADR)을 담는다.
 
+## Index
+
+| # | Title | Status | Date |
+|---|---|---|---|
+| 0001 | [Axis helpers stay in axes](./0001-axis-helpers-stay-in-axes.md) | accepted | — |
+| 0002 | [check 와 select 는 별개의 축](./0002-check-and-select-two-axes.md) | accepted | 2026-05-05 |
+| 0003 | [ARIA-punt 흡수 책임선](./0003-aria-punt-absorption-line.md) | accepted | 2026-05-11 |
+
 ## 명명
 
 `NNNN-kebab-title.md` — 4자리 zero-padded 순번 + 설명적 제목.
