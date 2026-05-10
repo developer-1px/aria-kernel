@@ -64,6 +64,7 @@ pnpm preview      # serve dist/
 |---|---|
 | `/` | Landing — product blurb + showcase cards |
 | `/patterns` | APG recipe catalog (snap-y scroll, hash anchors per pattern) |
+| `/lab` | ARIA-punt 흡수 PoC — 5 demo (dialog backdrop · tabs controlled · menu outside-close · grid editStart · dialog on keymap) + 25 black-box test |
 | `/apps/finder/` | Mac Finder column view |
 | `/apps/slides/docs/slides-sample.md` | Slides deck |
 | `/apps/admin/dashboard` | Admin dashboard (KPI cards) |
