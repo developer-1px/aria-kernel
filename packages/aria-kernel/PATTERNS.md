@@ -145,3 +145,4 @@ type Recipe<P extends string> = (
 - ✅ INVARIANTS C17 (출처 없으면 구현 없다) — recipe 의 모든 동작은 axis/gesture 파생, 새 어휘 0
 - ✅ 메모리 *Minimize choices for LLM* — `1 role = 1 recipe`
 - ✅ 메모리 *Vocabulary closed* — **subpath / 파일명**은 W3C APG `/patterns/` URL slug 그대로. **export 이름**은 React Rules of Hooks 준수 (hook 호출 내장 → `useXPattern`, pure → `xPattern`)
+- ✅ INVARIANTS §B-ter (B-ter.1~5) — ARIA-punt 흡수 (backdrop guard · controlled active · listener gating · emit 분리 · on keymap). 각각 `/lab/<slug>` PoC + kernel test 로 검증
