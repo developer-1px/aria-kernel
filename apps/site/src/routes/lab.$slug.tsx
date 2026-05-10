@@ -13,6 +13,7 @@ import { SliderKeyboardDemo } from '../lab/SliderKeyboardDemo'
 import { SwitchToggleDemo } from '../lab/SwitchToggleDemo'
 import { RadioGroupSffDemo } from '../lab/RadioGroupSffDemo'
 import { ListboxTypeaheadDemo } from '../lab/ListboxTypeaheadDemo'
+import { CheckboxMixedDemo } from '../lab/CheckboxMixedDemo'
 
 const DEMOS: Record<string, ComponentType> = {
   'dialog-backdrop': DialogBackdropDemo,
@@ -28,6 +29,7 @@ const DEMOS: Record<string, ComponentType> = {
   'switch-toggle': SwitchToggleDemo,
   'radio-sff': RadioGroupSffDemo,
   'listbox-typeahead': ListboxTypeaheadDemo,
+  'checkbox-mixed': CheckboxMixedDemo,
 }
 
 class LabErr extends Component<{ children: ReactNode }, { e?: Error; info?: ErrorInfo }> {

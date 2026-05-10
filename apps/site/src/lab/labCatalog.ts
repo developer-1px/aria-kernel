@@ -45,6 +45,14 @@ export const LAB_ENTRIES: LabEntry[] = [
     adoptedBy: ['spredsheet/useSheetGrid.ts', 'spredsheet/useShortcuts.ts'],
   },
   {
+    slug: 'checkbox-mixed',
+    title: 'Checkbox group — mixed (tri-state)',
+    invariant: '§B-ter.14',
+    purpose:
+      'APG punt — parent mixed 상태 derive 와 일괄 토글 의미 implementation-defined. disabled child 제외, all/none/partial 자동.',
+    status: 'PoC',
+  },
+  {
     slug: 'listbox-typeahead',
     title: 'Listbox — typeahead (printable keys)',
     invariant: '§B-ter.13',
