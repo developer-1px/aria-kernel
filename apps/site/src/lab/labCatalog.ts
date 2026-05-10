@@ -34,4 +34,11 @@ export const LAB_ENTRIES: LabEntry[] = [
       'F2 는 editStart, click 은 activate. consumer 가 click→편집 사고 없이 두 의도를 분리.',
     status: 'PoC',
   },
+  {
+    slug: 'dialog-on-keymap',
+    title: 'Dialog — on keymap',
+    purpose:
+      'open 인 동안 사용자 chord(Enter/Shift+Enter 등) 를 dialog 패턴이 흡수. consumer 가 input onKeyDown 손으로 안 부착.',
+    status: 'PoC',
+  },
 ]

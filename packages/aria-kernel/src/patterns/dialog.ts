@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type RefObject } from 'react'
 import { escapeKeys } from '../axes/escape'
 import { INTENT_CHORDS } from '../axes/intentChords'
 import { bindGlobalKeyMap } from '../key/bindGlobalKeyMap'
+import { matchAnyChord } from '../axes/chord'
 import { useFocusTrap, focusTrapKeys } from './focusTrap'
 import type { ItemProps, RootProps } from './types'
 
@@ -28,6 +29,12 @@ export interface DialogOptions {
   describedBy?: string
   rootRef?: RefObject<HTMLElement | null>
   onOpenChange?: (open: boolean) => void
+  /**
+   * 사용자 chord 미들웨어. dialog open 인 동안 window keydown 에 등록.
+   * 예: `on: { 'Enter': () => find.next(), 'shift+Enter': () => find.prev() }`.
+   * modifier 없는 chord 는 editable 안에서 탈취하지 않음 (bindGlobalKeyMap 규칙과 동일).
+   */
+  on?: Record<string, () => void>
 }
 
 const FOCUSABLE_SELECTOR = [
@@ -67,6 +74,7 @@ export function useDialogPattern(opts: DialogOptions = {}): {
     returnFocus = true,
     label, labelledBy, describedBy,
     onOpenChange,
+    on,
   } = opts
   const internalRootRef = useRef<HTMLElement | null>(null)
   const rootRef = opts.rootRef ?? internalRootRef
@@ -93,6 +101,21 @@ export function useDialogPattern(opts: DialogOptions = {}): {
 
   // Tab focus trap — declarative focus primitive (modal 일 때만 활성).
   useFocusTrap(rootRef, open && modal)
+
+  // 사용자 chord 미들웨어 — open 인 동안 window keydown 부착.
+  useEffect(() => {
+    if (!open || !on) return
+    const entries = Object.entries(on)
+    if (entries.length === 0) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.defaultPrevented) return
+      for (const [chord, fn] of entries) {
+        if (matchAnyChord(e, [chord])) { e.preventDefault(); fn(); return }
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open, on])
 
   // Focus management — 진입 focus + 닫힐 때 trigger 복귀.
   useEffect(() => {

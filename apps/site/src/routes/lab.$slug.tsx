@@ -4,12 +4,14 @@ import { DialogBackdropDemo } from '../lab/DialogBackdropDemo'
 import { TabsControlledDemo } from '../lab/TabsControlledDemo'
 import { MenuOutsideCloseDemo } from '../lab/MenuOutsideCloseDemo'
 import { GridEditStartDemo } from '../lab/GridEditStartDemo'
+import { DialogOnKeymapDemo } from '../lab/DialogOnKeymapDemo'
 
 const DEMOS: Record<string, ComponentType> = {
   'dialog-backdrop': DialogBackdropDemo,
   'tabs-controlled': TabsControlledDemo,
   'menu-outside-close': MenuOutsideCloseDemo,
   'grid-edit-start': GridEditStartDemo,
+  'dialog-on-keymap': DialogOnKeymapDemo,
 }
 
 class LabErr extends Component<{ children: ReactNode }, { e?: Error; info?: ErrorInfo }> {
