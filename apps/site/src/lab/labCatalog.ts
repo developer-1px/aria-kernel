@@ -45,6 +45,14 @@ export const LAB_ENTRIES: LabEntry[] = [
     adoptedBy: ['spredsheet/useSheetGrid.ts', 'spredsheet/useShortcuts.ts'],
   },
   {
+    slug: 'disclosure-toggle',
+    title: 'Disclosure — meta.expanded SSOT',
+    invariant: '§B-ter.20',
+    purpose:
+      'APG /disclosure/ — open 상태가 별도 useState 없이 meta.expanded set 으로 표현. activate→expand emit, reduceWithDefaults 흡수.',
+    status: 'PoC',
+  },
+  {
     slug: 'menubutton-open',
     title: 'MenuButton — open + focus 분기',
     invariant: '§B-ter.19',

@@ -35,6 +35,7 @@ B-ter.2. **Tabs controlled selected = `id === active`** — `active` prop 제공
 B-ter.3. **Menu listener gating** — `onInteractOutside` 의 document mousedown 리스너는 open=true ∧ onInteractOutside 제공 둘 다 일 때만 부착, open=false 전환 시 cleanup. (`/lab/menu-outside-close` + `menu.test.ts`)
 B-ter.4. **Grid emit 분리** — click → `activate` 만, F2 → `editStart` 만, Enter → 둘 다 (chord match + activate axis). 소비자가 dedupe 책임. (`/lab/grid-edit-start`)
 B-ter.5. **Dialog `on` keymap = window keydown** — open 인 동안만 부착, modifier-less chord 는 editable-guard 와 동일 규칙으로 입력 위젯 안에서 탈취 안 함. (`/lab/dialog-on-keymap`)
+B-ter.20. **Disclosure open = meta.expanded SSOT** — open 상태를 별도 useState 없이 NormalizedData.meta.expanded set 으로 표현. activate(Click/Enter/Space) → `{type:'expand', id, open:!open}` emit. reduce 가 meta 자동 갱신. (`/lab/disclosure-toggle`)
 B-ter.19. **MenuButton open + initial focus 분기** — trigger 가 closed 일 때: ArrowDown/Enter/Space → open + first menuitem; ArrowUp → open + last. Click → open + first. APG: 초기 focus 선정은 implementation-defined. (`/lab/menubutton-open`)
 B-ter.18. **Tree Right/Left semantics + focus≠expand** — Right on collapsed = expand, on expanded = navigate(first child). Left on expanded = collapse, on leaf = navigate(parent). **↑/↓ focus 이동은 expand 절대 유발 ❌** (memory feedback_tree_focus_no_expand). (`/lab/tree-arrow`)
 B-ter.17. **Toolbar separator skip + posinset 제외** — `entity.separator: true` 는 role=separator, roving navigation skip, posinset/setsize 집계에서 제외 (APG: separator MUST be skipped). 단일 tab stop. (`/lab/toolbar-separator`)
