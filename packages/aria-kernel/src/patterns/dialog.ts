@@ -27,6 +27,7 @@ export interface DialogOptions {
   labelledBy?: string
   describedBy?: string
   rootRef?: RefObject<HTMLElement | null>
+  onOpenChange?: (open: boolean) => void
 }
 
 const FOCUSABLE_SELECTOR = [
@@ -64,6 +65,7 @@ export function useDialogPattern(opts: DialogOptions = {}): {
     initialFocusRef,
     returnFocus = true,
     label, labelledBy, describedBy,
+    onOpenChange,
   } = opts
   const internalRootRef = useRef<HTMLElement | null>(null)
   const rootRef = opts.rootRef ?? internalRootRef
@@ -72,6 +74,7 @@ export function useDialogPattern(opts: DialogOptions = {}): {
   const open = isControlled ? openProp : internalOpen
   const setOpen = (next: boolean) => {
     if (!isControlled) setInternalOpen(next)
+    onOpenChange?.(next)
   }
   const previousFocusRef = useRef<HTMLElement | null>(null)
 
