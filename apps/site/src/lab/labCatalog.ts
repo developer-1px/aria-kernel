@@ -45,6 +45,14 @@ export const LAB_ENTRIES: LabEntry[] = [
     adoptedBy: ['spredsheet/useSheetGrid.ts', 'spredsheet/useShortcuts.ts'],
   },
   {
+    slug: 'carousel-autoplay',
+    title: 'Carousel — autoplay + pause rules',
+    invariant: '§B-ter.7',
+    purpose:
+      'APG punt — autoplay 일시정지 규칙(hover/focus/explicit toggle) 셋 전부 kernel 흡수.',
+    status: 'PoC',
+  },
+  {
     slug: 'tooltip-delay',
     title: 'Tooltip — delayShow/delayHide',
     invariant: '§B-ter.6',

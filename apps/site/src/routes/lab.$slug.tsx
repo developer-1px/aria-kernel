@@ -6,6 +6,7 @@ import { MenuOutsideCloseDemo } from '../lab/MenuOutsideCloseDemo'
 import { GridEditStartDemo } from '../lab/GridEditStartDemo'
 import { DialogOnKeymapDemo } from '../lab/DialogOnKeymapDemo'
 import { TooltipDelayDemo } from '../lab/TooltipDelayDemo'
+import { CarouselAutoplayDemo } from '../lab/CarouselAutoplayDemo'
 
 const DEMOS: Record<string, ComponentType> = {
   'dialog-backdrop': DialogBackdropDemo,
@@ -14,6 +15,7 @@ const DEMOS: Record<string, ComponentType> = {
   'grid-edit-start': GridEditStartDemo,
   'dialog-on-keymap': DialogOnKeymapDemo,
   'tooltip-delay': TooltipDelayDemo,
+  'carousel-autoplay': CarouselAutoplayDemo,
 }
 
 class LabErr extends Component<{ children: ReactNode }, { e?: Error; info?: ErrorInfo }> {
