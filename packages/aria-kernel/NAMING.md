@@ -111,6 +111,10 @@ use<X>Pattern(opts?): { ...props, open, setOpen, ... }
 | `defaultChecked` / `checked` / `onCheckedChange` | 동일 짝, switch | switch |
 | `returnFocusRef` | dialog close 시 focus 복귀 | dialog, alertDialog |
 | `initialFocusRef` | dialog open 시 첫 focus | dialog, alertDialog |
+| `active?: string` | controlled active id (외부 SSOT 동기화 시 entities mutation 0) | tabs |
+| `backdropProps` | modal backdrop self-target close props | dialog |
+| `onInteractOutside?: () => void` | 외부 클릭(open 동안 document mousedown) | menu (Radix de facto) |
+| `on?: Record<chord, () => void>` | open 동안 window keydown 미들웨어 (editable-guard 준수) | dialog |
 
 ## 5. 식별된 위반 (현재 코드)
 
