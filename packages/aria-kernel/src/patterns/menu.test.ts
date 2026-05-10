@@ -29,6 +29,6 @@ describe('useMenuPattern — listener lifecycle', () => {
 
   it('rootProps.role = menu (ARIA shape)', () => {
     const { result } = renderHook(() => useMenuPattern(data(), undefined, { label: 'm' }))
-    expect((result.current.rootProps as Record<string, unknown>).role).toBe('menu')
+    expect((result.current.rootProps as unknown as Record<string, unknown>).role).toBe('menu')
   })
 })
