@@ -56,6 +56,12 @@ const FOCUSABLE_SELECTOR = [
  * - `useFocusTrap` → Tab/Shift+Tab DOM focus 경계 (modal=true)
  *
  * focus 진입/복귀 는 별도 layer (focus management) — useEffect 잔존.
+ *
+ * **ARIA-punt 흡수 (INVARIANTS §B-ter.1 + B-ter.5):**
+ * - `backdropProps` — modal backdrop click 닫기. self-target guard (e.target===e.currentTarget)
+ *   로 drag-out 방지. (`/lab/dialog-backdrop`)
+ * - `on: Record<chord, () => void>` — open 동안 window keydown 미들웨어. editable-guard
+ *   준수 (modifier-less chord 는 입력 위젯 안에서 탈취 안 함). (`/lab/dialog-on-keymap`)
  */
 export function useDialogPattern(opts: DialogOptions = {}): {
   rootRef: RefObject<HTMLElement | null>
