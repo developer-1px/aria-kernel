@@ -16,6 +16,7 @@ import { ListboxTypeaheadDemo } from '../lab/ListboxTypeaheadDemo'
 import { CheckboxMixedDemo } from '../lab/CheckboxMixedDemo'
 import { ComboboxFilterDemo } from '../lab/ComboboxFilterDemo'
 import { AlertDialogCancelDemo } from '../lab/AlertDialogCancelDemo'
+import { ToolbarSeparatorDemo } from '../lab/ToolbarSeparatorDemo'
 
 const DEMOS: Record<string, ComponentType> = {
   'dialog-backdrop': DialogBackdropDemo,
@@ -34,6 +35,7 @@ const DEMOS: Record<string, ComponentType> = {
   'checkbox-mixed': CheckboxMixedDemo,
   'combobox-filter': ComboboxFilterDemo,
   'alertdialog-cancel': AlertDialogCancelDemo,
+  'toolbar-separator': ToolbarSeparatorDemo,
 }
 
 class LabErr extends Component<{ children: ReactNode }, { e?: Error; info?: ErrorInfo }> {

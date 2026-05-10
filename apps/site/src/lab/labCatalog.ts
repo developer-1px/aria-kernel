@@ -45,6 +45,14 @@ export const LAB_ENTRIES: LabEntry[] = [
     adoptedBy: ['spredsheet/useSheetGrid.ts', 'spredsheet/useShortcuts.ts'],
   },
   {
+    slug: 'toolbar-separator',
+    title: 'Toolbar — separator skip + single tab stop',
+    invariant: '§B-ter.17',
+    purpose:
+      'APG /toolbar/ — separator 항목 roving skip + posinset/setsize 집계 제외. 단일 tab stop, Arrow 로 내부 이동.',
+    status: 'PoC',
+  },
+  {
     slug: 'alertdialog-cancel',
     title: 'AlertDialog — cancel-first focus',
     invariant: '§B-ter.16',

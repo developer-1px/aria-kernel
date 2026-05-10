@@ -35,6 +35,7 @@ B-ter.2. **Tabs controlled selected = `id === active`** — `active` prop 제공
 B-ter.3. **Menu listener gating** — `onInteractOutside` 의 document mousedown 리스너는 open=true ∧ onInteractOutside 제공 둘 다 일 때만 부착, open=false 전환 시 cleanup. (`/lab/menu-outside-close` + `menu.test.ts`)
 B-ter.4. **Grid emit 분리** — click → `activate` 만, F2 → `editStart` 만, Enter → 둘 다 (chord match + activate axis). 소비자가 dedupe 책임. (`/lab/grid-edit-start`)
 B-ter.5. **Dialog `on` keymap = window keydown** — open 인 동안만 부착, modifier-less chord 는 editable-guard 와 동일 규칙으로 입력 위젯 안에서 탈취 안 함. (`/lab/dialog-on-keymap`)
+B-ter.17. **Toolbar separator skip + posinset 제외** — `entity.separator: true` 는 role=separator, roving navigation skip, posinset/setsize 집계에서 제외 (APG: separator MUST be skipped). 단일 tab stop. (`/lab/toolbar-separator`)
 B-ter.16. **AlertDialog cancel-first initial focus** — `useAlertDialogPattern` 의 `cancelRef` 가 `initialFocusRef` default. destructive 액션이 우연히 Enter 로 트리거되지 않게 보호. role=alertdialog + aria-modal=true. (`/lab/alertdialog-cancel`)
 B-ter.15. **Combobox list-autocomplete filter** — default filter = `getLabel(id).toLowerCase().includes(query.toLowerCase())`. openOnFocus, autoHighlightFirst (autocomplete='both'), closeOnBlurDelay 100ms, Escape close 자동. `filter` 옵션으로 사용자 override 가능. (`/lab/combobox-filter`)
 B-ter.14. **Checkbox-group mixed derivation** — parent state = `all checked? true : none? false : 'mixed'`. **disabled 자식은 집계 제외** (영구 mixed 회피). parent click 시 enabled 자식 전체 `{type:'check', ids, to}` emit. (`/lab/checkbox-mixed`)
