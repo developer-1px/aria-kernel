@@ -170,6 +170,7 @@
   },
   "active": "825ee3727135bc1f",
   "lastOpenFiles": [
+    "apps/site/src/lab/FeedPageNavDemo.test.tsx",
     "apps/site/src/lab/NavigationListDemo.test.tsx",
     "apps/site/src/lab/NavigationListDemo.tsx",
     "apps/site/src/lab/DisclosureToggleDemo.tsx",
@@ -180,7 +181,6 @@
     "apps/site/src/lab/CheckboxMixedDemo.tsx",
     "apps/site/src/lab/ListboxTypeaheadDemo.test.tsx",
     "apps/site/src/lab/__debug.test.tsx",
-    "docs/api/variables/state.singleSelectHandles.html",
     "docs/adr/0003-aria-punt-absorption-line.md",
     "packages/aria-kernel/coverage/sort-arrow-sprite.png",
     "packages/aria-kernel/coverage/favicon.png",

@@ -45,6 +45,14 @@ export const LAB_ENTRIES: LabEntry[] = [
     adoptedBy: ['spredsheet/useSheetGrid.ts', 'spredsheet/useShortcuts.ts'],
   },
   {
+    slug: 'feed-pagenav',
+    title: 'Feed — programmatic focus + aria-busy',
+    invariant: '§B-ter.23',
+    purpose:
+      'APG /feed/ — article tabIndex=-1 programmatic focus only, aria-busy load 흡수, posinset/setsize 자동.',
+    status: 'PoC',
+  },
+  {
     slug: 'menubar-crosstop',
     title: 'Menubar — Right/Left cross-top + Down submenu',
     invariant: '§B-ter.22',

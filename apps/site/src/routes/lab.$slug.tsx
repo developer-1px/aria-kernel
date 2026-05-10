@@ -22,6 +22,7 @@ import { MenuButtonOpenDemo } from '../lab/MenuButtonOpenDemo'
 import { DisclosureToggleDemo } from '../lab/DisclosureToggleDemo'
 import { NavigationListDemo } from '../lab/NavigationListDemo'
 import { MenubarCrossTopDemo } from '../lab/MenubarCrossTopDemo'
+import { FeedPageNavDemo } from '../lab/FeedPageNavDemo'
 
 const DEMOS: Record<string, ComponentType> = {
   'dialog-backdrop': DialogBackdropDemo,
@@ -46,6 +47,7 @@ const DEMOS: Record<string, ComponentType> = {
   'disclosure-toggle': DisclosureToggleDemo,
   'navigation-list': NavigationListDemo,
   'menubar-crosstop': MenubarCrossTopDemo,
+  'feed-pagenav': FeedPageNavDemo,
 }
 
 class LabErr extends Component<{ children: ReactNode }, { e?: Error; info?: ErrorInfo }> {
