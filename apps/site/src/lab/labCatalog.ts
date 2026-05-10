@@ -45,6 +45,14 @@ export const LAB_ENTRIES: LabEntry[] = [
     adoptedBy: ['spredsheet/useSheetGrid.ts', 'spredsheet/useShortcuts.ts'],
   },
   {
+    slug: 'menubar-crosstop',
+    title: 'Menubar — Right/Left cross-top + Down submenu',
+    invariant: '§B-ter.22',
+    purpose:
+      'APG /menubar/ — Right/Left top 사이 이동, Down submenu open + first child, Escape close.',
+    status: 'PoC',
+  },
+  {
     slug: 'navigation-list',
     title: 'NavigationList — aria-current="page"',
     invariant: '§B-ter.21',
