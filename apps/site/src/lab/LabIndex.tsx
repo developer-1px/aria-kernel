@@ -20,9 +20,25 @@ export function LabIndex() {
             >
               <div className="flex items-center justify-between">
                 <h2 className="font-semibold">{e.title}</h2>
-                <span className="rounded bg-neutral-100 px-2 py-0.5 text-xs">{e.status}</span>
+                <span
+                  className={
+                    'rounded px-2 py-0.5 text-xs ' +
+                    (e.status === 'Promoted'
+                      ? 'bg-emerald-100 text-emerald-800'
+                      : e.status === 'Candidate'
+                      ? 'bg-amber-100 text-amber-800'
+                      : 'bg-neutral-100 text-neutral-800')
+                  }
+                >
+                  {e.status}
+                </span>
               </div>
               <p className="mt-1 text-sm text-neutral-600">{e.purpose}</p>
+              {e.adoptedBy && e.adoptedBy.length > 0 && (
+                <p className="mt-2 text-xs text-neutral-500">
+                  적용: {e.adoptedBy.join(', ')}
+                </p>
+              )}
             </Link>
           </li>
         ))}

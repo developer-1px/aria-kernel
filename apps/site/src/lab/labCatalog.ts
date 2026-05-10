@@ -3,6 +3,7 @@ export interface LabEntry {
   title: string
   purpose: string
   status: 'PoC' | 'Candidate' | 'Promoted'
+  adoptedBy?: string[]
 }
 
 export const LAB_ENTRIES: LabEntry[] = [
@@ -11,34 +12,39 @@ export const LAB_ENTRIES: LabEntry[] = [
     title: 'Dialog backdrop + outside-close',
     purpose:
       'ARIA punt 자리 — modal backdrop DOM 동작과 outside-click 닫기를 kernel 이 흡수하는지 검증.',
-    status: 'PoC',
+    status: 'Promoted',
+    adoptedBy: ['spredsheet/HelpDialog.tsx'],
   },
   {
     slug: 'tabs-controlled',
     title: 'Tabs — controlled active',
     purpose:
       '외부 SSOT 가 active tab 인 경우, data.entities mutation 없이 active prop 으로 동기화.',
-    status: 'PoC',
+    status: 'Promoted',
+    adoptedBy: ['spredsheet/Tabs.tsx'],
   },
   {
     slug: 'menu-outside-close',
     title: 'Menu — onInteractOutside',
     purpose:
       'ARIA punt 자리 — 외부 클릭 시 menu 닫기를 kernel 이 흡수 (Radix de facto 어휘).',
-    status: 'PoC',
+    status: 'Promoted',
+    adoptedBy: ['spredsheet/ContextMenu.tsx'],
   },
   {
     slug: 'grid-edit-start',
     title: 'Grid — activate vs editStart',
     purpose:
-      'F2 는 editStart, click 은 activate. consumer 가 click→편집 사고 없이 두 의도를 분리.',
-    status: 'PoC',
+      'F2 는 editStart, click 은 activate. consumer 가 click→편집 사고 없이 두 의도를 분리. GRID_EDIT_CHORDS = [F2, Enter].',
+    status: 'Promoted',
+    adoptedBy: ['spredsheet/useSheetGrid.ts', 'spredsheet/useShortcuts.ts'],
   },
   {
     slug: 'dialog-on-keymap',
     title: 'Dialog — on keymap',
     purpose:
       'open 인 동안 사용자 chord(Enter/Shift+Enter 등) 를 dialog 패턴이 흡수. consumer 가 input onKeyDown 손으로 안 부착.',
-    status: 'PoC',
+    status: 'Promoted',
+    adoptedBy: ['spredsheet/Find.tsx'],
   },
 ]
