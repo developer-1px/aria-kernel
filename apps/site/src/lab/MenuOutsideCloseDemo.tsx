@@ -23,7 +23,10 @@ export function MenuOutsideCloseDemo() {
   return (
     <div className="p-6">
       <header className="mb-4">
-        <h1 className="text-2xl font-bold">Menu — onInteractOutside</h1>
+        <h1 className="text-2xl font-bold">
+          <span className="text-xs text-neutral-400 font-mono mr-2">§B-ter.3</span>
+          Menu — onInteractOutside
+        </h1>
         <p className="text-sm text-neutral-500">
           외부 클릭 시 자동 닫힘. consumer 는 <code>document.addEventListener</code>
           를 손으로 안 부착.

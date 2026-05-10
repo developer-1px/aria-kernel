@@ -20,7 +20,10 @@ export function GridEditStartDemo() {
   return (
     <div className="p-6">
       <header className="mb-4">
-        <h1 className="text-2xl font-bold">Grid — activate vs editStart</h1>
+        <h1 className="text-2xl font-bold">
+          <span className="text-xs text-neutral-400 font-mono mr-2">§B-ter.4</span>
+          Grid — activate vs editStart
+        </h1>
         <p className="text-sm text-neutral-500">
           클릭은 <code>activate</code>, F2 는 <code>editStart</code>. consumer 가 둘을
           구분할 수 있어 *click 으로 편집 진입 사고* 방지.

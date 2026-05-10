@@ -17,7 +17,10 @@ export function TabsControlledDemo() {
   return (
     <div className="p-6">
       <header className="mb-4">
-        <h1 className="text-2xl font-bold">Tabs — controlled active</h1>
+        <h1 className="text-2xl font-bold">
+          <span className="text-xs text-neutral-400 font-mono mr-2">§B-ter.2</span>
+          Tabs — controlled active
+        </h1>
         <p className="text-sm text-neutral-500">
           <code>active</code> prop 으로 외부 SSOT 와 동기화. consumer 는
           <code> data.entities[id].selected </code> 손으로 안 박음.

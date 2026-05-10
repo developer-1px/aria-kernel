@@ -11,7 +11,10 @@ export function DialogBackdropDemo() {
   return (
     <div className="p-6">
       <header className="mb-4">
-        <h1 className="text-2xl font-bold">Dialog backdrop + outside-close</h1>
+        <h1 className="text-2xl font-bold">
+          <span className="text-xs text-neutral-400 font-mono mr-2">§B-ter.1</span>
+          Dialog backdrop + outside-close
+        </h1>
         <p className="text-sm text-neutral-500">
           backdrop click 으로 닫힘 — kernel 의 <code>backdropProps</code> 가 mousedown
           타깃 검사까지 흡수. consumer 는 backdrop DOM 만 그리고 onClick 손으로 안 붙임.
