@@ -10,8 +10,13 @@ import {
 } from '../types'
 import { activate, composeAxes, gridNavigate, gridMultiSelect, matchAnyChord } from '../axes'
 
-/** grid edit-mode chord registry — declarative SSOT (F2 enters edit mode). */
-const GRID_EDIT_CHORDS = ['F2'] as const
+/**
+ * grid edit-mode chord registry — declarative SSOT.
+ * F2: APG 권고 — Enter cell edit mode.
+ * Enter: spreadsheet de facto (Google Sheets / Excel) — commit on Enter 동작은 cell edit
+ * mode 내부에서 처리되므로 cell read mode 에서 Enter 는 edit-mode 진입 의도.
+ */
+const GRID_EDIT_CHORDS = ['F2', 'Enter'] as const
 
 /** gridEditKeys — chord registry 도출. */
 export const gridEditKeys = (): readonly string[] => [...GRID_EDIT_CHORDS]
