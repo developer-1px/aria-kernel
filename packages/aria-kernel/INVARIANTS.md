@@ -35,6 +35,7 @@ B-ter.2. **Tabs controlled selected = `id === active`** — `active` prop 제공
 B-ter.3. **Menu listener gating** — `onInteractOutside` 의 document mousedown 리스너는 open=true ∧ onInteractOutside 제공 둘 다 일 때만 부착, open=false 전환 시 cleanup. (`/lab/menu-outside-close` + `menu.test.ts`)
 B-ter.4. **Grid emit 분리** — click → `activate` 만, F2 → `editStart` 만, Enter → 둘 다 (chord match + activate axis). 소비자가 dedupe 책임. (`/lab/grid-edit-start`)
 B-ter.5. **Dialog `on` keymap = window keydown** — open 인 동안만 부착, modifier-less chord 는 editable-guard 와 동일 규칙으로 입력 위젯 안에서 탈취 안 함. (`/lab/dialog-on-keymap`)
+B-ter.24. **SliderRange neighbor clamp** — multi-thumb 에서 thumb[i] 가용 범위는 `[values[i-1] ?? min, values[i+1] ?? max]`. 인접 thumb 가 서로의 min/max 로 동작, thumb 교차 절대 ❌. aria-valuemin/max 도 dynamic 으로 반영. (`/lab/slider-range`)
 B-ter.23. **Feed article tabIndex=-1 + aria-busy** — article 는 tabIndex=-1 (programmatic focus only — APG: read-only article bundle, native Tab 흐름은 article 내부 focusable 자식이 받음). aria-busy DOM load 표시 흡수, posinset/setsize 자동. (`/lab/feed-pagenav`)
 B-ter.22. **Menubar Right/Left cross-top + Down submenu** — Right/Left = top items 사이 이동 (wrap), Down = submenu open + first child, Escape = close submenu + top focus 유지. (`/lab/menubar-crosstop`)
 B-ter.21. **NavigationList = nav + aria-current="page"** — sidebar 는 listbox 가 아님. selected 가 아닌 current 가 SSOT (`entity.current`). role=navigation + native `<a>` + Tab/Enter native, axis 등록 ❌. (`/lab/navigation-list`)

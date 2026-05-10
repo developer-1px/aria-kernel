@@ -45,6 +45,14 @@ export const LAB_ENTRIES: LabEntry[] = [
     adoptedBy: ['spredsheet/useSheetGrid.ts', 'spredsheet/useShortcuts.ts'],
   },
   {
+    slug: 'slider-range',
+    title: 'SliderRange — neighbor clamp (multi-thumb)',
+    invariant: '§B-ter.24',
+    purpose:
+      'APG /slider-multithumb/ — thumb[i] ∈ [values[i-1], values[i+1]]. 인접 thumb 가 서로의 min/max 가 되어 절대 교차 ❌.',
+    status: 'PoC',
+  },
+  {
     slug: 'feed-pagenav',
     title: 'Feed — programmatic focus + aria-busy',
     invariant: '§B-ter.23',
