@@ -13,6 +13,13 @@
 export * from './types'
 export * from './schema'
 
+export type {
+  RootProps, ItemProps,
+  PatternProps, ControlProps,
+  BaseItem, TreeItem,
+  BasePatternOptions, CollectionOptions,
+} from './patterns/types'
+
 export { reduce } from './state/reduce'
 export { composeReducers, applyGesture, type Reducer } from './state/compose'
 export { singleSelect, singleCurrent, multiSelectToggle } from './state/selection'
