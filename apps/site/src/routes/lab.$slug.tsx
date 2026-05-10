@@ -8,6 +8,7 @@ import { DialogOnKeymapDemo } from '../lab/DialogOnKeymapDemo'
 import { TooltipDelayDemo } from '../lab/TooltipDelayDemo'
 import { CarouselAutoplayDemo } from '../lab/CarouselAutoplayDemo'
 import { AccordionSingleDemo } from '../lab/AccordionSingleDemo'
+import { ListboxMultiSelectDemo } from '../lab/ListboxMultiSelectDemo'
 
 const DEMOS: Record<string, ComponentType> = {
   'dialog-backdrop': DialogBackdropDemo,
@@ -18,6 +19,7 @@ const DEMOS: Record<string, ComponentType> = {
   'tooltip-delay': TooltipDelayDemo,
   'carousel-autoplay': CarouselAutoplayDemo,
   'accordion-single': AccordionSingleDemo,
+  'listbox-multiselect': ListboxMultiSelectDemo,
 }
 
 class LabErr extends Component<{ children: ReactNode }, { e?: Error; info?: ErrorInfo }> {

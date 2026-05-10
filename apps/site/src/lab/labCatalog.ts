@@ -45,6 +45,14 @@ export const LAB_ENTRIES: LabEntry[] = [
     adoptedBy: ['spredsheet/useSheetGrid.ts', 'spredsheet/useShortcuts.ts'],
   },
   {
+    slug: 'listbox-multiselect',
+    title: 'Listbox — multiselect (Space/Ctrl/Shift)',
+    invariant: '§B-ter.9',
+    purpose:
+      'APG punt — multi-mode 토글/범위 의미 implementation-defined. kernel 의 multiSelect axis + multiSelectToggle host reducer 가 흡수.',
+    status: 'PoC',
+  },
+  {
     slug: 'accordion-single',
     title: 'Accordion — single mode (sibling auto-collapse)',
     invariant: '§B-ter.8',

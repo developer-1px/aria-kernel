@@ -35,6 +35,7 @@ B-ter.2. **Tabs controlled selected = `id === active`** — `active` prop 제공
 B-ter.3. **Menu listener gating** — `onInteractOutside` 의 document mousedown 리스너는 open=true ∧ onInteractOutside 제공 둘 다 일 때만 부착, open=false 전환 시 cleanup. (`/lab/menu-outside-close` + `menu.test.ts`)
 B-ter.4. **Grid emit 분리** — click → `activate` 만, F2 → `editStart` 만, Enter → 둘 다 (chord match + activate axis). 소비자가 dedupe 책임. (`/lab/grid-edit-start`)
 B-ter.5. **Dialog `on` keymap = window keydown** — open 인 동안만 부착, modifier-less chord 는 editable-guard 와 동일 규칙으로 입력 위젯 안에서 탈취 안 함. (`/lab/dialog-on-keymap`)
+B-ter.9. **Listbox multiselect modifier semantics** — `multiSelectable: true` 일 때 Space=토글, Ctrl/Cmd+Click=개별 토글, Shift+Click=anchor 부터 범위 select. multiSelect axis 가 navigate 보다 먼저 매칭(Shift+Arrow 가로채기). Host reducer = `multiSelectToggle`. (`/lab/listbox-multiselect`)
 B-ter.8. **Accordion single mode sibling auto-collapse** — `mode: 'single'` 일 때 한 항목 expand 시 형제 expanded ids 에 대해 `{type:'expand', id:sib, open:false}` 자동 emit. APG: 동시 open 허용은 implementation-defined. (`/lab/accordion-single`)
 B-ter.7. **Carousel autoplay pause rules** — hover ∨ focus-within → 자동 정지. explicit toggle 후에는 hover/blur 만으로 재개 ❌ (APG 규칙 1). consumer 가 setInterval 손으로 부착 ❌. (`/lab/carousel-autoplay`)
 B-ter.6. **Tooltip delayShow/delayHide** — APG 권장 show ≥ 400ms, hide 짧게. hover/focus 둘 다 show 트리거, blur/mouseleave/Escape 모두 hide. consumer 가 setTimeout 손으로 부착 ❌. (`/lab/tooltip-delay`)
