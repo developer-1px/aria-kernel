@@ -36,3 +36,33 @@ describe('useDialogPattern — backdropProps + onOpenChange + on', () => {
     expect(onOpenChange).toHaveBeenCalledWith(false)
   })
 })
+
+describe('useDialogPattern — on keymap middleware', () => {
+  it('open=true + on 제공 → window keydown 리스너 부착', () => {
+    const spy = vi.spyOn(window, 'addEventListener')
+    renderHook(() => useDialogPattern({ open: true, on: { Enter: () => {} } }))
+    expect(spy.mock.calls.some(([type]) => type === 'keydown')).toBe(true)
+    spy.mockRestore()
+  })
+
+  it('open=false → 리스너 부착 안 함', () => {
+    const spy = vi.spyOn(window, 'addEventListener')
+    renderHook(() => useDialogPattern({ open: false, on: { Enter: () => {} } }))
+    expect(spy.mock.calls.some(([type]) => type === 'keydown')).toBe(false)
+    spy.mockRestore()
+  })
+
+  it('open=true→false 전환 시 리스너 cleanup', () => {
+    const addSpy = vi.spyOn(window, 'addEventListener')
+    const removeSpy = vi.spyOn(window, 'removeEventListener')
+    const { rerender } = renderHook(
+      ({ open }: { open: boolean }) => useDialogPattern({ open, on: { Enter: () => {} } }),
+      { initialProps: { open: true } },
+    )
+    const added = addSpy.mock.calls.filter(([t]) => t === 'keydown').length
+    rerender({ open: false })
+    const removed = removeSpy.mock.calls.filter(([t]) => t === 'keydown').length
+    expect(removed).toBeGreaterThanOrEqual(added)
+    addSpy.mockRestore(); removeSpy.mockRestore()
+  })
+})
