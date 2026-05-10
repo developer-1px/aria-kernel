@@ -45,6 +45,14 @@ export const LAB_ENTRIES: LabEntry[] = [
     adoptedBy: ['spredsheet/useSheetGrid.ts', 'spredsheet/useShortcuts.ts'],
   },
   {
+    slug: 'navigation-list',
+    title: 'NavigationList — aria-current="page"',
+    invariant: '§B-ter.21',
+    purpose:
+      'Listbox 안티패턴 차단 — sidebar 는 nav landmark + a[aria-current="page"]. selected 가 아닌 current 가 SSOT.',
+    status: 'PoC',
+  },
+  {
     slug: 'disclosure-toggle',
     title: 'Disclosure — meta.expanded SSOT',
     invariant: '§B-ter.20',

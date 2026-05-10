@@ -20,6 +20,7 @@ import { ToolbarSeparatorDemo } from '../lab/ToolbarSeparatorDemo'
 import { TreeArrowDemo } from '../lab/TreeArrowDemo'
 import { MenuButtonOpenDemo } from '../lab/MenuButtonOpenDemo'
 import { DisclosureToggleDemo } from '../lab/DisclosureToggleDemo'
+import { NavigationListDemo } from '../lab/NavigationListDemo'
 
 const DEMOS: Record<string, ComponentType> = {
   'dialog-backdrop': DialogBackdropDemo,
@@ -42,6 +43,7 @@ const DEMOS: Record<string, ComponentType> = {
   'tree-arrow': TreeArrowDemo,
   'menubutton-open': MenuButtonOpenDemo,
   'disclosure-toggle': DisclosureToggleDemo,
+  'navigation-list': NavigationListDemo,
 }
 
 class LabErr extends Component<{ children: ReactNode }, { e?: Error; info?: ErrorInfo }> {
