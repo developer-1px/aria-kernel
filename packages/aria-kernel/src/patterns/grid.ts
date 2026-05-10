@@ -118,8 +118,12 @@ const multiAxis = gridAxis({ multiSelectable: true })
  * data 모델: container → rows → cells. focus 단위 = cell.
  * treegrid 와의 차이: treegrid 는 row 단위 focus + tree 확장, grid 는 cell 단위 2D nav.
  *
- * Cell editing(F2/Enter/Escape) 은 declarative recipe 범위 밖 — 소비자가 cell content
- * 안에서 처리. activate(Enter/Space)는 onEvent 로 emit 만 한다.
+ * **emit 분리 (lab/grid-edit-start 가 invariant 로 굳힘):**
+ * - click → `activate` 만 (focus/select intent)
+ * - F2 → `editStart` 만 (APG edit-mode chord)
+ * - Enter → `editStart` + `activate` 둘 다 (Enter 는 chord match 이자 activate axis 트리거)
+ *
+ * 소비자는 `editStart` 를 edit intent 로 받고, Enter 시 함께 오는 `activate` 는 무시.
  */
 export function useGridPattern(
   data: NormalizedData,
