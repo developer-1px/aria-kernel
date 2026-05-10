@@ -19,7 +19,7 @@ export function SnapPage({ children }: { children: ReactNode }) {
   )
 }
 
-function useScrollToHash(ref: React.RefObject<HTMLDivElement>) {
+function useScrollToHash(ref: React.RefObject<HTMLDivElement | null>) {
   useEffect(() => {
     const root = ref.current
     if (!root) return

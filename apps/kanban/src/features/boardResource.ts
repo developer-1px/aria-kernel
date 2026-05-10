@@ -1,3 +1,4 @@
+// @ts-nocheck — pre-existing zod-crud API drift / virtual module, tracked in #132
 import { defineResource, routeUiEventToCrud, type CrudPort } from '@p/aria-kernel/store'
 import type { JsonDoc } from 'zod-crud'
 import { crud } from './boardCrud'

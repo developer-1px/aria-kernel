@@ -43,7 +43,7 @@ const focused = (): HTMLElement => {
   if (t0) return t0
   return items()[0]  // fallback — 첫 항목이 default focus
 }
-const press = (key: string, opts: { shiftKey?: boolean; metaKey?: boolean } = {}) =>
+const press = (key: string, opts: { shiftKey?: boolean; metaKey?: boolean; ctrlKey?: boolean } = {}) =>
   fireEvent.keyDown(focused(), { key, ...opts })
 
 describe('Outliner — Tab demote (move 어휘, clipboard 안 거침)', () => {

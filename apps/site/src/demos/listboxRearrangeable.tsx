@@ -22,7 +22,7 @@ export default function ListboxRearrangeableDemo() {
   data.meta = { ...(data.meta ?? {}), focus: focus ?? undefined }
 
   const onEvent = (e: UiEvent) => {
-    if (e.type === 'navigate') setFocusId(e.id)
+    if (e.type === 'navigate') setFocusId(e.id ?? null)
     if (e.type === 'select' && e.ids.length === 1) setFocusId(e.ids[0]!)
   }
 

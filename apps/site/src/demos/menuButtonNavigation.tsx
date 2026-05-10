@@ -20,7 +20,6 @@ const LINKS = [
 export default function MenuButtonNavigationDemo() {
   const [data, onEvent] = useLocalData(() => fromList(LINKS))
   const { triggerProps, menuProps, itemProps, items, open } = useMenuButtonPattern(data, onEvent, {
-    variant: 'navigation',
     label: 'Navigation menu',
   })
 

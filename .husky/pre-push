@@ -1,0 +1,3 @@
+echo "[pre-push] running build..."
+pnpm build
+echo "[pre-push] build ok"
