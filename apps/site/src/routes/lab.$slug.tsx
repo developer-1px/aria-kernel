@@ -1,9 +1,26 @@
-import type { ComponentType } from 'react'
+import { Component, type ComponentType, type ErrorInfo, type ReactNode } from 'react'
 import { createFileRoute, notFound } from '@tanstack/react-router'
 import { DialogBackdropDemo } from '../lab/DialogBackdropDemo'
+import { TabsControlledDemo } from '../lab/TabsControlledDemo'
 
 const DEMOS: Record<string, ComponentType> = {
   'dialog-backdrop': DialogBackdropDemo,
+  'tabs-controlled': TabsControlledDemo,
+}
+
+class LabErr extends Component<{ children: ReactNode }, { e?: Error; info?: ErrorInfo }> {
+  state = {}
+  static getDerivedStateFromError(e: Error) { return { e } }
+  componentDidCatch(e: Error, info: ErrorInfo) { this.setState({ e, info }) }
+  render() {
+    const { e, info } = this.state as { e?: Error; info?: ErrorInfo }
+    if (!e) return this.props.children
+    return (
+      <pre className="p-6 text-xs whitespace-pre-wrap text-red-600">
+        {e.message}{'\n\n'}{e.stack}{'\n\n'}{info?.componentStack}
+      </pre>
+    )
+  }
 }
 
 export const Route = createFileRoute('/lab/$slug')({
@@ -11,6 +28,6 @@ export const Route = createFileRoute('/lab/$slug')({
     const { slug } = Route.useParams()
     const Demo = DEMOS[slug]
     if (!Demo) throw notFound()
-    return <Demo />
+    return <LabErr><Demo /></LabErr>
   },
 })
