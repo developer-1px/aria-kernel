@@ -6,6 +6,7 @@
  * 같은 헬퍼가 의도 이벤트로 분해.
  */
 export { useClickOutsideGesture, type ClickOutsideRef } from './useClickOutsideGesture'
+export { useContextMenuGesture, type ContextMenuGestureOptions } from './useContextMenuGesture'
 
 import { getChildren, getExpanded, type UiEvent, type NormalizedData } from '../types'
 import { INTENT_CHORDS } from '../axes/intentChords'
