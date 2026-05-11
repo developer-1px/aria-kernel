@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { fromTree, reduceWithDefaults, type UiEvent } from '@p/aria-kernel'
+import { fromTree, reduceSingleSelect, type UiEvent } from '@p/aria-kernel'
 import { useMenubarPattern } from '@p/aria-kernel/patterns'
 
 interface Node { id: string; label: string; children?: Node[] }
@@ -19,7 +19,7 @@ const MENU: Node[] = [
 ]
 
 export function MenubarCrossTopDemo() {
-  const [data, dispatch] = useReducer(reduceWithDefaults, MENU, fromTree)
+  const [data, dispatch] = useReducer(reduceSingleSelect, MENU, fromTree)
   const { rootProps, menubarItemProps, topItems, getSubmenu, openPath } =
     useMenubarPattern(data, (e: UiEvent) => dispatch(e), { label: 'Main', autoFocus: true })
 

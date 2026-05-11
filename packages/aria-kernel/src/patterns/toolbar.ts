@@ -46,7 +46,7 @@ export interface ToolbarOptions {
  * APG toolbar example 의 혼합 itemRole 변종을 1:1 흡수.
  *
  * @example canonical 합성 (#148 §4)
- *   const [data, dispatch] = useReducer(reduceWithDefaults, ITEMS, fromList)
+ *   const [data, dispatch] = useReducer(reduceSingleSelect, ITEMS, fromList)
  *   const { rootProps, toolbarItemProps, items } = useToolbarPattern(data, dispatch)
  */
 export function useToolbarPattern(

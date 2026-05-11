@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { axisKeys, fromTree, reduceWithDefaults } from '@p/aria-kernel'
+import { axisKeys, fromTree, reduceSingleSelect } from '@p/aria-kernel'
 import { menuButtonAxis, useMenuButtonPattern, type MenuLevel } from '@p/aria-kernel/patterns'
 
 export const meta = {
@@ -74,7 +74,7 @@ function MenuLevelView({
 }
 
 export default function MenuButtonDemo() {
-  const [data, dispatch] = useReducer(reduceWithDefaults, TREE, fromTree)
+  const [data, dispatch] = useReducer(reduceSingleSelect, TREE, fromTree)
   const { triggerProps, rootLevel, getSubmenu, open } = useMenuButtonPattern(data, dispatch)
 
   return (

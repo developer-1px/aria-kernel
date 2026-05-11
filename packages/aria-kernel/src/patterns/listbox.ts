@@ -107,11 +107,11 @@ export const listboxAxis = (opts: ListboxOptions = {}) => {
  * https://www.w3.org/WAI/ARIA/apg/patterns/listbox/
  *
  * @example canonical 합성 (#148 §4)
- *   const [data, dispatch] = useReducer(reduceWithDefaults, ITEMS, fromList)
+ *   const [data, dispatch] = useReducer(reduceSingleSelect, ITEMS, fromList)
  *   const { rootProps, optionProps, items } = useListboxPattern(data, dispatch)
  *
  * @example multi-select 시나리오 — reducer 부품 교체만, 합성 형태 보존
- *   const [data, dispatch] = useReducer(reduceWithMultiSelect, ITEMS, fromList)
+ *   const [data, dispatch] = useReducer(reduceMultiSelect, ITEMS, fromList)
  *   const props = useListboxPattern(data, dispatch, { multiSelectable: true })
  */
 export function useListboxPattern(

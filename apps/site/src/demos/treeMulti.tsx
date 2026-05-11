@@ -4,7 +4,7 @@ import {
   axisKeys,
   expandBranchOnActivate,
   fromTree,
-  reduceWithMultiSelect,
+  reduceMultiSelect,
 } from '@p/aria-kernel'
 import { treeAxis, useTreePattern } from '@p/aria-kernel/patterns'
 
@@ -41,7 +41,7 @@ const tree: Node[] = [
   { id: 'pkg', label: 'package.json' },
 ]
 
-const treeReducer = applyGesture(expandBranchOnActivate, reduceWithMultiSelect)
+const treeReducer = applyGesture(expandBranchOnActivate, reduceMultiSelect)
 const initTree = () => fromTree(tree, { expanded: ['src', 'demos'] })
 
 export default function TreeMultiDemo() {

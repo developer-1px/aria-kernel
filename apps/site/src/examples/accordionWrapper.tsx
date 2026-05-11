@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { useReducer } from 'react'
-import { fromList, reduceWithDefaults } from '@p/aria-kernel'
+import { fromList, reduceSingleSelect } from '@p/aria-kernel'
 import type { BaseItem } from '@p/aria-kernel/patterns'
 import { Accordion, type AccordionSlots, accordionWrapperKeys } from './_accordionWrapper'
 import type { SlotProps } from '../catalog/slots'
@@ -35,6 +35,6 @@ export const meta = {
 }
 
 export default function AccordionWrapperDemo() {
-  const [data, onEvent] = useReducer(reduceWithDefaults, FAQ, initFaq)
+  const [data, onEvent] = useReducer(reduceSingleSelect, FAQ, initFaq)
   return <Accordion aria-label="FAQ" data={data} onEvent={onEvent} slots={slots as AccordionSlots} />
 }

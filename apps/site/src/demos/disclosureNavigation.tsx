@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { axisKeys, fromList, isExpanded, reduceWithDefaults } from '@p/aria-kernel'
+import { axisKeys, fromList, isExpanded, reduceSingleSelect } from '@p/aria-kernel'
 import { disclosureAxis, disclosurePattern } from '@p/aria-kernel/patterns'
 
 export const meta = {
@@ -39,7 +39,7 @@ function Section({ id, label, subs, data, onEvent }: { id: string; label: string
 }
 
 export default function DisclosureNavigationDemo() {
-  const [data, dispatch] = useReducer(reduceWithDefaults, NAV.map(({ id }) => ({ id })), fromList)
+  const [data, dispatch] = useReducer(reduceSingleSelect, NAV.map(({ id }) => ({ id })), fromList)
   return (
     <nav>
       <ul className="flex gap-1 rounded-md border border-stone-200 bg-white p-1">

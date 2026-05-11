@@ -24,7 +24,7 @@ export const composeReducers =
  *   const accReducer = applyGesture(expandOnActivate, composeReducers(reduce, setValue))
  *
  *   // tree: branch click → expand, leaf click → select
- *   const treeReducer = applyGesture(expandBranchOnActivate, reduceWithDefaults)
+ *   const treeReducer = applyGesture(expandBranchOnActivate, reduceSingleSelect)
  */
 export const applyGesture =
   (gesture: GestureHelper, reducer: Reducer): Reducer =>

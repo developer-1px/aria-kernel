@@ -121,7 +121,7 @@ export interface MenubarOptions {
  * 키 매핑은 모두 axis 합성. inline switch 0.
  *
  * @example canonical 합성 (#148 §4) — 트리 데이터는 fromTree
- *   const [data, dispatch] = useReducer(reduceWithDefaults, TREE, fromTree)
+ *   const [data, dispatch] = useReducer(reduceSingleSelect, TREE, fromTree)
  *   const { rootProps, menubarItemProps, topItems, getSubmenu } = useMenubarPattern(data, dispatch)
  */
 export function useMenubarPattern(

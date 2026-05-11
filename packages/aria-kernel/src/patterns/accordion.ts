@@ -25,7 +25,7 @@ const axis = accordionAxis()
  * collapse 를 emit. activate(click) → expand toggle.
  *
  * @example canonical 합성 (#148 §4)
- *   const [data, dispatch] = useReducer(reduceWithDefaults, ITEMS, fromList)
+ *   const [data, dispatch] = useReducer(reduceSingleSelect, ITEMS, fromList)
  *   const { rootProps, buttonProps, regionProps, items } = useAccordionPattern(data, dispatch)
  */
 export function useAccordionPattern(

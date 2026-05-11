@@ -224,12 +224,12 @@ function runEffect(
  * https://www.w3.org/WAI/ARIA/apg/patterns/treeview/
  *
  * @example canonical 합성 (#148 §4) — tree 데이터는 fromTree
- *   const reducer = applyGesture(expandBranchOnActivate, reduceWithDefaults)
+ *   const reducer = applyGesture(expandBranchOnActivate, reduceSingleSelect)
  *   const [data, dispatch] = useReducer(reducer, undefined, () => fromTree(NODES))
  *   const { rootProps, itemProps, items } = useTreePattern(data, dispatch)
  *
  * @example multi-select — reducer 부품 교체만 필요 (silent bug 주의: 두 곳 모두 설정)
- *   const reducer = applyGesture(expandBranchOnActivate, reduceWithMultiSelect)
+ *   const reducer = applyGesture(expandBranchOnActivate, reduceMultiSelect)
  *   const [data, dispatch] = useReducer(reducer, undefined, () => fromTree(NODES))
  *   const props = useTreePattern(data, dispatch, { multiSelectable: true })
  */

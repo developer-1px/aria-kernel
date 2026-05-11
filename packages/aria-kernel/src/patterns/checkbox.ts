@@ -98,7 +98,7 @@ export interface CheckboxGroupOptions {
  * `checkMany` emit. 자식 click 은 host 가 `check` event 로 dispatch.
  *
  * @example canonical 합성 (#148 §4)
- *   const [data, dispatch] = useReducer(reduceWithDefaults, ITEMS, fromList)
+ *   const [data, dispatch] = useReducer(reduceSingleSelect, ITEMS, fromList)
  *   const { groupProps, parentProps, childProps, items } =
  *     useCheckboxGroupPattern(data, dispatch)
  */

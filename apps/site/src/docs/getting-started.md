@@ -21,7 +21,7 @@ npm install file:../ds/packages/aria-kernel
 
 ```ts
 import { useReducer } from 'react'
-import { fromList, reduceWithDefaults } from '@p/aria-kernel'
+import { fromList, reduceSingleSelect } from '@p/aria-kernel'
 import { useListboxPattern } from '@p/aria-kernel/patterns'
 ```
 
@@ -50,7 +50,7 @@ recipe 한 줄이 `rootProps`, `optionProps(id)`, `items` 를 돌려준다. mark
 
 ```tsx
 import { useReducer } from 'react'
-import { fromList, reduceWithDefaults } from '@p/aria-kernel'
+import { fromList, reduceSingleSelect } from '@p/aria-kernel'
 import { useListboxPattern } from '@p/aria-kernel/patterns'
 
 const FRUITS = [
@@ -61,7 +61,7 @@ const FRUITS = [
 ]
 
 export default function Demo() {
-  const [data, dispatch] = useReducer(reduceWithDefaults, FRUITS, fromList)
+  const [data, dispatch] = useReducer(reduceSingleSelect, FRUITS, fromList)
   const { rootProps, optionProps, items } = useListboxPattern(data, dispatch)
 
   return (

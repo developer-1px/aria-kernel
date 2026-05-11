@@ -4,7 +4,7 @@ import {
   axisKeys,
   expandBranchOnActivate,
   fromTree,
-  reduceWithDefaults,
+  reduceSingleSelect,
 } from '@p/aria-kernel'
 import { treeGridAxis, useTreeGridPattern } from '@p/aria-kernel/patterns'
 
@@ -39,7 +39,7 @@ const rows: Row[] = [
 ]
 
 const COLS = ['Name', 'Size', 'Modified']
-const treeGridReducer = applyGesture(expandBranchOnActivate, reduceWithDefaults)
+const treeGridReducer = applyGesture(expandBranchOnActivate, reduceSingleSelect)
 const initRows = () => fromTree(rows, { expanded: ['src'] })
 
 export default function TreeGridDemo() {

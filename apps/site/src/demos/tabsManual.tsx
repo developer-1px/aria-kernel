@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { axisKeys, fromList, reduceWithDefaults } from '@p/aria-kernel'
+import { axisKeys, fromList, reduceSingleSelect } from '@p/aria-kernel'
 import { tabsAxis, useTabsPattern } from '@p/aria-kernel/patterns'
 
 export const meta = {
@@ -13,7 +13,7 @@ export const meta = {
 const TABS = [{ label: 'Nils' }, { label: 'Agnes', selected: true }, { label: 'Magnus' }]
 
 export default function TabsManualDemo() {
-  const [data, dispatch] = useReducer(reduceWithDefaults, TABS, fromList)
+  const [data, dispatch] = useReducer(reduceSingleSelect, TABS, fromList)
   const { rootProps, tabProps, panelProps, items } = useTabsPattern(data, dispatch, {
     activationMode: 'manual',
   })

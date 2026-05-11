@@ -1,10 +1,10 @@
 import { useReducer, useMemo } from 'react'
-import { fromList, reduceWithDefaults, type UiEvent } from '@p/aria-kernel'
+import { fromList, reduceSingleSelect, type UiEvent } from '@p/aria-kernel'
 import { disclosurePattern } from '@p/aria-kernel/patterns'
 
 export function DisclosureToggleDemo() {
   const initial = useMemo(() => fromList([{ id: 'faq', label: 'FAQ' }]), [])
-  const [data, dispatch] = useReducer(reduceWithDefaults, initial)
+  const [data, dispatch] = useReducer(reduceSingleSelect, initial)
   const dispatchEv = (e: UiEvent) => dispatch(e)
   const { triggerProps, panelProps } = disclosurePattern(data, 'faq', dispatchEv)
 
@@ -18,7 +18,7 @@ export function DisclosureToggleDemo() {
         <p className="text-sm text-neutral-500">
           APG /disclosure/ — open 상태는 별도 useState 없이 `meta.expanded` set 으로
           표현. activate(click/Enter/Space) → expand 이벤트 emit.
-          reduceWithDefaults 가 흡수.
+          reduceSingleSelect 가 흡수.
         </p>
       </header>
 

@@ -52,8 +52,8 @@ export const radioGroupKeys = (): readonly string[] =>
  *
  * 항상 selection-follows-focus (APG 강제). single-select.
  *
- * @example canonical 합성 (#148 §4) — radio 는 reduceWithRadio
- *   const [data, dispatch] = useReducer(reduceWithRadio, ITEMS, fromList)
+ * @example canonical 합성 (#148 §4) — radio 는 reduceRadio
+ *   const [data, dispatch] = useReducer(reduceRadio, ITEMS, fromList)
  *   const { rootProps, radioProps, items } = useRadioGroupPattern(data, dispatch)
  */
 export function useRadioGroupPattern(

@@ -19,7 +19,7 @@ flowchart LR
 - `axes` — `(data, currentId, trigger) → UiEvent[]`
 - `patterns` — `(data, onEvent, opts?) → { rootProps, partProps(id), items }`
 - `ui` — JSX + Tailwind utility class (소비자 코드)
-- `reducer` — `(data, event) → next data` (`reduceWithDefaults` / `reduceWithMultiSelect`)
+- `reducer` — `(data, event) → next data` (`reduceSingleSelect` / `reduceMultiSelect`)
 
 ## NormalizedData
 
@@ -190,8 +190,8 @@ drop-in reducers:
 
 | reducer | 합성 |
 |---|---|
-| `reduceWithDefaults` | `reduce` + `singleSelect` + `setValue` |
-| `reduceWithMultiSelect` | `reduce` + `multiSelectToggle` + `setValue` |
+| `reduceSingleSelect` | `reduce` + `singleSelect` + `setValue` |
+| `reduceMultiSelect` | `reduce` + `multiSelectToggle` + `setValue` |
 
 조각 reducer (필요 시 `composeReducers` 로 합성):
 

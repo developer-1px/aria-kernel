@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { useReducer } from 'react'
-import { fromList, reduceWithDefaults } from '@p/aria-kernel'
+import { fromList, reduceSingleSelect } from '@p/aria-kernel'
 import { Tabs, type TabsSlots, tabsWrapperKeys } from './_tabsWrapper'
 import type { SlotProps } from '../catalog/slots'
 
@@ -28,6 +28,6 @@ export const meta = {
 }
 
 export default function TabsWrapperDemo() {
-  const [data, onEvent] = useReducer(reduceWithDefaults, undefined, () => initialData)
+  const [data, onEvent] = useReducer(reduceSingleSelect, undefined, () => initialData)
   return <Tabs aria-label="Documentation" data={data} onEvent={onEvent} slots={slots as TabsSlots} />
 }

@@ -18,7 +18,7 @@ export const warnMultiSelectPairing = (pattern: string): void => {
   // eslint-disable-next-line no-console
   console.info(
     `[aria-kernel/${pattern}] multiSelectable: true — reducer 가 multi-select 이벤트를 ` +
-    `흡수하는지 확인하세요. Default \`reduceWithDefaults\` 는 single-select 만 처리. ` +
-    `\`reduceWithMultiSelect\` 또는 \`composeReducers(reduce, multiSelectToggle, ...)\` 사용.`,
+    `흡수하는지 확인하세요. Default \`reduceSingleSelect\` 는 single-select 만 처리. ` +
+    `\`reduceMultiSelect\` 또는 \`composeReducers(reduce, multiSelectToggle, ...)\` 사용.`,
   )
 }

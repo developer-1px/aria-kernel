@@ -24,7 +24,7 @@ W3C/WHATWG spec에 닫혀있다.
 - **INTENT_CHORDS** — 모든 axis 의 chord 정의 SSOT (`'navigate.next'`, `'activate'`, …). 패턴 hook 이 이걸 합성.
 - **UiEvent** — ui ↔ headless 통신 단일 어휘. zod schema gate. DOM `Event` 와 분리 위해 `Ui` prefix.
 - **NormalizedData** — flat by id + meta. tree/list 무관 통일 표현.
-- **데이터 합성** — React `useReducer(reduceWithDefaults, items, fromList)` 직접. 라이브러리 데이터 hook wrapper 0 (#148).
+- **데이터 합성** — React `useReducer(reduceSingleSelect, items, fromList)` 직접. 라이브러리 데이터 hook wrapper 0 (#148).
 - **Pattern** — `use*Pattern` (내부 React state) vs `*Pattern` (순수 함수). 데이터성 state는 외부 주입, UI 일시 state는 내부.
 
 자세한 의미·invariant는 위 정본 문서.

@@ -1,5 +1,5 @@
 import { useReducer, useMemo } from 'react'
-import { fromList, reduceWithDefaults, type UiEvent } from '@p/aria-kernel'
+import { fromList, reduceSingleSelect, type UiEvent } from '@p/aria-kernel'
 import { useListboxPattern } from '@p/aria-kernel/patterns'
 
 const COUNTRIES = [
@@ -15,7 +15,7 @@ const COUNTRIES = [
 
 export function ListboxTypeaheadDemo() {
   const initial = useMemo(() => fromList(COUNTRIES), [])
-  const [data, dispatch] = useReducer(reduceWithDefaults, initial)
+  const [data, dispatch] = useReducer(reduceSingleSelect, initial)
   const { rootProps, optionProps, items } = useListboxPattern(
     data, (e: UiEvent) => dispatch(e), { label: '국가', autoFocus: true },
   )

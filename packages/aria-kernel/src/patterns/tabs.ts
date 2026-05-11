@@ -48,7 +48,7 @@ export interface TabsOptions {
  * tabProps(id)·panelProps(id) 가 `aria-controls`/`aria-labelledby` 자동 연결.
  *
  * @example canonical 합성 (#148 §4)
- *   const [data, dispatch] = useReducer(reduceWithDefaults, ITEMS, fromList)
+ *   const [data, dispatch] = useReducer(reduceSingleSelect, ITEMS, fromList)
  *   const { rootProps, tabProps, panelProps, items } = useTabsPattern(data, dispatch)
  *
  * **ARIA-punt 흡수 (INVARIANTS §B-ter.2):**

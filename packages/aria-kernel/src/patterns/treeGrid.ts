@@ -107,7 +107,7 @@ const multiAxis = treeGridAxis({ multiSelectable: true })
  * Focus stays on rows; cells expose grid semantics through rowheader/gridcell + aria-colindex.
  *
  * @example canonical 합성 (#148 §4) — tree + expand gesture
- *   const reducer = applyGesture(expandBranchOnActivate, reduceWithDefaults)
+ *   const reducer = applyGesture(expandBranchOnActivate, reduceSingleSelect)
  *   const [data, dispatch] = useReducer(reducer, undefined, () => fromTree(ROWS))
  *   const { treegridProps, rowProps, gridcellProps, items } = useTreeGridPattern(data, dispatch)
  */

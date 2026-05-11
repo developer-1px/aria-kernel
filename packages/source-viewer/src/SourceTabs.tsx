@@ -1,5 +1,5 @@
 import { useReducer, useState } from 'react'
-import { fromList, reduceWithDefaults } from '@p/aria-kernel'
+import { fromList, reduceSingleSelect } from '@p/aria-kernel'
 import { useTabsPattern } from '@p/aria-kernel/patterns'
 import { CopyButton } from './CopyButton'
 import { HighlightedCode } from './HighlightedCode'
@@ -55,7 +55,7 @@ function TabsView({
   onBack: () => void
 }) {
   const [data, dispatch] = useReducer(
-    reduceWithDefaults,
+    reduceSingleSelect,
     tabs,
     (init) => fromList(init.map((t, i) => ({ id: t.key, label: t.label, selected: i === 0 }))),
   )

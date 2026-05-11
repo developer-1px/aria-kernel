@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it } from 'vitest'
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { useState } from 'react'
 import { fromList, fromTree } from '../state/fromTree'
-import { reduceWithDefaults, reduceWithRadio } from '../state/defaults'
+import { reduceSingleSelect, reduceRadio } from '../state/defaults'
 import type { NormalizedData, UiEvent } from '../types'
 import {
   checkboxPattern,
@@ -70,7 +70,7 @@ function SplitterHarness() {
 
 function DisclosureHarness() {
   const [data, setData] = useState<NormalizedData>(() => fromTree([{ id: 'faq', label: 'FAQ' }]))
-  const dispatch = (event: UiEvent) => setData((prev) => reduceWithDefaults(prev, event))
+  const dispatch = (event: UiEvent) => setData((prev) => reduceSingleSelect(prev, event))
   const { triggerProps, panelProps } = disclosurePattern(data, 'faq', dispatch, {
     idPrefix: 'test',
   })
@@ -90,7 +90,7 @@ function CheckboxGroupHarness() {
       { id: 'gamma', label: 'Gamma', checked: true, disabled: true },
     ]),
   )
-  const dispatch = (event: UiEvent) => setData((prev) => reduceWithDefaults(prev, event))
+  const dispatch = (event: UiEvent) => setData((prev) => reduceSingleSelect(prev, event))
   const { groupProps, parentProps, childProps } = useCheckboxGroupPattern(data, dispatch, {
     label: 'Permissions',
     parentLabel: 'All permissions',
@@ -116,7 +116,7 @@ function RadioGroupHarness() {
       { id: 'large', label: 'Large' },
     ]),
   )
-  const dispatch = (event: UiEvent) => setData((prev) => reduceWithRadio(prev, event))
+  const dispatch = (event: UiEvent) => setData((prev) => reduceRadio(prev, event))
   const { rootProps, radioProps } = useRadioGroupPattern(data, dispatch, {
     label: 'Size',
     orientation: 'horizontal',
@@ -171,7 +171,7 @@ function MenuButtonHarness() {
       },
     ]),
   )
-  const dispatch = (event: UiEvent) => setData((prev) => reduceWithDefaults(prev, event))
+  const dispatch = (event: UiEvent) => setData((prev) => reduceSingleSelect(prev, event))
   const pattern = useMenuButtonPattern(data, dispatch, { label: 'File', idPrefix: 'test-menu' })
   return (
     <>

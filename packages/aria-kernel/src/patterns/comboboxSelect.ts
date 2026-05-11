@@ -54,7 +54,7 @@ export interface ComboboxSelectOptions {
  *   click   → {type:'open', open:!expanded}
  *
  * @example canonical 합성 (#148 §4)
- *   const [data, dispatch] = useReducer(reduceWithDefaults, ITEMS, fromList)
+ *   const [data, dispatch] = useReducer(reduceSingleSelect, ITEMS, fromList)
  *   const { comboboxProps, listboxProps, optionProps, items } = useComboboxSelectPattern(data, dispatch)
  */
 export function useComboboxSelectPattern(

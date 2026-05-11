@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { useReducer } from 'react'
-import { applyGesture, expandBranchOnActivate, fromTree, reduceWithDefaults } from '@p/aria-kernel'
+import { applyGesture, expandBranchOnActivate, fromTree, reduceSingleSelect } from '@p/aria-kernel'
 import type { TreeItem } from '@p/aria-kernel/patterns'
 import { Tree, type TreeSlots, treeWrapperKeys } from './_treeWrapper'
 import type { SlotProps } from '../catalog/slots'
@@ -53,7 +53,7 @@ const files: Node[] = [
 const initialData = fromTree(files, { expanded: ['src', 'demos'] })
 
 // gesture: branch activate → expand toggle (leaf activate → activate emit 그대로).
-const reducer = applyGesture(expandBranchOnActivate, reduceWithDefaults)
+const reducer = applyGesture(expandBranchOnActivate, reduceSingleSelect)
 
 const slots: TreeSlots<FileItem> = {
   icon: ({ item, data }: SlotProps<FileItem, TreeItem>) =>

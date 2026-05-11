@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { axisKeys, fromList, reduceWithDefaults } from '@p/aria-kernel'
+import { axisKeys, fromList, reduceSingleSelect } from '@p/aria-kernel'
 import { menuAxis, useMenuPattern } from '@p/aria-kernel/patterns'
 
 export const meta = {
@@ -13,7 +13,7 @@ export const meta = {
 const ITEMS = [{ label: 'New file' }, { label: 'Open…' }, { label: 'Save' }, { label: 'Close' }]
 
 export default function MenuDemo() {
-  const [data, dispatch] = useReducer(reduceWithDefaults, ITEMS, fromList)
+  const [data, dispatch] = useReducer(reduceSingleSelect, ITEMS, fromList)
   const { rootProps, menuitemProps, buttonProps, items, open } = useMenuPattern(data, dispatch)
 
   return (

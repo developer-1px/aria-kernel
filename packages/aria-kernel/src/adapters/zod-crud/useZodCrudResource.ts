@@ -17,7 +17,7 @@
 import {useEffect, useMemo, useState} from 'react'
 import type {ZodType} from 'zod'
 import {reduce} from '../../state/reduce'
-import {reduceWithDefaults, reduceWithMultiSelect} from '../../state/defaults'
+import {reduceSingleSelect, reduceMultiSelect} from '../../state/defaults'
 import {useResource, type Resource} from '../../store/data'
 import {routeUiEventToCrud, type CrudPort} from '../../store/routeUiEventToCrud'
 import type {Meta, NormalizedData, UiEvent} from '../../types'
@@ -84,10 +84,10 @@ export function useZodCrudResource<
   const kind: Kind = opts.kind ?? 'tree'
   const reduceView =
     opts.selection === 'multi'
-      ? reduceWithMultiSelect
+      ? reduceMultiSelect
       : opts.selection === 'none'
         ? reduce
-        : reduceWithDefaults
+        : reduceSingleSelect
 
   const [doc, baseDispatch] = useResource(resource)
   const snapshot = doc ?? crud.snapshot()

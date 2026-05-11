@@ -112,7 +112,7 @@ export interface MenuOptions {
  * (context menu, popover trigger 외부에서 관리) 케이스.
  *
  * @example canonical 합성 (#148 §4)
- *   const [data, dispatch] = useReducer(reduceWithDefaults, ITEMS, fromList)
+ *   const [data, dispatch] = useReducer(reduceSingleSelect, ITEMS, fromList)
  *   const { rootProps, menuitemProps, items, open } = useMenuPattern(data, dispatch)
  */
 export function useMenuPattern(

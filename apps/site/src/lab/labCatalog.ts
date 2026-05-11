@@ -81,7 +81,7 @@ export const LAB_ENTRIES: LabEntry[] = [
     title: 'Disclosure — meta.expanded SSOT',
     invariant: '§B-ter.20',
     purpose:
-      'APG /disclosure/ — open 상태가 별도 useState 없이 meta.expanded set 으로 표현. activate→expand emit, reduceWithDefaults 흡수.',
+      'APG /disclosure/ — open 상태가 별도 useState 없이 meta.expanded set 으로 표현. activate→expand emit, reduceSingleSelect 흡수.',
     status: 'PoC',
   },
   {
@@ -145,7 +145,7 @@ export const LAB_ENTRIES: LabEntry[] = [
     title: 'RadioGroup — selection follows focus',
     invariant: '§B-ter.12',
     purpose:
-      'APG 강제 — radio 는 항상 selection-follows-focus. Arrow 이동 = checked 전환. reduceWithRadio (singleCheck) host reducer.',
+      'APG 강제 — radio 는 항상 selection-follows-focus. Arrow 이동 = checked 전환. reduceRadio (singleCheck) host reducer.',
     status: 'PoC',
   },
   {

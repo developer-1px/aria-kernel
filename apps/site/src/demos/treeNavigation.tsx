@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { applyGesture, axisKeys, expandBranchOnActivate, fromTree, reduceWithDefaults } from '@p/aria-kernel'
+import { applyGesture, axisKeys, expandBranchOnActivate, fromTree, reduceSingleSelect } from '@p/aria-kernel'
 import { treeAxis, useTreePattern } from '@p/aria-kernel/patterns'
 
 export const meta = {
@@ -25,7 +25,7 @@ const NAV: Node[] = [
   { id: 'about', label: 'About' },
 ]
 
-const reducer = applyGesture(expandBranchOnActivate, reduceWithDefaults)
+const reducer = applyGesture(expandBranchOnActivate, reduceSingleSelect)
 const initNav = () => {
   const d = fromTree(NAV, { expanded: ['docs', 'patterns'] })
   d.entities['tree'] = { ...(d.entities['tree'] ?? {}), selected: true }

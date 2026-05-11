@@ -41,12 +41,12 @@ APG 표준이 `aria-multiselectable`을 같은 role 안 분기로 둔다는 점,
 | `axes/multiSelect.ts` | dead code 제거 (`if (t.kind === 'click')` 중첩), click → `[navigate, select]` |
 | `state/selection.ts` | `multiSelectToggle`이 `'activate'` 대신 `'select'` 처리 — single과 어휘 분리 |
 | `state/expansion.ts` (신규) | `singleExpand` — `expand:open=true` 시 sibling collapse |
-| `state/defaults.ts` | `reduceWithMultiSelect` 추가 (`reduceWithDefaults`와 paralllel) |
+| `state/defaults.ts` | `reduceMultiSelect` 추가 (`reduceSingleSelect`와 paralllel) |
 | `patterns/listbox.ts` | `singleAxis`/`multiAxis` 분리, `multiSelectable` 옵션 따라 동적 합성 |
 | `patterns/tree.ts` | 미사용 `selectionMode` 제거, `multiSelectable: boolean` 어휘 통일 |
 | `patterns/treeGrid.ts` | 동일 |
 | `patterns/accordion.ts` | 미사용 `type`/`collapsible` 옵션 제거 |
-| `index.ts` · `state/index.ts` | `singleExpand`, `reduceWithMultiSelect` re-export |
+| `index.ts` · `state/index.ts` | `singleExpand`, `reduceMultiSelect` re-export |
 
 ### 데모 (별개 케이스)
 

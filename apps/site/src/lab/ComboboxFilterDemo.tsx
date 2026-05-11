@@ -1,5 +1,5 @@
 import { useReducer, useMemo } from 'react'
-import { fromList, reduceWithDefaults, type UiEvent } from '@p/aria-kernel'
+import { fromList, reduceSingleSelect, type UiEvent } from '@p/aria-kernel'
 import { useComboboxPattern } from '@p/aria-kernel/patterns'
 
 const FRUITS = [
@@ -14,7 +14,7 @@ const FRUITS = [
 
 export function ComboboxFilterDemo() {
   const initial = useMemo(() => fromList(FRUITS), [])
-  const [data, dispatch] = useReducer(reduceWithDefaults, initial)
+  const [data, dispatch] = useReducer(reduceSingleSelect, initial)
   const { comboboxProps, listboxProps, optionProps, items, expanded } =
     useComboboxPattern(data, (e: UiEvent) => dispatch(e), { label: '과일 검색', autocomplete: 'list' })
 

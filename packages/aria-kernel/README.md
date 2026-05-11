@@ -1,18 +1,18 @@
 # @p/aria-kernel
 
-**React + Reducer 기반 ARIA 행동 인프라.** W3C/APG 패턴 recipe + axis 합성 + roving tabindex + gesture/intent 변환. 데이터는 `useReducer(reduceWithDefaults, items, fromList)` 직접 합성. 토큰/CSS/UI 어휘 0건.
+**React + Reducer 기반 ARIA 행동 인프라.** W3C/APG 패턴 recipe + axis 합성 + roving tabindex + gesture/intent 변환. 데이터는 `useReducer(reduceSingleSelect, items, fromList)` 직접 합성. 토큰/CSS/UI 어휘 0건.
 
 ## Canonical 합성
 
 ```tsx
 import { useReducer } from 'react'
-import { reduceWithDefaults, fromList } from '@p/aria-kernel'
+import { reduceSingleSelect, fromList } from '@p/aria-kernel'
 import { useListboxPattern } from '@p/aria-kernel/patterns'
 
 const ITEMS = [{ id: 'a', label: 'A' }, { id: 'b', label: 'B' }]
 
 function Picker() {
-  const [data, dispatch] = useReducer(reduceWithDefaults, ITEMS, fromList)
+  const [data, dispatch] = useReducer(reduceSingleSelect, ITEMS, fromList)
   const { rootProps, itemProps } = useListboxPattern(data, dispatch, { label: 'Items' })
   return (
     <ul {...rootProps}>
@@ -62,7 +62,7 @@ function Toolbar() {
 | 카테고리 | 핵심 export |
 |---|---|
 | **Types** | `Entity` · `NormalizedData` · `UiEvent` · `ValueEvent` · `ROOT` |
-| **State** | `reduce` · `reduceWithDefaults` · `reduceWithMultiSelect` · `reduceWithRadio` · `composeReducers` · `fromTree` · `fromList` · `fromFlatTree` · `useControlState` · `useEventBridge` |
+| **State** | `reduce` · `reduceSingleSelect` · `reduceMultiSelect` · `reduceRadio` · `composeReducers` · `fromTree` · `fromList` · `fromFlatTree` · `useControlState` · `useEventBridge` |
 | **Axes** | `composeAxes` · `navigate` · `activate` · `expand` · `treeNavigate` · `typeahead` · `toggle` · `multiSelect` · `gridMultiSelect` |
 | **Roving** | `useRovingTabIndex` · `useSpatialNavigation` · `useActiveDescendant` |
 | **Gesture** | `composeGestures` · `navigateOnActivate` · `selectionFollowsFocus` · `expandBranchOnActivate` |

@@ -1,5 +1,5 @@
 import { useReducer, useMemo } from 'react'
-import { fromList, reduceWithDefaults, type UiEvent } from '@p/aria-kernel'
+import { fromList, reduceSingleSelect, type UiEvent } from '@p/aria-kernel'
 import { useMenuButtonPattern } from '@p/aria-kernel/patterns'
 
 const ITEMS = [
@@ -11,7 +11,7 @@ const ITEMS = [
 
 export function MenuButtonOpenDemo() {
   const initial = useMemo(() => fromList(ITEMS), [])
-  const [data, dispatch] = useReducer(reduceWithDefaults, initial)
+  const [data, dispatch] = useReducer(reduceSingleSelect, initial)
   const { triggerProps, menuProps, itemProps, items, open } =
     useMenuButtonPattern(data, (e: UiEvent) => dispatch(e), { label: '파일' })
 

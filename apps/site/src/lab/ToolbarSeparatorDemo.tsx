@@ -1,5 +1,5 @@
 import { useReducer, useMemo } from 'react'
-import { fromList, reduceWithDefaults, type UiEvent } from '@p/aria-kernel'
+import { fromList, reduceSingleSelect, type UiEvent } from '@p/aria-kernel'
 import { useToolbarPattern } from '@p/aria-kernel/patterns'
 
 const ITEMS = [
@@ -14,7 +14,7 @@ const ITEMS = [
 
 export function ToolbarSeparatorDemo() {
   const initial = useMemo(() => fromList(ITEMS), [])
-  const [data, dispatch] = useReducer(reduceWithDefaults, initial)
+  const [data, dispatch] = useReducer(reduceSingleSelect, initial)
   const { rootProps, toolbarItemProps, items } = useToolbarPattern(
     data, (e: UiEvent) => dispatch(e), { label: 'Format', autoFocus: true },
   )

@@ -69,7 +69,7 @@ const defaultFilter = (q: string, label: string): boolean =>
  * data: ROOT children = rowIds, 각 row 의 children = cellIds.
  *
  * @example canonical 합성 (#148 §4)
- *   const [data, dispatch] = useReducer(reduceWithDefaults, ROWS, fromTree)
+ *   const [data, dispatch] = useReducer(reduceSingleSelect, ROWS, fromTree)
  *   const { comboboxProps, inputProps, gridProps, rowProps, cellProps } = useComboboxGridPattern(data, dispatch)
  */
 export function useComboboxGridPattern(

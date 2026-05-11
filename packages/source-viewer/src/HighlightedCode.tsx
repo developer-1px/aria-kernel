@@ -96,14 +96,14 @@ export function HighlightedCode({
     return (
       <div
         ref={ref}
-        className="flex-1 text-xs leading-relaxed font-mono md:overflow-auto [&_pre]:!bg-transparent [&_pre]:py-4 [&_pre]:pl-2 [&_pre]:pr-4 [&_pre]:h-full [&_pre]:whitespace-normal [&_pre]:break-normal [&_.line]:block [&_.line]:whitespace-pre [counter-reset:lineno] [&_.line]:before:content-[counter(lineno)] [&_.line]:before:[counter-increment:lineno] [&_.line]:before:inline-block [&_.line]:before:w-8 [&_.line]:before:pr-3 [&_.line]:before:text-right [&_.line]:before:text-stone-600 [&_.line]:before:select-none [&_.line[data-hl=true]]:bg-stone-700/40 [&_.line[data-hl=true]]:before:text-stone-300"
+        className="flex-1 text-xs leading-relaxed font-mono md:overflow-auto [&_pre]:!bg-transparent [&_pre]:py-4 [&_pre]:pl-2 [&_pre]:pr-4 [&_pre]:h-full [&_pre]:whitespace-normal [&_pre]:break-normal [&_.line]:block [&_.line]:whitespace-pre-wrap [&_.line]:break-all [counter-reset:lineno] [&_.line]:before:content-[counter(lineno)] [&_.line]:before:[counter-increment:lineno] [&_.line]:before:inline-block [&_.line]:before:w-8 [&_.line]:before:pr-3 [&_.line]:before:text-right [&_.line]:before:text-stone-600 [&_.line]:before:select-none [&_.line[data-hl=true]]:bg-stone-700/40 [&_.line[data-hl=true]]:before:text-stone-300"
         dangerouslySetInnerHTML={{ __html: html }}
       />
     )
   }
   const lines = source.split('\n')
   return (
-    <pre className="flex-1 p-4 text-xs leading-relaxed text-stone-100 font-mono md:overflow-auto whitespace-pre break-normal">
+    <pre className="flex-1 p-4 text-xs leading-relaxed text-stone-100 font-mono md:overflow-auto whitespace-pre-wrap break-all">
       <code>
         {lines.map((line, i) => (
           <span key={i} className="block">
