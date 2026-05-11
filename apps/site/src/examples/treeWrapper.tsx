@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
+import { useReducer } from 'react'
 import { applyGesture, expandBranchOnActivate, fromTree, reduceWithDefaults } from '@p/aria-kernel'
-import { useLocalData } from '@p/aria-kernel/local'
 import type { TreeItem } from '@p/aria-kernel/patterns'
 import { Tree, type TreeSlots, treeWrapperKeys } from './_treeWrapper'
 import type { SlotProps } from '../catalog/slots'
@@ -72,7 +72,7 @@ export const meta = {
 }
 
 export default function TreeWrapperDemo() {
-  const [data, onEvent] = useLocalData(() => initialData, reducer)
+  const [data, onEvent] = useReducer(reducer, undefined, () => initialData)
 
   return (
     <Tree

@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
+import { useReducer } from 'react'
 import { reduceWithDefaults, type NormalizedData } from '@p/aria-kernel'
-import { useLocalData } from '@p/aria-kernel/local'
 import { Menu, type MenuSlots, menuWrapperKeys } from './_menuWrapper'
 import type { SlotProps } from '../catalog/slots'
 
@@ -55,7 +55,7 @@ export const meta = {
 }
 
 export default function MenuWrapperDemo() {
-  const [data, onEvent] = useLocalData(() => initialData, reduceWithDefaults)
+  const [data, onEvent] = useReducer(reduceWithDefaults, undefined, () => initialData)
 
   return <Menu aria-label="File" data={data} onEvent={onEvent} slots={slots as MenuSlots} />
 }

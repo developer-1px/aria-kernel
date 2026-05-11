@@ -1,7 +1,6 @@
-import { useState } from 'react'
-import { fromList } from '@p/aria-kernel'
+import { useReducer, useState } from 'react'
+import { fromList, reduceWithDefaults } from '@p/aria-kernel'
 import { useTabsPattern } from '@p/aria-kernel/patterns'
-import { useLocalData } from '@p/aria-kernel/local'
 import { CopyButton } from './CopyButton'
 import { HighlightedCode } from './HighlightedCode'
 import { buildAppTabs, type AppTab } from './buildAppTabs'
@@ -55,10 +54,12 @@ function TabsView({
   backLabel: string | null
   onBack: () => void
 }) {
-  const [data, onEvent] = useLocalData(() =>
-    fromList(tabs.map((t, i) => ({ id: t.key, label: t.label, selected: i === 0 }))),
+  const [data, dispatch] = useReducer(
+    reduceWithDefaults,
+    tabs,
+    (init) => fromList(init.map((t, i) => ({ id: t.key, label: t.label, selected: i === 0 }))),
   )
-  const { rootProps, tabProps, panelProps, items } = useTabsPattern(data, onEvent)
+  const { rootProps, tabProps, panelProps, items } = useTabsPattern(data, dispatch)
   const activeId = items.find((i) => i.selected)?.id ?? items[0]?.id
   const active = tabs.find((t) => t.key === activeId) ?? tabs[0]
 

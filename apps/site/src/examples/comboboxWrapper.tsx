@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
-import { fromList } from '@p/aria-kernel'
-import { useLocalData } from '@p/aria-kernel/local'
+import { useReducer } from 'react'
+import { fromList, reduceWithDefaults } from '@p/aria-kernel'
 import { Combobox, comboboxWrapperKeys } from './_comboboxWrapper'
 
 const initialData = fromList(
@@ -20,6 +20,6 @@ export const meta = {
 }
 
 export default function ComboboxWrapperDemo() {
-  const [data, onEvent] = useLocalData(() => initialData)
-  return <Combobox aria-label="Country" data={data} onEvent={onEvent} placeholder="Search country…" />
+  const [data, dispatch] = useReducer(reduceWithDefaults, undefined, () => initialData)
+  return <Combobox aria-label="Country" data={data} onEvent={dispatch} placeholder="Search country…" />
 }
