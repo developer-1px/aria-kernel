@@ -5,6 +5,21 @@ import { getChildren, getSelectAnchor, type NormalizedData, type UiEvent } from 
 import { INTENT_CHORDS } from './intentChords'
 import { gridCoord } from './gridNavigate'
 
+let warnedAnchorMissing = false
+const warnAnchorMissing = (): void => {
+  if (warnedAnchorMissing) return
+  // production tree-shake hint — bundler 가 NODE_ENV 치환 후 dead-code 제거.
+  const env = (globalThis as { process?: { env?: { NODE_ENV?: string } } }).process?.env?.NODE_ENV
+  if (env === 'production') return
+  warnedAnchorMissing = true
+  // eslint-disable-next-line no-console
+  console.warn(
+    '[aria-kernel/gridMultiSelect] Shift+Arrow range called but data.meta.selectAnchor is null. ' +
+    'Your reducer must persist anchor on `select` events with `anchor: true` ' +
+    '(see types.ts UiEvent select / getSelectAnchor). Falling back to currentId — range will not accumulate.',
+  )
+}
+
 /**
  * gridMultiSelect — APG `/grid/` Selection 키 매핑. focus 이동은 gridNavigate.
  * https://www.w3.org/WAI/ARIA/apg/patterns/grid/
@@ -74,7 +89,9 @@ const rangeRect = (
     }
     return null
   }
-  const anchorId = getSelectAnchor(d) ?? currentId
+  const persistedAnchor = getSelectAnchor(d)
+  if (persistedAnchor == null) warnAnchorMissing()
+  const anchorId = persistedAnchor ?? currentId
   const anchor = findCoords(anchorId) ?? { row: c.rowIdx, col: c.colIdx }
   const r1 = Math.min(anchor.row, nextRow), r2 = Math.max(anchor.row, nextRow)
   const c1 = Math.min(anchor.col, nextCol), c2 = Math.max(anchor.col, nextCol)
