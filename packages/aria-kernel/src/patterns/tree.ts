@@ -226,6 +226,11 @@ function runEffect(
  *   const reducer = applyGesture(expandBranchOnActivate, reduceWithDefaults)
  *   const [data, dispatch] = useReducer(reducer, undefined, () => fromTree(NODES))
  *   const { rootProps, itemProps, items } = useTreePattern(data, dispatch)
+ *
+ * @example multi-select — reducer 부품 교체만 필요 (silent bug 주의: 두 곳 모두 설정)
+ *   const reducer = applyGesture(expandBranchOnActivate, reduceWithMultiSelect)
+ *   const [data, dispatch] = useReducer(reducer, undefined, () => fromTree(NODES))
+ *   const props = useTreePattern(data, dispatch, { multiSelectable: true })
  */
 export function useTreePattern(
   data: NormalizedData,
