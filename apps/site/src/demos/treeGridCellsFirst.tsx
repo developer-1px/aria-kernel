@@ -1,12 +1,5 @@
-import { useReducer } from 'react'
-import {
-  applyGesture,
-  axisKeys,
-  expandBranchOnActivate,
-  fromTree,
-  reduceSingleSelect,
-} from '@p/aria-kernel'
-import { treeGridAxis, useTreeGridPattern } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@p/aria-kernel'
+import { treeGridAxis, useTreeGridPattern, useTreeGridReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Tree Grid · Cells-First',
@@ -32,10 +25,9 @@ const rows: Row[] = [
 ]
 
 const COLS = ['Name', 'Size', 'Modified']
-const reducer = applyGesture(reduceSingleSelect, expandBranchOnActivate)
 
 export default function TreeGridCellsFirstDemo() {
-  const [data, dispatch] = useReducer(reducer, undefined, () => fromTree(rows, { expanded: ['src'] }))
+  const [data, dispatch] = useTreeGridReducer(rows, { defaultExpanded: ['src'] })
   const {
     treegridProps, headerRowProps, rowProps, columnheaderProps, rowheaderProps, gridcellProps, items,
   } = useTreeGridPattern(data, dispatch, {

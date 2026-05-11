@@ -227,13 +227,12 @@ function runEffect(
  * tree — APG `/treeview/` recipe.
  * https://www.w3.org/WAI/ARIA/apg/patterns/treeview/
  *
- * @example canonical — tree 데이터 + expand gesture (pipe)
- *   const expand = (r) => applyGesture(r, expandBranchOnActivate)
- *   const [data, dispatch] = useTreeReducer(NODES, { enhance: expand })
+ * @example canonical — expand gesture 는 default 로 박혀 있음
+ *   const [data, dispatch] = useTreeReducer(NODES, { defaultExpanded: ['src'] })
  *   const { rootProps, itemProps, items } = useTreePattern(data, dispatch)
  *
  * @example multi-select — `multi: true` (두 곳 모두 설정 필요)
- *   const [data, dispatch] = useTreeReducer(NODES, { multi: true, enhance: expand })
+ *   const [data, dispatch] = useTreeReducer(NODES, { multi: true })
  *   const props = useTreePattern(data, dispatch, { multiSelectable: true })
  */
 export function useTreePattern(

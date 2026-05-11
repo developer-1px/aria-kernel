@@ -15,10 +15,11 @@
  * @example middleware (HOR — redux-undo 등과 호환)
  *   const [data, dispatch] = useListboxReducer(items, { enhance: undoable })
  */
-import { useReducer, type Dispatch } from 'react'
+import { useReducer, useMemo, type Dispatch } from 'react'
 import { fromList, fromTree } from '../state/fromTree'
 import { reduceSingleSelect, reduceMultiSelect, reduceRadio } from '../state/defaults'
-import type { Reducer } from '../state/compose'
+import { applyGesture, type Reducer } from '../state/compose'
+import { expandBranchOnActivate } from '../gesture'
 import type { NormalizedData, UiEvent } from '../types'
 
 type Enhance = (r: Reducer) => Reducer
@@ -32,6 +33,12 @@ export interface SelectableReducerOptions {
   enhance?: Enhance
 }
 
+/** Tree/TreeGrid 옵션 — expand 기본 박힘 + 초기 expanded seed. */
+export interface TreeReducerOptions extends SelectableReducerOptions {
+  /** 초기 expanded id seed. `fromTree(roots, { expanded })`로 thread. */
+  defaultExpanded?: string[]
+}
+
 /** select-single 전용 패턴 옵션. */
 export interface SingleReducerOptions {
   /** HOR middleware. */
@@ -41,6 +48,14 @@ export interface SingleReducerOptions {
 const pickSelectable = (multi: boolean | undefined, enhance?: Enhance): Reducer => {
   const base = multi ? reduceMultiSelect : reduceSingleSelect
   return enhance ? enhance(base) : base
+}
+
+/** Tree/TreeGrid 정본 reducer — `applyGesture(base, expandBranchOnActivate)` 후 enhance.
+ *  APG `treeview` 자구: Enter/Space는 parent면 expand, leaf면 activate. */
+const pickTreeSelectable = (multi: boolean | undefined, enhance?: Enhance): Reducer => {
+  const base = multi ? reduceMultiSelect : reduceSingleSelect
+  const withExpand = applyGesture(base, expandBranchOnActivate)
+  return enhance ? enhance(withExpand) : withExpand
 }
 const pickSingle = (enhance?: Enhance): Reducer =>
   enhance ? enhance(reduceSingleSelect) : reduceSingleSelect
@@ -59,25 +74,31 @@ export function useListboxReducer<T extends Record<string, unknown>>(items: T[],
  * Tree-based (fromTree) — multi 지원
  * ───────────────────────────────────────────────────────────── */
 
-export function useTreeReducer<T extends { id: string; children?: T[] } & Record<string, unknown>>(
+export function useTreeReducer<T extends { id: string; children?: T[] }>(
   roots: T[],
-  opts: SelectableReducerOptions = {},
+  opts: TreeReducerOptions = {},
 ): Result {
-  return useReducer(pickSelectable(opts.multi, opts.enhance), roots, fromTree)
+  const reducer = useMemo(() => pickTreeSelectable(opts.multi, opts.enhance), [opts.multi, opts.enhance])
+  return useReducer(reducer, roots, (r) =>
+    opts.defaultExpanded ? fromTree(r, { expanded: opts.defaultExpanded }) : fromTree(r),
+  )
 }
 
-export function useGridReducer<T extends { id: string; children?: T[] } & Record<string, unknown>>(
+export function useGridReducer<T extends { id: string; children?: T[] }>(
   rows: T[],
   opts: SelectableReducerOptions = {},
 ): Result {
   return useReducer(pickSelectable(opts.multi, opts.enhance), rows, fromTree)
 }
 
-export function useTreeGridReducer<T extends { id: string; children?: T[] } & Record<string, unknown>>(
+export function useTreeGridReducer<T extends { id: string; children?: T[] }>(
   rows: T[],
-  opts: SelectableReducerOptions = {},
+  opts: TreeReducerOptions = {},
 ): Result {
-  return useReducer(pickSelectable(opts.multi, opts.enhance), rows, fromTree)
+  const reducer = useMemo(() => pickTreeSelectable(opts.multi, opts.enhance), [opts.multi, opts.enhance])
+  return useReducer(reducer, rows, (r) =>
+    opts.defaultExpanded ? fromTree(r, { expanded: opts.defaultExpanded }) : fromTree(r),
+  )
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -120,28 +141,28 @@ export function useNavigationListReducer<T extends Record<string, unknown>>(item
  * Tree-based, single-only
  * ───────────────────────────────────────────────────────────── */
 
-export function useMenuReducer<T extends { id: string; children?: T[] } & Record<string, unknown>>(
+export function useMenuReducer<T extends { id: string; children?: T[] }>(
   roots: T[],
   opts: SingleReducerOptions = {},
 ): Result {
   return useReducer(pickSingle(opts.enhance), roots, fromTree)
 }
 
-export function useMenubarReducer<T extends { id: string; children?: T[] } & Record<string, unknown>>(
+export function useMenubarReducer<T extends { id: string; children?: T[] }>(
   roots: T[],
   opts: SingleReducerOptions = {},
 ): Result {
   return useReducer(pickSingle(opts.enhance), roots, fromTree)
 }
 
-export function useMenuButtonReducer<T extends { id: string; children?: T[] } & Record<string, unknown>>(
+export function useMenuButtonReducer<T extends { id: string; children?: T[] }>(
   roots: T[],
   opts: SingleReducerOptions = {},
 ): Result {
   return useReducer(pickSingle(opts.enhance), roots, fromTree)
 }
 
-export function useComboboxGridReducer<T extends { id: string; children?: T[] } & Record<string, unknown>>(
+export function useComboboxGridReducer<T extends { id: string; children?: T[] }>(
   rows: T[],
   opts: SingleReducerOptions = {},
 ): Result {

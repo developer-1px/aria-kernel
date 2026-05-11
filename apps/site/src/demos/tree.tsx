@@ -1,12 +1,5 @@
-import { useReducer } from 'react'
-import {
-  applyGesture,
-  axisKeys,
-  expandBranchOnActivate,
-  fromTree,
-  reduceSingleSelect,
-} from '@p/aria-kernel'
-import { treeAxis, useTreePattern } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@p/aria-kernel'
+import { treeAxis, useTreePattern, useTreeReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Tree',
@@ -41,11 +34,8 @@ const tree: Node[] = [
   { id: 'pkg', label: 'package.json' },
 ]
 
-const treeReducer = applyGesture(reduceSingleSelect, expandBranchOnActivate)
-const initTree = () => fromTree(tree, { expanded: ['src', 'demos'] })
-
 export default function TreeDemo() {
-  const [data, dispatch] = useReducer(treeReducer, undefined, initTree)
+  const [data, dispatch] = useTreeReducer(tree, { defaultExpanded: ['src', 'demos'] })
   const { rootProps, itemProps, items } = useTreePattern(data, dispatch)
 
   return (
