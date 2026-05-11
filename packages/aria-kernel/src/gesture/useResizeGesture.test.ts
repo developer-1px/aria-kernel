@@ -60,4 +60,28 @@ describe('useResizeGesture', () => {
     expect(onChange).toHaveBeenLastCalledWith(250)
     dispatchMouse('mouseup', 0, 150)
   })
+
+  it('onEnd — mouseup 1회만 호출, 마지막 onChange 값 (#155)', () => {
+    const onChange = vi.fn()
+    const onEnd = vi.fn()
+    const { result } = renderHook(() =>
+      useResizeGesture({ axis: 'x', initial: () => 100, onChange, onEnd }),
+    )
+    const hp = result.current.handleProps as unknown as { onMouseDown: (e: { clientX: number; clientY: number; preventDefault?: () => void }) => void }
+    hp.onMouseDown({ clientX: 0, clientY: 0, preventDefault: () => {} })
+    dispatchMouse('mousemove', 10, 0)
+    dispatchMouse('mousemove', 30, 0)
+    dispatchMouse('mousemove', 50, 0)
+    expect(onEnd).not.toHaveBeenCalled()
+    dispatchMouse('mouseup', 50, 0)
+    expect(onEnd).toHaveBeenCalledTimes(1)
+    expect(onEnd).toHaveBeenCalledWith(150)
+  })
+
+  it('onEnd — 드래그 없이 mouseup → 호출 안 됨', () => {
+    const onEnd = vi.fn()
+    renderHook(() => useResizeGesture({ axis: 'x', initial: () => 100, onChange: () => {}, onEnd }))
+    dispatchMouse('mouseup', 50, 0)
+    expect(onEnd).not.toHaveBeenCalled()
+  })
 })

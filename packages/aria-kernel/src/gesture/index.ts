@@ -8,7 +8,7 @@
 export { useClickOutsideGesture, type ClickOutsideRef } from './useClickOutsideGesture'
 export { useContextMenuGesture, type ContextMenuGestureOptions } from './useContextMenuGesture'
 export { useResizeGesture, type ResizeGestureOptions } from './useResizeGesture'
-export { useGridDragSelectGesture } from './useGridDragSelectGesture'
+export { useGridDragSelectGesture, useGridDragSelectGestureRaw } from './useGridDragSelectGesture'
 
 import { getChildren, getExpanded, type UiEvent, type NormalizedData } from '../types'
 import { INTENT_CHORDS } from '../axes/intentChords'

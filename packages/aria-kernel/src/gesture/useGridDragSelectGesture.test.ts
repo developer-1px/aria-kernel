@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 import { renderHook } from '@testing-library/react'
 import { fromTree } from '../state/fromTree'
-import { useGridDragSelectGesture } from './useGridDragSelectGesture'
+import { useGridDragSelectGesture, useGridDragSelectGestureRaw } from './useGridDragSelectGesture'
 import type { UiEvent } from '../types'
 
 type Node = { id: string; children?: Node[] }
@@ -48,5 +48,42 @@ describe('useGridDragSelectGesture', () => {
     const { result } = renderHook(() => useGridDragSelectGesture(grid2x2, dispatch))
     result.current.getCellHandlers('B1').onMouseEnter({} as unknown as React.MouseEvent)
     expect(dispatch).not.toHaveBeenCalled()
+  })
+})
+
+describe('useGridDragSelectGestureRaw (#157)', () => {
+  it('mousedown → onAnchorChange(id), mouseenter → onRectChange(anchor, head)', () => {
+    const onAnchorChange = vi.fn()
+    const onRectChange = vi.fn()
+    const { result } = renderHook(() =>
+      useGridDragSelectGestureRaw({ onAnchorChange, onRectChange }),
+    )
+    result.current.getCellHandlers('A').onMouseDown({ preventDefault: () => {} } as unknown as React.MouseEvent)
+    expect(onAnchorChange).toHaveBeenCalledWith('A')
+    expect(onRectChange).not.toHaveBeenCalled()
+
+    result.current.getCellHandlers('D').onMouseEnter({} as unknown as React.MouseEvent)
+    expect(onRectChange).toHaveBeenCalledWith('A', 'D')
+  })
+
+  it('mouseup 후 mouseenter 무시', () => {
+    const onRectChange = vi.fn()
+    const { result } = renderHook(() =>
+      useGridDragSelectGestureRaw({ onAnchorChange: () => {}, onRectChange }),
+    )
+    result.current.getCellHandlers('A').onMouseDown({ preventDefault: () => {} } as unknown as React.MouseEvent)
+    window.dispatchEvent(new MouseEvent('mouseup'))
+    result.current.getCellHandlers('D').onMouseEnter({} as unknown as React.MouseEvent)
+    expect(onRectChange).not.toHaveBeenCalled()
+  })
+
+  it('anchor 자기 자신 enter → onRectChange 호출 ❌', () => {
+    const onRectChange = vi.fn()
+    const { result } = renderHook(() =>
+      useGridDragSelectGestureRaw({ onAnchorChange: () => {}, onRectChange }),
+    )
+    result.current.getCellHandlers('A').onMouseDown({ preventDefault: () => {} } as unknown as React.MouseEvent)
+    result.current.getCellHandlers('A').onMouseEnter({} as unknown as React.MouseEvent)
+    expect(onRectChange).not.toHaveBeenCalled()
   })
 })

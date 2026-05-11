@@ -21,7 +21,7 @@ describe('useContextMenuGesture', () => {
       currentTarget: el,
       target: el,
     } as unknown as Event)
-    expect(onOpen).toHaveBeenCalledWith(42, 99, el)
+    expect(onOpen).toHaveBeenCalledWith(undefined, 42, 99, el)
     el.remove()
   })
 
@@ -46,7 +46,7 @@ describe('useContextMenuGesture', () => {
     Object.defineProperty(e, 'currentTarget', { value: el })
     Object.defineProperty(e, 'preventDefault', { value: vi.fn() })
     ;(result.current.onKeyDown as (e: unknown) => void)(e)
-    expect(onOpen).toHaveBeenCalledWith(10, 20, el)
+    expect(onOpen).toHaveBeenCalledWith(undefined, 10, 20, el)
     el.remove()
   })
 
@@ -59,7 +59,7 @@ describe('useContextMenuGesture', () => {
     Object.defineProperty(e, 'currentTarget', { value: el })
     Object.defineProperty(e, 'preventDefault', { value: vi.fn() })
     ;(result.current.onKeyDown as (e: unknown) => void)(e)
-    expect(onOpen).toHaveBeenCalledWith(5, 7, el)
+    expect(onOpen).toHaveBeenCalledWith(undefined, 5, 7, el)
     el.remove()
   })
 
@@ -92,6 +92,35 @@ describe('useContextMenuGesture', () => {
 
     expect(onOpen).not.toHaveBeenCalled()
     expect(preventDefault).not.toHaveBeenCalled()
+    el.remove()
+  })
+
+  it('getHandlers(id) — 항목당 모드 (#156)', () => {
+    const el = setup()
+    const onOpen = vi.fn()
+    const { result } = renderHook(() => useContextMenuGesture<string>({ onOpen }))
+    const h = result.current.getHandlers('cell-7')
+    ;(h.onContextMenu as (e: unknown) => void)({
+      preventDefault: () => {}, clientX: 3, clientY: 4, currentTarget: el, target: el,
+    } as unknown as Event)
+    expect(onOpen).toHaveBeenCalledWith('cell-7', 3, 4, el)
+    el.remove()
+  })
+
+  it('getHandlers — 같은 hook 호출로 다른 id 핸들러 생성 (Rules of Hooks 안전)', () => {
+    const onOpen = vi.fn()
+    const { result } = renderHook(() => useContextMenuGesture<string>({ onOpen }))
+    const a = result.current.getHandlers('A')
+    const b = result.current.getHandlers('B')
+    const el = setup()
+    ;(a.onContextMenu as (e: unknown) => void)({
+      preventDefault: () => {}, clientX: 0, clientY: 0, currentTarget: el, target: el,
+    } as unknown as Event)
+    ;(b.onContextMenu as (e: unknown) => void)({
+      preventDefault: () => {}, clientX: 0, clientY: 0, currentTarget: el, target: el,
+    } as unknown as Event)
+    expect(onOpen).toHaveBeenNthCalledWith(1, 'A', 0, 0, el)
+    expect(onOpen).toHaveBeenNthCalledWith(2, 'B', 0, 0, el)
     el.remove()
   })
 })
