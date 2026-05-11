@@ -1,29 +1,27 @@
 # @p/aria-kernel
 
-**React + Reducer 기반 ARIA 행동 인프라.** W3C/APG 패턴 recipe + axis 합성 + roving tabindex + gesture/intent 변환. 데이터는 `useReducer(reduceSingleSelect, items, fromList)` 직접 합성. 토큰/CSS/UI 어휘 0건.
+**React + Reducer 기반 ARIA 행동 인프라.** W3C/APG 패턴 recipe + axis 합성 + roving tabindex + gesture/intent 변환. 데이터는 `use<Pattern>Reducer` 한 줄. 토큰/CSS/UI 어휘 0건.
 
 ## Canonical 합성
 
 ```tsx
-import { useReducer } from 'react'
-import { reduceSingleSelect, fromList } from '@p/aria-kernel'
-import { useListboxPattern } from '@p/aria-kernel/patterns'
+import { useListboxReducer, useListboxPattern } from '@p/aria-kernel/patterns'
 
 const ITEMS = [{ id: 'a', label: 'A' }, { id: 'b', label: 'B' }]
 
 function Picker() {
-  const [data, dispatch] = useReducer(reduceSingleSelect, ITEMS, fromList)
-  const { rootProps, itemProps } = useListboxPattern(data, dispatch, { label: 'Items' })
+  const [data, dispatch] = useListboxReducer(ITEMS)
+  const { rootProps, optionProps } = useListboxPattern(data, dispatch, { label: 'Items' })
   return (
     <ul {...rootProps}>
-      {data.meta.root.map((id) => <li key={id} {...itemProps(id)}>{data.entities[id].label}</li>)}
+      {data.meta.root.map((id) => <li key={id} {...optionProps(id)}>{data.entities[id].label}</li>)}
     </ul>
   )
 }
 ```
 
-- 데이터 hook wrapper 없음 — React `useReducer` 직접.
-- HMR/devtools/persist 는 `composeReducers` middleware.
+- 컬렉션 패턴마다 `use<Pattern>Reducer` 1:1 sibling — `items` 입력, `{ multi, pipe }` 옵션.
+- middleware (HMR/devtools/persist/undo) 는 `pipe` 옵션. custom init / 합성은 React `useReducer` 직접 (escape).
 - 자세한 합성·escape 패턴은 [CANONICAL.md](./CANONICAL.md).
 
 ## 설치

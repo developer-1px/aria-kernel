@@ -45,8 +45,8 @@ export interface ToolbarOptions {
  *   `'menubutton'`, `'spinbutton'`, `'link'`.
  * APG toolbar example 의 혼합 itemRole 변종을 1:1 흡수.
  *
- * @example canonical 합성 (#148 §4)
- *   const [data, dispatch] = useReducer(reduceSingleSelect, ITEMS, fromList)
+ * @example canonical
+ *   const [data, dispatch] = useToolbarReducer(ITEMS)
  *   const { rootProps, toolbarItemProps, items } = useToolbarPattern(data, dispatch)
  */
 export function useToolbarPattern(

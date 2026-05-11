@@ -111,8 +111,8 @@ export interface MenuOptions {
  * trigger 가 필요하면 `useMenuButtonPattern` 사용. 본 패턴은 standalone menu
  * (context menu, popover trigger 외부에서 관리) 케이스.
  *
- * @example canonical 합성 (#148 §4)
- *   const [data, dispatch] = useReducer(reduceSingleSelect, ITEMS, fromList)
+ * @example canonical
+ *   const [data, dispatch] = useMenuReducer(ITEMS)
  *   const { rootProps, menuitemProps, items, open } = useMenuPattern(data, dispatch)
  */
 export function useMenuPattern(

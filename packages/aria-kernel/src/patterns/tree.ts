@@ -223,14 +223,13 @@ function runEffect(
  * tree — APG `/treeview/` recipe.
  * https://www.w3.org/WAI/ARIA/apg/patterns/treeview/
  *
- * @example canonical 합성 (#148 §4) — tree 데이터는 fromTree
- *   const reducer = applyGesture(expandBranchOnActivate, reduceSingleSelect)
- *   const [data, dispatch] = useReducer(reducer, undefined, () => fromTree(NODES))
+ * @example canonical — tree 데이터 + expand gesture (pipe)
+ *   const expand = (r) => applyGesture(expandBranchOnActivate, r)
+ *   const [data, dispatch] = useTreeReducer(NODES, { pipe: expand })
  *   const { rootProps, itemProps, items } = useTreePattern(data, dispatch)
  *
- * @example multi-select — reducer 부품 교체만 필요 (silent bug 주의: 두 곳 모두 설정)
- *   const reducer = applyGesture(expandBranchOnActivate, reduceMultiSelect)
- *   const [data, dispatch] = useReducer(reducer, undefined, () => fromTree(NODES))
+ * @example multi-select — `multi: true` (두 곳 모두 설정 필요)
+ *   const [data, dispatch] = useTreeReducer(NODES, { multi: true, pipe: expand })
  *   const props = useTreePattern(data, dispatch, { multiSelectable: true })
  */
 export function useTreePattern(

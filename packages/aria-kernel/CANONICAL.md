@@ -1,25 +1,33 @@
-# CANONICAL 합성 (#148)
+# CANONICAL 합성
 
-`@p/aria-kernel` 은 데이터 hook wrapper 를 만들지 않습니다. React 표준 `useReducer` 를 직접 노출하고, 라이브러리는 부품 키트를 제공합니다.
+`@p/aria-kernel` 의 canonical 합성 형태. 데이터 컬렉션 패턴은 `use<Pattern>Reducer` 한 줄로 묶고, 패턴 hook 한 줄을 더해 ARIA recipe 를 얹는다.
 
-## 1. 합성 형태 (한 가지)
+## 1. 합성 형태
 
 ```tsx
-import { useReducer } from 'react'
-import { reduceSingleSelect, fromList } from '@p/aria-kernel'
-import { useListboxPattern } from '@p/aria-kernel/patterns'
+import { useListboxReducer, useListboxPattern } from '@p/aria-kernel/patterns'
 
-const [data, dispatch] = useReducer(reduceSingleSelect, items, fromList)
-const { rootProps, itemProps } = useListboxPattern(data, dispatch, { label: '…' })
+const [data, dispatch] = useListboxReducer(items)
+const { rootProps, optionProps } = useListboxPattern(data, dispatch, { label: '…' })
 ```
 
-3 줄. 패턴 21 개 전부 같은 형태.
+2 줄. 모든 컬렉션 패턴이 같은 형태 — `use<Pattern>Reducer` ↔ `use<Pattern>Pattern` 1:1.
 
-- `useReducer` — **React 표준.** wrapper 없음.
-- `reduceSingleSelect` — drop-in reducer (`reduce` + `singleSelect` + `checkToggle` + `setValue`).
-  multi-select 데모는 `reduceMultiSelect`, radio 는 `reduceRadio`. 직접 합성은 `composeReducers(reduce, …)`.
-- `fromList` / `fromTree` / `fromFlatTree` — `items → NormalizedData` 생성자.
-- `use<APGName>Pattern` — `(data, dispatch, opts?) => { rootProps, …Props }` ARIA recipe.
+- `use<Pattern>Reducer` — `items` 입력 + reducer 변형 옵션 (`multi`, `pipe`).
+- `use<Pattern>Pattern` — `(data, dispatch, opts?) => { rootProps, …Props }` ARIA recipe.
+
+### 변형
+
+```tsx
+// Multi-select
+const [data, dispatch] = useListboxReducer(items, { multi: true })
+
+// Middleware (HOR — redux-undo 등)
+const [data, dispatch] = useListboxReducer(items, { pipe: undoable })
+
+// Radio
+const [data, dispatch] = useRadioGroupReducer(items)
+```
 
 ## 2. 부품 키트
 
@@ -27,58 +35,51 @@ const { rootProps, itemProps } = useListboxPattern(data, dispatch, { label: '…
 |---|---|
 | `NormalizedData` | 보편 데이터 타입 |
 | `UiEvent` | 보편 이벤트 어휘 (DOM Event 와 구분되는 `Ui` prefix) |
-| `fromList` / `fromTree` / `fromFlatTree` | items → NormalizedData |
+| `fromList` / `fromTree` / `fromFlatTree` | items → NormalizedData (escape 경로) |
 | `reduce` | 단일 reducer (event routing) |
-| `reduceSingleSelect` / `reduceMultiSelect` / `reduceRadio` | drop-in pre-합성 |
+| `reduceSingleSelect` / `reduceMultiSelect` / `reduceRadio` | drop-in pre-합성 (escape 경로) |
 | `composeReducers` | reducer 합성 (middleware) |
+| `use<Pattern>Reducer` | items → `[data, dispatch]` (canonical) |
+| `use<Pattern>Pattern` | ARIA recipe |
 | `useResource` / `defineResource` / `writeResource` | 외부 store 부품 |
-| `use<APGName>Pattern` | ARIA recipe (21 개) |
 
-데이터 hook wrapper 0 개. 패턴 hook 21 개 + `useResource` 1 개 = 라이브러리 발명 hook 총 22 개.
+## 3. middleware 합성
 
-## 3. middleware 합성 (HMR / devtools / persist)
+`use<Pattern>Reducer` 의 `pipe` 옵션:
 
-새 wrapper 가 아니라 `composeReducers` 위에:
+```ts
+const [data, dispatch] = useListboxReducer(items, { pipe: undoable })
+```
+
+`pipe` 는 reducer-to-reducer 함수 — redux-undo 등 표준 HOR 호환.
+
+## 4. Escape — React `useReducer` 직접
+
+custom init, 다른 reducer 합성, devtools 등 특수 케이스에서는 React `useReducer` 를 직접 쓴다:
 
 ```ts
 import { useReducer } from 'react'
-import { reduce, composeReducers, fromList } from '@p/aria-kernel'
+import { reduceSingleSelect, fromList, composeReducers } from '@p/aria-kernel'
+import { useListboxPattern } from '@p/aria-kernel/patterns'
 
-const reduceWithDevtools = composeReducers(devtoolsMiddleware, reduce)
+const reduceWithDevtools = composeReducers(devtoolsMiddleware, reduceSingleSelect)
 const [data, dispatch] = useReducer(reduceWithDevtools, items, fromList)
+const { rootProps, optionProps } = useListboxPattern(data, dispatch)
 ```
 
-middleware signature 는 reducer 와 동일 — 합성 형태가 보존됨.
+reducer / init / 합성 형태 모두 동일 — escape 도 같은 부품 위.
 
-## 4. Escape — 부품 교체
+## 5. 단일값 / opts-only 패턴
 
-특수 케이스에서도 합성 형태는 그대로. 한 줄만 다른 부품으로:
-
-```ts
-// remote backend
-const [data, dispatch] = useResource(myResource)
-
-// 그 외 동일
-const { rootProps, itemProps } = useListboxPattern(data, dispatch, { label: '…' })
-```
-
-## 5. 폐기된 대안 (#148 §7)
-
-| 시도 | 폐기 이유 |
-|---|---|
-| `useAccordion({ items })` facade | 검은 상자 — 부품 가림 |
-| Controlled/Uncontrolled props | 새 개념 증가 |
-| `useLocalData` / `useLocalValue` (제거됨) | 모호 prefix + React 표준 복제. `useReducer` / `useState` 직접 |
-| `useUiReducer` wrapper | 모호 prefix (`Ui` 가 useReducer 와 무슨 차이?) |
-
-원칙: 라이브러리는 **React 표준 어휘 위에 ARIA recipe 만 더한다.** wrapper 로 React 어휘를 가리지 않는다.
+- 단일값 (`switchPattern`, `sliderPattern`, `splitterPattern`, `sliderRangePattern`, `spinbuttonPattern`, `checkboxPattern`, `alertPattern`) — React `useState` 직접.
+- opts-only (`useDialogPattern`, `useAlertDialogPattern`, `useTooltipPattern`, `useComboboxDialogPattern`, `useCarouselPattern`) — 데이터 hook 불필요.
 
 ## 6. 합성 불변식
 
-- 모든 데모/소비자는 §1 형태 (`useReducer(reduceSingleSelect, items, fromList)` + `use<Pattern>(data, dispatch)`).
+- 모든 컬렉션 데모/소비자는 §1 형태 (`use<Pattern>Reducer` + `use<Pattern>Pattern`).
+- escape 는 §4 (React `useReducer` 직접) — 새 wrapper 발명 ❌.
 - 같은 시나리오에 부품 2 개 이상 등장 ❌.
-- 새 `use*Data` / `use*Reducer` wrapper 추가 ❌ (21 패턴 + `useResource` 외).
 
 ## 출처
 
-#143 · #144 · #145 · #146 · #147 누적 결론 (#148 확정).
+#143 · #144 · #145 · #146 · #147 누적 (#148 React `useReducer` 직접 합성 도입) → 컬렉션 패턴 단순화를 위해 `use<Pattern>Reducer` 1:1 sibling hook 으로 canonical 승격.

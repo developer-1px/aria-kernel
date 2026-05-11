@@ -140,12 +140,12 @@ const multiAxis = gridAxis({ multiSelectable: true })
  *
  * 소비자는 `editStart` 를 edit intent 로 받고, Enter 시 함께 오는 `activate` 는 무시.
  *
- * @example canonical 합성 (#148 §4) — row → cells 중첩 fromTree
- *   const [data, dispatch] = useReducer(reduceSingleSelect, ROWS, fromTree)
+ * @example canonical — row → cells 중첩 트리
+ *   const [data, dispatch] = useGridReducer(ROWS)
  *   const { rootProps, rowProps, cellProps, rows } = useGridPattern(data, dispatch)
  *
- * @example multi-select (selectionMode 'row'/'rect') — reducer 부품 교체 필요
- *   const [data, dispatch] = useReducer(reduceMultiSelect, ROWS, fromTree)
+ * @example multi-select (selectionMode 'row'/'rect')
+ *   const [data, dispatch] = useGridReducer(ROWS, { multi: true })
  *   const props = useGridPattern(data, dispatch, { selectionMode: 'rect' })
  */
 export function useGridPattern(

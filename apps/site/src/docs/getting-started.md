@@ -17,17 +17,14 @@ npm install file:../ds/packages/aria-kernel
 
 ## 첫 import
 
-두 곳에서 끌어 쓴다 — core + patterns. 데이터 state 는 React `useReducer` 직접.
+컬렉션 패턴은 `use<Pattern>Reducer` + `use<Pattern>Pattern` 두 줄. 둘 다 `@p/aria-kernel/patterns` 에서 끌어 쓴다.
 
 ```ts
-import { useReducer } from 'react'
-import { fromList, reduceSingleSelect } from '@p/aria-kernel'
-import { useListboxPattern } from '@p/aria-kernel/patterns'
+import { useListboxReducer, useListboxPattern } from '@p/aria-kernel/patterns'
 ```
 
-- `@p/aria-kernel` — `NormalizedData`, `UiEvent`, axes, roving, gesture, `reduce*`, `from*` (core 어휘)
-- `@p/aria-kernel/patterns` — APG recipe (`useListboxPattern`, `useTabsPattern`, ...)
-- 라이브러리는 `use*Data` / `use*Value` wrapper 를 제공하지 않는다 (#148).
+- `@p/aria-kernel/patterns` — APG recipe + 1:1 sibling reducer hook (`useListboxReducer`, `useTabsReducer`, ...)
+- `@p/aria-kernel` — core 어휘 (`NormalizedData`, `UiEvent`, axes, roving, gesture, `reduce*`, `from*`). escape / custom init 에서 직접 사용.
 
 ## 데이터 만들기 — `fromList`
 
@@ -49,9 +46,7 @@ const seed = fromList([
 recipe 한 줄이 `rootProps`, `optionProps(id)`, `items` 를 돌려준다. markup 결정은 소비자.
 
 ```tsx
-import { useReducer } from 'react'
-import { fromList, reduceSingleSelect } from '@p/aria-kernel'
-import { useListboxPattern } from '@p/aria-kernel/patterns'
+import { useListboxReducer, useListboxPattern } from '@p/aria-kernel/patterns'
 
 const FRUITS = [
   { label: 'Apple' },
@@ -61,7 +56,7 @@ const FRUITS = [
 ]
 
 export default function Demo() {
-  const [data, dispatch] = useReducer(reduceSingleSelect, FRUITS, fromList)
+  const [data, dispatch] = useListboxReducer(FRUITS)
   const { rootProps, optionProps, items } = useListboxPattern(data, dispatch)
 
   return (

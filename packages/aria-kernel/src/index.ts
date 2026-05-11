@@ -6,8 +6,8 @@
  *
  * Optional store adapter (resource / feature) at `@p/aria-kernel/store`.
  *
- * Data: React `useReducer(reduceSingleSelect, items, fromList)` 직접 합성.
- * 라이브러리는 `use*Data` / `use*Value` wrapper 를 제공하지 않는다 (#148).
+ * Data: 컬렉션 패턴은 `use<Pattern>Reducer(items, opts?)` (canonical, `@p/aria-kernel/patterns`).
+ * Escape: React `useReducer(reduceSingleSelect, items, fromList)` 직접 (custom init / 합성).
  *
  * Knows nothing about: tokens · CSS · component vocabulary.
  */
