@@ -340,6 +340,3 @@ export type CollectionProps<
   E extends Record<string, unknown> = Record<string, unknown>,
   M extends Meta = Meta,
 > = ControlProps<E, M> & Extra
-
-/** Tone — 의미 색 토큰 (default/info/success/warning/danger/primary). */
-export type Tone = 'default' | 'info' | 'success' | 'warning' | 'danger' | 'primary'
