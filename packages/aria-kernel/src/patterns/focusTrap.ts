@@ -11,7 +11,7 @@ const FOCUSABLE_SELECTOR = [
   '[tabindex]:not([tabindex="-1"])',
 ].join(',')
 
-/** focusTrapKeys — 선언형 SSOT. probe / dialogKeys 가 읽음. */
+/** focusTrapKeys — 선언형 SSOT. dialog 등 wrapper 가 표시용으로 읽음. */
 export const focusTrapKeys = (): readonly string[] => [KEYS.Tab]
 
 /**

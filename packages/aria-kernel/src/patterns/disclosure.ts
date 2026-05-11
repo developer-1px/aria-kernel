@@ -3,7 +3,7 @@ import { isExpanded, type NormalizedData, type UiEvent } from '../types'
 import { activate } from '../axes'
 import { bindAxis } from '../state/bind'
 
-/** Disclosure 가 등록하는 axis — SSOT. 데모/문서는 이걸 probe. */
+/** Disclosure 가 등록하는 axis — SSOT. 데모/문서는 `axis.chords` 직접 read. */
 export const disclosureAxis = () => activate
 
 /** Options for {@link disclosurePattern}. */

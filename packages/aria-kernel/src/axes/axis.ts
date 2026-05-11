@@ -18,8 +18,8 @@ import { triggerMatches } from '../trigger'
  * Axis — function-with-property. 호출 가능 (data + trigger → UiEvent[] | null) 하면서
  * `chords` 메타데이터로 자신이 응답하는 chord 목록을 노출.
  *
- * `chords` 는 phase 4 (PRD #38) 추가 — demo 가 `keys: () => dedupe(probe(...))`
- * 보일러플레이트 없이 `axisKeys(axis)` 한 줄로 chord 추출 가능.
+ * `chords` 는 phase 4 (PRD #38) 추가 — demo·문서가 `axis.chords` 직접 read 하여
+ * 별도 probe 없이 chord 목록 추출 (`axisKeys(axis)` 는 key 부분만 추가 dedup).
  */
 export type Axis = ((d: NormalizedData, id: string, t: Trigger) => UiEvent[] | null) & {
   /** axis 가 응답하는 chord 목록 (string tinykeys 형식). 직렬화 가능. */
