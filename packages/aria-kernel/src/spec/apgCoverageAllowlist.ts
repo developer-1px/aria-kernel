@@ -89,10 +89,20 @@ export const PATTERN_APG_WAIVE: Record<string, readonly string[]> = {
   combobox: ['Tab'],
   dialog: ['Tab', 'Shift+Tab'],
   // grid Tab: cell 내부 focusable 순회 (native). PageUp/Down: APG 'optional, author-defined'.
-  grid: ['Tab', 'PageUp', 'PageDown'],
+  // F2: APG 'Optional cell edit-mode entry' — editable: true 옵션 시 cellProps onKeyDown 에서
+  // 처리되며 axis 가 advertise 하지 않는다(per-cell onKeyDown). drift 아닌 의도된 분리.
+  grid: ['Tab', 'PageUp', 'PageDown', 'F2'],
   menu: ['Tab', 'Shift+Tab'],
   radioGroup: ['Tab', 'Shift+Tab'],
-  tabs: ['Tab'],
+  // tabs Delete: APG 'Optional — removes closeable tab'. axis 가 다루지 않고 소비자 reducer
+  // 가 remove 핸들. Tab 자체는 toolbar 와 동일한 native focus 정책.
+  tabs: ['Tab', 'Delete'],
+  // toolbar Enter: APG 'Optional — toolbar 가 splitter 라면 reset'. 라이브러리 미구현.
   toolbar: ['Tab'],
-  treeGrid: ['Tab', 'Shift+Tab'],
+  // treeGrid: $mod+Home/End — APG 'Optional — first/last cell of first/last row'. cell-level
+  // grid navigate 어휘로 처리해야 하나 현 treeGridAxis 는 row 단위만. F2 — grid 와 동일하게
+  // pattern hook 자체에서 처리(아직 미구현). 셋 모두 의도된 미구현, drift 아님.
+  treeGrid: ['Tab', 'Shift+Tab', '$mod+Home', '$mod+End', 'F2'],
+  // splitter Enter: APG 'Optional — reset to default'. 라이브러리는 step 만 노출.
+  splitter: ['Enter'],
 }

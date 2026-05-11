@@ -63,9 +63,7 @@ exports[`APG ↔ axis chord coverage (Issue #123) > coverage matrix matches snap
     "pattern": "feed",
   },
   {
-    "apgGap": [
-      "F2",
-    ],
+    "apgGap": [],
     "implExtra": [],
     "pattern": "grid",
   },
@@ -80,11 +78,7 @@ exports[`APG ↔ axis chord coverage (Issue #123) > coverage matrix matches snap
     "pattern": "link",
   },
   {
-    "apgGap": [
-      "$mod+Shift+End",
-      "$mod+Shift+Home",
-      "Shift+Space",
-    ],
+    "apgGap": [],
     "implExtra": [],
     "pattern": "listbox",
   },
@@ -134,9 +128,7 @@ exports[`APG ↔ axis chord coverage (Issue #123) > coverage matrix matches snap
     "pattern": "spinbutton",
   },
   {
-    "apgGap": [
-      "Enter",
-    ],
+    "apgGap": [],
     "implExtra": [],
     "pattern": "splitter",
   },
@@ -151,9 +143,7 @@ exports[`APG ↔ axis chord coverage (Issue #123) > coverage matrix matches snap
     "pattern": "table",
   },
   {
-    "apgGap": [
-      "Delete",
-    ],
+    "apgGap": [],
     "implExtra": [],
     "pattern": "tabs",
   },
@@ -173,11 +163,7 @@ exports[`APG ↔ axis chord coverage (Issue #123) > coverage matrix matches snap
     "pattern": "tree",
   },
   {
-    "apgGap": [
-      "$mod+End",
-      "$mod+Home",
-      "F2",
-    ],
+    "apgGap": [],
     "implExtra": [],
     "pattern": "treeGrid",
   },

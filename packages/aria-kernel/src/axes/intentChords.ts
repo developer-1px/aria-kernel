@@ -70,6 +70,11 @@ export const INTENT_CHORDS = {
     selectAll: ['Control+a', 'Control+A', 'Meta+a', 'Meta+A'] as readonly Chord[],
     rangeUp:   'Shift+ArrowUp' as Chord,
     rangeDown: 'Shift+ArrowDown' as Chord,
+    // APG listbox Selection: anchor → 현재 focus 까지 범위 확장(포커스 이동 없음).
+    rangeAtFocus:  'Shift+Space' as Chord,
+    // APG listbox Selection: focus 를 첫/마지막으로 이동 + 그 사이 전체 선택.
+    rangeToFirst:  ['Control+Shift+Home', 'Meta+Shift+Home'] as readonly Chord[],
+    rangeToLast:   ['Control+Shift+End',  'Meta+Shift+End']  as readonly Chord[],
   },
   select: {
     toggle: 'Space' as Chord,

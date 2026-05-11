@@ -42,6 +42,31 @@ const rangeStep = (delta: number): KeyHandler => (d, id) => {
   return rangeFrom(d, id, ids[nextIdx])
 }
 
+/** Shift+Space — anchor → 현재 focus 범위 확장(포커스 이동 없음). APG listbox Selection. */
+const rangeAtFocus: KeyHandler = (d, id) => {
+  const ids = enabledSiblings(d, id)
+  if (!ids.length) return null
+  const anchor = getSelectAnchor(d) ?? id
+  const a = ids.indexOf(anchor)
+  const b = ids.indexOf(id)
+  if (a < 0 || b < 0) return [{ type: 'select', ids: [id], to: true }]
+  const [from, to] = a <= b ? [a, b] : [b, a]
+  const inRange = ids.slice(from, to + 1)
+  const outRange = ids.filter((x) => !inRange.includes(x))
+  const events: UiEvent[] = []
+  if (outRange.length) events.push({ type: 'select', ids: outRange, to: false })
+  events.push({ type: 'select', ids: inRange, to: true })
+  return events
+}
+
+/** $mod+Shift+Home/End — focus 를 첫/마지막으로 이동 + 그 사이 전체 선택. APG listbox Selection. */
+const rangeToEdge = (edge: 'first' | 'last'): KeyHandler => (d, id) => {
+  const ids = enabledSiblings(d, id)
+  if (!ids.length) return null
+  const target = edge === 'first' ? ids[0] : ids[ids.length - 1]
+  return rangeFrom(d, id, target)
+}
+
 const multiSelectKeys: Axis = fromKeyMap([
   // Space — toggle add/remove + anchor 갱신.
   [INTENT_CHORDS.multiSelect.toggle, (d, id) => {
@@ -51,6 +76,9 @@ const multiSelectKeys: Axis = fromKeyMap([
   [INTENT_CHORDS.multiSelect.selectAll, (d, id) => [{ type: 'select', ids: enabledSiblings(d, id), to: true }]],
   [INTENT_CHORDS.multiSelect.rangeDown, rangeStep(+1)],
   [INTENT_CHORDS.multiSelect.rangeUp, rangeStep(-1)],
+  [INTENT_CHORDS.multiSelect.rangeAtFocus, rangeAtFocus],
+  [INTENT_CHORDS.multiSelect.rangeToFirst, rangeToEdge('first')],
+  [INTENT_CHORDS.multiSelect.rangeToLast,  rangeToEdge('last')],
 ])
 
 export const multiSelect: Axis = tagAxis((d, id, t) => {
