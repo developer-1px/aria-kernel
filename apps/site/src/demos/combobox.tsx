@@ -1,7 +1,6 @@
-import { fromList } from '@p/aria-kernel'
-import { useLocalData } from '@p/aria-kernel/local'
+import { useReducer } from 'react'
+import { axisKeys, fromList, reduceWithDefaults } from '@p/aria-kernel'
 import { comboboxAxis, useComboboxPattern, type ControlProps, type PatternProps } from '@p/aria-kernel/patterns'
-import { axisKeys } from '@p/aria-kernel'
 
 export const meta = {
   title: 'Combobox',
@@ -11,7 +10,8 @@ export const meta = {
   keys: () => axisKeys(comboboxAxis()),
 }
 
-const ALL = ['Argentina', 'Australia', 'Brazil', 'Canada', 'Denmark', 'France', 'Germany', 'Japan']
+const COUNTRIES = ['Argentina', 'Australia', 'Brazil', 'Canada', 'Denmark', 'France', 'Germany', 'Japan']
+  .map((label) => ({ label }))
 
 /** wrapper 와 동일 props interface — collection(PatternProps) + control(ControlProps<string>) 합집합. */
 export type ComboboxDemoProps = PatternProps & ControlProps<string>
@@ -51,6 +51,6 @@ export function ComboboxDemo({ data, value, onEvent, 'aria-label': ariaLabel }: 
 }
 
 export default function Demo() {
-  const [data, onEvent] = useLocalData(() => fromList(ALL.map((label) => ({ label }))))
-  return <ComboboxDemo data={data} onEvent={onEvent} aria-label="Country" />
+  const [data, dispatch] = useReducer(reduceWithDefaults, COUNTRIES, fromList)
+  return <ComboboxDemo data={data} onEvent={dispatch} aria-label="Country" />
 }

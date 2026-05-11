@@ -1,7 +1,6 @@
-import { fromList } from '@p/aria-kernel'
-import { useLocalData } from '@p/aria-kernel/local'
+import { useReducer } from 'react'
+import { axisKeys, fromList, reduceWithDefaults } from '@p/aria-kernel'
 import { comboboxSelectAxis, useComboboxSelectPattern } from '@p/aria-kernel/patterns'
-import { axisKeys } from '@p/aria-kernel'
 
 export const meta = {
   title: 'Combobox · Select-Only',
@@ -11,11 +10,12 @@ export const meta = {
   keys: () => axisKeys(comboboxSelectAxis()),
 }
 
-const ALL = ['Argentina', 'Australia', 'Brazil', 'Canada', 'Denmark', 'France', 'Germany', 'Japan']
+const COUNTRIES = ['Argentina', 'Australia', 'Brazil', 'Canada', 'Denmark', 'France', 'Germany', 'Japan']
+  .map((label) => ({ label }))
 
 export default function ComboboxSelectOnlyDemo() {
-  const [data, onEvent] = useLocalData(() => fromList(ALL.map((label) => ({ label }))))
-  const { comboboxProps, listboxProps, optionProps, items, expanded } = useComboboxSelectPattern(data, onEvent, {
+  const [data, dispatch] = useReducer(reduceWithDefaults, COUNTRIES, fromList)
+  const { comboboxProps, listboxProps, optionProps, items, expanded } = useComboboxSelectPattern(data, dispatch, {
     label: 'Country',
   })
 

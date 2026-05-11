@@ -1,7 +1,6 @@
-import { fromList } from '@p/aria-kernel'
-import { useLocalData } from '@p/aria-kernel/local'
+import { useReducer } from 'react'
+import { axisKeys, fromList, reduceWithDefaults } from '@p/aria-kernel'
 import { comboboxAxis, useComboboxPattern } from '@p/aria-kernel/patterns'
-import { axisKeys } from '@p/aria-kernel'
 
 export const meta = {
   title: 'Combobox · Autocomplete None',
@@ -11,11 +10,12 @@ export const meta = {
   keys: () => axisKeys(comboboxAxis()),
 }
 
-const ALL = ['Argentina', 'Australia', 'Brazil', 'Canada', 'Denmark', 'France', 'Germany', 'Japan']
+const COUNTRIES = ['Argentina', 'Australia', 'Brazil', 'Canada', 'Denmark', 'France', 'Germany', 'Japan']
+  .map((label) => ({ label }))
 
 export default function ComboboxAutocompleteNoneDemo() {
-  const [data, onEvent] = useLocalData(() => fromList(ALL.map((label) => ({ label }))))
-  const { comboboxProps, listboxProps, optionProps, items, expanded } = useComboboxPattern(data, onEvent, {
+  const [data, dispatch] = useReducer(reduceWithDefaults, COUNTRIES, fromList)
+  const { comboboxProps, listboxProps, optionProps, items, expanded } = useComboboxPattern(data, dispatch, {
     label: 'Country',
     autocomplete: 'none',
     filter: () => true,
