@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import { useComboboxDialogPattern } from '@p/aria-kernel/patterns'
-import { CalendarGrid } from './_calendarGrid'
+import { useComboboxDialogPattern, comboboxDialogKeys } from '@p/aria-kernel/patterns'
+import { CalendarGrid, calendarGridKeys } from './_calendarGrid'
 
 export const meta = {
   title: 'Combobox · Date Picker',
   apg: 'combobox',
   kind: 'collection' as const,
   blurb: 'Editable combobox that opens a dialog containing a calendar grid.',
-  keys: () => ['ArrowDown', 'Alt+ArrowDown', 'Escape'],
+  keys: () => [...comboboxDialogKeys(), ...calendarGridKeys()],
 }
 
 export default function ComboboxDatepickerDemo() {

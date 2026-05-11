@@ -1,4 +1,4 @@
-import { useSpatialNavigation } from '@p/aria-kernel/roving'
+import { useSpatialNavigation, spatialNavigationKeys } from '@p/aria-kernel/roving'
 
 export const meta = {
   title: 'Spatial Navigation (TV)',
@@ -6,7 +6,7 @@ export const meta = {
   kind: 'collection' as const,
   blurb:
     '시각 좌표 기반 roving — TV/리모컨 UI. APG 외 W3C `css-nav-1` spatnav. Arrow 키 90° cone 안에서 centroid 거리 최소 element 로 이동.',
-  keys: () => ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End'],
+  keys: () => spatialNavigationKeys({ orientation: 'both' }),
 }
 
 const POSTERS = [

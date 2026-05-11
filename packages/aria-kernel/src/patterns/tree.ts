@@ -225,11 +225,11 @@ function runEffect(
  *
  * @example canonical — tree 데이터 + expand gesture (pipe)
  *   const expand = (r) => applyGesture(expandBranchOnActivate, r)
- *   const [data, dispatch] = useTreeReducer(NODES, { pipe: expand })
+ *   const [data, dispatch] = useTreeReducer(NODES, { enhance: expand })
  *   const { rootProps, itemProps, items } = useTreePattern(data, dispatch)
  *
  * @example multi-select — `multi: true` (두 곳 모두 설정 필요)
- *   const [data, dispatch] = useTreeReducer(NODES, { multi: true, pipe: expand })
+ *   const [data, dispatch] = useTreeReducer(NODES, { multi: true, enhance: expand })
  *   const props = useTreePattern(data, dispatch, { multiSelectable: true })
  */
 export function useTreePattern(

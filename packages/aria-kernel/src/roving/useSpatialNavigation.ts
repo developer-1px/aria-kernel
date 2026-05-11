@@ -68,6 +68,23 @@ const ALLOWED_DIRS: Record<NonNullable<UseSpatialNavigationOptions['orientation'
   both:       new Set(['left', 'right', 'up', 'down']),
 }
 
+const DIR_TO_KEY: Record<Dir, string> = {
+  left: 'ArrowLeft', right: 'ArrowRight', up: 'ArrowUp', down: 'ArrowDown',
+}
+
+/**
+ * useSpatialNavigation 이 흡수하는 키 — SSOT.
+ * orientation 별 허용 방향 (ALLOWED_DIRS) + homeEnd 옵션을 그대로 derive.
+ */
+export const spatialNavigationKeys = (
+  opts: { orientation?: UseSpatialNavigationOptions['orientation']; homeEnd?: boolean } = {},
+): readonly string[] => {
+  const orientation = opts.orientation ?? 'horizontal'
+  const homeEnd = opts.homeEnd ?? true
+  const arrows = [...ALLOWED_DIRS[orientation]].map((d) => DIR_TO_KEY[d])
+  return homeEnd ? [...arrows, 'Home', 'End'] : arrows
+}
+
 /**
  * useSpatialNavigation — W3C CSS Spatial Navigation 기반 roving tabindex.
  * **시각 좌표 기반** 이동 — `getBoundingClientRect()` 로 다음 element 결정.

@@ -39,7 +39,7 @@ export {
   type ComboboxSelectOptions,
 } from './comboboxSelect'
 export {
-  useComboboxDialogPattern,
+  useComboboxDialogPattern, comboboxDialogKeys,
   type ComboboxDialogOptions, type ComboboxDialogReturn,
 } from './comboboxDialog'
 export {
@@ -59,7 +59,7 @@ export {
   type FeedItem, type FeedEvent, type FeedOptions,
 } from './feed'
 export { useGridPattern, gridAxis, gridEditKeys, gridBuiltinChords, type GridOptions, type GridCell } from './grid'
-export { useCarouselPattern, type CarouselOptions, type CarouselSlide } from './carousel'
+export { useCarouselPattern, carouselKeys, type CarouselOptions, type CarouselSlide } from './carousel'
 export { spinbuttonPattern, spinbuttonAxis, type SpinbuttonOptions } from './spinbutton'
 
 export { disclosurePattern, disclosureAxis, type DisclosureOptions } from './disclosure'

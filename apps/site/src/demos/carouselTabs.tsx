@@ -1,11 +1,11 @@
-import { useCarouselPattern } from '@p/aria-kernel/patterns'
+import { useCarouselPattern, carouselKeys } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Carousel · Tablist',
   apg: 'carousel',
   kind: 'collection' as const,
   blurb: 'Auto-rotating carousel where each slide is selectable via tabs.',
-  keys: () => ['ArrowRight', 'ArrowLeft', 'Home', 'End'],
+  keys: () => carouselKeys({ control: 'tabs' }),
 }
 
 const SLIDES = [

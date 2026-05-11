@@ -1,12 +1,12 @@
 
-import { useMenuButtonPattern, useMenuButtonReducer } from '@p/aria-kernel/patterns'
+import { useMenuButtonPattern, useMenuButtonReducer, menuButtonKeys } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Menu Button · Navigation',
   apg: 'menu-button',
   kind: 'collection' as const,
   blurb: 'Menu items rendered as <a> links — variant="navigation".',
-  keys: () => ['ArrowDown', 'ArrowUp', 'Enter', 'Space', 'Home', 'End', 'Escape'],
+  keys: () => menuButtonKeys(),
 }
 
 const LINKS = [

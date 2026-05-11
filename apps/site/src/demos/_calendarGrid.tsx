@@ -7,6 +7,10 @@ export const MONTH_NAMES = [
 ]
 export const WEEKDAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
+/** CalendarGrid 가 흡수하는 키 — 내부 mini-axis (commit + 좌표 이동) SSOT. */
+export const calendarGridKeys = (): readonly string[] =>
+  [KEYS.Enter, KEYS.Space, KEYS.ArrowLeft, KEYS.ArrowRight, KEYS.ArrowUp, KEYS.ArrowDown]
+
 interface CalendarDay { day: number | null; key: string }
 
 export function buildMonth(year: number, month: number): CalendarDay[] {

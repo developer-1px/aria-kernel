@@ -1,7 +1,15 @@
 import { useEffect, useId, useRef } from 'react'
 import { matchAnyChord } from '../axes'
-import { useDialogPattern, type DialogOptions } from './dialog'
+import { useDialogPattern, dialogKeys, type DialogOptions } from './dialog'
 import type { ItemProps, RootProps } from './types'
+
+/**
+ * useComboboxDialogPattern 이 흡수하는 키 — SSOT.
+ * - ArrowDown / Alt+ArrowDown: open (APG combobox-datepicker)
+ * - dialogKeys: Escape (+ modal=true 인 경우 Tab)
+ */
+export const comboboxDialogKeys = (opts: { modal?: boolean } = {}): readonly string[] =>
+  ['ArrowDown', 'Alt+ArrowDown', ...dialogKeys({ modal: opts.modal ?? false })]
 
 /** Options for {@link useComboboxDialogPattern}. */
 export interface ComboboxDialogOptions

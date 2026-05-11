@@ -1,13 +1,13 @@
 import { useRef, useState } from 'react'
-import { useDialogPattern } from '@p/aria-kernel/patterns'
-import { CalendarGrid } from './_calendarGrid'
+import { useDialogPattern, dialogKeys } from '@p/aria-kernel/patterns'
+import { CalendarGrid, calendarGridKeys } from './_calendarGrid'
 
 export const meta = {
   title: 'Dialog · Date Picker',
   apg: 'dialog-modal',
   kind: 'overlay' as const,
   blurb: 'Button trigger opens a modal dialog containing a calendar grid.',
-  keys: () => ['Escape', 'Tab', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Enter', 'Space'],
+  keys: () => [...dialogKeys({ modal: true }), ...calendarGridKeys()],
 }
 
 export default function DialogDatepickerDemo() {

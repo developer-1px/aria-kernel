@@ -2,16 +2,25 @@
 
 **React + Reducer 기반 ARIA 행동 인프라.** W3C/APG 패턴 recipe + axis 합성 + roving tabindex + gesture/intent 변환. 데이터는 `use<Pattern>Reducer` 한 줄. 토큰/CSS/UI 어휘 0건.
 
-## Canonical 합성
+## Canonical 합성 (with side effect)
 
 ```tsx
 import { useListboxReducer, useListboxPattern } from '@p/aria-kernel/patterns'
+import { useNavigate } from '@tanstack/react-router'
 
-const ITEMS = [{ id: 'a', label: 'A' }, { id: 'b', label: 'B' }]
+const FRUITS = [{ id: 'apple', label: 'Apple' }, { id: 'banana', label: 'Banana' }]
 
 function Picker() {
-  const [data, dispatch] = useListboxReducer(ITEMS)
-  const { rootProps, optionProps } = useListboxPattern(data, dispatch, { label: 'Items' })
+  const [data, baseDispatch] = useListboxReducer(FRUITS)
+  const navigate = useNavigate()
+
+  // side effect: dispatch wrapping — onActivate / onSelect 같은 callback prop 0
+  const dispatch = (e) => {
+    baseDispatch(e)
+    if (e.type === 'activate') navigate({ to: '/fruit/' + e.id })
+  }
+
+  const { rootProps, optionProps } = useListboxPattern(data, dispatch, { label: 'Fruits' })
   return (
     <ul {...rootProps}>
       {data.meta.root.map((id) => <li key={id} {...optionProps(id)}>{data.entities[id].label}</li>)}
@@ -20,9 +29,11 @@ function Picker() {
 }
 ```
 
-- 컬렉션 패턴마다 `use<Pattern>Reducer` 1:1 sibling — `items` 입력, `{ multi, pipe }` 옵션.
-- middleware (HMR/devtools/persist/undo) 는 `pipe` 옵션. custom init / 합성은 React `useReducer` 직접 (escape).
-- 자세한 합성·escape 패턴은 [CANONICAL.md](./CANONICAL.md).
+**중요 — side effect 는 dispatch wrapping 으로.** `onActivate` / `onSelect` / `onChange` 같은 callback prop 없음. event 가 진실, callback 은 dispatch wrap 으로 사용자가 합성 — 모든 event 타입에 universal 작동.
+
+- 컬렉션 패턴마다 `use<Pattern>Reducer` 1:1 sibling — `items` 입력, `{ multi, enhance }` 옵션.
+- middleware (HMR/devtools/persist/undo) 는 `enhance` 옵션 (HOR — `redux-undo` 등 호환). custom init / 합성은 React `useReducer` 직접 (escape).
+- 자세한 합성·escape·controlled-input 패턴은 [CANONICAL.md](./CANONICAL.md).
 
 ## 설치
 

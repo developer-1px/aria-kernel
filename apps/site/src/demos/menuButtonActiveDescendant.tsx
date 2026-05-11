@@ -1,12 +1,12 @@
 
-import { useMenuButtonPattern, useMenuButtonReducer } from '@p/aria-kernel/patterns'
+import { useMenuButtonPattern, useMenuButtonReducer, menuButtonKeys } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Menu Button · activeDescendant',
   apg: 'menu-button',
   kind: 'collection' as const,
   blurb: 'DOM focus stays on the trigger; aria-activedescendant marks the active menuitem.',
-  keys: () => ['ArrowDown', 'ArrowUp', 'Enter', 'Space', 'Home', 'End', 'Escape'],
+  keys: () => menuButtonKeys(),
 }
 
 const ITEMS = [

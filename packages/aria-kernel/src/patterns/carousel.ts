@@ -9,6 +9,16 @@ export interface CarouselSlide {
   label: string
 }
 
+/**
+ * useCarouselPattern 이 흡수하는 키 — SSOT.
+ * control='tabs' 일 때만 tablist 가 ArrowLeft/Right/Home/End 처리.
+ * control='buttons' 는 키 흡수 없음 (prev/next 버튼 클릭).
+ */
+export const carouselKeys = (opts: { control?: 'buttons' | 'tabs' } = {}): readonly string[] =>
+  (opts.control ?? 'buttons') === 'tabs'
+    ? [KEYS.ArrowRight, KEYS.ArrowLeft, KEYS.Home, KEYS.End]
+    : []
+
 /** Options for {@link useCarouselPattern}. */
 export interface CarouselOptions {
   slides: CarouselSlide[]

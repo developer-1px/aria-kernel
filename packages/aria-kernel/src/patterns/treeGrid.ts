@@ -108,7 +108,7 @@ const multiAxis = treeGridAxis({ multiSelectable: true })
  *
  * @example canonical — tree + expand gesture (pipe)
  *   const expand = (r) => applyGesture(expandBranchOnActivate, r)
- *   const [data, dispatch] = useTreeGridReducer(ROWS, { pipe: expand })
+ *   const [data, dispatch] = useTreeGridReducer(ROWS, { enhance: expand })
  *   const { treegridProps, rowProps, gridcellProps, items } = useTreeGridPattern(data, dispatch)
  */
 export function useTreeGridPattern(
