@@ -7,6 +7,7 @@
  */
 export { useClickOutsideGesture, type ClickOutsideRef } from './useClickOutsideGesture'
 export { useContextMenuGesture, type ContextMenuGestureOptions } from './useContextMenuGesture'
+export { useResizeGesture, type ResizeGestureOptions } from './useResizeGesture'
 
 import { getChildren, getExpanded, type UiEvent, type NormalizedData } from '../types'
 import { INTENT_CHORDS } from '../axes/intentChords'
