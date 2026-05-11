@@ -1,6 +1,30 @@
 # @p/aria-kernel
 
-ARIA 행동 인프라 — axis 합성, roving tabindex, gesture/intent 변환, FlatLayout 선언적 트리, Resource 단일 데이터 인터페이스. 토큰/CSS/UI 어휘 0건.
+**React + Reducer 기반 ARIA 행동 인프라.** W3C/APG 패턴 recipe + axis 합성 + roving tabindex + gesture/intent 변환. 데이터는 `useReducer(reduce, items, fromList)` 직접 합성. 토큰/CSS/UI 어휘 0건.
+
+## Canonical 합성
+
+```tsx
+import { useReducer } from 'react'
+import { reduce, fromList } from '@p/aria-kernel'
+import { useListboxPattern } from '@p/aria-kernel/patterns'
+
+const ITEMS = [{ id: 'a', label: 'A' }, { id: 'b', label: 'B' }]
+
+function Picker() {
+  const [data, dispatch] = useReducer(reduce, ITEMS, fromList)
+  const { rootProps, itemProps } = useListboxPattern(data, dispatch, { label: 'Items' })
+  return (
+    <ul {...rootProps}>
+      {data.meta.root.map((id) => <li key={id} {...itemProps(id)}>{data.entities[id].label}</li>)}
+    </ul>
+  )
+}
+```
+
+- 데이터 hook wrapper 없음 — React `useReducer` 직접.
+- HMR/devtools/persist 는 `composeReducers` middleware.
+- 자세한 합성·escape 패턴은 [CANONICAL.md](./CANONICAL.md).
 
 ## 설치
 
