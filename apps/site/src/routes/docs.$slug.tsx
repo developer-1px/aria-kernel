@@ -14,7 +14,6 @@ export const Route = createFileRoute('/docs/$slug')({
       label: 'Docs',
       to: '/docs/$slug',
       params: { slug: 'overview' },
-      category: 'Docs',
       sub: 'Korean technical documentation from markdown',
     },
   },

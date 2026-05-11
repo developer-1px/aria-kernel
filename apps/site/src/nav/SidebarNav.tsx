@@ -6,7 +6,7 @@
  * 라우팅은 onEvent('activate') 를 받아 host (TanStack router) 가 navigate.
  */
 import { useRef } from 'react'
-import { useRouter } from '@tanstack/react-router'
+import { useRouter, useRouterState } from '@tanstack/react-router'
 import type { NormalizedData } from '@p/aria-kernel'
 import { Nav } from '../examples/_navigationListWrapper'
 import { collectPalette, paletteCategory, type PaletteEntry } from './palette'
@@ -60,7 +60,7 @@ export function SidebarNav() {
     }
   }
 
-  const pathname = router.state.location.pathname
+  const pathname = useRouterState({ select: (s) => s.location.pathname })
   const data = buildData(collectPalette(router), pathname)
 
   const onEvent = (event: { type: string; id?: string }) => {
