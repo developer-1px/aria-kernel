@@ -1,7 +1,6 @@
-import { fromList } from '@p/aria-kernel'
+import { useReducer } from 'react'
+import { axisKeys, fromList, reduceWithDefaults } from '@p/aria-kernel'
 import { accordionAxis, useAccordionPattern } from '@p/aria-kernel/patterns'
-import { useLocalData } from '@p/aria-kernel/local'
-import { axisKeys } from '@p/aria-kernel'
 
 export const meta = {
   title: 'Accordion',
@@ -11,14 +10,16 @@ export const meta = {
   keys: () => axisKeys(accordionAxis()),
 }
 
+const ITEMS = [
+  { id: 'a', label: 'What is @p/aria-kernel?' },
+  { id: 'b', label: 'Why ARIA-first?' },
+  { id: 'c', label: 'Bring my own styles?' },
+]
+
 export default function AccordionDemo() {
-  const [data, onEvent] = useLocalData(() => fromList([
-    { id: 'a', label: 'What is @p/aria-kernel?' },
-    { id: 'b', label: 'Why ARIA-first?' },
-    { id: 'c', label: 'Bring my own styles?' },
-  ]))
+  const [data, dispatch] = useReducer(reduceWithDefaults, ITEMS, fromList)
   const { rootProps, headingProps, buttonProps, regionProps, items } =
-    useAccordionPattern(data, onEvent)
+    useAccordionPattern(data, dispatch)
 
   return (
     <div {...rootProps} className="divide-y divide-stone-200 rounded-md border border-stone-200 bg-white">
