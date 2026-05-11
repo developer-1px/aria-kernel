@@ -60,32 +60,6 @@ export interface TreeItem extends BaseItem {
   hasChildren: boolean
 }
 
-/**
- * Pattern Options 공통 base — 거의 모든 Options interface 가 extends.
- *  label · labelledBy : ARIA accessible name (둘 중 하나 강제)
- */
-export interface BasePatternOptions {
-  /** ARIA accessible name. */
-  label?: string
-  /** ARIA `aria-labelledby` — id of element naming this pattern. */
-  labelledBy?: string
-}
-
-/**
- * Collection Options base — data-driven pattern 들이 공유.
- *  containerId · idPrefix · autoFocus · orientation
- * 각 패턴이 미지원 옵션은 Omit 또는 단순히 사용 안 함.
- */
-export interface CollectionOptions extends BasePatternOptions {
-  /** NormalizedData 의 root container id (default ROOT). */
-  containerId?: string
-  /** useId 기반 안정 ID 네임스페이스. */
-  idPrefix?: string
-  /** mount 시 첫 항목 focus. */
-  autoFocus?: boolean
-  /** ARIA orientation. */
-  orientation?: 'horizontal' | 'vertical'
-}
 
 /**
  * Builtin chord descriptor — pattern 이 자기 디폴트로 흡수하는 chord 한 entry.

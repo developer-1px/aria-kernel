@@ -72,6 +72,5 @@ export { alertPattern } from './alert'
 export type {
   BaseItem, TreeItem, RootProps, ItemProps,
   PatternProps, ControlProps,
-  BasePatternOptions, CollectionOptions,
 } from './types'
 
