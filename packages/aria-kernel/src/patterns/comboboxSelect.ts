@@ -11,6 +11,7 @@ import { bindAxis } from '../state/bind'
 import { useActiveDescendant } from '../roving/useActiveDescendant'
 import type { BaseItem, ItemProps, RootProps } from './types'
 import { BLUR_RACE_DELAY_MS } from '../key/timing'
+import { usePopupBlurRace } from './usePopupBlurRace'
 
 const ARROW_DOWN = ['ArrowDown'] as const
 const ARROW_UP = ['ArrowUp'] as const
@@ -72,7 +73,7 @@ export function useComboboxSelectPattern(
   } = opts
 
   const rootRef = useRef<HTMLElement | null>(null)
-  const blurTimerRef = useRef<number | null>(null)
+  const blurRace = usePopupBlurRace(closeOnBlurDelay)
 
   const expanded = isOpen(data, ROOT)
   const activeId = getFocus(data) ?? null
@@ -95,13 +96,6 @@ export function useComboboxSelectPattern(
 
   const selectedId = allIds.find((id) => data.entities[id]?.selected)
   const selectedLabel = selectedId ? getLabel(data, selectedId) : ''
-
-  const cancelBlurClose = () => {
-    if (blurTimerRef.current !== null) {
-      clearTimeout(blurTimerRef.current)
-      blurTimerRef.current = null
-    }
-  }
 
   const intent = (e: UiEvent) => {
     if (e.type === 'navigate' && !expanded) onEvent?.({ type: 'open', id: ROOT, open: true })
@@ -136,15 +130,7 @@ export function useComboboxSelectPattern(
     dispatchKey(e, activeId ?? ROOT)
   }
 
-  // @FIXME(srp): blur race(setTimeout)가 popup 패턴 공통 메커니즘인지 미확인 —
-  // 판단 조건: menu·menuButton·tooltip 감사 후 동일 race 2건 이상이면 usePopupBlurRace 추출
-  const onBlur = () => {
-    cancelBlurClose()
-    blurTimerRef.current = window.setTimeout(() => {
-      onEvent?.({ type: 'open', id: ROOT, open: false })
-      blurTimerRef.current = null
-    }, closeOnBlurDelay)
-  }
+  const onBlur = () => blurRace.schedule(() => onEvent?.({ type: 'open', id: ROOT, open: false }))
 
   const comboboxProps: ItemProps = {
     role: 'combobox',
@@ -176,7 +162,7 @@ export function useComboboxSelectPattern(
     'aria-labelledby': popupLabelledBy,
     onMouseDown: (e: React.MouseEvent) => {
       e.preventDefault()
-      cancelBlurClose()
+      blurRace.cancel()
     },
   } as unknown as RootProps
 

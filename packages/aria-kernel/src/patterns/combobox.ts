@@ -12,6 +12,7 @@ import { useControlValue } from '../state/useControlValue'
 import { useActiveDescendant } from '../roving/useActiveDescendant'
 import type { BaseItem, ItemProps, RootProps } from './types'
 import { BLUR_RACE_DELAY_MS } from '../key/timing'
+import { usePopupBlurRace } from './usePopupBlurRace'
 
 /** combobox chord registry — declarative SSOT. */
 const ARROW_DOWN = ['ArrowDown'] as const
@@ -143,7 +144,7 @@ export function useComboboxPattern(
   const [query, setValue] = useControlValue<string>(valueProp, defaultValue, onEvent)
 
   const inputRef = useRef<HTMLInputElement | null>(null)
-  const blurTimerRef = useRef<number | null>(null)
+  const blurRace = usePopupBlurRace(closeOnBlurDelay)
 
   const expanded = isOpen(data, ROOT)
   const activeId = getFocus(data) ?? null
@@ -169,13 +170,6 @@ export function useComboboxPattern(
       setsize: visibleIds.length,
     }
   })
-
-  const cancelBlurClose = () => {
-    if (blurTimerRef.current !== null) {
-      clearTimeout(blurTimerRef.current)
-      blurTimerRef.current = null
-    }
-  }
 
   // @FIXME(srp): intent re-interpret 코드가 tree 의 effect VM 과 같은 역할 —
   // 판단 조건: menu·menubar god module 분해 시 commands+effect 어휘를 axis 위에 도입할지 결정.
@@ -226,26 +220,20 @@ export function useComboboxPattern(
     }
   }
   const onFocus = () => {
-    cancelBlurClose()
+    blurRace.cancel()
     inputRef.current?.select()
     if (openOnFocus && !expanded) onEvent?.({ type: 'open', id: ROOT, open: true })
   }
-  // @FIXME(srp): blur race(setTimeout)가 popup 패턴 공통 메커니즘인지 미확인 —
-  // 판단 조건: menu·menuButton·tooltip 감사 후 동일 race 2건 이상이면 usePopupBlurRace 추출
-  const onBlur = () => {
-    cancelBlurClose()
-    blurTimerRef.current = window.setTimeout(() => {
-      if (selectOnBlur && activeId) {
-        onEvent?.({ type: 'activate', id: activeId })
-        if (commitOnActivate) {
-          const lbl = data.entities[activeId]?.label
-          if (typeof lbl === 'string') setValue(lbl)
-        }
+  const onBlur = () => blurRace.schedule(() => {
+    if (selectOnBlur && activeId) {
+      onEvent?.({ type: 'activate', id: activeId })
+      if (commitOnActivate) {
+        const lbl = data.entities[activeId]?.label
+        if (typeof lbl === 'string') setValue(lbl)
       }
-      onEvent?.({ type: 'open', id: ROOT, open: false })
-      blurTimerRef.current = null
-    }, closeOnBlurDelay)
-  }
+    }
+    onEvent?.({ type: 'open', id: ROOT, open: false })
+  })
 
   const comboboxProps: ItemProps = {
     role: 'combobox',
@@ -275,7 +263,7 @@ export function useComboboxPattern(
     'aria-labelledby': popupLabelledBy,
     onMouseDown: (e: React.MouseEvent) => {
       e.preventDefault()
-      cancelBlurClose()
+      blurRace.cancel()
     },
   } as unknown as RootProps
 

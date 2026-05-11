@@ -12,6 +12,7 @@ import { useControlValue } from '../state/useControlValue'
 import { useActiveDescendant } from '../roving/useActiveDescendant'
 import type { ItemProps, RootProps } from './types'
 import { BLUR_RACE_DELAY_MS } from '../key/timing'
+import { usePopupBlurRace } from './usePopupBlurRace'
 
 /** comboboxGrid open-trigger chord registry — declarative SSOT. */
 const ARROW_DOWN = ['ArrowDown'] as const
@@ -95,7 +96,7 @@ export function useComboboxGridPattern(
 
   const [query, setValue] = useControlValue<string>(valueProp, defaultValue, onEvent)
   const inputRef = useRef<HTMLInputElement | null>(null)
-  const blurTimerRef = useRef<number | null>(null)
+  const blurRace = usePopupBlurRace(closeOnBlurDelay)
 
   const expanded = isOpen(data, ROOT)
   const activeId = getFocus(data) ?? null
@@ -127,13 +128,6 @@ export function useComboboxGridPattern(
   // activeId 가 cell 인지 row 인지 — focused id 의 부모가 ROOT 면 row, 아니면 cell.
   const findRowOfCell = (cellId: string): string | undefined =>
     visibleRowIds.find((rowId) => getChildren(data, rowId).includes(cellId))
-
-  const cancelBlurClose = () => {
-    if (blurTimerRef.current !== null) {
-      clearTimeout(blurTimerRef.current)
-      blurTimerRef.current = null
-    }
-  }
 
   const intent = (e: UiEvent) => {
     if (e.type === 'navigate' && !expanded) {
@@ -183,17 +177,11 @@ export function useComboboxGridPattern(
     if (openOnType && !expanded) onEvent?.({ type: 'open', id: ROOT, open: true })
   }
   const onFocus = () => {
-    cancelBlurClose()
+    blurRace.cancel()
     inputRef.current?.select()
     if (openOnFocus && !expanded) onEvent?.({ type: 'open', id: ROOT, open: true })
   }
-  const onBlur = () => {
-    cancelBlurClose()
-    blurTimerRef.current = window.setTimeout(() => {
-      onEvent?.({ type: 'open', id: ROOT, open: false })
-      blurTimerRef.current = null
-    }, closeOnBlurDelay)
-  }
+  const onBlur = () => blurRace.schedule(() => onEvent?.({ type: 'open', id: ROOT, open: false }))
 
   const comboboxProps: ItemProps = {
     role: 'combobox',
@@ -225,7 +213,7 @@ export function useComboboxGridPattern(
     'aria-colcount': colCount,
     onMouseDown: (e: React.MouseEvent) => {
       e.preventDefault()
-      cancelBlurClose()
+      blurRace.cancel()
     },
   } as unknown as RootProps
 
