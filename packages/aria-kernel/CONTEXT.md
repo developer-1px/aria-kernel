@@ -19,11 +19,12 @@ W3C/WHATWG spec에 닫혀있다.
 
 ## 핵심 어휘 한눈에
 
-- **Axis** — `(NormalizedData, focusId, Trigger) → UiEvent[] | null` data-driven primitive.
-- **KeyMap** — `[KeyChord | KeyChord[], handler][]` 선언 tuple. chord는 항상 `KEYS.X` 또는 `INTENTS.X` 통과.
-- **Trigger** — `{ kind: 'key'|'click', ...modifiers }` plain object.
-- **UiEvent** — ui ↔ headless 통신 단일 어휘. zod schema gate.
+- **Axis** — function-with-property hybrid. 호출 시 `KeyMap` 반환, `.chords: readonly string[]` 메타 직렬화 (PRD #38 closed).
+- **chord** — tinykeys string syntax (`'Shift+Tab'`, `'$mod+c'`, `'Click'`). 과거의 `KeyChord` 객체/boolean modifier map 은 폐기.
+- **INTENT_CHORDS** — 모든 axis 의 chord 정의 SSOT (`'navigate.next'`, `'activate'`, …). 패턴 hook 이 이걸 합성.
+- **UiEvent** — ui ↔ headless 통신 단일 어휘. zod schema gate. DOM `Event` 와 분리 위해 `Ui` prefix.
 - **NormalizedData** — flat by id + meta. tree/list 무관 통일 표현.
+- **데이터 합성** — React `useReducer(reduceWithDefaults, items, fromList)` 직접. 라이브러리 데이터 hook wrapper 0 (#148).
 - **Pattern** — `use*Pattern` (내부 React state) vs `*Pattern` (순수 함수). 데이터성 state는 외부 주입, UI 일시 state는 내부.
 
 자세한 의미·invariant는 위 정본 문서.
