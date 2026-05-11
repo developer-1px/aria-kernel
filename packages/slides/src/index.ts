@@ -17,3 +17,4 @@ export {
   type SlideEventContext,
 } from './commands'
 export { parentOf, previousSibling, selectedEventIds, siblingBatch, visibleOrder } from './structure'
+export { exportDeckToPptx } from './pptx'
