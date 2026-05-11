@@ -21,7 +21,7 @@ const GRID_EDIT_CHORDS = ['F2', 'Enter'] as const
 /** gridEditKeys — chord registry 도출. */
 export const gridEditKeys = (): readonly string[] => [...GRID_EDIT_CHORDS]
 import { useRovingTabIndex } from '../roving/useRovingTabIndex'
-import type { InsideEditableMode } from '../key/insideEditable'
+import { isEditable, type InsideEditableMode } from '../key/insideEditable'
 import { usePatternClipboard, type ClipboardOnMiddleware } from './usePatternClipboard'
 import type { BuiltinChordDescriptor, ItemProps, RootProps } from './types'
 
@@ -269,6 +269,8 @@ export function useGridPattern(
       ...(editable
         ? {
             onKeyDown: (e: React.KeyboardEvent) => {
+              // cell-input(내부 editable) 안의 Enter/F2 는 input 의 commit 의도 — 셀의 editStart 재발화 금지.
+              if (isEditable(e.target as Element | null)) return
               if (matchAnyChord(e as unknown as KeyboardEvent, GRID_EDIT_CHORDS)) {
                 e.preventDefault()
                 onEvent?.({ type: 'editStart', id })

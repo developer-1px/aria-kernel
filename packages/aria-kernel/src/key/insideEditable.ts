@@ -13,7 +13,7 @@ const TEXTUAL_INPUT_TYPES = new Set([
   'text', 'search', 'email', 'password', 'url', 'tel', 'number',
 ])
 
-const isEditable = (el: Element | null): boolean => {
+export const isEditable = (el: Element | null): boolean => {
   if (!el) return false
   if (el instanceof HTMLTextAreaElement) return true
   if (el instanceof HTMLSelectElement) return true

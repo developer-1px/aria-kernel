@@ -14,7 +14,7 @@
 import type React from 'react'
 import type { UiEvent } from '../types'
 import { matchEventToChord } from '../axes/chord'
-import { routeInsideEditable, type InsideEditableMode } from '../key/insideEditable'
+import { routeInsideEditable, isEditable, type InsideEditableMode } from '../key/insideEditable'
 import type { BuiltinChordDescriptor } from './types'
 
 export type ClipboardOnMiddleware = Record<
@@ -64,6 +64,8 @@ const DEFAULT_CHORDS: ReadonlyArray<{ chord: string; build: DefaultBuilder }> = 
   { chord: 'mod+shift+v', build: (id) => (id ? { type: 'paste', targetId: id, mode: 'child' } : null) },
 ]
 
+const HAS_MODIFIER = /(?:Control|Ctrl|Alt|Meta|\$mod|mod)\+/i
+
 export function usePatternClipboard(args: UsePatternClipboardArgs): UsePatternClipboardReturn {
   const { onEvent, activeId, insideEditable = 'forward', on, disableBuiltinChords = false } = args
 
@@ -98,9 +100,14 @@ export function usePatternClipboard(args: UsePatternClipboardArgs): UsePatternCl
     const userKeys = Object.keys(userMap)
     const consumed = new Set<string>()
 
+    // editable surface(input/textarea/contenteditable) 안의 non-modifier 단일 키는
+     // native 타이핑(Backspace/Delete 등) 을 탈취하지 않는다 — bindGlobalKeyMap 의 가드 어휘와 동일.
+    const targetEditable = isEditable(e.target as Element | null)
+
     // 1) builtin default chord 매칭 (disableBuiltinChords 면 skip — tree 가 자체 흡수)
     if (!disableBuiltinChords) for (const { chord, build } of DEFAULT_CHORDS) {
       if (!matchEventToChord(ke, chord)) continue
+      if (targetEditable && !HAS_MODIFIER.test(chord)) return
       const ev = build(activeId)
       const orig = () => { if (ev && onEvent) onEvent(ev) }
       const userFn = userMap[chord]

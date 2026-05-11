@@ -9,13 +9,7 @@
 import type { KeyMap, UiEventTemplate } from '../axes/axis'
 import { matchAnyChord, type Chord } from '../axes/chord'
 import type { UiEvent } from '../types'
-
-const isEditable = (t: EventTarget | null): boolean => {
-  const el = t as HTMLElement | null
-  if (!el) return false
-  const tag = el.tagName
-  return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || el.isContentEditable
-}
+import { isEditable } from './insideEditable'
 
 const toChords = (chord: unknown): readonly Chord[] => {
   const arr = Array.isArray(chord) ? chord : [chord]
@@ -35,7 +29,7 @@ export const bindGlobalKeyMap = (
       if (!matchAnyChord(e, strings)) continue
       // editable 안에서 modifier 없는 chord 는 탈취 금지
       const anyModified = strings.some(stringHasModifier)
-      if (!anyModified && isEditable(e.target)) return
+      if (!anyModified && isEditable(e.target as Element | null)) return
       e.preventDefault()
       if (typeof rhs === 'function') return // 글로벌은 KeyHandler 미지원 (data/focusId 없음)
       const tmpls: UiEventTemplate[] = Array.isArray(rhs) ? rhs : [rhs]
