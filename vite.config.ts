@@ -39,6 +39,8 @@ export default defineConfig({
       { find: /^zod-crud$/, replacement: resolve(__dirname, 'tooling/zod-crud-shim.ts') },
       { find: /^@p\/aria-kernel$/, replacement: resolve(__dirname, 'packages/aria-kernel/src/index.ts') },
       { find: /^@p\/aria-kernel\//, replacement: resolve(__dirname, 'packages/aria-kernel/src/') + '/' },
+      { find: /^@p\/resource$/, replacement: resolve(__dirname, 'packages/resource/src/index.ts') },
+      { find: /^@p\/resource\//, replacement: resolve(__dirname, 'packages/resource/src/') + '/' },
       { find: /^@p\/fs$/, replacement: resolve(__dirname, 'packages/fs/src/index.ts') },
       { find: /^@p\/fs\//, replacement: resolve(__dirname, 'packages/fs/src/') + '/' },
       { find: /^@p\/slides$/, replacement: resolve(__dirname, 'packages/slides/src/index.ts') },
