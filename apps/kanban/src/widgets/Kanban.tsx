@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useListboxPattern } from '@p/aria-kernel/patterns'
 import { KEYS, type UiEvent } from '@p/aria-kernel'
-import { useZodCrudResource } from '@p/aria-kernel/adapters/zod-crud'
+import { useZodCrudResource } from '@p/resource/zod-crud'
 import { boardResource } from '../features/boardResource'
 import { normalizeBoard } from '../features/normalizeBoard'
 import { crud } from '../features/boardCrud'

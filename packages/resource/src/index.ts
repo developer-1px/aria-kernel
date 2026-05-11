@@ -1,5 +1,5 @@
 /**
- * @p/aria-kernel/store — 옵션 데이터 흐름 어댑터.
+ * @p/resource — 옵션 데이터 흐름 어댑터.
  *
  * - `useResource` / `defineResource` / `writeResource` — keyed external store with cache
  * - `useFeature` / `defineFeature` — single-spec mini reducer + query selector

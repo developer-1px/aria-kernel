@@ -1,5 +1,5 @@
 import { useEffect, useSyncExternalStore } from 'react'
-import type { UiEvent as UiEvent } from '../types'
+import type { UiEvent as UiEvent } from '@p/aria-kernel'
 
 /**
  * Resource — ui/ `(data, onEvent)`의 데이터 레이어 평행.

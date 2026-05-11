@@ -1,4 +1,4 @@
-import type { UiEvent } from '../types'
+import type { UiEvent } from '@p/aria-kernel'
 
 /**
  * CrudPort — UiEvent 편집 어휘를 받을 수 있는 minimal interface.

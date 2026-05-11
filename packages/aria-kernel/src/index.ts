@@ -4,8 +4,6 @@
  * Owns: axis composition · roving tabindex · gesture/intent split · patterns ·
  * shared data vocabulary (NormalizedData / UiEvent) · middleware.
  *
- * Optional store adapter (resource / feature) at `@p/aria-kernel/store`.
- *
  * Data: 컬렉션 패턴은 `use<Pattern>Reducer(items, opts?)` (canonical, `@p/aria-kernel/patterns`).
  * Escape: React `useReducer(reduceSingleSelect, items, fromList)` 직접 (custom init / 합성).
  *

@@ -1,4 +1,4 @@
-import { useResource } from '@p/aria-kernel/store'
+import { useResource } from '@p/resource'
 import { formatDate, formatSize } from '../features/data'
 import { extToLang, extToPreviewKind, type FsNode } from '../entities/types'
 import {

@@ -26,6 +26,8 @@
     "paths": {
       "@p/aria-kernel": ["packages/aria-kernel/src/index.ts"],
       "@p/aria-kernel/*": ["packages/aria-kernel/src/*"],
+      "@p/resource": ["packages/resource/src/index.ts"],
+      "@p/resource/*": ["packages/resource/src/*"],
       "@p/fs": ["packages/fs/src/index.ts"],
       "@p/fs/*": ["packages/fs/src/*"],
       "@p/slides": ["packages/slides/src/index.ts"],
@@ -38,6 +40,6 @@
       "zod-crud": ["tooling/zod-crud-shim.ts"]
     }
   },
-  "include": ["apps/site/src", "packages/aria-kernel/src", "packages/slides/src", "apps/*/src", "tooling/zod-crud-shim.ts"],
+  "include": ["apps/site/src", "packages/aria-kernel/src", "packages/resource/src", "packages/slides/src", "apps/*/src", "tooling/zod-crud-shim.ts"],
   "exclude": []
 }

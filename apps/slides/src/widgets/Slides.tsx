@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useZodCrudResource } from '@p/aria-kernel/adapters/zod-crud'
+import { useZodCrudResource } from '@p/resource/zod-crud'
 import { useTreePattern } from '@p/aria-kernel/patterns'
 import type { NormalizedData, UiEvent } from '@p/aria-kernel'
 import { dispatchSlideEvent, slideText, slideTreeCommands, slideTreeEventFromKeyboard, updateSlideText } from '@p/slides'

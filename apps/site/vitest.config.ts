@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import path from 'node:path'
 
 const headless = path.resolve(__dirname, '../../packages/aria-kernel/src')
+const resource = path.resolve(__dirname, '../../packages/resource/src')
 const outliner = path.resolve(__dirname, '../outliner/src')
 
 export default defineConfig({
@@ -10,8 +11,8 @@ export default defineConfig({
   resolve: {
     alias: [
       { find: /^@p\/aria-kernel\/patterns$/, replacement: path.join(headless, 'patterns/index.ts') },
-      { find: /^@p\/aria-kernel\/adapters\/zod-crud$/, replacement: path.join(headless, 'adapters/zod-crud/index.ts') },
-      { find: /^@p\/aria-kernel\/store$/, replacement: path.join(headless, 'store/index.ts') },
+      { find: /^@p\/resource\/zod-crud$/, replacement: path.join(resource, 'zod-crud/index.ts') },
+      { find: /^@p\/resource$/, replacement: path.join(resource, 'index.ts') },
       { find: /^@p\/aria-kernel\/key$/, replacement: path.join(headless, 'key/index.ts') },
       { find: /^@p\/aria-kernel\/axes$/, replacement: path.join(headless, 'axes/index.ts') },
       { find: /^@p\/aria-kernel\/state$/, replacement: path.join(headless, 'state/index.ts') },

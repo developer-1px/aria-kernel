@@ -76,7 +76,6 @@ function Toolbar() {
 | **Roving** | `useRovingTabIndex` · `useSpatialNavigation` · `useActiveDescendant` |
 | **Gesture** | `composeGestures` · `navigateOnActivate` · `selectionFollowsFocus` · `expandBranchOnActivate` |
 | **Patterns** | `@p/aria-kernel/patterns` (subpath) — `useListboxPattern` · `useTreePattern` · ... 21종 |
-| **Store** | `@p/aria-kernel/store` (subpath, 옵션) — `useResource` · `defineResource` · `writeResource` · `useFeature` · `defineFeature` |
 
 ## Subpath imports
 
@@ -84,7 +83,6 @@ function Toolbar() {
 import { composeAxes, navigate } from '@p/aria-kernel/axes'
 import { useRovingTabIndex } from '@p/aria-kernel/roving'
 import { useListboxPattern } from '@p/aria-kernel/patterns'
-import { useResource } from '@p/aria-kernel/store'
 ```
 
 ## UI Registry Augmentation

@@ -5,7 +5,7 @@ import {
   useControlState, useEventBridge,
   type UiEvent, type NormalizedData,
 } from '@p/aria-kernel'
-import { useResource, writeResource } from '@p/aria-kernel/store'
+import { useResource, writeResource } from '@p/resource'
 import { smartGroups, sidebar } from '../features/data'
 import { pathResource, pinnedRootResource } from '../features/resources'
 

@@ -61,7 +61,7 @@ const normalized = useMemo(() => fromList(data ?? []), [data])
 return <Listbox data={normalized} ... />
 ```
 
-또는 `useResource` (`@p/aria-kernel/store`) 가 query/cache 어댑터 역할을 할 수 있습니다.
+또는 `useResource` (`@p/resource`) 가 query/cache 어댑터 역할을 할 수 있습니다.
 
 ### Q. UiEvent 11 variant 가 부족하지 않나?
 

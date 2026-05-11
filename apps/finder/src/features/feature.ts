@@ -13,7 +13,7 @@ import {
   pathAncestors,
   type NormalizedData,
 } from '@p/aria-kernel'
-import { defineFeature, type QuerySpec } from '@p/aria-kernel/store'
+import { defineFeature, type QuerySpec } from '@p/resource'
 import {
   getTree, loadText, getImageUrl, sidebar as favItems, smartGroups, walk,
   tagGroups, tagItems, isTagPath,

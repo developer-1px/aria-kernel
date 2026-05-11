@@ -1,4 +1,4 @@
-import { useZodCrudResource } from '@p/aria-kernel/adapters/zod-crud'
+import { useZodCrudResource } from '@p/resource/zod-crud'
 import { outlinerSpec } from './outliner.spec'
 import { crud, resource } from './resource'
 import { normalize } from './normalize'

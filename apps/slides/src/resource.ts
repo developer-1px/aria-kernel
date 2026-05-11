@@ -1,5 +1,5 @@
 import { createDeckCrud, normalizeDeck } from '@p/slides'
-import { defineResource, routeUiEventToCrud, type CrudPort } from '@p/aria-kernel/store'
+import { defineResource, routeUiEventToCrud, type CrudPort } from '@p/resource'
 import type { JsonDoc } from 'zod-crud'
 
 export const crud = createDeckCrud()

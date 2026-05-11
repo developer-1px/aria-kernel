@@ -79,7 +79,7 @@ export function CatalogRow({
             >
               Tab
             </kbd>
-            {keys.map((k) => (
+            {Array.from(new Set(keys)).map((k) => (
               <kbd
                 key={k}
                 className="rounded border border-stone-300 bg-stone-50 px-1.5 py-0.5 text-[11px] font-mono text-stone-700 shadow-[0_1px_0_0_#d6d3d1]"

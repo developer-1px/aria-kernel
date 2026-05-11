@@ -1,6 +1,6 @@
 // @ts-nocheck — pre-existing zod-crud API drift / virtual module, tracked in #132
 import { parentOf, ROOT } from '@p/aria-kernel'
-import { defineResource, writeResource } from '@p/aria-kernel/store'
+import { defineResource, writeResource } from '@p/resource'
 import { finderNavigate } from './nav'
 import {
   loadText,
