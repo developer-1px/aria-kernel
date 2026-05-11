@@ -93,6 +93,11 @@ export interface CheckboxGroupOptions {
  *
  * parent click 시 자식 전체를 true (mixed/false 일 때) / false (all true 일 때) 로
  * `checkMany` emit. 자식 click 은 host 가 `check` event 로 dispatch.
+ *
+ * @example canonical 합성 (#148 §4)
+ *   const [data, dispatch] = useReducer(reduceWithDefaults, ITEMS, fromList)
+ *   const { groupProps, parentProps, childProps, items } =
+ *     useCheckboxGroupPattern(data, dispatch)
  */
 export function useCheckboxGroupPattern(
   data: NormalizedData,
