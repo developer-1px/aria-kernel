@@ -1,6 +1,6 @@
+import { useReducer } from 'react'
 import { fromList, singleCurrent } from '@p/aria-kernel'
 import { navigationListPattern } from '@p/aria-kernel/patterns'
-import { useLocalData } from '@p/aria-kernel/local'
 
 export const meta = {
   title: 'Navigation List',
@@ -10,17 +10,16 @@ export const meta = {
   keys: () => [],
 }
 
+const NAV = [
+  { id: 'home', label: 'Home', href: '#home' },
+  { id: 'docs', label: 'Docs', href: '#docs', current: true },
+  { id: 'api', label: 'Api', href: '#api' },
+  { id: 'guides', label: 'Guides', href: '#guides' },
+]
+
 export default function NavigationListDemo() {
-  const [data, onEvent] = useLocalData(
-    () => fromList([
-      { id: 'home', label: 'Home', href: '#home' },
-      { id: 'docs', label: 'Docs', href: '#docs', current: true },
-      { id: 'api', label: 'Api', href: '#api' },
-      { id: 'guides', label: 'Guides', href: '#guides' },
-    ]),
-    singleCurrent,
-  )
-  const { rootProps, linkProps, items } = navigationListPattern(data, onEvent, { label: 'Primary' })
+  const [data, dispatch] = useReducer(singleCurrent, NAV, fromList)
+  const { rootProps, linkProps, items } = navigationListPattern(data, dispatch, { label: 'Primary' })
 
   return (
     <nav {...rootProps} className="rounded-md border border-stone-200 bg-white p-2">
