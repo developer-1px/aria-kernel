@@ -10,11 +10,7 @@ export function App() {
   const activeHash = useActiveHash()
 
   return (
-    <SnapPage>
-      <Intro />
-      {ENTRIES.map((entry, i) => (
-        <PatternScreen key={entry.slug} entry={entry} index={i} total={ENTRIES.length} />
-      ))}
+    <div className="md:flex md:h-screen">
       <CatalogSidebar
         ariaLabel="Pattern index"
         buttonLabel="Index"
@@ -24,7 +20,13 @@ export function App() {
         }))}
         activeSlug={activeHash}
       />
-      <ReproRecorderOverlay />
-    </SnapPage>
+      <SnapPage className="md:flex-1">
+        <Intro />
+        {ENTRIES.map((entry, i) => (
+          <PatternScreen key={entry.slug} entry={entry} index={i} total={ENTRIES.length} />
+        ))}
+        <ReproRecorderOverlay />
+      </SnapPage>
+    </div>
   )
 }

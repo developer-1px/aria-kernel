@@ -74,7 +74,9 @@ function Toolbar() {
 | **State** | `reduce` · `reduceSingleSelect` · `reduceMultiSelect` · `reduceRadio` · `composeReducers` · `fromTree` · `fromList` · `fromFlatTree` · `useControlState` · `useEventBridge` |
 | **Axes** | `composeAxes` · `navigate` · `activate` · `expand` · `treeNavigate` · `typeahead` · `toggle` · `multiSelect` · `gridMultiSelect` |
 | **Roving** | `useRovingTabIndex` · `useSpatialNavigation` · `useActiveDescendant` |
-| **Gesture** | `composeGestures` · `navigateOnActivate` · `selectionFollowsFocus` · `expandBranchOnActivate` |
+| **Gesture** | `composeGestures` · `navigateOnActivate` · `selectionFollowsFocus` · `expandBranchOnActivate` · `expandOnActivate` · `activateProps` · `useZoomPanGesture` |
+| **Key** | `@p/aria-kernel/key` (subpath) — `useShortcut` · `onShortcut` · `bindGlobalKeyMap` · `useKeyMap` · `routeInsideEditable` · `isEditable` · `fromKeyboardEvent` |
+| **Spec** | `APG_KEYBOARD_SPEC` · `allApgChords` · `APG_PATTERN_EXAMPLE_SPEC` · `allApgExamples` · `IMPL_CHORDS` · `normalizeChord` · `normalizeChordSet` |
 | **Patterns** | `@p/aria-kernel/patterns` (subpath) — `useListboxPattern` · `useTreePattern` · ... 21종 |
 
 ## Subpath imports
@@ -82,6 +84,7 @@ function Toolbar() {
 ```ts
 import { composeAxes, navigate } from '@p/aria-kernel/axes'
 import { useRovingTabIndex } from '@p/aria-kernel/roving'
+import { useShortcut } from '@p/aria-kernel/key'
 import { useListboxPattern } from '@p/aria-kernel/patterns'
 ```
 

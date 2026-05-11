@@ -6,13 +6,13 @@ import { useEffect, useRef, useSyncExternalStore, type ReactNode } from 'react'
  * scroll → URL 은 IntersectionObserver 로 가장 잘 보이는 [id] 섹션을
  * `history.replaceState` 갱신. 첫 자식은 hash 비움.
  */
-export function SnapPage({ children }: { children: ReactNode }) {
+export function SnapPage({ children, className }: { children: ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null)
   useScrollToHash(ref)
   return (
     <div
       ref={ref}
-      className="md:h-screen md:snap-y md:snap-mandatory md:overflow-y-scroll overscroll-contain"
+      className={`md:h-screen md:snap-y md:snap-mandatory md:overflow-y-scroll overscroll-contain ${className ?? ''}`}
     >
       {children}
     </div>
