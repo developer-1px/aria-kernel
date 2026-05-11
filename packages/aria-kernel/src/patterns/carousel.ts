@@ -43,6 +43,9 @@ export interface CarouselOptions {
  *   3. rotation control 토글 → 명시적 재개/정지
  *
  * roleDescription="carousel"·"slide" 는 APG 권장 — 스크린리더가 "carousel"·"slide" 로 읽음.
+ *
+ * @example canonical (#148 §4) — opts-only 패턴 (slides 는 props, 라이프사이클은 hook 내부)
+ *   const { rootProps, slideProps, prevProps, nextProps } = useCarouselPattern({ slides, label: '…' })
  */
 export function useCarouselPattern(opts: CarouselOptions): {
   index: number

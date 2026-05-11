@@ -114,6 +114,10 @@ const defaultFilter = (q: string, label: string): boolean =>
  *
  * `useControlState` 가 base(entities/relationships) 와 local meta(focus/expanded)
  * 를 분리 — filtered 갱신 시 entities 만 swap, 키보드 nav 상태는 보존.
+ *
+ * @example canonical 합성 (#148 §4) — 안정 리스트
+ *   const [data, dispatch] = useReducer(reduceWithDefaults, ITEMS, fromList)
+ *   const { comboboxProps, inputProps, listboxProps, items } = useComboboxPattern(data, dispatch)
  */
 export function useComboboxPattern(
   data: NormalizedData,

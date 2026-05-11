@@ -62,6 +62,9 @@ const FOCUSABLE_SELECTOR = [
  *   로 drag-out 방지. (`/lab/dialog-backdrop`)
  * - `on: Record<chord, () => void>` — open 동안 window keydown 미들웨어. editable-guard
  *   준수 (modifier-less chord 는 입력 위젯 안에서 탈취 안 함). (`/lab/dialog-on-keymap`)
+ *
+ * @example canonical (#148 §4) — opts-only 패턴 (단일 인스턴스)
+ *   const { rootProps, backdropProps, closeProps } = useDialogPattern({ open, onClose, label: '…' })
  */
 export function useDialogPattern(opts: DialogOptions = {}): {
   rootRef: RefObject<HTMLElement | null>

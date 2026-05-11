@@ -24,6 +24,9 @@ export interface TooltipOptions {
  *
  * hover/focus 로 열림, blur/Escape 로 닫힘. Escape 처리는 `bindGlobalKeyMap`
  * (declarative SSOT 메커니즘).
+ *
+ * @example canonical (#148 §4) — opts-only 패턴 (단일 인스턴스)
+ *   const { triggerProps, tooltipProps, open } = useTooltipPattern({ label: 'Help' })
  */
 export function useTooltipPattern(opts: TooltipOptions = {}): {
   open: boolean

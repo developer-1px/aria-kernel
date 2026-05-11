@@ -52,6 +52,10 @@ export interface ComboboxSelectOptions {
  *   activate→ {type:'activate', id} + {type:'open', open:false}
  *   escape  → {type:'open', id:ROOT, open:false}
  *   click   → {type:'open', open:!expanded}
+ *
+ * @example canonical 합성 (#148 §4)
+ *   const [data, dispatch] = useReducer(reduceWithDefaults, ITEMS, fromList)
+ *   const { comboboxProps, listboxProps, optionProps, items } = useComboboxSelectPattern(data, dispatch)
  */
 export function useComboboxSelectPattern(
   data: NormalizedData,

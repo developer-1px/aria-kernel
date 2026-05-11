@@ -67,6 +67,10 @@ const defaultFilter = (q: string, label: string): boolean =>
  * Enter 시 focused row 의 첫 cell label 을 input value 로 commit.
  *
  * data: ROOT children = rowIds, 각 row 의 children = cellIds.
+ *
+ * @example canonical 합성 (#148 §4)
+ *   const [data, dispatch] = useReducer(reduceWithDefaults, ROWS, fromTree)
+ *   const { comboboxProps, inputProps, gridProps, rowProps, cellProps } = useComboboxGridPattern(data, dispatch)
  */
 export function useComboboxGridPattern(
   data: NormalizedData,

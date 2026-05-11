@@ -69,6 +69,9 @@ const ARTICLE_ATTR = 'data-feed-article'
  * 위임이 깊은 자식에서도 article id 추적.
  *
  * Ctrl+Home/End (feed 바깥 first/last focusable) 은 host 책임.
+ *
+ * @example canonical (#148 §4) — feed 는 FeedItem[] 직접 (NormalizedData 미사용)
+ *   const { rootProps, articleProps } = useFeedPattern(items, (e) => { ... })
  */
 export function useFeedPattern(
   items: FeedItem[],

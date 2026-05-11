@@ -41,6 +41,9 @@ export interface ComboboxDialogReturn {
  *   ② 반환: inputProps/popoverProps/triggerProps (listbox variant 와 다른 키 집합)
  *   ③ 상태: collection 없음
  *   ④ 라이프사이클: navigate/activate 없음, open/close 만
+ *
+ * @example canonical (#148 §4) — opts-only 패턴 (collection 없는 wrapper, popup 안에서 별도 합성)
+ *   const { inputProps, popoverProps, triggerProps, open } = useComboboxDialogPattern({ label: '…' })
  */
 export function useComboboxDialogPattern(opts: ComboboxDialogOptions): ComboboxDialogReturn {
   const {

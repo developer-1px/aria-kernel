@@ -105,6 +105,10 @@ export interface MenuButtonOptions {
  *       </li>
  *     ))}</ul>
  *   }
+ *
+ * @example canonical 합성 (#148 §4)
+ *   const [data, dispatch] = useReducer(reduceWithDefaults, MENU, fromTree)
+ *   const { triggerProps, rootLevel, getSubmenu } = useMenuButtonPattern(data, dispatch)
  */
 export function useMenuButtonPattern(
   data: NormalizedData,
