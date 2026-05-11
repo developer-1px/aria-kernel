@@ -1,7 +1,6 @@
-import { fromList } from '@p/aria-kernel'
+import { useReducer } from 'react'
+import { axisKeys, fromList, reduceWithDefaults } from '@p/aria-kernel'
 import { tabsAxis, useTabsPattern } from '@p/aria-kernel/patterns'
-import { useLocalData } from '@p/aria-kernel/local'
-import { axisKeys } from '@p/aria-kernel'
 
 export const meta = {
   title: 'Tabs · Manual Activation',
@@ -11,11 +10,11 @@ export const meta = {
   keys: () => axisKeys(tabsAxis()),
 }
 
+const TABS = [{ label: 'Nils' }, { label: 'Agnes', selected: true }, { label: 'Magnus' }]
+
 export default function TabsManualDemo() {
-  const [data, onEvent] = useLocalData(() =>
-    fromList([{ label: 'Nils' }, { label: 'Agnes', selected: true }, { label: 'Magnus' }]),
-  )
-  const { rootProps, tabProps, panelProps, items } = useTabsPattern(data, onEvent, {
+  const [data, dispatch] = useReducer(reduceWithDefaults, TABS, fromList)
+  const { rootProps, tabProps, panelProps, items } = useTabsPattern(data, dispatch, {
     activationMode: 'manual',
   })
 

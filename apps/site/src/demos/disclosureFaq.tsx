@@ -1,7 +1,6 @@
-import { fromList, isExpanded } from '@p/aria-kernel'
-import { useLocalData } from '@p/aria-kernel/local'
+import { useReducer } from 'react'
+import { axisKeys, fromList, isExpanded, reduceWithDefaults } from '@p/aria-kernel'
 import { disclosureAxis, disclosurePattern } from '@p/aria-kernel/patterns'
-import { axisKeys } from '@p/aria-kernel'
 
 export const meta = {
   title: 'Disclosure · FAQ',
@@ -35,11 +34,11 @@ function Item({ id, q, a, data, onEvent }: { id: string; q: string; a: string; d
 }
 
 export default function DisclosureFaqDemo() {
-  const [data, onEvent] = useLocalData(() => fromList(QA.map(({ id }) => ({ id }))))
+  const [data, dispatch] = useReducer(reduceWithDefaults, QA.map(({ id }) => ({ id })), fromList)
   return (
     <div className="w-80 rounded-md border border-stone-200 bg-white px-3">
       {QA.map((item) => (
-        <Item key={item.id} {...item} data={data} onEvent={onEvent} />
+        <Item key={item.id} {...item} data={data} onEvent={dispatch} />
       ))}
     </div>
   )
