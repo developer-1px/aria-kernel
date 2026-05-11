@@ -1,7 +1,6 @@
-import { applyGesture, expandBranchOnActivate, fromTree, reduceWithDefaults } from '@p/aria-kernel'
+import { useReducer } from 'react'
+import { applyGesture, axisKeys, expandBranchOnActivate, fromTree, reduceWithDefaults } from '@p/aria-kernel'
 import { treeAxis, useTreePattern } from '@p/aria-kernel/patterns'
-import { useLocalData } from '@p/aria-kernel/local'
-import { axisKeys } from '@p/aria-kernel'
 
 export const meta = {
   title: 'Tree · Navigation',
@@ -27,17 +26,15 @@ const NAV: Node[] = [
 ]
 
 const reducer = applyGesture(expandBranchOnActivate, reduceWithDefaults)
+const initNav = () => {
+  const d = fromTree(NAV, { expanded: ['docs', 'patterns'] })
+  d.entities['tree'] = { ...(d.entities['tree'] ?? {}), selected: true }
+  return d
+}
 
 export default function TreeNavigationDemo() {
-  const [data, onEvent] = useLocalData(
-    () => {
-      const d = fromTree(NAV, { expanded: ['docs', 'patterns'] })
-      d.entities['tree'] = { ...(d.entities['tree'] ?? {}), selected: true }
-      return d
-    },
-    reducer,
-  )
-  const { rootProps, itemProps, items } = useTreePattern(data, onEvent, {
+  const [data, dispatch] = useReducer(reducer, undefined, initNav)
+  const { rootProps, itemProps, items } = useTreePattern(data, dispatch, {
     label: 'Site navigation',
     variant: 'navigation',
   })

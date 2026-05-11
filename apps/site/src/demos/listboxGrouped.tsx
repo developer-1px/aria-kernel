@@ -1,7 +1,6 @@
-import { fromTree } from '@p/aria-kernel'
+import { useReducer } from 'react'
+import { axisKeys, fromTree, reduceWithDefaults } from '@p/aria-kernel'
 import { listboxAxis, useListboxPattern } from '@p/aria-kernel/patterns'
-import { useLocalData } from '@p/aria-kernel/local'
-import { axisKeys } from '@p/aria-kernel'
 
 export const meta = {
   title: 'Listbox · Grouped',
@@ -32,8 +31,8 @@ const TREE: Node[] = [
 const IDP = 'lb'
 
 export default function ListboxGroupedDemo() {
-  const [data, onEvent] = useLocalData(() => fromTree(TREE))
-  const { rootProps, optionProps, groupProps, groups } = useListboxPattern(data, onEvent, {
+  const [data, dispatch] = useReducer(reduceWithDefaults, TREE, fromTree)
+  const { rootProps, optionProps, groupProps, groups } = useListboxPattern(data, dispatch, {
     label: 'Foods',
     groups: true,
     idPrefix: IDP,
