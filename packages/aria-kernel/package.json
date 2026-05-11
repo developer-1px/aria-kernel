@@ -1,7 +1,7 @@
 {
   "name": "@p/aria-kernel",
   "version": "0.0.2",
-  "description": "ARIA 행동 인프라 — axis 합성, roving tabindex, gesture/intent 변환, ARIA 패턴. 옵션 store 어댑터(/store). 토큰/CSS/UI 어휘 0건.",
+  "description": "React + Reducer 기반 ARIA 행동 인프라 — W3C/APG 패턴 recipe + axis 합성 + roving tabindex + gesture/intent 변환. 데이터는 useReducer(reduceWithDefaults, items, fromList) 직접. 옵션 store 어댑터(/store). 토큰/CSS/UI 어휘 0건.",
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
