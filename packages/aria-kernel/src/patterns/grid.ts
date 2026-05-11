@@ -10,8 +10,13 @@ import {
 } from '../types'
 import { activate, composeAxes, gridNavigate, gridMultiSelect, matchAnyChord } from '../axes'
 
-/** grid edit-mode chord registry — declarative SSOT (F2 enters edit mode). */
-const GRID_EDIT_CHORDS = ['F2'] as const
+/**
+ * grid edit-mode chord registry — declarative SSOT.
+ * F2: APG 권고 — Enter cell edit mode.
+ * Enter: spreadsheet de facto (Google Sheets / Excel) — commit on Enter 동작은 cell edit
+ * mode 내부에서 처리되므로 cell read mode 에서 Enter 는 edit-mode 진입 의도.
+ */
+const GRID_EDIT_CHORDS = ['F2', 'Enter'] as const
 
 /** gridEditKeys — chord registry 도출. */
 export const gridEditKeys = (): readonly string[] => [...GRID_EDIT_CHORDS]
@@ -44,8 +49,8 @@ export interface GridOptions {
    */
   sortable?: boolean
   /**
-   * F2 시 `{type: 'activate', id: <cellId>}` emit (de facto edit intent). 셀 자체에
-   * `aria-readonly` 가 부여된다. default false.
+   * F2 시 `{type: 'editStart', id: <cellId>}` emit (APG-faithful edit intent — 분리되어
+   * click `activate` 와 구분됨). 셀 자체에 `aria-readonly` 가 부여된다. default false.
    */
   editable?: boolean
   autoFocus?: boolean
@@ -61,6 +66,12 @@ export interface GridOptions {
    * 사용자 chord 미들웨어. default 와 충돌 시 userFn(event, originalFn) 으로 wrap.
    */
   on?: ClipboardOnMiddleware
+  /**
+   * Skip built-in chord descriptors (mod+z, Backspace, Delete, mod+shift+v, F2).
+   * Use when the consumer owns key handling globally (e.g. via aria-kernel/key useShortcut)
+   * so the grid root doesn't intercept Backspace/Delete inside per-cell edit inputs.
+   */
+  disableBuiltinChords?: boolean
 }
 
 /**
@@ -74,7 +85,7 @@ export const gridBuiltinChords: readonly BuiltinChordDescriptor[] = [
   { chord: 'Delete',      uiEvent: 'remove', description: 'Remove focused cell',   scope: 'item' },
   { chord: 'mod+shift+v', uiEvent: 'paste',  description: 'Paste as child of focused cell', scope: 'item' },
   // grid-specific edit-mode (F2 enters cell edit, opts.editable=true 일 때 active)
-  { chord: GRID_EDIT_CHORDS[0], uiEvent: 'activate', description: 'Enter cell edit mode (F2)', scope: 'item' },
+  { chord: GRID_EDIT_CHORDS[0], uiEvent: 'editStart', description: 'Enter cell edit mode (F2)', scope: 'item' },
   // clipboard React events
   { chord: 'clipboard:copy',  uiEvent: 'copy',  description: 'Copy focused cell (React onCopy)',   scope: 'item' },
   { chord: 'clipboard:cut',   uiEvent: 'cut',   description: 'Cut focused cell (React onCut)',     scope: 'item' },
@@ -107,8 +118,12 @@ const multiAxis = gridAxis({ multiSelectable: true })
  * data 모델: container → rows → cells. focus 단위 = cell.
  * treegrid 와의 차이: treegrid 는 row 단위 focus + tree 확장, grid 는 cell 단위 2D nav.
  *
- * Cell editing(F2/Enter/Escape) 은 declarative recipe 범위 밖 — 소비자가 cell content
- * 안에서 처리. activate(Enter/Space)는 onEvent 로 emit 만 한다.
+ * **emit 분리 (lab/grid-edit-start 가 invariant 로 굳힘):**
+ * - click → `activate` 만 (focus/select intent)
+ * - F2 → `editStart` 만 (APG edit-mode chord)
+ * - Enter → `editStart` + `activate` 둘 다 (Enter 는 chord match 이자 activate axis 트리거)
+ *
+ * 소비자는 `editStart` 를 edit intent 로 받고, Enter 시 함께 오는 `activate` 는 무시.
  */
 export function useGridPattern(
   data: NormalizedData,
@@ -175,6 +190,7 @@ export function useGridPattern(
     insideEditable,
     on: opts.on,
     builtinChords: gridBuiltinChords,
+    disableBuiltinChords: opts.disableBuiltinChords,
   })
 
   const rootHandleKeyDown = (e: React.KeyboardEvent) => {
@@ -255,7 +271,7 @@ export function useGridPattern(
             onKeyDown: (e: React.KeyboardEvent) => {
               if (matchAnyChord(e as unknown as KeyboardEvent, GRID_EDIT_CHORDS)) {
                 e.preventDefault()
-                onEvent?.({ type: 'activate', id })
+                onEvent?.({ type: 'editStart', id })
               }
             },
           }

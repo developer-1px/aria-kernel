@@ -33,6 +33,12 @@ export interface TabsOptions {
   /** aria-label — ARIA: tablist requires accessible name. */
   label?: string
   labelledBy?: string
+  /**
+   * controlled — 외부 SSOT 의 active tab id. 제공되면 `data.entities[id].selected`
+   * 를 무시하고 `id === active` 로 selected 도출. 외부 state 와 동기화 위해
+   * data mutation 할 필요 없음.
+   */
+  active?: string
 }
 
 /**
@@ -40,6 +46,10 @@ export interface TabsOptions {
  * https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
  *
  * tabProps(id)·panelProps(id) 가 `aria-controls`/`aria-labelledby` 자동 연결.
+ *
+ * **ARIA-punt 흡수 (INVARIANTS §B-ter.2):**
+ * `active?: string` — controlled selection. 제공 시 `data.entities[id].selected` 무시,
+ * `id === active` 로 도출. 외부 SSOT 와 동기화할 때 data mutation 0. (`/lab/tabs-controlled`)
  */
 export function useTabsPattern(
   data: NormalizedData,
@@ -58,6 +68,7 @@ export function useTabsPattern(
     idPrefix = 'tabs',
     label,
     labelledBy,
+    active,
   } = opts
 
   const axis = tabsAxis({ orientation })
@@ -77,7 +88,7 @@ export function useTabsPattern(
     return {
       id,
       label: getLabel(data, id),
-      selected: Boolean(ent.selected),
+      selected: active !== undefined ? id === active : Boolean(ent.selected),
       disabled: isDisabled(data, id),
       posinset: i + 1,
       setsize: ids.length,

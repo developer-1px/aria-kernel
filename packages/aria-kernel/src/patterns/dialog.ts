@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type RefObject } from 'react'
 import { escapeKeys } from '../axes/escape'
 import { INTENT_CHORDS } from '../axes/intentChords'
 import { bindGlobalKeyMap } from '../key/bindGlobalKeyMap'
+import { matchAnyChord } from '../axes/chord'
 import { useFocusTrap, focusTrapKeys } from './focusTrap'
 import type { ItemProps, RootProps } from './types'
 
@@ -28,6 +29,12 @@ export interface DialogOptions {
   describedBy?: string
   rootRef?: RefObject<HTMLElement | null>
   onOpenChange?: (open: boolean) => void
+  /**
+   * 사용자 chord 미들웨어. dialog open 인 동안 window keydown 에 등록.
+   * 예: `on: { 'Enter': () => find.next(), 'shift+Enter': () => find.prev() }`.
+   * modifier 없는 chord 는 editable 안에서 탈취하지 않음 (bindGlobalKeyMap 규칙과 동일).
+   */
+  on?: Record<string, () => void>
 }
 
 const FOCUSABLE_SELECTOR = [
@@ -49,10 +56,17 @@ const FOCUSABLE_SELECTOR = [
  * - `useFocusTrap` → Tab/Shift+Tab DOM focus 경계 (modal=true)
  *
  * focus 진입/복귀 는 별도 layer (focus management) — useEffect 잔존.
+ *
+ * **ARIA-punt 흡수 (INVARIANTS §B-ter.1 + B-ter.5):**
+ * - `backdropProps` — modal backdrop click 닫기. self-target guard (e.target===e.currentTarget)
+ *   로 drag-out 방지. (`/lab/dialog-backdrop`)
+ * - `on: Record<chord, () => void>` — open 동안 window keydown 미들웨어. editable-guard
+ *   준수 (modifier-less chord 는 입력 위젯 안에서 탈취 안 함). (`/lab/dialog-on-keymap`)
  */
 export function useDialogPattern(opts: DialogOptions = {}): {
   rootRef: RefObject<HTMLElement | null>
   rootProps: RootProps
+  backdropProps: RootProps
   closeProps: ItemProps
   open: boolean
   setOpen: (open: boolean) => void
@@ -66,6 +80,7 @@ export function useDialogPattern(opts: DialogOptions = {}): {
     returnFocus = true,
     label, labelledBy, describedBy,
     onOpenChange,
+    on,
   } = opts
   const internalRootRef = useRef<HTMLElement | null>(null)
   const rootRef = opts.rootRef ?? internalRootRef
@@ -92,6 +107,21 @@ export function useDialogPattern(opts: DialogOptions = {}): {
 
   // Tab focus trap — declarative focus primitive (modal 일 때만 활성).
   useFocusTrap(rootRef, open && modal)
+
+  // 사용자 chord 미들웨어 — open 인 동안 window keydown 부착.
+  useEffect(() => {
+    if (!open || !on) return
+    const entries = Object.entries(on)
+    if (entries.length === 0) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.defaultPrevented) return
+      for (const [chord, fn] of entries) {
+        if (matchAnyChord(e, [chord])) { e.preventDefault(); fn(); return }
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open, on])
 
   // Focus management — 진입 focus + 닫힐 때 trigger 복귀.
   useEffect(() => {
@@ -126,5 +156,16 @@ export function useDialogPattern(opts: DialogOptions = {}): {
     onClick: () => setOpen(false),
   } as unknown as ItemProps
 
-  return { rootRef, rootProps, closeProps, open, setOpen }
+  // backdrop — ARIA punt. modal dialog 의 backdrop click 닫기는 spec 본문이 아니라
+  // 플랫폼 관행(Radix Dialog.Overlay · RAC ModalOverlay 의 사실상 표준 위치). kernel 이 흡수.
+  // mousedown 자체 타깃이 backdrop 일 때만 닫는다 — dialog 내부 drag-out 으로 닫히는 사고 방지.
+  const backdropProps: RootProps = {
+    'data-state': open ? 'open' : 'closed',
+    hidden: !open,
+    onMouseDown: (e: React.MouseEvent) => {
+      if (e.target === e.currentTarget) setOpen(false)
+    },
+  } as unknown as RootProps
+
+  return { rootRef, rootProps, backdropProps, closeProps, open, setOpen }
 }
