@@ -170,6 +170,7 @@
   },
   "active": "825ee3727135bc1f",
   "lastOpenFiles": [
+    "packages/aria-kernel/CANONICAL.md",
     "packages/aria-kernel/src/patterns/devWarnMultiSelect.ts",
     "packages/aria-kernel/src/patterns/usePopupBlurRace.ts",
     "dist/_fs/docs/api/variables/state.singleSelectHandles.html",
@@ -180,7 +181,6 @@
     "dist/_fs/docs/api/variables/state.REDUCE_PRESETS.html",
     "dist/_fs/docs/api/variables/state.multiSelectToggleHandles.html",
     "dist/_fs/docs/api/variables/state.checkToggleHandles.html",
-    "dist/_fs/docs/api/variables/patterns.treeGridBuiltinChords.html",
     "dist/_fs/docs/adr/0003-aria-punt-absorption-line.md",
     "docs/adr/0003-aria-punt-absorption-line.md",
     "packages/aria-kernel/coverage/sort-arrow-sprite.png",

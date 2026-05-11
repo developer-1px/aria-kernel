@@ -5,7 +5,9 @@
  * shared data vocabulary (NormalizedData / UiEvent) · middleware.
  *
  * Optional store adapter (resource / feature) at `@p/aria-kernel/store`.
- * Demo quick-start helpers at `@p/aria-kernel/local`.
+ *
+ * Data: React `useReducer(reduceWithDefaults, items, fromList)` 직접 합성.
+ * 라이브러리는 `use*Data` / `use*Value` wrapper 를 제공하지 않는다 (#148).
  *
  * Knows nothing about: tokens · CSS · component vocabulary.
  */

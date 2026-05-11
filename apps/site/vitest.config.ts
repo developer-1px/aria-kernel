@@ -15,7 +15,6 @@ export default defineConfig({
       { find: /^@p\/aria-kernel\/key$/, replacement: path.join(headless, 'key/index.ts') },
       { find: /^@p\/aria-kernel\/axes$/, replacement: path.join(headless, 'axes/index.ts') },
       { find: /^@p\/aria-kernel\/state$/, replacement: path.join(headless, 'state/index.ts') },
-      { find: /^@p\/aria-kernel\/local$/, replacement: path.join(headless, 'local/index.ts') },
       { find: /^@p\/aria-kernel$/, replacement: path.join(headless, 'index.ts') },
       { find: /^@apps\/outliner\/(.+)$/, replacement: path.join(outliner, '$1') },
       { find: /^@apps\/outliner$/, replacement: path.join(outliner, 'index.ts') },

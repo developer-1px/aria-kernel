@@ -28,9 +28,9 @@ export interface SliderOptions {
  *
  * 단일 number 컨트롤 — 키보드: Arrow ±step, Home/End min/max, PageUp/PageDown ±step*10.
  *
- * @example
- *   const [value, dispatch] = useLocalValue(40)
- *   const { thumbProps, ... } = sliderPattern(value, dispatch,
+ * @example canonical (#148)
+ *   const [value, setValue] = useState(40)
+ *   const { thumbProps, ... } = sliderPattern(value, (e) => setValue(e.value),
  *     { min: 0, max: 100, step: 5, label: 'Volume' })
  */
 export function sliderPattern(

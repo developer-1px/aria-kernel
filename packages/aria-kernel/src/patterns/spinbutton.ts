@@ -34,9 +34,9 @@ export interface SpinbuttonOptions {
  * native `<input type="number">` 가 충분할 때는 그쪽이 우선. custom widget
  * (예: 시:분 picker, 통화 입력 등) 일 때 본 recipe 사용.
  *
- * @example
- *   const [n, dispatch] = useLocalValue(5)
- *   const { spinbuttonProps } = spinbuttonPattern(n, dispatch,
+ * @example canonical (#148)
+ *   const [n, setN] = useState(5)
+ *   const { spinbuttonProps } = spinbuttonPattern(n, (e) => setN(e.value),
  *     { min: 0, max: 10, step: 1, label: 'Quantity' })
  */
 export function spinbuttonPattern(

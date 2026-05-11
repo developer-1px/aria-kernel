@@ -1,4 +1,4 @@
-import { useLocalValue } from '@p/aria-kernel/local'
+import { useState } from 'react'
 import { sliderAxis, sliderPattern } from '@p/aria-kernel/patterns'
 import { axisKeys } from '@p/aria-kernel'
 
@@ -11,8 +11,8 @@ export const meta = {
 }
 
 export default function SliderDemo() {
-  const [value, dispatch] = useLocalValue(40)
-  const { rootProps, trackProps, rangeProps, thumbProps } = sliderPattern(value, dispatch, {
+  const [value, setValue] = useState(40)
+  const { rootProps, trackProps, rangeProps, thumbProps } = sliderPattern(value, (e) => setValue(e.value), {
     min: 0,
     max: 100,
     step: 5,

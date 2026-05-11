@@ -1,4 +1,4 @@
-import { useLocalValue } from '@p/aria-kernel/local'
+import { useState } from 'react'
 import { switchAxis, switchPattern } from '@p/aria-kernel/patterns'
 import { axisKeys } from '@p/aria-kernel'
 
@@ -11,8 +11,8 @@ export const meta = {
 }
 
 export default function SwitchDivDemo() {
-  const [on, dispatch] = useLocalValue(true)
-  const { switchProps } = switchPattern(on, dispatch, { label: 'Sound' })
+  const [on, setOn] = useState(true)
+  const { switchProps } = switchPattern(on, (e) => setOn(e.value), { label: 'Sound' })
 
   return (
     <label className="flex items-center gap-3 text-sm">

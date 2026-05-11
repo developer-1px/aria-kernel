@@ -18,9 +18,9 @@ export interface SwitchOptions {
  *
  * 단일 boolean 컨트롤 — activate 시 `{type:'value', value:!checked}` 직렬 emit.
  *
- * @example
- *   const [on, dispatch] = useLocalValue(false)
- *   const { switchProps } = switchPattern(on, dispatch, { label: 'Mute' })
+ * @example canonical (#148)
+ *   const [on, setOn] = useState(false)
+ *   const { switchProps } = switchPattern(on, (e) => setOn(e.value), { label: 'Mute' })
  */
 export function switchPattern(
   checked: boolean,

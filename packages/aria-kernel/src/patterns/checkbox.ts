@@ -38,8 +38,11 @@ export interface CheckboxOptions {
  * 두 변종을 흡수. mixed → click 은 false → true 로 진행 (APG default).
  *
  * 시그니처는 `switchPattern` 정합 — `(checked, dispatch?, opts)`. dispatch 는
- * `{type:'value', value: !current}` 만 emit (mixed → true). uncontrolled 모드는
- * `useLocalValue` 와 조합.
+ * `{type:'value', value: !current}` 만 emit (mixed → true).
+ *
+ * @example canonical (#148)
+ *   const [checked, setChecked] = useState<CheckboxState>(false)
+ *   const { checkboxProps } = checkboxPattern(checked, (e) => setChecked(e.value), { label: '…' })
  */
 export function checkboxPattern(
   checked: CheckboxState,

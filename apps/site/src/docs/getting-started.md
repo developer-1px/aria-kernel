@@ -17,17 +17,17 @@ npm install file:../ds/packages/aria-kernel
 
 ## 첫 import
 
-세 곳에서 끌어 쓴다 — core, patterns, local quick-start.
+두 곳에서 끌어 쓴다 — core + patterns. 데이터 state 는 React `useReducer` 직접.
 
 ```ts
-import { fromList } from '@p/aria-kernel'
+import { useReducer } from 'react'
+import { fromList, reduceWithDefaults } from '@p/aria-kernel'
 import { useListboxPattern } from '@p/aria-kernel/patterns'
-import { useLocalData } from '@p/aria-kernel/local'
 ```
 
-- `@p/aria-kernel` — `NormalizedData`, `UiEvent`, axes, roving, gesture (core 어휘)
-- `@p/aria-kernel/patterns` — APG recipe 24종 (`useListboxPattern`, `useTabsPattern`, ...)
-- `@p/aria-kernel/local` — 데모용 quick-start state (`useLocalData`, `useLocalValue`)
+- `@p/aria-kernel` — `NormalizedData`, `UiEvent`, axes, roving, gesture, `reduce*`, `from*` (core 어휘)
+- `@p/aria-kernel/patterns` — APG recipe (`useListboxPattern`, `useTabsPattern`, ...)
+- 라이브러리는 `use*Data` / `use*Value` wrapper 를 제공하지 않는다 (#148).
 
 ## 데이터 만들기 — `fromList`
 
@@ -49,20 +49,20 @@ const seed = fromList([
 recipe 한 줄이 `rootProps`, `optionProps(id)`, `items` 를 돌려준다. markup 결정은 소비자.
 
 ```tsx
-import { fromList } from '@p/aria-kernel'
+import { useReducer } from 'react'
+import { fromList, reduceWithDefaults } from '@p/aria-kernel'
 import { useListboxPattern } from '@p/aria-kernel/patterns'
-import { useLocalData } from '@p/aria-kernel/local'
+
+const FRUITS = [
+  { label: 'Apple' },
+  { label: 'Banana' },
+  { label: 'Cherry' },
+  { label: 'Durian' },
+]
 
 export default function Demo() {
-  const [data, onEvent] = useLocalData(() =>
-    fromList([
-      { label: 'Apple' },
-      { label: 'Banana' },
-      { label: 'Cherry' },
-      { label: 'Durian' },
-    ]),
-  )
-  const { rootProps, optionProps, items } = useListboxPattern(data, onEvent)
+  const [data, dispatch] = useReducer(reduceWithDefaults, FRUITS, fromList)
+  const { rootProps, optionProps, items } = useListboxPattern(data, dispatch)
 
   return (
     <ul

@@ -68,7 +68,7 @@ const { rootProps, itemProps } = useListboxPattern(data, dispatch, { label: '…
 |---|---|
 | `useAccordion({ items })` facade | 검은 상자 — 부품 가림 |
 | Controlled/Uncontrolled props | 새 개념 증가 |
-| `useLocalData` / `useLocalValue` | 모호 prefix (`Local` 이 무엇의 local?) |
+| `useLocalData` / `useLocalValue` (제거됨) | 모호 prefix + React 표준 복제. `useReducer` / `useState` 직접 |
 | `useUiReducer` wrapper | 모호 prefix (`Ui` 가 useReducer 와 무슨 차이?) |
 
 원칙: 라이브러리는 **React 표준 어휘 위에 ARIA recipe 만 더한다.** wrapper 로 React 어휘를 가리지 않는다.

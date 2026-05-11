@@ -1,4 +1,4 @@
-import { useLocalValue } from '@p/aria-kernel/local'
+import { useState } from 'react'
 import { splitterAxis, splitterPattern } from '@p/aria-kernel/patterns'
 import { axisKeys } from '@p/aria-kernel'
 
@@ -11,8 +11,8 @@ export const meta = {
 }
 
 export default function SplitterVerticalDemo() {
-  const [value, dispatch] = useLocalValue(40)
-  const { rootProps, handleProps } = splitterPattern(value, dispatch, {
+  const [value, setValue] = useState(40)
+  const { rootProps, handleProps } = splitterPattern(value, (e) => setValue(e.value), {
     orientation: 'vertical',
     min: 10,
     max: 90,

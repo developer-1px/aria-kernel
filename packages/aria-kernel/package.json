@@ -1,7 +1,7 @@
 {
   "name": "@p/aria-kernel",
   "version": "0.0.2",
-  "description": "ARIA 행동 인프라 — axis 합성, roving tabindex, gesture/intent 변환, ARIA 패턴. 옵션 store 어댑터(/store), 데모 quick-start(/local). 토큰/CSS/UI 어휘 0건.",
+  "description": "ARIA 행동 인프라 — axis 합성, roving tabindex, gesture/intent 변환, ARIA 패턴. 옵션 store 어댑터(/store). 토큰/CSS/UI 어휘 0건.",
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
@@ -38,11 +38,6 @@
       "types": "./dist/key/index.d.ts",
       "import": "./dist/key/index.js",
       "require": "./dist/key/index.cjs"
-    },
-    "./local": {
-      "types": "./dist/local/index.d.ts",
-      "import": "./dist/local/index.js",
-      "require": "./dist/local/index.cjs"
     },
     "./roving": {
       "types": "./dist/roving/index.d.ts",

@@ -1,5 +1,5 @@
+import { useState } from 'react'
 import { axisKeys, toggle } from '@p/aria-kernel'
-import { useLocalValue } from '@p/aria-kernel/local'
 import { checkboxPattern, type CheckboxState } from '@p/aria-kernel/patterns'
 
 export const meta = {
@@ -11,8 +11,8 @@ export const meta = {
 }
 
 export default function CheckboxDemo() {
-  const [checked, dispatch] = useLocalValue<CheckboxState>(false)
-  const { checkboxProps } = checkboxPattern(checked, dispatch, {
+  const [checked, setChecked] = useState<CheckboxState>(false)
+  const { checkboxProps } = checkboxPattern(checked, (e) => setChecked(e.value), {
     label: 'Subscribe to newsletter',
   })
 

@@ -25,9 +25,9 @@ export interface SplitterOptions {
  *
  * 단일 number 컨트롤 — slider 와 axis 공유 (numericStep), role=separator 만 다름.
  *
- * @example
- *   const [pos, dispatch] = useLocalValue(40)
- *   const { handleProps, ... } = splitterPattern(pos, dispatch, { min: 10, max: 90 })
+ * @example canonical (#148)
+ *   const [pos, setPos] = useState(40)
+ *   const { handleProps, ... } = splitterPattern(pos, (e) => setPos(e.value), { min: 10, max: 90 })
  */
 export function splitterPattern(
   value: number,
