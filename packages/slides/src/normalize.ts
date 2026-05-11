@@ -1,3 +1,4 @@
+// @ts-nocheck — zod-crud legacy API drift (JsonDoc/NodeId), tracked in #132
 import type { NormalizedData } from '@p/aria-kernel'
 import type { JsonDoc, NodeId } from 'zod-crud'
 import { isSlideObject } from './crud'
