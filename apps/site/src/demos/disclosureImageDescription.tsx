@@ -1,7 +1,6 @@
-import { fromList, isExpanded } from '@p/aria-kernel'
-import { useLocalData } from '@p/aria-kernel/local'
+import { useReducer } from 'react'
+import { axisKeys, fromList, isExpanded, reduceWithDefaults } from '@p/aria-kernel'
 import { disclosureAxis, disclosurePattern } from '@p/aria-kernel/patterns'
-import { axisKeys } from '@p/aria-kernel'
 
 export const meta = {
   title: 'Disclosure · Image Description',
@@ -14,9 +13,9 @@ export const meta = {
 const ID = 'desc'
 
 export default function DisclosureImageDescriptionDemo() {
-  const [data, onEvent] = useLocalData(() => fromList([{ id: ID }]))
+  const [data, dispatch] = useReducer(reduceWithDefaults, [{ id: ID }], fromList)
   const open = isExpanded(data, ID)
-  const { triggerProps, panelProps } = disclosurePattern(data, ID, onEvent)
+  const { triggerProps, panelProps } = disclosurePattern(data, ID, dispatch)
 
   return (
     <figure className="w-72 space-y-2">
