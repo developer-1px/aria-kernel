@@ -23,6 +23,10 @@ const axis = accordionAxis()
  *
  * `meta.expanded` 가 expanded 항목 SSoT. `single` mode 는 패턴이 형제 자동
  * collapse 를 emit. activate(click) → expand toggle.
+ *
+ * @example canonical 합성 (#148 §4)
+ *   const [data, dispatch] = useReducer(reduceWithDefaults, ITEMS, fromList)
+ *   const { rootProps, buttonProps, regionProps, items } = useAccordionPattern(data, dispatch)
  */
 export function useAccordionPattern(
   data: NormalizedData,

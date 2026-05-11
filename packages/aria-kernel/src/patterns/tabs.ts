@@ -47,6 +47,10 @@ export interface TabsOptions {
  *
  * tabProps(id)·panelProps(id) 가 `aria-controls`/`aria-labelledby` 자동 연결.
  *
+ * @example canonical 합성 (#148 §4)
+ *   const [data, dispatch] = useReducer(reduceWithDefaults, ITEMS, fromList)
+ *   const { rootProps, tabProps, panelProps, items } = useTabsPattern(data, dispatch)
+ *
  * **ARIA-punt 흡수 (INVARIANTS §B-ter.2):**
  * `active?: string` — controlled selection. 제공 시 `data.entities[id].selected` 무시,
  * `id === active` 로 도출. 외부 SSOT 와 동기화할 때 data mutation 0. (`/lab/tabs-controlled`)

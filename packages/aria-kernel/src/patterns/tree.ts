@@ -221,6 +221,11 @@ function runEffect(
 /**
  * tree — APG `/treeview/` recipe.
  * https://www.w3.org/WAI/ARIA/apg/patterns/treeview/
+ *
+ * @example canonical 합성 (#148 §4) — tree 데이터는 fromTree
+ *   const reducer = applyGesture(expandBranchOnActivate, reduceWithDefaults)
+ *   const [data, dispatch] = useReducer(reducer, undefined, () => fromTree(NODES))
+ *   const { rootProps, itemProps, items } = useTreePattern(data, dispatch)
  */
 export function useTreePattern(
   data: NormalizedData,
