@@ -69,6 +69,16 @@ export { switchPattern, switchAxis, type SwitchOptions } from './switch'
 export { navigationListPattern, type NavigationListOptions } from './navigationList'
 export { alertPattern } from './alert'
 
+// L1 pattern-named reducer hooks — useReducer(reduce*, items, from*) shortcut
+export {
+  useListboxReducer, useTreeReducer, useGridReducer, useTreeGridReducer,
+  useTabsReducer, useAccordionReducer, useToolbarReducer, useCheckboxGroupReducer,
+  useComboboxReducer, useComboboxSelectReducer, useComboboxGridReducer,
+  useMenuReducer, useMenubarReducer, useMenuButtonReducer,
+  useRadioGroupReducer,
+  type SelectableReducerOptions, type SingleReducerOptions,
+} from './reducers'
+
 export type {
   BaseItem, TreeItem, RootProps, ItemProps,
   PatternProps, ControlProps,
