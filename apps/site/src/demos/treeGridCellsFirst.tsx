@@ -1,12 +1,12 @@
+import { useReducer } from 'react'
 import {
   applyGesture,
+  axisKeys,
   expandBranchOnActivate,
   fromTree,
   reduceWithDefaults,
 } from '@p/aria-kernel'
 import { treeGridAxis, useTreeGridPattern } from '@p/aria-kernel/patterns'
-import { useLocalData } from '@p/aria-kernel/local'
-import { axisKeys } from '@p/aria-kernel'
 
 export const meta = {
   title: 'Tree Grid · Cells-First',
@@ -35,10 +35,10 @@ const COLS = ['Name', 'Size', 'Modified']
 const reducer = applyGesture(expandBranchOnActivate, reduceWithDefaults)
 
 export default function TreeGridCellsFirstDemo() {
-  const [data, onEvent] = useLocalData(() => fromTree(rows, { expanded: ['src'] }), reducer)
+  const [data, dispatch] = useReducer(reducer, undefined, () => fromTree(rows, { expanded: ['src'] }))
   const {
     treegridProps, headerRowProps, rowProps, columnheaderProps, rowheaderProps, gridcellProps, items,
-  } = useTreeGridPattern(data, onEvent, {
+  } = useTreeGridPattern(data, dispatch, {
     label: 'Files (cells-first)',
     colCount: COLS.length,
     navigationMode: 'cell',

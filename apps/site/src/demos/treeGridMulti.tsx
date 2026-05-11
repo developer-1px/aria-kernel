@@ -1,12 +1,12 @@
+import { useReducer } from 'react'
 import {
   applyGesture,
+  axisKeys,
   expandBranchOnActivate,
   fromTree,
   reduceWithMultiSelect,
 } from '@p/aria-kernel'
 import { treeGridAxis, useTreeGridPattern } from '@p/aria-kernel/patterns'
-import { useLocalData } from '@p/aria-kernel/local'
-import { axisKeys } from '@p/aria-kernel'
 
 export const meta = {
   title: 'Tree Grid · Multi',
@@ -42,11 +42,7 @@ const COLS = ['Name', 'Size', 'Modified']
 const treeGridReducer = applyGesture(expandBranchOnActivate, reduceWithMultiSelect)
 
 export default function TreeGridMultiDemo() {
-  const [data, onEvent] = useLocalData(
-    () =>
-      fromTree(rows, { expanded: ['src'] }),
-    treeGridReducer,
-  )
+  const [data, dispatch] = useReducer(treeGridReducer, undefined, () => fromTree(rows, { expanded: ['src'] }))
   const {
     treegridProps,
     headerRowProps,
@@ -55,7 +51,7 @@ export default function TreeGridMultiDemo() {
     rowheaderProps,
     gridcellProps,
     items,
-  } = useTreeGridPattern(data, onEvent, {
+  } = useTreeGridPattern(data, dispatch, {
     multiSelectable: true,
     label: 'Files (multi-select)',
     colCount: COLS.length,

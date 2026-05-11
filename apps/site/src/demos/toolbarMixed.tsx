@@ -1,7 +1,6 @@
-import { fromList } from '@p/aria-kernel'
-import { useLocalData } from '@p/aria-kernel/local'
+import { useReducer } from 'react'
+import { axisKeys, fromList, reduceWithDefaults } from '@p/aria-kernel'
 import { toolbarAxis, useToolbarPattern } from '@p/aria-kernel/patterns'
-import { axisKeys } from '@p/aria-kernel'
 
 export const meta = {
   title: 'Toolbar · Mixed Items',
@@ -27,8 +26,8 @@ const ITEMS = [
 ]
 
 export default function ToolbarMixedDemo() {
-  const [data, onEvent] = useLocalData(() => fromList(ITEMS))
-  const { rootProps, toolbarItemProps, items } = useToolbarPattern(data, onEvent, {
+  const [data, dispatch] = useReducer(reduceWithDefaults, ITEMS, fromList)
+  const { rootProps, toolbarItemProps, items } = useToolbarPattern(data, dispatch, {
     label: 'Editor toolbar',
   })
 
