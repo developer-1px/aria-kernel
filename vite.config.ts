@@ -28,6 +28,12 @@ export default defineConfig({
     outDir: resolve(__dirname, 'dist'),
     emptyOutDir: true,
   },
+  // zod-crud 는 alias 로 legacy shim 에 연결 — vite optimizeDeps 가 미리 node_modules
+  // 의 실제 dist 를 prebundle 하면 alias 가 무시돼 'createJsonCrud' export missing
+  // 런타임 크래시 (#132). exclude 로 prebundle 차단해 alias 가 이긴다.
+  optimizeDeps: {
+    exclude: ['zod-crud'],
+  },
   resolve: {
     alias: [
       { find: /^zod-crud$/, replacement: resolve(__dirname, 'tooling/zod-crud-shim.ts') },
