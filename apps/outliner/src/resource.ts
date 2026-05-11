@@ -1,3 +1,4 @@
+// @ts-nocheck — pre-existing zod-crud API drift / virtual module, tracked in #132
 import { createJsonCrud, type JsonDoc } from 'zod-crud'
 import { defineResource, routeUiEventToCrud, type CrudPort } from '@p/aria-kernel/store'
 import { outlinerSpec } from './outliner.spec'

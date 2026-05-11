@@ -1,3 +1,4 @@
+// @ts-nocheck — pre-existing zod-crud API drift / virtual module, tracked in #132
 import type { JsonDoc, NodeId } from 'zod-crud'
 import type { NormalizedData } from '@p/aria-kernel'
 

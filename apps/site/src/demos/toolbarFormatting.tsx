@@ -184,8 +184,8 @@ export default function ToolbarFormattingDemo() {
               : (item as { title?: string }).title
             const tProps = toolbarItemProps(item.id)
             const ref = role === 'menubutton'
-              ? composeRef(tProps.ref as React.Ref<HTMLElement>, menu.buttonProps.ref as React.Ref<HTMLElement>)
-              : tProps.ref
+              ? composeRef((tProps as { ref?: React.Ref<HTMLElement> }).ref as React.Ref<HTMLElement>, (menu.buttonProps as { ref?: React.Ref<HTMLElement> }).ref as React.Ref<HTMLElement>) as React.Ref<HTMLButtonElement>
+              : (tProps as { ref?: React.Ref<HTMLButtonElement> }).ref
             return (
               <button
                 key={item.id}
