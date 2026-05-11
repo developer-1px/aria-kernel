@@ -1,5 +1,5 @@
-import { fromList } from '@p/aria-kernel'
-import { useLocalData } from '@p/aria-kernel/local'
+import { useReducer } from 'react'
+import { fromList, reduceWithDefaults } from '@p/aria-kernel'
 import { useMenuButtonPattern } from '@p/aria-kernel/patterns'
 
 export const meta = {
@@ -18,8 +18,8 @@ const LINKS = [
 ]
 
 export default function MenuButtonNavigationDemo() {
-  const [data, onEvent] = useLocalData(() => fromList(LINKS))
-  const { triggerProps, menuProps, itemProps, items, open } = useMenuButtonPattern(data, onEvent, {
+  const [data, dispatch] = useReducer(reduceWithDefaults, LINKS, fromList)
+  const { triggerProps, menuProps, itemProps, items, open } = useMenuButtonPattern(data, dispatch, {
     label: 'Navigation menu',
   })
 
