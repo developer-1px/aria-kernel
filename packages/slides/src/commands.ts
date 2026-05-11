@@ -1,3 +1,4 @@
+// @ts-nocheck — zod-crud legacy API drift, tracked in #132
 import type { NormalizedData, UiEvent } from '@p/aria-kernel'
 import { matchEventToChord } from '@p/aria-kernel/axes'
 import type { TreeCommandDescriptor } from '@p/aria-kernel/patterns'

@@ -1,8 +1,10 @@
-import { useReducer, useMemo } from 'react'
+import { useReducer } from 'react'
 import { fromTree, reduceWithDefaults, type UiEvent } from '@p/aria-kernel'
 import { useTreePattern } from '@p/aria-kernel/patterns'
 
-const TREE = [
+interface Node { id: string; label: string; children?: Node[] }
+
+const TREE: Node[] = [
   { id: 'fruit', label: 'Fruits', children: [
     { id: 'apple', label: 'Apple' },
     { id: 'citrus', label: 'Citrus', children: [
@@ -16,8 +18,7 @@ const TREE = [
 ]
 
 export function TreeArrowDemo() {
-  const initial = useMemo(() => fromTree(TREE), [])
-  const [data, dispatch] = useReducer(reduceWithDefaults, initial)
+  const [data, dispatch] = useReducer(reduceWithDefaults, TREE, fromTree)
   const { rootProps, itemProps, items } = useTreePattern(
     data, (e: UiEvent) => dispatch(e), { label: '카테고리', autoFocus: true },
   )
