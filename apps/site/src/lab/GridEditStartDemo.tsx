@@ -1,17 +1,21 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { fromTree, type UiEvent } from '@p/aria-kernel'
 import { useGridPattern } from '@p/aria-kernel/patterns'
 
+interface Node { id: string; label: string; children?: Node[] }
+
+const ROWS: Node[] = [
+  { id: 'r0', label: '1', children: [
+    { id: 'r0-A', label: 'A1' }, { id: 'r0-B', label: 'B1' },
+  ] },
+  { id: 'r1', label: '2', children: [
+    { id: 'r1-A', label: 'A2' }, { id: 'r1-B', label: 'B2' },
+  ] },
+]
+
 export function GridEditStartDemo() {
   const [log, setLog] = useState<string[]>([])
-  const data = useMemo(() => fromTree([
-    { id: 'r0', label: '1', children: [
-      { id: 'r0-A', label: 'A1' }, { id: 'r0-B', label: 'B1' },
-    ] },
-    { id: 'r1', label: '2', children: [
-      { id: 'r1-A', label: 'A2' }, { id: 'r1-B', label: 'B2' },
-    ] },
-  ]), [])
+  const data = fromTree(ROWS)
 
   const { rootProps, rowProps, cellProps, rows } = useGridPattern(data, (e: UiEvent) => {
     setLog((l) => [`${e.type}${'id' in e ? ' id=' + e.id : ''}`, ...l].slice(0, 6))

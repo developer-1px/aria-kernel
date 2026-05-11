@@ -1,4 +1,3 @@
-// @ts-nocheck — zod-crud legacy API drift, tracked in #132
 import { createDeckCrud, normalizeDeck } from '@p/slides'
 import { defineResource, routeUiEventToCrud, type CrudPort } from '@p/aria-kernel/store'
 import type { JsonDoc } from 'zod-crud'

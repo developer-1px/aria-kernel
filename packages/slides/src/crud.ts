@@ -1,4 +1,3 @@
-// @ts-nocheck — zod-crud legacy API drift (createJsonCrud/JsonDoc), tracked in #132
 import { createJsonCrud, type JsonCrud, type JsonDoc, type JsonValue } from 'zod-crud'
 import { DeckDocSchema, emptySlide, SAMPLE_DECK, type DeckDoc } from './schema'
 
@@ -18,7 +17,7 @@ export function createDeckCrud(initial: DeckDoc = SAMPLE_DECK): JsonCrud<DeckDoc
   return createJsonCrud(DeckDocSchema, initial, {
     childKeys: ['slides', 'children'],
     focusFilter: isSlideObject,
-    defaultFor: (path): JsonValue => {
+    defaultFor: (path: string[]): JsonValue => {
       const last = path[path.length - 1]
       if (last === 'slides' || last === 'children') return emptySlide()
       return emptySlide()

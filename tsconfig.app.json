@@ -34,9 +34,10 @@
       "@p/devtools/*": ["packages/devtools/src/*"],
       "@p/site": ["apps/site/src/main.tsx"],
       "@p/site/*": ["apps/site/src/*"],
-      "@apps/*": ["apps/*/src/index.ts", "apps/*/src"]
+      "@apps/*": ["apps/*/src/index.ts", "apps/*/src"],
+      "zod-crud": ["tooling/zod-crud-shim.ts"]
     }
   },
-  "include": ["apps/site/src", "packages/aria-kernel/src", "packages/slides/src", "apps/*/src"],
+  "include": ["apps/site/src", "packages/aria-kernel/src", "packages/slides/src", "apps/*/src", "tooling/zod-crud-shim.ts"],
   "exclude": []
 }
