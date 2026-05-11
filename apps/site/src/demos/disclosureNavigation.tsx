@@ -1,7 +1,6 @@
-import { fromList, isExpanded } from '@p/aria-kernel'
-import { useLocalData } from '@p/aria-kernel/local'
+import { useReducer } from 'react'
+import { axisKeys, fromList, isExpanded, reduceWithDefaults } from '@p/aria-kernel'
 import { disclosureAxis, disclosurePattern } from '@p/aria-kernel/patterns'
-import { axisKeys } from '@p/aria-kernel'
 
 export const meta = {
   title: 'Disclosure · Navigation',
@@ -40,12 +39,12 @@ function Section({ id, label, subs, data, onEvent }: { id: string; label: string
 }
 
 export default function DisclosureNavigationDemo() {
-  const [data, onEvent] = useLocalData(() => fromList(NAV.map(({ id }) => ({ id }))))
+  const [data, dispatch] = useReducer(reduceWithDefaults, NAV.map(({ id }) => ({ id })), fromList)
   return (
     <nav>
       <ul className="flex gap-1 rounded-md border border-stone-200 bg-white p-1">
         {NAV.map((s) => (
-          <Section key={s.id} {...s} data={data} onEvent={onEvent} />
+          <Section key={s.id} {...s} data={data} onEvent={dispatch} />
         ))}
       </ul>
     </nav>
