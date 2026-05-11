@@ -49,6 +49,17 @@ npm install react@^19
 npm install file:../ds/packages/aria-kernel
 ```
 
+`file:` link 사용 시, consumer 의 Vite/번들러에 `react` dedupe 를 추가한다 — workspace dev 의 `node_modules/react` symlink 가 함께 노출되어 React 인스턴스가 중복되면 `Invalid hook call` 이 발생한다.
+
+```ts
+// vite.config.ts
+export default defineConfig({
+  resolve: { dedupe: ['react', 'react-dom'] },
+})
+```
+
+npm registry 설치(`npm install @p/aria-kernel`)에서는 불필요. 대안으로 `pnpm pack` 으로 tarball 을 만들어 설치하면 dedupe 없이 작동한다.
+
 ## 한 줄 사용
 
 ```tsx
