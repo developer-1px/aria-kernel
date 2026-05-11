@@ -32,7 +32,7 @@ const rows: Row[] = [
 ]
 
 const COLS = ['Name', 'Size', 'Modified']
-const reducer = applyGesture(expandBranchOnActivate, reduceSingleSelect)
+const reducer = applyGesture(reduceSingleSelect, expandBranchOnActivate)
 
 export default function TreeGridCellsOnlyDemo() {
   const [data, dispatch] = useReducer(reducer, undefined, () => fromTree(rows, { expanded: ['src'] }))

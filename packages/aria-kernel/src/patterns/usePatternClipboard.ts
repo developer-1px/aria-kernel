@@ -15,7 +15,7 @@ import type React from 'react'
 import type { UiEvent } from '../types'
 import { matchEventToChord } from '../axes/chord'
 import { routeInsideEditable, isEditable, type InsideEditableMode } from '../key/insideEditable'
-import type { BuiltinChordDescriptor } from './types'
+import type { KeyDescriptor } from './types'
 
 export type ClipboardOnMiddleware = Record<
   string,
@@ -33,7 +33,7 @@ export interface UsePatternClipboardArgs {
    */
   on?: ClipboardOnMiddleware
   /** 패턴이 자기 builtin chord 목록 주입 — descriptor 기반 라우팅 */
-  builtinChords?: readonly BuiltinChordDescriptor[]
+  builtinChords?: readonly KeyDescriptor[]
   /**
    * tree 처럼 패턴이 자체 commands 로 chord dispatch 를 흡수했을 때 true.
    * DEFAULT_CHORDS 비활성, 'on' middleware 만 작동 (default 없이 user chord 만 처리).

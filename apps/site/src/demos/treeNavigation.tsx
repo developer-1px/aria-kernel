@@ -25,7 +25,7 @@ const NAV: Node[] = [
   { id: 'about', label: 'About' },
 ]
 
-const reducer = applyGesture(expandBranchOnActivate, reduceSingleSelect)
+const reducer = applyGesture(reduceSingleSelect, expandBranchOnActivate)
 const initNav = () => {
   const d = fromTree(NAV, { expanded: ['docs', 'patterns'] })
   d.entities['tree'] = { ...(d.entities['tree'] ?? {}), selected: true }

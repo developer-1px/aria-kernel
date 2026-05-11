@@ -18,7 +18,7 @@ import { selectionFollowsFocus as applySelectionFollowsFocus } from '../gesture'
 import { useRovingTabIndex } from '../roving/useRovingTabIndex'
 import type { InsideEditableMode } from '../key/insideEditable'
 import { usePatternClipboard, type ClipboardOnMiddleware } from './usePatternClipboard'
-import type { BuiltinChordDescriptor, ItemProps, RootProps, TreeItem } from './types'
+import type { KeyDescriptor, ItemProps, RootProps, TreeItem } from './types'
 import { warnMultiSelectPairing } from './devWarnMultiSelect'
 
 /** Options for {@link useTreeGridPattern}. */
@@ -69,7 +69,7 @@ export interface TreeGridOptions {
  * treeGrid 는 Backspace 가 'editable' 모드의 remove 와도 겹치므로,
  * 빌트인 clipboard 'remove' 와 동일 의미로 통합된다.
  */
-export const treeGridBuiltinChords: readonly BuiltinChordDescriptor[] = [
+export const treeGridKeys: readonly KeyDescriptor[] = [
   { chord: 'mod+z',       uiEvent: 'undo',   description: 'Undo last operation' },
   { chord: 'mod+shift+z', uiEvent: 'redo',   description: 'Redo' },
   { chord: 'mod+y',       uiEvent: 'redo',   description: 'Redo (Windows fallback)' },
@@ -107,7 +107,7 @@ const multiAxis = treeGridAxis({ multiSelectable: true })
  * Focus stays on rows; cells expose grid semantics through rowheader/gridcell + aria-colindex.
  *
  * @example canonical — tree + expand gesture (pipe)
- *   const expand = (r) => applyGesture(expandBranchOnActivate, r)
+ *   const expand = (r) => applyGesture(r, expandBranchOnActivate)
  *   const [data, dispatch] = useTreeGridReducer(ROWS, { enhance: expand })
  *   const { treegridProps, rowProps, gridcellProps, items } = useTreeGridPattern(data, dispatch)
  */
@@ -245,7 +245,7 @@ export function useTreeGridPattern(
     activeId,
     insideEditable,
     on: opts.on,
-    builtinChords: treeGridBuiltinChords,
+    builtinChords: treeGridKeys,
   })
 
   // cells-mode 에선 row 단위 onKeyDown delegate 를 끈다 (cell 이 직접 수신).

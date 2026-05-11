@@ -13,7 +13,7 @@ export const listboxEditKeys = (): readonly string[] =>
   [...LISTBOX_EDIT_INSERT, ...LISTBOX_EDIT_REMOVE]
 import { selectionFollowsFocus as applySelectionFollowsFocus } from '../gesture'
 import { useRovingTabIndex } from '../roving/useRovingTabIndex'
-import type { BaseItem, BuiltinChordDescriptor, ItemProps, RootProps } from './types'
+import type { BaseItem, KeyDescriptor, ItemProps, RootProps } from './types'
 import { warnMultiSelectPairing } from './devWarnMultiSelect'
 
 /** Options for {@link useListboxPattern}. */
@@ -74,7 +74,7 @@ export interface ListboxOptions {
 /**
  * listbox 가 디폴트로 흡수하는 chord 목록 — descriptor SSOT.
  */
-export const listboxBuiltinChords: readonly BuiltinChordDescriptor[] = [
+export const listboxKeys: readonly KeyDescriptor[] = [
   { chord: 'mod+z',       uiEvent: 'undo',   description: 'Undo last operation' },
   { chord: 'mod+shift+z', uiEvent: 'redo',   description: 'Redo' },
   { chord: 'mod+y',       uiEvent: 'redo',   description: 'Redo (Windows fallback)' },
@@ -215,7 +215,7 @@ export function useListboxPattern(
     activeId,
     insideEditable,
     on: opts.on,
-    builtinChords: listboxBuiltinChords,
+    builtinChords: listboxKeys,
   })
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

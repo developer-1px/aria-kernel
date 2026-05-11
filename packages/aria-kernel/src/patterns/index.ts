@@ -18,10 +18,10 @@
  * 자세한 명세는 packages/aria-kernel/PATTERNS.md
  */
 
-export { useListboxPattern, listboxAxis, listboxEditKeys, listboxBuiltinChords, type ListboxOptions } from './listbox'
+export { useListboxPattern, listboxAxis, listboxEditKeys, listboxKeys, type ListboxOptions } from './listbox'
 export { useTabsPattern, tabsAxis, tabsKeys, type TabsOptions } from './tabs'
-export { useTreePattern, treeAxis, treeBuiltinChords, defaultTreeCommands, type TreeOptions } from './tree'
-export { type BuiltinChordDescriptor, type TreeCommand, type TreeCommandDescriptor } from './types'
+export { useTreePattern, treeAxis, treeKeys, defaultTreeCommands, type TreeOptions } from './tree'
+export { type KeyDescriptor, type TreeCommand, type TreeCommandDescriptor } from './types'
 export { mergeRefs } from './mergeRefs'
 export { useRadioGroupPattern, radioGroupAxis, radioGroupKeys, type RadioGroupOptions } from './radioGroup'
 export { useToolbarPattern, toolbarAxis, type ToolbarOptions } from './toolbar'
@@ -46,7 +46,7 @@ export {
   useComboboxGridPattern, comboboxGridAxis,
   type ComboboxGridOptions, type ComboboxGridCell,
 } from './comboboxGrid'
-export { useTreeGridPattern, treeGridAxis, treeGridEditKeys, treeGridBuiltinChords, type TreeGridOptions } from './treeGrid'
+export { useTreeGridPattern, treeGridAxis, treeGridEditKeys, treeGridKeys, type TreeGridOptions } from './treeGrid'
 export { useAccordionPattern, accordionAxis, type AccordionOptions } from './accordion'
 export { useDialogPattern, dialogKeys, type DialogOptions } from './dialog'
 export { useFocusTrap, focusTrapKeys } from './focusTrap'
@@ -55,10 +55,10 @@ export { sliderRangePattern, sliderRangeAxis, type SliderRangeOptions } from './
 export { useTooltipPattern, tooltipKeys, type TooltipOptions } from './tooltip'
 
 export {
-  useFeedPattern, feedAxis, feedBuiltinChords,
+  useFeedPattern, feedAxis, feedKeys,
   type FeedItem, type FeedEvent, type FeedOptions,
 } from './feed'
-export { useGridPattern, gridAxis, gridEditKeys, gridBuiltinChords, type GridOptions, type GridCell } from './grid'
+export { useGridPattern, gridAxis, gridEditKeys, gridKeys, type GridOptions, type GridCell } from './grid'
 export { useCarouselPattern, carouselKeys, type CarouselOptions, type CarouselSlide } from './carousel'
 export { spinbuttonPattern, spinbuttonAxis, type SpinbuttonOptions } from './spinbutton'
 

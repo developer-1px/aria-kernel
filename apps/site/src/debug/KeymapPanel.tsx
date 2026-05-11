@@ -3,7 +3,7 @@ import { fmtChord } from './fmtChord'
 interface CommandDescriptor {
   chord: string
   command?: string  // new shape (TreeCommandDescriptor)
-  uiEvent?: string  // legacy shape (BuiltinChordDescriptor)
+  uiEvent?: string  // legacy shape (KeyDescriptor)
   description?: string
 }
 

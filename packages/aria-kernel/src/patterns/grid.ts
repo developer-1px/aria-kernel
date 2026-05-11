@@ -37,7 +37,7 @@ const warnChildlessTopLevel = (count: number): void => {
 import { useRovingTabIndex } from '../roving/useRovingTabIndex'
 import { isEditable, type InsideEditableMode } from '../key/insideEditable'
 import { usePatternClipboard, type ClipboardOnMiddleware } from './usePatternClipboard'
-import type { BuiltinChordDescriptor, ItemProps, RootProps } from './types'
+import type { KeyDescriptor, ItemProps, RootProps } from './types'
 import { warnMultiSelectPairing } from './devWarnMultiSelect'
 
 /** Options for {@link useGridPattern}. */
@@ -92,7 +92,7 @@ export interface GridOptions {
 /**
  * grid 가 디폴트로 흡수하는 chord 목록 — descriptor SSOT.
  */
-export const gridBuiltinChords: readonly BuiltinChordDescriptor[] = [
+export const gridKeys: readonly KeyDescriptor[] = [
   { chord: 'mod+z',       uiEvent: 'undo',   description: 'Undo last operation' },
   { chord: 'mod+shift+z', uiEvent: 'redo',   description: 'Redo' },
   { chord: 'mod+y',       uiEvent: 'redo',   description: 'Redo (Windows fallback)' },
@@ -217,7 +217,7 @@ export function useGridPattern(
     activeId,
     insideEditable,
     on: opts.on,
-    builtinChords: gridBuiltinChords,
+    builtinChords: gridKeys,
     disableBuiltinChords: opts.disableBuiltinChords,
   })
 

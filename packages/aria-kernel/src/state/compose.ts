@@ -16,17 +16,19 @@ export const composeReducers =
     rs.reduce((acc, r) => r(acc, e), d)
 
 /**
- * applyGesture — gesture + reducer 합성. gesture가 활성 이벤트를 의도 이벤트
- * 스트림으로 변환한 뒤, reducer가 각 이벤트를 적용해 최종 state로 reduce.
+ * applyGesture — gesture + reducer 합성. *주체 reducer 가 먼저, gesture 가 augmentation.*
+ * composeReducers 와 같은 인자 순서 (주체 먼저).
+ *
+ * 작동: gesture 가 active event 를 의도 event 스트림으로 변환한 뒤, reducer 가 각 event 적용.
  *
  * 예시:
  *   // accordion: activate → expand 토글
- *   const accReducer = applyGesture(expandOnActivate, composeReducers(reduce, setValue))
+ *   const accReducer = applyGesture(composeReducers(reduce, setValue), expandOnActivate)
  *
  *   // tree: branch click → expand, leaf click → select
- *   const treeReducer = applyGesture(expandBranchOnActivate, reduceSingleSelect)
+ *   const treeReducer = applyGesture(reduceSingleSelect, expandBranchOnActivate)
  */
 export const applyGesture =
-  (gesture: GestureHelper, reducer: Reducer): Reducer =>
+  (reducer: Reducer, gesture: GestureHelper): Reducer =>
   (d, e) =>
     gesture(d, e).reduce<NormalizedData>((acc, ev) => reducer(acc, ev), d)

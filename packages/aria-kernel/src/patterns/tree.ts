@@ -11,7 +11,7 @@ import { usePatternClipboard, type ClipboardOnMiddleware } from './usePatternCli
 import { selectionFollowsFocus as applySelectionFollowsFocus } from '../gesture'
 import { useRovingTabIndex } from '../roving/useRovingTabIndex'
 import type {
-  BuiltinChordDescriptor, ItemProps, RootProps, TreeItem,
+  KeyDescriptor, ItemProps, RootProps, TreeItem,
   TreeAxis, EffectStep, Effect, TreeCommandDescriptor,
 } from './types'
 import { warnMultiSelectPairing } from './devWarnMultiSelect'
@@ -49,8 +49,8 @@ export const defaultTreeCommands: readonly TreeCommandDescriptor[] = [
     effect: { op: 'paste', source: 'self', mode: 'child' } },
 ]
 
-/** treeBuiltinChords — backward-compat. KeymapPanel 등이 쓰던 옛 SSOT 의 default keymap 형태. */
-export const treeBuiltinChords: readonly BuiltinChordDescriptor[] = defaultTreeCommands.map((c) => ({
+/** treeKeys — backward-compat. KeymapPanel 등이 쓰던 옛 SSOT 의 default keymap 형태. */
+export const treeKeys: readonly KeyDescriptor[] = defaultTreeCommands.map((c) => ({
   chord: c.chord,
   uiEvent: c.command ?? (Array.isArray(c.effect) ? c.effect[0]?.op : (c.effect as EffectStep).op) ?? '',
   description: c.description ?? '',
@@ -224,7 +224,7 @@ function runEffect(
  * https://www.w3.org/WAI/ARIA/apg/patterns/treeview/
  *
  * @example canonical — tree 데이터 + expand gesture (pipe)
- *   const expand = (r) => applyGesture(expandBranchOnActivate, r)
+ *   const expand = (r) => applyGesture(r, expandBranchOnActivate)
  *   const [data, dispatch] = useTreeReducer(NODES, { enhance: expand })
  *   const { rootProps, itemProps, items } = useTreePattern(data, dispatch)
  *
@@ -316,7 +316,7 @@ export function useTreePattern(
     activeId,
     insideEditable,
     on: opts.on,
-    builtinChords: treeBuiltinChords,
+    builtinChords: treeKeys,
     disableBuiltinChords: true,  // tree 가 자체 commands 로 모든 chord 처리
   })
 

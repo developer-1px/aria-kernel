@@ -69,7 +69,7 @@ export interface TreeItem extends BaseItem {
  *  description : 한 줄 설명
  *  scope       : 'root' (default) | 'item' (focused item 필요)
  */
-export interface BuiltinChordDescriptor {
+export interface KeyDescriptor {
   chord: string
   uiEvent: string
   description: string

@@ -53,7 +53,7 @@ const files: Node[] = [
 const initialData = fromTree(files, { expanded: ['src', 'demos'] })
 
 // gesture: branch activate → expand toggle (leaf activate → activate emit 그대로).
-const reducer = applyGesture(expandBranchOnActivate, reduceSingleSelect)
+const reducer = applyGesture(reduceSingleSelect, expandBranchOnActivate)
 
 const slots: TreeSlots<FileItem> = {
   icon: ({ item, data }: SlotProps<FileItem, TreeItem>) =>

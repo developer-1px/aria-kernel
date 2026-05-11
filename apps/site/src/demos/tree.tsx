@@ -41,7 +41,7 @@ const tree: Node[] = [
   { id: 'pkg', label: 'package.json' },
 ]
 
-const treeReducer = applyGesture(expandBranchOnActivate, reduceSingleSelect)
+const treeReducer = applyGesture(reduceSingleSelect, expandBranchOnActivate)
 const initTree = () => fromTree(tree, { expanded: ['src', 'demos'] })
 
 export default function TreeDemo() {

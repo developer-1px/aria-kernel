@@ -39,7 +39,7 @@ const rows: Row[] = [
 ]
 
 const COLS = ['Name', 'Size', 'Modified']
-const treeGridReducer = applyGesture(expandBranchOnActivate, reduceMultiSelect)
+const treeGridReducer = applyGesture(reduceMultiSelect, expandBranchOnActivate)
 
 export default function TreeGridMultiDemo() {
   const [data, dispatch] = useReducer(treeGridReducer, undefined, () => fromTree(rows, { expanded: ['src'] }))

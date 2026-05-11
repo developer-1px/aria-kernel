@@ -4,7 +4,7 @@ import { composeAxes, navigate, pageNavigate } from '../axes'
 import { useRovingTabIndex } from '../roving/useRovingTabIndex'
 import type { InsideEditableMode } from '../key/insideEditable'
 import { usePatternClipboard, type ClipboardOnMiddleware } from './usePatternClipboard'
-import type { BuiltinChordDescriptor, ItemProps, RootProps } from './types'
+import type { KeyDescriptor, ItemProps, RootProps } from './types'
 
 /** Feed 가 등록하는 axis — SSOT. ArrowDown/Up + Home/End (navigate) + PageUp/PageDown (pageNavigate). */
 export const feedAxis = () => composeAxes(pageNavigate('vertical', 1), navigate('vertical'))
@@ -42,7 +42,7 @@ export interface FeedOptions {
  * feed 는 read-only article bundle 이지만 clipboard/history chord 일관 정책상 동일 chord 흡수.
  * 호스트가 read-only 라면 dispatch 에서 해당 UiEvent 를 무시하면 된다.
  */
-export const feedBuiltinChords: readonly BuiltinChordDescriptor[] = [
+export const feedKeys: readonly KeyDescriptor[] = [
   { chord: 'mod+z',       uiEvent: 'undo',   description: 'Undo last operation' },
   { chord: 'mod+shift+z', uiEvent: 'redo',   description: 'Redo' },
   { chord: 'mod+y',       uiEvent: 'redo',   description: 'Redo (Windows fallback)' },
@@ -102,7 +102,7 @@ export function useFeedPattern(
     activeId: focusId ?? null,
     insideEditable,
     on: opts.on,
-    builtinChords: feedBuiltinChords,
+    builtinChords: feedKeys,
   })
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
