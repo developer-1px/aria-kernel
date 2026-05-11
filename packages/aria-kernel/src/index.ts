@@ -19,7 +19,12 @@ export { reduce } from './state/reduce'
 export { composeReducers, applyGesture, type Reducer } from './state/compose'
 export { singleSelect, singleCurrent, multiSelectToggle } from './state/selection'
 export { setValue } from './state/value'
-export { reduceWithDefaults, reduceWithMultiSelect, reduceWithRadio } from './state/defaults'
+export {
+  reduceSingleSelect, reduceMultiSelect, reduceRadio,
+  /** @deprecated */ reduceWithDefaults,
+  /** @deprecated */ reduceWithMultiSelect,
+  /** @deprecated */ reduceWithRadio,
+} from './state/defaults'
 export { fromTree, fromList, pathAncestors } from './state/fromTree'
 export { fromFlatTree } from './state/fromFlatTree'
 export { useControlState } from './state/useControlState'

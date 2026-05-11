@@ -53,15 +53,15 @@ export const appCommandHandles: readonly EvType[] = [
   'dragStart', 'dragOver', 'drop', 'dragEnd',
 ]
 
-/** Composition presets — 각 reduceWith* 가 cover 하는 events 합집합. */
+/** Composition presets — 각 reduce* 변종이 cover 하는 events 합집합. */
 export const REDUCE_PRESETS: Record<string, readonly EvType[]> = {
-  reduceWithDefaults: [
+  reduceSingleSelect: [
     ...reduceHandles, ...singleSelectHandles, ...checkToggleHandles, ...setValueHandles, ...appCommandHandles,
   ],
-  reduceWithMultiSelect: [
+  reduceMultiSelect: [
     ...reduceHandles, ...multiSelectToggleHandles, ...checkToggleHandles, ...setValueHandles, ...appCommandHandles,
   ],
-  reduceWithRadio: [
+  reduceRadio: [
     ...reduceHandles, ...singleCheckHandles, ...setValueHandles, ...appCommandHandles,
   ],
 }

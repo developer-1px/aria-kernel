@@ -5,20 +5,32 @@ import { multiSelectToggle, singleSelect } from './selection'
 import { setValue } from './value'
 
 /**
- * reduceWithDefaults — drop-in 기본 reducer. select 축은 single-mode, check 축은
- * multi-mode (toggle). 두 축이 다른 이벤트 (`select` vs `check`/`checkMany`) 라
- * 충돌 없이 합성 — listbox-single, tabs, menu, checkbox group 데모가 zero config 로 동작.
+ * reduceSingleSelect — ARIA `aria-selected` (single) 정본 합성 reducer.
+ * listbox(single) · tabs · menu · toolbar · accordion 등 가장 보편 시나리오.
+ *
+ * 합성: select 축 single + check 축 multi-toggle + value. 두 축이 서로 다른 event
+ * (`select` vs `check`/`checkMany`) 라 충돌 없이 합성.
  */
-export const reduceWithDefaults: Reducer = composeReducers(reduce, singleSelect, checkToggle, setValue)
+export const reduceSingleSelect: Reducer = composeReducers(reduce, singleSelect, checkToggle, setValue)
 
 /**
- * reduceWithMultiSelect — drop-in multi-select 변종. listbox(multi)/tree(multi)/grid(multi).
- * `multiSelectToggle` 가 `select{ids,to?}` (replace/additive/unset) 단일 축을 처리.
+ * reduceMultiSelect — ARIA `aria-multiselectable="true"` 시나리오.
+ * listbox(multi) / tree(multi) / grid(multi).
+ *
+ * `multiSelectToggle` 가 `select{ids,to?}` (replace/additive/unset) 단일 축 처리.
  */
-export const reduceWithMultiSelect: Reducer = composeReducers(reduce, multiSelectToggle, checkToggle, setValue)
+export const reduceMultiSelect: Reducer = composeReducers(reduce, multiSelectToggle, checkToggle, setValue)
 
 /**
- * reduceWithRadio — radio 데모 전용 변종. check 축이 single-of-group (singleCheck)
- * 으로 동작. radio 는 select 축을 쓰지 않으므로 singleSelect 미포함.
+ * reduceRadio — ARIA `role="radiogroup"` 시나리오.
+ * check 축이 single-of-group (singleCheck) 으로 동작. select 축은 미사용 (radio 는
+ * aria-selected 가 아니라 aria-checked 로 표현).
  */
-export const reduceWithRadio: Reducer = composeReducers(reduce, singleCheck, setValue)
+export const reduceRadio: Reducer = composeReducers(reduce, singleCheck, setValue)
+
+/** @deprecated use `reduceSingleSelect` — ARIA `aria-selected` (single) 자구 정렬. */
+export const reduceWithDefaults: Reducer = reduceSingleSelect
+/** @deprecated use `reduceMultiSelect` — ARIA `aria-multiselectable` 자구 정렬. */
+export const reduceWithMultiSelect: Reducer = reduceMultiSelect
+/** @deprecated use `reduceRadio` — ARIA `role=radiogroup` 자구 정렬. */
+export const reduceWithRadio: Reducer = reduceRadio

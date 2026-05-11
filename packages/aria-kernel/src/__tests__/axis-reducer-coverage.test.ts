@@ -12,9 +12,9 @@ import { REDUCE_PRESETS } from '../state/handles'
  */
 describe('axis-reducer coverage (EPIC #95 Layer 2.3)', () => {
   const allHandled = new Set<string>([
-    ...REDUCE_PRESETS.reduceWithDefaults,
-    ...REDUCE_PRESETS.reduceWithMultiSelect,
-    ...REDUCE_PRESETS.reduceWithRadio,
+    ...REDUCE_PRESETS.reduceSingleSelect,
+    ...REDUCE_PRESETS.reduceMultiSelect,
+    ...REDUCE_PRESETS.reduceRadio,
   ])
 
   it('모든 axis emit 이 어떤 reducer preset 에서 cover 된다', () => {
