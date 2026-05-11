@@ -1,6 +1,6 @@
 import { useReducer } from 'react'
 import { fromList, reduceWithDefaults } from '@p/aria-kernel'
-import { tabsKeys, useTabsPattern } from '@p/aria-kernel/patterns'
+import { tabsKeys, useTabs } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Tabs',
@@ -14,7 +14,7 @@ const TABS = [{ label: 'Overview', selected: true }, { label: 'Behavior' }, { la
 
 export default function TabsDemo() {
   const [data, dispatch] = useReducer(reduceWithDefaults, TABS, fromList)
-  const { rootProps, tabProps, panelProps, items } = useTabsPattern(data, dispatch)
+  const { rootProps, tabProps, panelProps, items } = useTabs(data, dispatch)
 
   return (
     <div className="space-y-3">
