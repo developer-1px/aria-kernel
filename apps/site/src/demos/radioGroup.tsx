@@ -1,6 +1,6 @@
+import { useReducer } from 'react'
 import { fromList, reduceWithRadio } from '@p/aria-kernel'
 import { radioGroupKeys, useRadioGroupPattern } from '@p/aria-kernel/patterns'
-import { useLocalData } from '@p/aria-kernel/local'
 
 export const meta = {
   title: 'Radio Group',
@@ -10,12 +10,11 @@ export const meta = {
   keys: () => radioGroupKeys(),
 }
 
+const SIZES = [{ label: 'Small' }, { label: 'Medium', checked: true }, { label: 'Large' }]
+
 export default function RadioGroupDemo() {
-  const [data, onEvent] = useLocalData(
-    () => fromList([{ label: 'Small' }, { label: 'Medium', checked: true }, { label: 'Large' }]),
-    reduceWithRadio,
-  )
-  const { rootProps, radioProps, items } = useRadioGroupPattern(data, onEvent)
+  const [data, dispatch] = useReducer(reduceWithRadio, SIZES, fromList)
+  const { rootProps, radioProps, items } = useRadioGroupPattern(data, dispatch)
 
   return (
     <div {...rootProps} aria-label="Size" className="flex flex-col gap-2">

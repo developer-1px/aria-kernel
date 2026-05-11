@@ -1,7 +1,6 @@
-import { fromList } from '@p/aria-kernel'
+import { useReducer } from 'react'
+import { axisKeys, fromList, reduceWithDefaults } from '@p/aria-kernel'
 import { menuAxis, useMenuPattern } from '@p/aria-kernel/patterns'
-import { useLocalData } from '@p/aria-kernel/local'
-import { axisKeys } from '@p/aria-kernel'
 
 export const meta = {
   title: 'Menu',
@@ -11,11 +10,11 @@ export const meta = {
   keys: () => axisKeys(menuAxis({ hasSubmenu: false })),
 }
 
+const ITEMS = [{ label: 'New file' }, { label: 'Open…' }, { label: 'Save' }, { label: 'Close' }]
+
 export default function MenuDemo() {
-  const [data, onEvent] = useLocalData(() =>
-    fromList([{ label: 'New file' }, { label: 'Open…' }, { label: 'Save' }, { label: 'Close' }]),
-  )
-  const { rootProps, menuitemProps, buttonProps, items, open } = useMenuPattern(data, onEvent)
+  const [data, dispatch] = useReducer(reduceWithDefaults, ITEMS, fromList)
+  const { rootProps, menuitemProps, buttonProps, items, open } = useMenuPattern(data, dispatch)
 
   return (
     <div className="relative inline-block">

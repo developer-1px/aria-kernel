@@ -1,8 +1,6 @@
-import { useState } from 'react'
-import { fromList, type UiEvent } from '@p/aria-kernel'
+import { useReducer, useState } from 'react'
+import { axisKeys, fromList, reduceWithDefaults, type UiEvent } from '@p/aria-kernel'
 import { toolbarAxis, useToolbarPattern } from '@p/aria-kernel/patterns'
-import { useLocalData } from '@p/aria-kernel/local'
-import { axisKeys } from '@p/aria-kernel'
 
 export const meta = {
   title: 'Toolbar',
@@ -12,18 +10,20 @@ export const meta = {
   keys: () => axisKeys(toolbarAxis()),
 }
 
+const ITEMS = [
+  { id: 'bold', label: 'Bold' },
+  { id: 'italic', label: 'Italic' },
+  { id: 'underline', label: 'Underline' },
+  { id: 'sep', separator: true },
+  { id: 'link', label: 'Link' },
+]
+
 export default function ToolbarDemo() {
   const [activated, setActivated] = useState<string | null>(null)
-  const [data, onEvent] = useLocalData(() => fromList([
-    { id: 'bold', label: 'Bold' },
-    { id: 'italic', label: 'Italic' },
-    { id: 'underline', label: 'Underline' },
-    { id: 'sep', separator: true },
-    { id: 'link', label: 'Link' },
-  ]))
+  const [data, dispatch] = useReducer(reduceWithDefaults, ITEMS, fromList)
   const handleEvent = (e: UiEvent) => {
     if (e.type === 'activate') setActivated(e.id)
-    onEvent(e)
+    dispatch(e)
   }
   const { rootProps, toolbarItemProps, items } = useToolbarPattern(data, handleEvent, { label: 'Formatting' })
 
