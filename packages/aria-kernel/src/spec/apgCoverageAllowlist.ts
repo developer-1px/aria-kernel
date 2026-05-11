@@ -19,27 +19,28 @@ export const UNIVERSAL_EXTRA: readonly string[] = [
 
 /**
  * 다중선택 패턴 공통 확장 — multiSelect axis 가 advertise 하는 chord 중 APG 가
- * listbox 표에만 명시한 chord. listbox/tree/treeGrid/grid 는 동일 multiSelect axis 를
- * 합성하므로 모두 자동 통과.
+ * tree/treeGrid/grid 표에는 명시 안 한 chord (listbox 만 명시). 같은 axis 합성이라
+ * 자동 통과. listbox 자체는 axis ↔ APG 정합 후 본 list 가 필요 없다 — listbox
+ * 항목에서 분리해 사용.
  */
 const MULTI_SELECT_EXTENSION: readonly string[] = [
-  '$mod+a',          // selectAll — APG listbox 명시, 다른 패턴 표에는 없음
-  '$mod+Click',      // modifier-click toggle (de facto)
-  'Shift+Click',     // range click (de facto)
-  'Shift+ArrowDown', // range extend (APG listbox 명시)
+  '$mod+a',           // selectAll — APG listbox 명시, 다른 패턴 표에는 없음
+  '$mod+Click',       // modifier-click toggle (de facto)
+  'Shift+Click',      // range click (de facto)
+  'Shift+ArrowDown',  // range extend (APG listbox 만)
   'Shift+ArrowUp',
   'Shift+ArrowLeft',
   'Shift+ArrowRight',
-  'Shift+Space',     // range from anchor
-  '$mod+Space',      // multi-select toggle variant
-  '$mod+Shift+Home', // range to first (APG listbox 명시)
-  '$mod+Shift+End',  // range to last (APG listbox 명시)
+  'Shift+Space',      // range from anchor (APG listbox 만)
+  '$mod+Space',       // multi-select toggle variant (de facto)
+  '$mod+Shift+Home',  // range to first (APG listbox 만)
+  '$mod+Shift+End',   // range to last (APG listbox 만)
 ]
 
 /** per-pattern extra allowlist — APG 외 chord 중 의도된 확장. 정규화된 chord 기준. */
 export const PATTERN_EXTRA_ALLOW: Record<string, readonly string[]> = {
-  // multi-select 패턴: 모두 multiSelect axis 합성 → 공통 확장 상속
-  listbox: [...MULTI_SELECT_EXTENSION],
+  // listbox: axis ↔ APG 정합 (7a53b37 후) — 외부 확장만 인정.
+  listbox: ['$mod+Click', 'Shift+Click', '$mod+Space'],
   // tree: APG 는 Home/End 만 명시. 라이브러리는 visible-flat 정점/끝점 chord 도 advertise.
   tree: [...MULTI_SELECT_EXTENSION, '$mod+Home', '$mod+End'],
   treeGrid: [...MULTI_SELECT_EXTENSION, 'Space'],
