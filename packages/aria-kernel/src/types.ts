@@ -59,6 +59,11 @@ export type UiEvent =
   /** navigate — id ⊕ dir (result-form ⊕ intent-form). schema.ts 의 zod refine 으로 런타임 강제. */
   | { type: 'navigate'; id?: string; dir?: NavigateDir }
   | { type: 'activate'; id: string }
+  /**
+   * expand — **inline content reveal** (accordion section · disclosure twisty · tree branch).
+   * trigger 옆 콘텐츠가 in-flow 로 펼쳐짐. ARIA: `aria-expanded` on trigger.
+   * 대비: 'open' 은 popover/overlay (out-of-flow). 같은 aria-expanded 를 emit 해도 의도가 다름.
+   */
   | { type: 'expand'; id: string; open: boolean }
   /**
    * select — `aria-selected` 통합 어휘. 항상 ids 배열.
@@ -75,6 +80,11 @@ export type UiEvent =
    */
   | { type: 'check'; ids: string[]; to?: boolean | 'mixed' }
   | { type: 'value'; id: string; value: unknown }
+  /**
+   * open — **popover/overlay 가시성** (combobox listbox · menu · dialog · tooltip).
+   * out-of-flow overlay 가 떠오름/사라짐. ARIA: combobox `aria-expanded`, dialog `aria-modal`,
+   * 또는 conditional mount. 대비: 'expand' 는 inline reveal.
+   */
   | { type: 'open'; id: string; open: boolean }
   | { type: 'typeahead'; buf: string; deadline: number }
   /** pan: target entity의 (x, y)를 (dx, dy)만큼 이동 — gesture 어댑터가 wheel/pointer를 번역 */
