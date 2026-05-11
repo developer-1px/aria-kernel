@@ -124,6 +124,47 @@ const gridMultiSelectKeys: Axis = fromKeyMap([
   [INTENT_CHORDS.gridMultiSelect.toggle, (_d, id) => [{ type: 'select', ids: [id] }]],
 ])
 
+/**
+ * gridRectEvents — anchor 셀부터 to 셀까지 2D 직사각형 영역의 select 이벤트 생성.
+ * Shift+Arrow / Shift+Click / drag-extend 가 공유하는 rect 산수.
+ *
+ * @returns `[navigate(toCellId), select(out, false), select(in, true)]`
+ */
+export const gridRectEvents = (
+  d: NormalizedData,
+  anchorId: string,
+  toCellId: string,
+): UiEvent[] => {
+  const c = gridCoord(d, toCellId)
+  if (!c) return []
+  const findCoords = (cellId: string): { row: number; col: number } | null => {
+    for (let r = 0; r < c.rows.length; r++) {
+      const cells = getChildren(d, c.rows[r])
+      const ci = cells.indexOf(cellId)
+      if (ci >= 0) return { row: r, col: ci }
+    }
+    return null
+  }
+  const anchor = findCoords(anchorId) ?? { row: c.rowIdx, col: c.colIdx }
+  const r1 = Math.min(anchor.row, c.rowIdx), r2 = Math.max(anchor.row, c.rowIdx)
+  const c1 = Math.min(anchor.col, c.colIdx), c2 = Math.max(anchor.col, c.colIdx)
+  const inRange: string[] = []
+  const outRange: string[] = []
+  for (let r = 0; r < c.rows.length; r++) {
+    const cells = getChildren(d, c.rows[r])
+    for (let cc = 0; cc < cells.length; cc++) {
+      const cid = cells[cc]
+      const inside = r >= r1 && r <= r2 && cc >= c1 && cc <= c2
+      if (inside) inRange.push(cid)
+      else outRange.push(cid)
+    }
+  }
+  const events: UiEvent[] = [{ type: 'navigate', id: toCellId }]
+  if (outRange.length) events.push({ type: 'select', ids: outRange, to: false })
+  events.push({ type: 'select', ids: inRange, to: true })
+  return events
+}
+
 export const gridMultiSelect: Axis = tagAxis((d, id, t) => {
   const p = parseTrigger(t)
   if (p.kind === 'click') {

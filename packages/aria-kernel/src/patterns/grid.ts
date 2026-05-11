@@ -9,6 +9,7 @@ import {
   type UiEvent,
 } from '../types'
 import { activate, composeAxes, gridNavigate, gridMultiSelect, matchAnyChord } from '../axes'
+import { useGridDragSelectGesture } from '../gesture/useGridDragSelectGesture'
 
 /**
  * grid edit-mode chord registry — declarative SSOT.
@@ -210,6 +211,7 @@ export function useGridPattern(
     [rows],
   )
 
+  const dragSelect = useGridDragSelectGesture(data, onEvent ?? (() => {}))
   const activeId = focusId && focusId !== containerId ? focusId : null
 
   const clipboard = usePatternClipboard({
@@ -294,6 +296,7 @@ export function useGridPattern(
       'data-selected': cell?.selected ? '' : undefined,
       'data-disabled': cell?.disabled ? '' : undefined,
       'data-focus-visible': isFocus ? '' : undefined,
+      ...(multiSelectable ? dragSelect.getCellHandlers(id) : {}),
       ...(editable
         ? {
             onKeyDown: (e: React.KeyboardEvent) => {
