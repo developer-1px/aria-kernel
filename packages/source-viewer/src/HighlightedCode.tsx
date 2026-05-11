@@ -92,22 +92,30 @@ export function HighlightedCode({
     })
   }, [html, highlightSymbols, source])
 
+  const lineCount = source.split('\n').length
+  const lnWidth = `${String(lineCount).length + 2}ch`
+  const lnStyle = { '--ln-w': lnWidth } as React.CSSProperties
+
   if (html) {
     return (
       <div
         ref={ref}
-        className="flex-1 text-xs leading-relaxed font-mono md:overflow-auto [&_pre]:!bg-transparent [&_pre]:py-4 [&_pre]:pl-2 [&_pre]:pr-4 [&_pre]:h-full [&_pre]:whitespace-normal [&_pre]:break-normal [&_.line]:block [&_.line]:whitespace-pre-wrap [&_.line]:break-all [counter-reset:lineno] [&_.line]:before:content-[counter(lineno)] [&_.line]:before:[counter-increment:lineno] [&_.line]:before:inline-block [&_.line]:before:w-8 [&_.line]:before:pr-3 [&_.line]:before:text-right [&_.line]:before:text-stone-600 [&_.line]:before:select-none [&_.line[data-hl=true]]:bg-stone-700/40 [&_.line[data-hl=true]]:before:text-stone-300"
+        style={lnStyle}
+        className="flex-1 text-xs leading-relaxed font-mono md:overflow-auto [&_pre]:!bg-transparent [&_pre]:py-4 [&_pre]:pl-2 [&_pre]:pr-4 [&_pre]:h-full [&_pre]:whitespace-normal [&_pre]:break-normal [&_.line]:block [&_.line]:whitespace-pre-wrap [&_.line]:break-all [&_.line]:pl-[var(--ln-w)] [&_.line]:[text-indent:calc(var(--ln-w)*-1)] [counter-reset:lineno] [&_.line]:before:content-[counter(lineno)] [&_.line]:before:[counter-increment:lineno] [&_.line]:before:inline-block [&_.line]:before:w-[var(--ln-w)] [&_.line]:before:pr-2 [&_.line]:before:text-right [&_.line]:before:text-stone-600 [&_.line]:before:select-none [&_.line[data-hl=true]]:bg-stone-700/40 [&_.line[data-hl=true]]:before:text-stone-300"
         dangerouslySetInnerHTML={{ __html: html }}
       />
     )
   }
   const lines = source.split('\n')
   return (
-    <pre className="flex-1 p-4 text-xs leading-relaxed text-stone-100 font-mono md:overflow-auto whitespace-pre-wrap break-all">
+    <pre
+      style={lnStyle}
+      className="flex-1 p-4 text-xs leading-relaxed text-stone-100 font-mono md:overflow-auto whitespace-pre-wrap break-all"
+    >
       <code>
         {lines.map((line, i) => (
-          <span key={i} className="block">
-            <span className="inline-block w-8 pr-3 text-right text-stone-600 select-none">{i + 1}</span>
+          <span key={i} className="block pl-[var(--ln-w)] [text-indent:calc(var(--ln-w)*-1)]">
+            <span className="inline-block w-[var(--ln-w)] pr-2 text-right text-stone-600 select-none">{i + 1}</span>
             {line}
           </span>
         ))}
