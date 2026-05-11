@@ -43,7 +43,12 @@ const parentPath = (p: string): string => {
 const isImagePath = (p: string): boolean =>
   /\.(png|jpe?g|gif|webp|avif|svg)$/i.test(p)
 
-const isFilePath = (p: string): boolean => p !== '/' && !p.endsWith('/')
+// path 문자열만으로는 file/dir 구분 불가 (확장자 없는 file, 존재 안 하는 today 폴더 등).
+// tree 노드 lookup 으로 실제 'file' 인지 확인 — 디렉토리·미존재 경로는 loadText 미요청 → 404 회피.
+const isFilePath = (p: string): boolean => {
+  if (p === '/' || p.endsWith('/')) return false
+  return walk(p).at(-1)?.type === 'file'
+}
 
 type FlatNode = { id: string; label: string; icon: string; selected: boolean; children?: FlatNode[] }
 const fsToFlat = (n: FsNode, url: string): FlatNode => ({
