@@ -28,9 +28,3 @@ export const reduceMultiSelect: Reducer = composeReducers(reduce, multiSelectTog
  */
 export const reduceRadio: Reducer = composeReducers(reduce, singleCheck, setValue)
 
-/** @deprecated use `reduceSingleSelect` — ARIA `aria-selected` (single) 자구 정렬. */
-export const reduceWithDefaults: Reducer = reduceSingleSelect
-/** @deprecated use `reduceMultiSelect` — ARIA `aria-multiselectable` 자구 정렬. */
-export const reduceWithMultiSelect: Reducer = reduceMultiSelect
-/** @deprecated use `reduceRadio` — ARIA `role=radiogroup` 자구 정렬. */
-export const reduceWithRadio: Reducer = reduceRadio
