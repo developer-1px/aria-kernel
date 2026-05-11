@@ -30,11 +30,8 @@ src/routeTree.gen.ts
 # build artifacts
 *.tsbuildinfo
 docs/screenshots/
-packages/headless/docs/api/
 
-# typedoc artifacts
-docs/api/
-docs/api.json
-docs/api-md/
-packages/headless/docs/api/
-packages/headless/docs/api-md/
+# typedoc artifacts (generated)
+**/docs/api/
+**/docs/api-md/
+**/docs/api.json
