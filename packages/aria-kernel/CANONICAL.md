@@ -13,7 +13,7 @@ const [data, dispatch] = useReducer(reduceWithDefaults, items, fromList)
 const { rootProps, itemProps } = useListboxPattern(data, dispatch, { label: '…' })
 ```
 
-3 줄. 패턴 33 개 전부 같은 형태.
+3 줄. 패턴 21 개 전부 같은 형태.
 
 - `useReducer` — **React 표준.** wrapper 없음.
 - `reduceWithDefaults` — drop-in reducer (`reduce` + `singleSelect` + `checkToggle` + `setValue`).
@@ -32,9 +32,9 @@ const { rootProps, itemProps } = useListboxPattern(data, dispatch, { label: '…
 | `reduceWithDefaults` / `reduceWithMultiSelect` / `reduceWithRadio` | drop-in pre-합성 |
 | `composeReducers` | reducer 합성 (middleware) |
 | `useResource` / `defineResource` / `writeResource` | 외부 store 부품 |
-| `use<APGName>Pattern` | ARIA recipe (33 개) |
+| `use<APGName>Pattern` | ARIA recipe (21 개) |
 
-데이터 hook wrapper 0 개. 패턴 hook 33 개 + `useResource` 1 개 = 라이브러리 발명 hook 총 34 개.
+데이터 hook wrapper 0 개. 패턴 hook 21 개 + `useResource` 1 개 = 라이브러리 발명 hook 총 22 개.
 
 ## 3. middleware 합성 (HMR / devtools / persist)
 
@@ -77,7 +77,7 @@ const { rootProps, itemProps } = useListboxPattern(data, dispatch, { label: '…
 
 - 모든 데모/소비자는 §1 형태 (`useReducer(reduceWithDefaults, items, fromList)` + `use<Pattern>(data, dispatch)`).
 - 같은 시나리오에 부품 2 개 이상 등장 ❌.
-- 새 `use*Data` / `use*Reducer` wrapper 추가 ❌ (33 패턴 + `useResource` 외).
+- 새 `use*Data` / `use*Reducer` wrapper 추가 ❌ (21 패턴 + `useResource` 외).
 
 ## 출처
 
