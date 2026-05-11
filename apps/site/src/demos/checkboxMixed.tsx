@@ -1,5 +1,5 @@
-import { fromList, axisKeys, toggle } from '@p/aria-kernel'
-import { useLocalData } from '@p/aria-kernel/local'
+import { useReducer } from 'react'
+import { axisKeys, fromList, reduceWithDefaults, toggle } from '@p/aria-kernel'
 import { useCheckboxGroupPattern } from '@p/aria-kernel/patterns'
 
 export const meta = {
@@ -11,20 +11,16 @@ export const meta = {
 }
 
 const ITEMS = [
-  { id: 'lettuce', label: 'Lettuce' },
+  { id: 'lettuce', label: 'Lettuce', checked: true },
   { id: 'tomato', label: 'Tomato' },
   { id: 'onion', label: 'Onion' },
   { id: 'cheese', label: 'Cheese' },
 ]
 
 export default function CheckboxMixedDemo() {
-  const [data, onEvent] = useLocalData(() => {
-    const d = fromList(ITEMS)
-    d.entities['lettuce'] = { ...(d.entities['lettuce'] ?? {}), checked: true }
-    return d
-  })
+  const [data, dispatch] = useReducer(reduceWithDefaults, ITEMS, fromList)
   const { groupProps, parentProps, childProps, parentChecked, items } =
-    useCheckboxGroupPattern(data, onEvent, {
+    useCheckboxGroupPattern(data, dispatch, {
       label: 'Sandwich toppings',
       parentLabel: 'All toppings',
     })

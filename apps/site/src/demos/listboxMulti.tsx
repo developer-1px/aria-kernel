@@ -1,7 +1,6 @@
-import { fromList, reduceWithMultiSelect } from '@p/aria-kernel'
+import { useReducer } from 'react'
+import { axisKeys, fromList, reduceWithMultiSelect } from '@p/aria-kernel'
 import { listboxAxis, useListboxPattern } from '@p/aria-kernel/patterns'
-import { useLocalData } from '@p/aria-kernel/local'
-import { axisKeys } from '@p/aria-kernel'
 
 export const meta = {
   title: 'Listbox · Multi',
@@ -11,18 +10,17 @@ export const meta = {
   keys: () => axisKeys(listboxAxis({ multiSelectable: true })),
 }
 
+const FRUITS = [
+  { label: 'Apple' },
+  { label: 'Banana' },
+  { label: 'Cherry' },
+  { label: 'Durian' },
+  { label: 'Elderberry' },
+]
+
 export default function ListboxMultiDemo() {
-  const [data, onEvent] = useLocalData(
-    () => fromList([
-      { label: 'Apple' },
-      { label: 'Banana' },
-      { label: 'Cherry' },
-      { label: 'Durian' },
-      { label: 'Elderberry' },
-    ]),
-    reduceWithMultiSelect,
-  )
-  const { rootProps, optionProps, items } = useListboxPattern(data, onEvent, {
+  const [data, dispatch] = useReducer(reduceWithMultiSelect, FRUITS, fromList)
+  const { rootProps, optionProps, items } = useListboxPattern(data, dispatch, {
     multiSelectable: true,
   })
 
