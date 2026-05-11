@@ -10,6 +10,7 @@ import {
 import { bindAxis } from '../state/bind'
 import { useActiveDescendant } from '../roving/useActiveDescendant'
 import type { BaseItem, ItemProps, RootProps } from './types'
+import { BLUR_RACE_DELAY_MS } from '../key/timing'
 
 const ARROW_DOWN = ['ArrowDown'] as const
 const ARROW_UP = ['ArrowUp'] as const
@@ -64,7 +65,7 @@ export function useComboboxSelectPattern(
 } {
   const {
     haspopup = 'listbox',
-    closeOnBlurDelay = 100,
+    closeOnBlurDelay = BLUR_RACE_DELAY_MS,
     idPrefix = 'cmbx',
     required, invalid, disabled,
     label, labelledBy, popupLabel, popupLabelledBy,

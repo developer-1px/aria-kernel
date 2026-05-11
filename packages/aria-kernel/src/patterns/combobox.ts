@@ -11,6 +11,7 @@ import { bindAxis } from '../state/bind'
 import { useControlValue } from '../state/useControlValue'
 import { useActiveDescendant } from '../roving/useActiveDescendant'
 import type { BaseItem, ItemProps, RootProps } from './types'
+import { BLUR_RACE_DELAY_MS } from '../key/timing'
 
 /** combobox chord registry — declarative SSOT. */
 const ARROW_DOWN = ['ArrowDown'] as const
@@ -116,7 +117,7 @@ export function useComboboxPattern(
     value: valueProp, defaultValue = '',
     filter = defaultFilter,
     autocomplete = 'list', haspopup = 'listbox',
-    closeOnBlurDelay = 100, commitOnActivate = true,
+    closeOnBlurDelay = BLUR_RACE_DELAY_MS, commitOnActivate = true,
     openOnFocus = autocomplete !== 'none',
     openOnType = true,
     selectOnBlur = autocomplete === 'both',

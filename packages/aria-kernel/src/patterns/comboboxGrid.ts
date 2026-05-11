@@ -11,6 +11,7 @@ import { bindAxis } from '../state/bind'
 import { useControlValue } from '../state/useControlValue'
 import { useActiveDescendant } from '../roving/useActiveDescendant'
 import type { ItemProps, RootProps } from './types'
+import { BLUR_RACE_DELAY_MS } from '../key/timing'
 
 /** comboboxGrid open-trigger chord registry — declarative SSOT. */
 const ARROW_DOWN = ['ArrowDown'] as const
@@ -82,7 +83,7 @@ export function useComboboxGridPattern(
   const {
     value: valueProp, defaultValue = '',
     filter = defaultFilter,
-    closeOnBlurDelay = 100,
+    closeOnBlurDelay = BLUR_RACE_DELAY_MS,
     commitOnActivate = true,
     openOnFocus = true,
     openOnType = true,

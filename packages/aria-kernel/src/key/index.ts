@@ -27,4 +27,5 @@ export const fromKeyboardEvent = (e: {
 export { useShortcut, onShortcut } from './useShortcut'
 export { bindGlobalKeyMap } from './bindGlobalKeyMap'
 export { useKeyMap } from './useKeyMap'
-export { routeInsideEditable, type InsideEditableMode, type RouterDecision } from './insideEditable'
+export { routeInsideEditable, isEditable, type InsideEditableMode, type RouterDecision } from './insideEditable'
+export { BLUR_RACE_DELAY_MS } from './timing'
