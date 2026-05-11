@@ -19,6 +19,7 @@ export default defineConfig({
       { find: /^@p\/aria-kernel$/, replacement: path.join(headless, 'index.ts') },
       { find: /^@apps\/outliner\/(.+)$/, replacement: path.join(outliner, '$1') },
       { find: /^@apps\/outliner$/, replacement: path.join(outliner, 'index.ts') },
+      { find: /^zod-crud$/, replacement: path.resolve(__dirname, '../../tooling/zod-crud-shim.ts') },
     ],
   },
   test: {

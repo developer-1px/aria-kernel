@@ -26,8 +26,15 @@ export interface JsonDoc {
 // Using `any` here unblocks tsc on unrelated work; the proper fix is migration.
 export type JsonCrud<_T = unknown> = any
 
+// Returns a Proxy whose property access throws — lets module evaluation succeed
+// (test harnesses can import then skip), but any actual usage fails loudly.
 export function createJsonCrud<_T = unknown>(..._args: any[]): any {
-  throw new Error(
-    'createJsonCrud is a legacy zod-crud API; apps using it are pending migration (#132).',
-  )
+  const handler: ProxyHandler<object> = {
+    get(_t, prop) {
+      throw new Error(
+        `createJsonCrud is legacy (#132). '${String(prop)}' called on stub. Migrate to useJsonDocument.`,
+      )
+    },
+  }
+  return new Proxy({}, handler)
 }
