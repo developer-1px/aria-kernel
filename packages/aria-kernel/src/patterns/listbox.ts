@@ -14,6 +14,7 @@ export const listboxEditKeys = (): readonly string[] =>
 import { selectionFollowsFocus as applySelectionFollowsFocus } from '../gesture'
 import { useRovingTabIndex } from '../roving/useRovingTabIndex'
 import type { BaseItem, BuiltinChordDescriptor, ItemProps, RootProps } from './types'
+import { warnMultiSelectPairing } from './devWarnMultiSelect'
 
 /** Options for {@link useListboxPattern}. */
 export interface ListboxOptions {
@@ -131,6 +132,7 @@ export function useListboxPattern(
     insideEditable = 'forward',
   } = opts
   const sff = opts.selectionFollowsFocus ?? !multiSelectable
+  if (multiSelectable) warnMultiSelectPairing('useListboxPattern')
 
   const relay = useCallback(
     (e: UiEvent) => {

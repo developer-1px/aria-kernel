@@ -19,6 +19,7 @@ import { useRovingTabIndex } from '../roving/useRovingTabIndex'
 import type { InsideEditableMode } from '../key/insideEditable'
 import { usePatternClipboard, type ClipboardOnMiddleware } from './usePatternClipboard'
 import type { BuiltinChordDescriptor, ItemProps, RootProps, TreeItem } from './types'
+import { warnMultiSelectPairing } from './devWarnMultiSelect'
 
 /** Options for {@link useTreeGridPattern}. */
 export interface TreeGridOptions {
@@ -129,6 +130,7 @@ export function useTreeGridPattern(
     insideEditable = 'forward',
   } = opts
   const sff = opts.selectionFollowsFocus ?? !multiSelectable
+  if (multiSelectable) warnMultiSelectPairing('useTreeGridPattern')
   const cellsMode = navigationMode !== 'row'
   const colsCount = colCount ?? 1
 

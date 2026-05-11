@@ -38,6 +38,7 @@ import { useRovingTabIndex } from '../roving/useRovingTabIndex'
 import { isEditable, type InsideEditableMode } from '../key/insideEditable'
 import { usePatternClipboard, type ClipboardOnMiddleware } from './usePatternClipboard'
 import type { BuiltinChordDescriptor, ItemProps, RootProps } from './types'
+import { warnMultiSelectPairing } from './devWarnMultiSelect'
 
 /** Options for {@link useGridPattern}. */
 export interface GridOptions {
@@ -166,6 +167,7 @@ export function useGridPattern(
   } = opts
   // 'row'/'rect' implies multi-selectable.
   const multiSelectable = opts.multiSelectable ?? selectionMode !== 'cell'
+  if (multiSelectable) warnMultiSelectPairing('useGridPattern')
   // ROOT 자식 중 cell 을 가진 entity 만 row 로 인정. column header 처럼 자식 없는
   // top-level entity (gridSortable 데모 등) 는 row 로 보지 않아야 gridCoord 가 깨지지 않는다.
   // ⚠️ `rows` return 은 childless top-level entity 를 자동 필터링 — column header 는

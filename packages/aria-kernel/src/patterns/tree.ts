@@ -14,6 +14,7 @@ import type {
   BuiltinChordDescriptor, ItemProps, RootProps, TreeItem,
   TreeAxis, EffectStep, Effect, TreeCommandDescriptor,
 } from './types'
+import { warnMultiSelectPairing } from './devWarnMultiSelect'
 
 /**
  * defaultTreeCommands — editable tree 의 기본 keymap (chord ↔ effect SSOT).
@@ -248,6 +249,7 @@ export function useTreePattern(
     insideEditable = 'forward',
   } = opts
   const sff = opts.selectionFollowsFocus ?? !multiSelectable
+  if (multiSelectable) warnMultiSelectPairing('useTreePattern')
 
   // commands SSOT 결정 — 앱이 명시 > editable=true 면 default > 그 외 빈 배열.
   const commands: readonly TreeCommandDescriptor[] =
