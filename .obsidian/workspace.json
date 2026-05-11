@@ -170,6 +170,7 @@
   },
   "active": "825ee3727135bc1f",
   "lastOpenFiles": [
+    "packages/aria-kernel/src/patterns/reducers.ts",
     "dist/_fs/packages/aria-kernel/docs/api/types/index.CollectionData.html",
     "dist/_fs/packages/aria-kernel/docs/api/types/key.RouterDecision.html",
     "dist/_fs/packages/aria-kernel/docs/api/types/index.CollectionMeta.html",
@@ -181,7 +182,6 @@
     "dist/_fs/docs/api/variables/axes.expandEmits.html",
     "dist/_fs/docs/api/variables/axes.activateEmits.html",
     "dist/_fs/docs/api/variables/axes.escapeEmits.html",
-    "dist/_fs/docs/api/variables/axes.ALL_AXIS_EMITS.html",
     "packages/aria-kernel/docs/api/media/CANONICAL.md",
     "packages/aria-kernel/CANONICAL.md",
     "dist/_fs/docs/adr/0003-aria-punt-absorption-line.md",

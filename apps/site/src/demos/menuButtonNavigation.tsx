@@ -1,6 +1,5 @@
-import { useReducer } from 'react'
-import { fromList, reduceSingleSelect } from '@p/aria-kernel'
-import { useMenuButtonPattern } from '@p/aria-kernel/patterns'
+
+import { useMenuButtonPattern, useMenuButtonReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Menu Button · Navigation',
@@ -18,7 +17,7 @@ const LINKS = [
 ]
 
 export default function MenuButtonNavigationDemo() {
-  const [data, dispatch] = useReducer(reduceSingleSelect, LINKS, fromList)
+  const [data, dispatch] = useMenuButtonReducer(LINKS)
   const { triggerProps, menuProps, itemProps, items, open } = useMenuButtonPattern(data, dispatch, {
     label: 'Navigation menu',
   })

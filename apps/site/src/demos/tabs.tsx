@@ -1,6 +1,5 @@
-import { useReducer } from 'react'
-import { fromList, reduceSingleSelect } from '@p/aria-kernel'
-import { tabsKeys, useTabsPattern } from '@p/aria-kernel/patterns'
+
+import { tabsKeys, useTabsPattern, useTabsReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Tabs',
@@ -13,7 +12,7 @@ export const meta = {
 const TABS = [{ label: 'Overview', selected: true }, { label: 'Behavior' }, { label: 'Patterns' }]
 
 export default function TabsDemo() {
-  const [data, dispatch] = useReducer(reduceSingleSelect, TABS, fromList)
+  const [data, dispatch] = useTabsReducer(TABS)
   const { rootProps, tabProps, panelProps, items } = useTabsPattern(data, dispatch)
 
   return (

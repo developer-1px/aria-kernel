@@ -108,6 +108,14 @@ export function useComboboxSelectReducer<T extends Record<string, unknown>>(item
   return useReducer(pickSingle(opts.pipe), items, fromList)
 }
 
+export function useDisclosureReducer<T extends Record<string, unknown>>(items: T[], opts: SingleReducerOptions = {}): Result {
+  return useReducer(pickSingle(opts.pipe), items, fromList)
+}
+
+export function useNavigationListReducer<T extends Record<string, unknown>>(items: T[], opts: SingleReducerOptions = {}): Result {
+  return useReducer(pickSingle(opts.pipe), items, fromList)
+}
+
 /* ─────────────────────────────────────────────────────────────
  * Tree-based, single-only
  * ───────────────────────────────────────────────────────────── */

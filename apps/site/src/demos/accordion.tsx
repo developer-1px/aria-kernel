@@ -1,6 +1,5 @@
-import { useReducer } from 'react'
-import { axisKeys, fromList, reduceSingleSelect } from '@p/aria-kernel'
-import { accordionAxis, useAccordionPattern } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@p/aria-kernel'
+import { accordionAxis, useAccordionPattern, useAccordionReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Accordion',
@@ -17,7 +16,7 @@ const ITEMS = [
 ]
 
 export default function AccordionDemo() {
-  const [data, dispatch] = useReducer(reduceSingleSelect, ITEMS, fromList)
+  const [data, dispatch] = useAccordionReducer(ITEMS)
   const { rootProps, headingProps, buttonProps, regionProps, items } =
     useAccordionPattern(data, dispatch)
 

@@ -1,6 +1,5 @@
-import { useReducer } from 'react'
-import { axisKeys, fromTree, reduceSingleSelect } from '@p/aria-kernel'
-import { comboboxGridAxis, useComboboxGridPattern } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@p/aria-kernel'
+import { comboboxGridAxis, useComboboxGridPattern, useComboboxGridReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Combobox · Grid Popup',
@@ -10,7 +9,7 @@ export const meta = {
   keys: () => axisKeys(comboboxGridAxis()),
 }
 
-interface Node { id: string; label: string; children?: Node[] }
+interface Node { id: string; label: string; children?: Node[]; [key: string]: unknown }
 
 const row = (id: string, label: string, c: [string, string, string]): Node => ({
   id, label,
@@ -31,7 +30,7 @@ const ROWS: Node[] = [
 ]
 
 export default function ComboboxGridDemo() {
-  const [data, dispatch] = useReducer(reduceSingleSelect, ROWS, fromTree)
+  const [data, dispatch] = useComboboxGridReducer(ROWS)
   const { comboboxProps, gridProps, rowProps, cellProps, rows, expanded } = useComboboxGridPattern(
     data,
     dispatch,

@@ -1,6 +1,5 @@
-import { useReducer } from 'react'
-import { axisKeys, fromList, reduceMultiSelect } from '@p/aria-kernel'
-import { listboxAxis, useListboxPattern } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@p/aria-kernel'
+import { listboxAxis, useListboxPattern, useListboxReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Listbox · Multi',
@@ -19,7 +18,7 @@ const FRUITS = [
 ]
 
 export default function ListboxMultiDemo() {
-  const [data, dispatch] = useReducer(reduceMultiSelect, FRUITS, fromList)
+  const [data, dispatch] = useListboxReducer(FRUITS, { multi: true })
   const { rootProps, optionProps, items } = useListboxPattern(data, dispatch, {
     multiSelectable: true,
   })

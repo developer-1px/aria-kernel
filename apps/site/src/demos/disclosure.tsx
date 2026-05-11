@@ -1,6 +1,5 @@
-import { useReducer } from 'react'
-import { axisKeys, fromList, isExpanded, reduceSingleSelect } from '@p/aria-kernel'
-import { disclosureAxis, disclosurePattern } from '@p/aria-kernel/patterns'
+import { axisKeys, isExpanded } from '@p/aria-kernel'
+import { disclosureAxis, disclosurePattern, useDisclosureReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Disclosure',
@@ -13,7 +12,7 @@ export const meta = {
 const PANEL_ID = 'details'
 
 export default function DisclosureDemo() {
-  const [data, dispatch] = useReducer(reduceSingleSelect, [{ id: PANEL_ID }], fromList)
+  const [data, dispatch] = useDisclosureReducer([{ id: PANEL_ID }])
   const open = isExpanded(data, PANEL_ID)
   const { triggerProps, panelProps } = disclosurePattern(data, PANEL_ID, dispatch)
 

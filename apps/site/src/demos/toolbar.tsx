@@ -1,6 +1,6 @@
-import { useReducer, useState } from 'react'
-import { axisKeys, fromList, reduceSingleSelect, type UiEvent } from '@p/aria-kernel'
-import { toolbarAxis, useToolbarPattern } from '@p/aria-kernel/patterns'
+import { useState } from 'react'
+import { axisKeys, type UiEvent } from '@p/aria-kernel'
+import { toolbarAxis, useToolbarPattern, useToolbarReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Toolbar',
@@ -20,7 +20,7 @@ const ITEMS = [
 
 export default function ToolbarDemo() {
   const [activated, setActivated] = useState<string | null>(null)
-  const [data, dispatch] = useReducer(reduceSingleSelect, ITEMS, fromList)
+  const [data, dispatch] = useToolbarReducer(ITEMS)
   const handleEvent = (e: UiEvent) => {
     if (e.type === 'activate') setActivated(e.id)
     dispatch(e)

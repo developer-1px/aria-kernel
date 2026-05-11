@@ -1,6 +1,5 @@
-import { useReducer } from 'react'
-import { axisKeys, fromList, reduceSingleSelect } from '@p/aria-kernel'
-import { menuAxis, useMenuPattern } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@p/aria-kernel'
+import { menuAxis, useMenuPattern, useMenuReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Menu',
@@ -10,10 +9,10 @@ export const meta = {
   keys: () => axisKeys(menuAxis({ hasSubmenu: false })),
 }
 
-const ITEMS = [{ label: 'New file' }, { label: 'Open…' }, { label: 'Save' }, { label: 'Close' }]
+const ITEMS = [{ id: 'new', label: 'New file' }, { id: 'open', label: 'Open…' }, { id: 'save', label: 'Save' }, { id: 'close', label: 'Close' }]
 
 export default function MenuDemo() {
-  const [data, dispatch] = useReducer(reduceSingleSelect, ITEMS, fromList)
+  const [data, dispatch] = useMenuReducer(ITEMS)
   const { rootProps, menuitemProps, buttonProps, items, open } = useMenuPattern(data, dispatch)
 
   return (

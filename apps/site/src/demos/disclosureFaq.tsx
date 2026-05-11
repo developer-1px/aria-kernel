@@ -1,6 +1,5 @@
-import { useReducer } from 'react'
-import { axisKeys, fromList, isExpanded, reduceSingleSelect } from '@p/aria-kernel'
-import { disclosureAxis, disclosurePattern } from '@p/aria-kernel/patterns'
+import { axisKeys, isExpanded } from '@p/aria-kernel'
+import { disclosureAxis, disclosurePattern, useDisclosureReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Disclosure · FAQ',
@@ -34,7 +33,7 @@ function Item({ id, q, a, data, onEvent }: { id: string; q: string; a: string; d
 }
 
 export default function DisclosureFaqDemo() {
-  const [data, dispatch] = useReducer(reduceSingleSelect, QA.map(({ id }) => ({ id })), fromList)
+  const [data, dispatch] = useDisclosureReducer(QA.map(({ id }) => ({ id })))
   return (
     <div className="w-80 rounded-md border border-stone-200 bg-white px-3">
       {QA.map((item) => (

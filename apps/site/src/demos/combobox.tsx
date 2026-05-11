@@ -1,6 +1,5 @@
-import { useReducer } from 'react'
-import { axisKeys, fromList, reduceSingleSelect } from '@p/aria-kernel'
-import { comboboxAxis, useComboboxPattern, type ControlProps, type PatternProps } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@p/aria-kernel'
+import { comboboxAxis, useComboboxPattern, type ControlProps, type PatternProps, useComboboxReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Combobox',
@@ -51,6 +50,6 @@ export function ComboboxDemo({ data, value, onEvent, 'aria-label': ariaLabel }: 
 }
 
 export default function Demo() {
-  const [data, dispatch] = useReducer(reduceSingleSelect, COUNTRIES, fromList)
+  const [data, dispatch] = useComboboxReducer(COUNTRIES)
   return <ComboboxDemo data={data} onEvent={dispatch} aria-label="Country" />
 }

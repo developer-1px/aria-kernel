@@ -1,6 +1,5 @@
-import { useReducer } from 'react'
-import { axisKeys, fromList, reduceSingleSelect, toggle } from '@p/aria-kernel'
-import { useCheckboxGroupPattern } from '@p/aria-kernel/patterns'
+import { axisKeys, toggle } from '@p/aria-kernel'
+import { useCheckboxGroupPattern, useCheckboxGroupReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Checkbox · Mixed (Group)',
@@ -18,7 +17,7 @@ const ITEMS = [
 ]
 
 export default function CheckboxMixedDemo() {
-  const [data, dispatch] = useReducer(reduceSingleSelect, ITEMS, fromList)
+  const [data, dispatch] = useCheckboxGroupReducer(ITEMS)
   const { groupProps, parentProps, childProps, parentChecked, items } =
     useCheckboxGroupPattern(data, dispatch, {
       label: 'Sandwich toppings',

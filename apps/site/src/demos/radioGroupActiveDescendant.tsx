@@ -1,6 +1,5 @@
-import { useReducer } from 'react'
-import { axisKeys, fromList, reduceRadio } from '@p/aria-kernel'
-import { radioGroupAxis, useRadioGroupPattern } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@p/aria-kernel'
+import { radioGroupAxis, useRadioGroupPattern, useRadioGroupReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Radio Group · activeDescendant',
@@ -13,7 +12,7 @@ export const meta = {
 const SIZES = [{ label: 'Small' }, { label: 'Medium', checked: true }, { label: 'Large' }]
 
 export default function RadioGroupActiveDescendantDemo() {
-  const [data, dispatch] = useReducer(reduceRadio, SIZES, fromList)
+  const [data, dispatch] = useRadioGroupReducer(SIZES)
   const { rootProps, radioProps, items } = useRadioGroupPattern(data, dispatch, {
     focusMode: 'activeDescendant',
     label: 'Size',

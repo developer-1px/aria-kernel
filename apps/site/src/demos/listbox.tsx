@@ -1,6 +1,5 @@
-import { useReducer } from 'react'
-import { axisKeys, fromList, reduceSingleSelect } from '@p/aria-kernel'
-import { listboxAxis, useListboxPattern } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@p/aria-kernel'
+import { listboxAxis, useListboxPattern, useListboxReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Listbox',
@@ -13,7 +12,7 @@ export const meta = {
 const FRUITS = [{ label: 'Apple' }, { label: 'Banana' }, { label: 'Cherry' }, { label: 'Durian' }]
 
 export default function ListboxDemo() {
-  const [data, dispatch] = useReducer(reduceSingleSelect, FRUITS, fromList)
+  const [data, dispatch] = useListboxReducer(FRUITS)
   const { rootProps, optionProps, items } = useListboxPattern(data, dispatch)
 
   return (

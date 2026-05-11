@@ -74,6 +74,7 @@ export {
   useListboxReducer, useTreeReducer, useGridReducer, useTreeGridReducer,
   useTabsReducer, useAccordionReducer, useToolbarReducer, useCheckboxGroupReducer,
   useComboboxReducer, useComboboxSelectReducer, useComboboxGridReducer,
+  useDisclosureReducer, useNavigationListReducer,
   useMenuReducer, useMenubarReducer, useMenuButtonReducer,
   useRadioGroupReducer,
   type SelectableReducerOptions, type SingleReducerOptions,

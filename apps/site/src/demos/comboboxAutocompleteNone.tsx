@@ -1,6 +1,5 @@
-import { useReducer } from 'react'
-import { axisKeys, fromList, reduceSingleSelect } from '@p/aria-kernel'
-import { comboboxAxis, useComboboxPattern } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@p/aria-kernel'
+import { comboboxAxis, useComboboxPattern, useComboboxReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Combobox · Autocomplete None',
@@ -14,7 +13,7 @@ const COUNTRIES = ['Argentina', 'Australia', 'Brazil', 'Canada', 'Denmark', 'Fra
   .map((label) => ({ label }))
 
 export default function ComboboxAutocompleteNoneDemo() {
-  const [data, dispatch] = useReducer(reduceSingleSelect, COUNTRIES, fromList)
+  const [data, dispatch] = useComboboxReducer(COUNTRIES)
   const { comboboxProps, listboxProps, optionProps, items, expanded } = useComboboxPattern(data, dispatch, {
     label: 'Country',
     autocomplete: 'none',

@@ -1,6 +1,5 @@
-import { useReducer } from 'react'
-import { fromList, reduceSingleSelect } from '@p/aria-kernel'
-import { useMenuButtonPattern } from '@p/aria-kernel/patterns'
+
+import { useMenuButtonPattern, useMenuButtonReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Menu Button · activeDescendant',
@@ -18,7 +17,7 @@ const ITEMS = [
 ]
 
 export default function MenuButtonActiveDescendantDemo() {
-  const [data, dispatch] = useReducer(reduceSingleSelect, ITEMS, fromList)
+  const [data, dispatch] = useMenuButtonReducer(ITEMS)
   const { triggerProps, menuProps, itemProps, items, open } = useMenuButtonPattern(data, dispatch, {
     focusMode: 'activeDescendant',
   })

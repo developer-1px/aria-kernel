@@ -1,6 +1,5 @@
-import { useReducer } from 'react'
-import { axisKeys, fromTree, reduceSingleSelect } from '@p/aria-kernel'
-import { menubarAxis, useMenubarPattern, type MenuLevel } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@p/aria-kernel'
+import { menubarAxis, useMenubarPattern, type MenuLevel, useMenubarReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Menubar',
@@ -85,7 +84,7 @@ function SubmenuView({
 }
 
 export default function MenubarDemo() {
-  const [data, dispatch] = useReducer(reduceSingleSelect, TREE, fromTree)
+  const [data, dispatch] = useMenubarReducer(TREE)
   const { rootProps, menubarItemProps, topItems, getSubmenu } = useMenubarPattern(data, dispatch, {
     label: 'Application',
   })

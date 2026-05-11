@@ -1,6 +1,6 @@
-import { Fragment, useReducer, type KeyboardEvent } from 'react'
-import { axisKeys, fromList, reduceSingleSelect } from '@p/aria-kernel'
-import { listboxAxis, useListboxPattern } from '@p/aria-kernel/patterns'
+import { Fragment, type KeyboardEvent } from 'react'
+import { axisKeys } from '@p/aria-kernel'
+import { listboxAxis, useListboxPattern, useListboxReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Sidebar (custom)',
@@ -25,7 +25,7 @@ const ITEMS = [
 const GROUPS = Array.from(new Set(ITEMS.map((i) => i.group)))
 
 export default function SidebarGroupedDemo() {
-  const [data, dispatch] = useReducer(reduceSingleSelect, ITEMS, fromList)
+  const [data, dispatch] = useListboxReducer(ITEMS)
   const { rootProps, optionProps, items } = useListboxPattern(data, dispatch)
 
   // Cmd/Ctrl + 1..9 → activate items[N-1]. 다른 키는 roving delegate 로 통과.
