@@ -3,7 +3,7 @@
  * PATTERNS.md 의 통일 시그니처 참조.
  */
 
-import type { HTMLAttributes } from 'react'
+import type { HTMLAttributes, Ref } from 'react'
 import type { NormalizedData, UiEvent } from '../types'
 
 /**
@@ -152,12 +152,16 @@ export interface TreeCommandDescriptor {
 /** rootProps — pattern 컨테이너에 spread. role/aria-* 필수, ref/onKey 포함. */
 export type RootProps = HTMLAttributes<HTMLElement> & {
   role: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ref?: Ref<any>
 }
 
 /** itemProps(id) 형태의 part-getter 반환 타입. */
 export type ItemProps = HTMLAttributes<HTMLElement> & {
   role?: string
   tabIndex?: number
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ref?: Ref<any>
   'data-id'?: string
   'aria-selected'?: boolean
   'aria-disabled'?: boolean
