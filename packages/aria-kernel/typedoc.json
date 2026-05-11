@@ -17,7 +17,7 @@
   "excludePrivate": true,
   "categorizeByGroup": true,
   "navigationLinks": {
-    "GitHub": "https://github.com/"
+    "GitHub": "https://github.com/developer-1px/aria-kernel"
   },
   "validation": {
     "notExported": false,
