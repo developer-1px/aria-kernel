@@ -24,7 +24,8 @@ export { fromTree, fromList, pathAncestors } from './state/fromTree'
 export { fromFlatTree } from './state/fromFlatTree'
 export { useControlState } from './state/useControlState'
 export { useEventBridge } from './state/useEventBridge'
-export { useControlValue } from './state/useControlValue'
+// useControlValue: 내부 (combobox/comboboxGrid query 입력) — 외부 export 안 함.
+// controlled/uncontrolled 표면은 #148 §7 폐기. 추후 combobox 합성 재설계 시 제거.
 
 export { useRovingTabIndex } from './roving/useRovingTabIndex'
 export { useSpatialNavigation } from './roving/useSpatialNavigation'
