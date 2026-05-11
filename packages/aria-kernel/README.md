@@ -1,18 +1,18 @@
 # @p/aria-kernel
 
-**React + Reducer 기반 ARIA 행동 인프라.** W3C/APG 패턴 recipe + axis 합성 + roving tabindex + gesture/intent 변환. 데이터는 `useReducer(reduce, items, fromList)` 직접 합성. 토큰/CSS/UI 어휘 0건.
+**React + Reducer 기반 ARIA 행동 인프라.** W3C/APG 패턴 recipe + axis 합성 + roving tabindex + gesture/intent 변환. 데이터는 `useReducer(reduceWithDefaults, items, fromList)` 직접 합성. 토큰/CSS/UI 어휘 0건.
 
 ## Canonical 합성
 
 ```tsx
 import { useReducer } from 'react'
-import { reduce, fromList } from '@p/aria-kernel'
+import { reduceWithDefaults, fromList } from '@p/aria-kernel'
 import { useListboxPattern } from '@p/aria-kernel/patterns'
 
 const ITEMS = [{ id: 'a', label: 'A' }, { id: 'b', label: 'B' }]
 
 function Picker() {
-  const [data, dispatch] = useReducer(reduce, ITEMS, fromList)
+  const [data, dispatch] = useReducer(reduceWithDefaults, ITEMS, fromList)
   const { rootProps, itemProps } = useListboxPattern(data, dispatch, { label: 'Items' })
   return (
     <ul {...rootProps}>

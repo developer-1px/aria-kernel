@@ -6,17 +6,18 @@
 
 ```tsx
 import { useReducer } from 'react'
-import { reduce, fromList } from '@p/aria-kernel'
+import { reduceWithDefaults, fromList } from '@p/aria-kernel'
 import { useListboxPattern } from '@p/aria-kernel/patterns'
 
-const [data, dispatch] = useReducer(reduce, items, fromList)
+const [data, dispatch] = useReducer(reduceWithDefaults, items, fromList)
 const { rootProps, itemProps } = useListboxPattern(data, dispatch, { label: '…' })
 ```
 
 3 줄. 패턴 33 개 전부 같은 형태.
 
 - `useReducer` — **React 표준.** wrapper 없음.
-- `reduce` — `(NormalizedData, UiEvent) => NormalizedData` 단일 reducer.
+- `reduceWithDefaults` — drop-in reducer (`reduce` + `singleSelect` + `checkToggle` + `setValue`).
+  multi-select 데모는 `reduceWithMultiSelect`, radio 는 `reduceWithRadio`. 직접 합성은 `composeReducers(reduce, …)`.
 - `fromList` / `fromTree` / `fromFlatTree` — `items → NormalizedData` 생성자.
 - `use<APGName>Pattern` — `(data, dispatch, opts?) => { rootProps, …Props }` ARIA recipe.
 
@@ -27,7 +28,8 @@ const { rootProps, itemProps } = useListboxPattern(data, dispatch, { label: '…
 | `NormalizedData` | 보편 데이터 타입 |
 | `UiEvent` | 보편 이벤트 어휘 (DOM Event 와 구분되는 `Ui` prefix) |
 | `fromList` / `fromTree` / `fromFlatTree` | items → NormalizedData |
-| `reduce` | 단일 reducer |
+| `reduce` | 단일 reducer (event routing) |
+| `reduceWithDefaults` / `reduceWithMultiSelect` / `reduceWithRadio` | drop-in pre-합성 |
 | `composeReducers` | reducer 합성 (middleware) |
 | `useResource` / `defineResource` / `writeResource` | 외부 store 부품 |
 | `use<APGName>Pattern` | ARIA recipe (33 개) |
@@ -73,7 +75,7 @@ const { rootProps, itemProps } = useListboxPattern(data, dispatch, { label: '…
 
 ## 6. 합성 불변식
 
-- 모든 데모/소비자는 §1 형태 (`useReducer(reduce, items, fromList)` + `use<Pattern>(data, dispatch)`).
+- 모든 데모/소비자는 §1 형태 (`useReducer(reduceWithDefaults, items, fromList)` + `use<Pattern>(data, dispatch)`).
 - 같은 시나리오에 부품 2 개 이상 등장 ❌.
 - 새 `use*Data` / `use*Reducer` wrapper 추가 ❌ (33 패턴 + `useResource` 외).
 
