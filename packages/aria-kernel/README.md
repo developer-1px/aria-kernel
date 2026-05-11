@@ -57,26 +57,25 @@ function Toolbar() {
 }
 ```
 
-## 8 카테고리
+## 카테고리
 
 | 카테고리 | 핵심 export |
 |---|---|
-| **Types** | `Entity` · `NormalizedData` · `UiEvent` · `ROOT` · `CollectionProps` · `ControlProps` |
-| **Axes** | `composeAxes` · `navigate` · `activate` · `expand` · `treeNavigate` · `typeahead` |
-| **Roving** | `useRovingTabIndex` · `useSpatialNavigation` |
-| **Gesture** | `composeGestures` · `navigateOnActivate` · `selectionFollowsFocus` · `expandBranchOnActivate` · `activateProps` |
-| **State** | `reduce` · `fromTree` · `fromList` · `useControlState` · `useEventBridge` |
-| **Flow** | `defineFlow` · `useFlow` · `FlowDef` · `Resource` · `useResource` · `defineResource` · `readResource` · `writeResource` |
-| **Feature** | `defineFeature` · `useFeature` · `invalidateQuery` |
-| **Layout** | `definePage` · `defineLayout` · `defineWidget` · `merge` · `node` · `placementAttrs` · `validatePage` |
-| **Middleware** | `defineMiddleware` |
+| **Types** | `Entity` · `NormalizedData` · `UiEvent` · `ValueEvent` · `ROOT` |
+| **State** | `reduce` · `reduceWithDefaults` · `reduceWithMultiSelect` · `reduceWithRadio` · `composeReducers` · `fromTree` · `fromList` · `fromFlatTree` · `useControlState` · `useEventBridge` |
+| **Axes** | `composeAxes` · `navigate` · `activate` · `expand` · `treeNavigate` · `typeahead` · `toggle` · `multiSelect` · `gridMultiSelect` |
+| **Roving** | `useRovingTabIndex` · `useSpatialNavigation` · `useActiveDescendant` |
+| **Gesture** | `composeGestures` · `navigateOnActivate` · `selectionFollowsFocus` · `expandBranchOnActivate` |
+| **Patterns** | `@p/aria-kernel/patterns` (subpath) — `useListboxPattern` · `useTreePattern` · ... 21종 |
+| **Store** | `@p/aria-kernel/store` (subpath, 옵션) — `useResource` · `defineResource` · `writeResource` · `useFeature` · `defineFeature` |
 
 ## Subpath imports
 
 ```ts
 import { composeAxes, navigate } from '@p/aria-kernel/axes'
-import { useRovingTabIndex } from '@p/aria-kernel/roving/useRovingTabIndex'
-import { definePage } from '@p/aria-kernel/layout'
+import { useRovingTabIndex } from '@p/aria-kernel/roving'
+import { useListboxPattern } from '@p/aria-kernel/patterns'
+import { useResource } from '@p/aria-kernel/store'
 ```
 
 ## UI Registry Augmentation
