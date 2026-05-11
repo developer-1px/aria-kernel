@@ -20,6 +20,20 @@ const GRID_EDIT_CHORDS = ['F2', 'Enter'] as const
 
 /** gridEditKeys — chord registry 도출. */
 export const gridEditKeys = (): readonly string[] => [...GRID_EDIT_CHORDS]
+
+let warnedChildlessTopLevel = false
+const warnChildlessTopLevel = (count: number): void => {
+  if (count <= 0 || warnedChildlessTopLevel) return
+  const env = (globalThis as { process?: { env?: { NODE_ENV?: string } } }).process?.env?.NODE_ENV
+  if (env === 'production') return
+  warnedChildlessTopLevel = true
+  // eslint-disable-next-line no-console
+  console.warn(
+    `[aria-kernel/useGridPattern] ${count} childless top-level entity(ies) detected — ` +
+    'filtered out of `rows`. Render column headers via `columnHeaderProps(id)`, not as top-level rows. ' +
+    'Avoid `rows.slice(N)` assumptions tied to header count.',
+  )
+}
 import { useRovingTabIndex } from '../roving/useRovingTabIndex'
 import { isEditable, type InsideEditableMode } from '../key/insideEditable'
 import { usePatternClipboard, type ClipboardOnMiddleware } from './usePatternClipboard'
@@ -146,7 +160,11 @@ export function useGridPattern(
   const multiSelectable = opts.multiSelectable ?? selectionMode !== 'cell'
   // ROOT 자식 중 cell 을 가진 entity 만 row 로 인정. column header 처럼 자식 없는
   // top-level entity (gridSortable 데모 등) 는 row 로 보지 않아야 gridCoord 가 깨지지 않는다.
-  const rowIds = getCollectionChildren(data, containerId).filter((id) => getChildren(data, id).length > 0)
+  // ⚠️ `rows` return 은 childless top-level entity 를 자동 필터링 — column header 는
+  // 항상 `columnHeaderProps(id)` 로 별도 렌더, `rows.slice(N)` 같은 위치 가정 금지.
+  const allTopLevel = getCollectionChildren(data, containerId)
+  const rowIds = allTopLevel.filter((id) => getChildren(data, id).length > 0)
+  warnChildlessTopLevel(allTopLevel.length - rowIds.length)
   // grid 의 focus 단위는 cell. useRovingTabIndex 의 default 계산을 cell 차원에서 하도록
   // 첫 row id 를 focus-container 로 전달 (containerId 자체는 ROOT/grid id 그대로 의미).
   const focusContainerId = rowIds[0] ?? containerId

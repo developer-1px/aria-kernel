@@ -30,9 +30,21 @@ export function fromTree<T extends { id: string; children?: T[] }>(
 }
 
 /**
- * fromList — flat array to NormalizedData.
- * Items may omit `id`; in that case a synthetic id `__0`, `__1`, ... is assigned.
- * All non-id keys become entity data.
+ * fromList — flat array → NormalizedData. ad-hoc 컬렉션 (검색 suggestion, chat
+ * @-mention 후보, /-command palette 등) 의 표준 빌더.
+ *
+ * Convention-based: `id` 와 나머지 키 모두 객체 그대로 spread. callback 없음 — 호출자가
+ * map 으로 shape 을 맞춰서 넘긴다.
+ *
+ * @example
+ *   // chat composer: @-mention 후보 (ephemeral, 키스트로크마다 재계산)
+ *   const data = useMemo(
+ *     () => fromList(filtered.map(u => ({ id: u.id, label: u.name, user: u }))),
+ *     [filtered],
+ *   )
+ *   useComboboxPattern(data, onEvent)
+ *
+ * id 누락 시 `__0`, `__1`, ... synthetic id 자동 할당.
  */
 export function fromList(items: Array<Record<string, unknown>>): CollectionData {
   const entities: NormalizedData['entities'] = {}
