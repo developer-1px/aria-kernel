@@ -5,6 +5,8 @@
  * 키보드 axes(composeAxes) 와 대칭 — 마우스/터치/Enter 가 activate 로 합류한 뒤
  * 같은 헬퍼가 의도 이벤트로 분해.
  */
+export { useClickOutsideGesture, type ClickOutsideRef } from './useClickOutsideGesture'
+
 import { getChildren, getExpanded, type UiEvent, type NormalizedData } from '../types'
 import { INTENT_CHORDS } from '../axes/intentChords'
 import { matchAnyChord } from '../axes/chord'
