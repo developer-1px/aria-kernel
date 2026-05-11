@@ -7,7 +7,6 @@
     "src/store/index.ts",
     "src/gesture/index.ts",
     "src/key/index.ts",
-    "src/local/index.ts",
     "src/roving/index.ts",
     "src/state/index.ts"
   ],
