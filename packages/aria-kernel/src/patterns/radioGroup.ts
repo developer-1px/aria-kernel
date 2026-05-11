@@ -51,6 +51,10 @@ export const radioGroupKeys = (): readonly string[] =>
  * https://www.w3.org/WAI/ARIA/apg/patterns/radio/
  *
  * 항상 selection-follows-focus (APG 강제). single-select.
+ *
+ * @example canonical 합성 (#148 §4) — radio 는 reduceWithRadio
+ *   const [data, dispatch] = useReducer(reduceWithRadio, ITEMS, fromList)
+ *   const { rootProps, radioProps, items } = useRadioGroupPattern(data, dispatch)
  */
 export function useRadioGroupPattern(
   data: NormalizedData,

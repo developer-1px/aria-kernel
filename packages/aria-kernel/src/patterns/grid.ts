@@ -138,6 +138,10 @@ const multiAxis = gridAxis({ multiSelectable: true })
  * - Enter → `editStart` + `activate` 둘 다 (Enter 는 chord match 이자 activate axis 트리거)
  *
  * 소비자는 `editStart` 를 edit intent 로 받고, Enter 시 함께 오는 `activate` 는 무시.
+ *
+ * @example canonical 합성 (#148 §4) — row → cells 중첩 fromTree
+ *   const [data, dispatch] = useReducer(reduceWithDefaults, ROWS, fromTree)
+ *   const { rootProps, rowProps, cellProps, rows } = useGridPattern(data, dispatch)
  */
 export function useGridPattern(
   data: NormalizedData,
