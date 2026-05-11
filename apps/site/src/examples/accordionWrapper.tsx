@@ -12,12 +12,15 @@ interface FaqItem extends Record<string, unknown> {
   body: string
 }
 
-const initialBase = fromList([
+const FAQ = [
   { id: 'what',   label: 'What is @p/aria-kernel?',  body: 'ARIA behavior infrastructure — axes, roving, gesture, patterns.' },
   { id: 'why',    label: 'Why ARIA-first?',       body: 'W3C/WHATWG specs are the canonical naming source.' },
   { id: 'styles', label: 'Bring my own styles?',  body: 'Tailwind utilities directly. No design tokens, no CSS-in-JS.' },
-])
-const initialData = { ...initialBase, meta: { ...initialBase.meta, expanded: ['what'] } }
+]
+const initFaq = (items: typeof FAQ) => {
+  const d = fromList(items)
+  return { ...d, meta: { ...d.meta, expanded: ['what'] } }
+}
 
 const slots: AccordionSlots<FaqItem> = {
   panel: ({ data }: SlotProps<FaqItem, AccordionItem>) => <p>{data.body}</p>,
@@ -32,6 +35,6 @@ export const meta = {
 }
 
 export default function AccordionWrapperDemo() {
-  const [data, onEvent] = useReducer(reduceWithDefaults, undefined, () => initialData)
+  const [data, onEvent] = useReducer(reduceWithDefaults, FAQ, initFaq)
   return <Accordion aria-label="FAQ" data={data} onEvent={onEvent} slots={slots as AccordionSlots} />
 }

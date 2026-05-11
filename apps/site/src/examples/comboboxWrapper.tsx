@@ -3,13 +3,11 @@ import { useReducer } from 'react'
 import { fromList, reduceWithDefaults } from '@p/aria-kernel'
 import { Combobox, comboboxWrapperKeys } from './_comboboxWrapper'
 
-const initialData = fromList(
-  ['Argentina', 'Australia', 'Brazil', 'Canada', 'Denmark',
-   'France', 'Germany', 'Japan', 'Korea', 'Mexico',
-   'Netherlands', 'Norway', 'Spain', 'Sweden', 'Switzerland'].map((label) => ({
+const COUNTRIES = ['Argentina', 'Australia', 'Brazil', 'Canada', 'Denmark',
+  'France', 'Germany', 'Japan', 'Korea', 'Mexico',
+  'Netherlands', 'Norway', 'Spain', 'Sweden', 'Switzerland'].map((label) => ({
     id: label.toLowerCase(), label,
-  })),
-)
+  }))
 
 export const meta = {
   title: 'Combobox Wrapper',
@@ -20,6 +18,6 @@ export const meta = {
 }
 
 export default function ComboboxWrapperDemo() {
-  const [data, dispatch] = useReducer(reduceWithDefaults, undefined, () => initialData)
+  const [data, dispatch] = useReducer(reduceWithDefaults, COUNTRIES, fromList)
   return <Combobox aria-label="Country" data={data} onEvent={dispatch} placeholder="Search country…" />
 }
