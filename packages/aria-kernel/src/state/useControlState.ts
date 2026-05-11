@@ -30,9 +30,18 @@ const hydrate = (base: NormalizedData): NormalizedData => {
  * base 가 갱신되면 사용자가 아직 건드리지 않은 키만 base 시드로 갱신, 사용자가 dispatch 한 키는 local 우선.
  * 반환은 `[merged data, dispatch]` — ui/ 의 (data, onEvent) 인터페이스에 그대로 꽂힌다.
  *
- * @example
- * const [data, dispatch] = useControlState(fromTree(roots, { focusId: ROOT }))
- * <ListView data={data} onEvent={dispatch} />
+ * @example tree/listbox — persistent collection
+ *   const [data, dispatch] = useControlState(fromTree(roots, { focusId: ROOT }))
+ *   <ListView data={data} onEvent={dispatch} />
+ *
+ * @example chat composer — ephemeral derived list (per-keystroke 필터)
+ *   const base = useMemo(() => fromList(filtered), [filtered])
+ *   const [data, dispatch] = useControlState(base)
+ *   const cb = useComboboxPattern(data, (e) => {
+ *     dispatch(e)                              // keyboard nav meta 보존
+ *     if (e.type === 'activate') commit(e.id)  // intent 처리
+ *   })
+ *   // base 가 filtered 갱신될 때마다 새 entities 로 swap, focus/expanded 는 dispatch 가 덮어쓴 키 우선
  */
 export function useControlState(base: NormalizedData): [NormalizedData, (e: UiEvent) => void] {
   const [local, rawDispatch] = useReducer(reduce, base, hydrate)

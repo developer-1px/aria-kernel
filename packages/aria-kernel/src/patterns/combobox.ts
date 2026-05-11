@@ -101,6 +101,18 @@ const defaultFilter = (q: string, label: string): boolean =>
  *   escape  → {type:'open', id:ROOT, open:false}
  *
  * INVARIANT B11: input 에 focus 유지, popup option 활성은 aria-activedescendant.
+ *
+ * **Ephemeral derived list 사용 (chat @-mention · /-command 등 키스트로크당 재계산):**
+ *
+ *   const base = useMemo(() => fromList(filtered), [filtered])
+ *   const [data, dispatch] = useControlState(base)
+ *   const cb = useComboboxPattern(data, (e) => {
+ *     dispatch(e)                              // keyboard nav meta 영속화
+ *     if (e.type === 'activate') commit(e.id)  // intent 처리
+ *   })
+ *
+ * `useControlState` 가 base(entities/relationships) 와 local meta(focus/expanded)
+ * 를 분리 — filtered 갱신 시 entities 만 swap, 키보드 nav 상태는 보존.
  */
 export function useComboboxPattern(
   data: NormalizedData,
