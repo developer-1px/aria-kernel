@@ -67,7 +67,7 @@ export { sliderPattern, sliderAxis, type SliderOptions } from './slider'
 export { splitterPattern, splitterAxis, type SplitterOptions } from './splitter'
 export { switchPattern, switchAxis, type SwitchOptions } from './switch'
 export { navigationListPattern, type NavigationListOptions } from './navigationList'
-export { alertPattern, alertdialogPattern, type AlertdialogOptions } from './alert'
+export { alertPattern } from './alert'
 
 export type {
   BaseItem, TreeItem, RootProps, ItemProps,
