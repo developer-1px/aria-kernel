@@ -74,3 +74,31 @@ export type {
   PatternProps, ControlProps,
   BasePatternOptions, CollectionOptions,
 } from './types'
+
+/**
+ * ARIA-canonical alias — APG URL slug 와 1:1. LLM 의 학습된 습관 (`useAccordion` 등)
+ * 이 첫 시도에 착륙하도록 #146 §10 step 2 / #145 anchoring 원칙. non-breaking 추가만.
+ *
+ * 기존 `use<X>Pattern` 형은 그대로 유지 — 두 이름 모두 동일 hook 참조.
+ */
+export { useAccordionPattern as useAccordion } from './accordion'
+export { useListboxPattern as useListbox } from './listbox'
+export { useTabsPattern as useTabs } from './tabs'
+export { useTreePattern as useTreeView } from './tree'
+export { useMenuPattern as useMenu } from './menu'
+export { useMenubarPattern as useMenubar } from './menubar'
+export { useMenuButtonPattern as useMenuButton } from './menuButton'
+export { useComboboxPattern as useCombobox } from './combobox'
+export { useComboboxSelectPattern as useComboboxSelect } from './comboboxSelect'
+export { useComboboxDialogPattern as useComboboxDialog } from './comboboxDialog'
+export { useComboboxGridPattern as useComboboxGrid } from './comboboxGrid'
+export { useTreeGridPattern as useTreeGrid } from './treeGrid'
+export { useDialogPattern as useDialog } from './dialog'
+export { useAlertDialogPattern as useAlertDialog } from './alertDialog'
+export { useTooltipPattern as useTooltip } from './tooltip'
+export { useFeedPattern as useFeed } from './feed'
+export { useGridPattern as useGrid } from './grid'
+export { useCarouselPattern as useCarousel } from './carousel'
+export { useToolbarPattern as useToolbar } from './toolbar'
+export { useRadioGroupPattern as useRadioGroup } from './radioGroup'
+export { useCheckboxGroupPattern as useCheckboxGroup } from './checkbox'
