@@ -11,8 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WrappersRouteImport } from './routes/wrappers'
 import { Route as UieventsRouteImport } from './routes/uievents'
+import { Route as RovingRouteImport } from './routes/roving'
+import { Route as ResourceRouteImport } from './routes/resource'
 import { Route as PatternsRouteImport } from './routes/patterns'
 import { Route as LabRouteImport } from './routes/lab'
+import { Route as KeyRouteImport } from './routes/key'
+import { Route as GestureRouteImport } from './routes/gesture'
 import { Route as DataRouteImport } from './routes/data'
 import { Route as CoverageRouteImport } from './routes/coverage'
 import { Route as AxesRouteImport } from './routes/axes'
@@ -36,6 +40,16 @@ const UieventsRoute = UieventsRouteImport.update({
   path: '/uievents',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RovingRoute = RovingRouteImport.update({
+  id: '/roving',
+  path: '/roving',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourceRoute = ResourceRouteImport.update({
+  id: '/resource',
+  path: '/resource',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PatternsRoute = PatternsRouteImport.update({
   id: '/patterns',
   path: '/patterns',
@@ -44,6 +58,16 @@ const PatternsRoute = PatternsRouteImport.update({
 const LabRoute = LabRouteImport.update({
   id: '/lab',
   path: '/lab',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KeyRoute = KeyRouteImport.update({
+  id: '/key',
+  path: '/key',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GestureRoute = GestureRouteImport.update({
+  id: '/gesture',
+  path: '/gesture',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DataRoute = DataRouteImport.update({
@@ -112,8 +136,12 @@ export interface FileRoutesByFullPath {
   '/axes': typeof AxesRoute
   '/coverage': typeof CoverageRoute
   '/data': typeof DataRoute
+  '/gesture': typeof GestureRoute
+  '/key': typeof KeyRoute
   '/lab': typeof LabRouteWithChildren
   '/patterns': typeof PatternsRoute
+  '/resource': typeof ResourceRoute
+  '/roving': typeof RovingRoute
   '/uievents': typeof UieventsRoute
   '/wrappers': typeof WrappersRoute
   '/docs/$slug': typeof DocsSlugRoute
@@ -130,7 +158,11 @@ export interface FileRoutesByTo {
   '/axes': typeof AxesRoute
   '/coverage': typeof CoverageRoute
   '/data': typeof DataRoute
+  '/gesture': typeof GestureRoute
+  '/key': typeof KeyRoute
   '/patterns': typeof PatternsRoute
+  '/resource': typeof ResourceRoute
+  '/roving': typeof RovingRoute
   '/uievents': typeof UieventsRoute
   '/wrappers': typeof WrappersRoute
   '/docs/$slug': typeof DocsSlugRoute
@@ -148,8 +180,12 @@ export interface FileRoutesById {
   '/axes': typeof AxesRoute
   '/coverage': typeof CoverageRoute
   '/data': typeof DataRoute
+  '/gesture': typeof GestureRoute
+  '/key': typeof KeyRoute
   '/lab': typeof LabRouteWithChildren
   '/patterns': typeof PatternsRoute
+  '/resource': typeof ResourceRoute
+  '/roving': typeof RovingRoute
   '/uievents': typeof UieventsRoute
   '/wrappers': typeof WrappersRoute
   '/docs/$slug': typeof DocsSlugRoute
@@ -168,8 +204,12 @@ export interface FileRouteTypes {
     | '/axes'
     | '/coverage'
     | '/data'
+    | '/gesture'
+    | '/key'
     | '/lab'
     | '/patterns'
+    | '/resource'
+    | '/roving'
     | '/uievents'
     | '/wrappers'
     | '/docs/$slug'
@@ -186,7 +226,11 @@ export interface FileRouteTypes {
     | '/axes'
     | '/coverage'
     | '/data'
+    | '/gesture'
+    | '/key'
     | '/patterns'
+    | '/resource'
+    | '/roving'
     | '/uievents'
     | '/wrappers'
     | '/docs/$slug'
@@ -203,8 +247,12 @@ export interface FileRouteTypes {
     | '/axes'
     | '/coverage'
     | '/data'
+    | '/gesture'
+    | '/key'
     | '/lab'
     | '/patterns'
+    | '/resource'
+    | '/roving'
     | '/uievents'
     | '/wrappers'
     | '/docs/$slug'
@@ -222,8 +270,12 @@ export interface RootRouteChildren {
   AxesRoute: typeof AxesRoute
   CoverageRoute: typeof CoverageRoute
   DataRoute: typeof DataRoute
+  GestureRoute: typeof GestureRoute
+  KeyRoute: typeof KeyRoute
   LabRoute: typeof LabRouteWithChildren
   PatternsRoute: typeof PatternsRoute
+  ResourceRoute: typeof ResourceRoute
+  RovingRoute: typeof RovingRoute
   UieventsRoute: typeof UieventsRoute
   WrappersRoute: typeof WrappersRoute
   DocsSlugRoute: typeof DocsSlugRoute
@@ -250,6 +302,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UieventsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/roving': {
+      id: '/roving'
+      path: '/roving'
+      fullPath: '/roving'
+      preLoaderRoute: typeof RovingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resource': {
+      id: '/resource'
+      path: '/resource'
+      fullPath: '/resource'
+      preLoaderRoute: typeof ResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/patterns': {
       id: '/patterns'
       path: '/patterns'
@@ -262,6 +328,20 @@ declare module '@tanstack/react-router' {
       path: '/lab'
       fullPath: '/lab'
       preLoaderRoute: typeof LabRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/key': {
+      id: '/key'
+      path: '/key'
+      fullPath: '/key'
+      preLoaderRoute: typeof KeyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gesture': {
+      id: '/gesture'
+      path: '/gesture'
+      fullPath: '/gesture'
+      preLoaderRoute: typeof GestureRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/data': {
@@ -368,8 +448,12 @@ const rootRouteChildren: RootRouteChildren = {
   AxesRoute: AxesRoute,
   CoverageRoute: CoverageRoute,
   DataRoute: DataRoute,
+  GestureRoute: GestureRoute,
+  KeyRoute: KeyRoute,
   LabRoute: LabRouteWithChildren,
   PatternsRoute: PatternsRoute,
+  ResourceRoute: ResourceRoute,
+  RovingRoute: RovingRoute,
   UieventsRoute: UieventsRoute,
   WrappersRoute: WrappersRoute,
   DocsSlugRoute: DocsSlugRoute,
