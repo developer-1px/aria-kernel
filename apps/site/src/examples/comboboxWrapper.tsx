@@ -1,6 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { useReducer } from 'react'
-import { fromList, reduceSingleSelect } from '@p/aria-kernel'
+import { useComboboxReducer } from '@p/aria-kernel/patterns'
 import { Combobox, comboboxWrapperKeys } from './_comboboxWrapper'
 
 const COUNTRIES = ['Argentina', 'Australia', 'Brazil', 'Canada', 'Denmark',
@@ -18,6 +17,6 @@ export const meta = {
 }
 
 export default function ComboboxWrapperDemo() {
-  const [data, dispatch] = useReducer(reduceSingleSelect, COUNTRIES, fromList)
+  const [data, dispatch] = useComboboxReducer(COUNTRIES)
   return <Combobox aria-label="Country" data={data} onEvent={dispatch} placeholder="Search country…" />
 }

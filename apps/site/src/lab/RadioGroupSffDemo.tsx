@@ -1,7 +1,5 @@
-import { useReducer, useMemo } from 'react'
-import { fromList, type UiEvent } from '@p/aria-kernel'
-import { reduceRadio } from '@p/aria-kernel'
-import { useRadioGroupPattern } from '@p/aria-kernel/patterns'
+import type { UiEvent } from '@p/aria-kernel'
+import { useRadioGroupPattern, useRadioGroupReducer } from '@p/aria-kernel/patterns'
 
 const ITEMS = [
   { id: 'small', label: '소형' },
@@ -10,8 +8,7 @@ const ITEMS = [
 ]
 
 export function RadioGroupSffDemo() {
-  const initial = useMemo(() => fromList(ITEMS), [])
-  const [data, dispatch] = useReducer(reduceRadio, initial)
+  const [data, dispatch] = useRadioGroupReducer(ITEMS)
   const { rootProps, radioProps, items } = useRadioGroupPattern(
     data, (e: UiEvent) => dispatch(e), { label: '사이즈', autoFocus: true },
   )

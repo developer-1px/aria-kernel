@@ -1,10 +1,8 @@
-import { useReducer, useMemo } from 'react'
-import { fromList, reduceSingleSelect, type UiEvent } from '@p/aria-kernel'
-import { disclosurePattern } from '@p/aria-kernel/patterns'
+import type { UiEvent } from '@p/aria-kernel'
+import { disclosurePattern, useDisclosureReducer } from '@p/aria-kernel/patterns'
 
 export function DisclosureToggleDemo() {
-  const initial = useMemo(() => fromList([{ id: 'faq', label: 'FAQ' }]), [])
-  const [data, dispatch] = useReducer(reduceSingleSelect, initial)
+  const [data, dispatch] = useDisclosureReducer([{ id: 'faq', label: 'FAQ' }])
   const dispatchEv = (e: UiEvent) => dispatch(e)
   const { triggerProps, panelProps } = disclosurePattern(data, 'faq', dispatchEv)
 

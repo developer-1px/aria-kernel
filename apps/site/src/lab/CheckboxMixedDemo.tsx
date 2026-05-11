@@ -1,6 +1,5 @@
-import { useReducer, useMemo } from 'react'
-import { fromList, reduceSingleSelect, type UiEvent } from '@p/aria-kernel'
-import { useCheckboxGroupPattern } from '@p/aria-kernel/patterns'
+import type { UiEvent } from '@p/aria-kernel'
+import { useCheckboxGroupPattern, useCheckboxGroupReducer } from '@p/aria-kernel/patterns'
 
 const ITEMS = [
   { id: 'apple', label: '사과' },
@@ -9,8 +8,7 @@ const ITEMS = [
 ]
 
 export function CheckboxMixedDemo() {
-  const initial = useMemo(() => fromList(ITEMS), [])
-  const [data, dispatch] = useReducer(reduceSingleSelect, initial)
+  const [data, dispatch] = useCheckboxGroupReducer(ITEMS)
   const { groupProps, parentProps, childProps, parentChecked, items } =
     useCheckboxGroupPattern(data, (e: UiEvent) => dispatch(e), {
       label: '과일 선택', parentLabel: '전체',
