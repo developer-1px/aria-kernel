@@ -3,9 +3,9 @@ product: aria-kernel
 slug: operating-rules
 title: "운영 규칙"
 description: "이 repo에서 새 기능·문서·검증 앱을 추가할 때 지켜야 하는 실무 규칙을 정리한다."
-section: "05-ops"
+section: "06-ops"
 sectionLabel: "운영"
-sectionOrder: 5
+sectionOrder: 6
 order: 1
 status: "source-aligned"
 source:
@@ -85,9 +85,9 @@ product: aria-kernel
 slug: core-concept
 title: "Core Concept"
 description: "..."
-section: "02-model"
+section: "03-model"
 sectionLabel: "모델"
-sectionOrder: 2
+sectionOrder: 3
 order: 1
 status: "source-aligned"
 source:

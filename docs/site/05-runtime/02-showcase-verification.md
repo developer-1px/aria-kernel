@@ -3,9 +3,9 @@ product: aria-kernel
 slug: showcase-verification
 title: "Showcase & Verification"
 description: "apps/site와 apps/*가 제품이 아니라 API 검증 표면으로 존재하는 이유와 검증 기준을 설명한다."
-section: "04-runtime"
+section: "05-runtime"
 sectionLabel: "런타임"
-sectionOrder: 4
+sectionOrder: 5
 order: 2
 status: "source-aligned"
 source:

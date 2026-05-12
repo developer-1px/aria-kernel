@@ -3,9 +3,9 @@ product: aria-kernel
 slug: core-concept
 title: "Core Concept"
 description: "NormalizedData, Axis, Pattern, UiEvent, Reducer가 한 방향으로 연결되는 핵심 모델을 설명한다."
-section: "02-model"
+section: "03-model"
 sectionLabel: "모델"
-sectionOrder: 2
+sectionOrder: 3
 order: 1
 status: "source-aligned"
 source:

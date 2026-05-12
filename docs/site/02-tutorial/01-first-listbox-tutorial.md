@@ -5,7 +5,7 @@ title: "첫 번째 Listbox 만들기"
 description: "처음 사용하는 독자가 fromList, useListboxPattern, reducer, onEvent 흐름을 손으로 따라갈 수 있는 단계별 튜토리얼이다."
 section: "02-tutorial"
 sectionLabel: "튜토리얼"
-sectionOrder: 1.5
+sectionOrder: 2
 order: 1
 status: "source-aligned"
 source:

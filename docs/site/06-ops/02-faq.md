@@ -3,9 +3,9 @@ product: aria-kernel
 slug: faq
 title: "FAQ"
 description: "도입 전 자주 나오는 질문과 @p/aria-kernel의 명확한 비목표를 정리한다."
-section: "05-ops"
+section: "06-ops"
 sectionLabel: "운영"
-sectionOrder: 5
+sectionOrder: 6
 order: 2
 status: "source-aligned"
 source:

@@ -3,15 +3,15 @@ product: aria-kernel
 slug: behavior-patterns
 title: "Behavior Patterns"
 description: "Axis composition과 APG pattern recipe가 어떻게 키보드·포커스·ARIA state를 제공하는지 설명한다."
-section: "03-contract"
+section: "04-contract"
 sectionLabel: "계약"
-sectionOrder: 3
+sectionOrder: 4
 order: 2
 status: "source-aligned"
 source:
   - packages/aria-kernel/src/axes/axis.ts
   - packages/aria-kernel/src/patterns/listbox.ts
-  - packages/aria-kernel/src/patterns/tree.ts
+  - packages/aria-kernel/src/patterns/treeview.ts
   - packages/aria-kernel/src/spec/apgKeyboardSpec.ts
 tags: [patterns, axis, apg]
 ---
@@ -103,7 +103,7 @@ Enter가 눌렸을 때 실행할 명령은 앱이 결정한다. 하지만 option
 
 ## Tree
 
-`useTreePattern`은 tree navigation, expand/collapse, activation, typeahead를 합성한다. editable mode에서는 command descriptor가 추가된다.
+`useTreeviewPattern`은 tree navigation, expand/collapse, activation, typeahead를 합성한다. editable mode에서는 command descriptor가 추가된다.
 
 tree의 중요한 설계는 command도 데이터로 선언한다는 점이다.
 
@@ -133,7 +133,7 @@ function DocsTree() {
   const [state, setState] = useState(data)
   const onEvent = (event) => setState((prev) => reduce(prev, event))
   const { rootProps, itemProps, items } =
-    useTreePattern(state, onEvent, { label: 'Docs tree' })
+    useTreeviewPattern(state, onEvent, { label: 'Docs tree' })
 
   return (
     <nav {...rootProps}>
@@ -197,6 +197,6 @@ markup은 소비자가 결정한다. behavior는 recipe가 제공한다.
 | 접고 펼치는 계층 구조 | tree | visible traversal과 expand/collapse가 필요 |
 | 탭 패널 전환 | tabs | tab ↔ tabpanel 관계가 필요 |
 | 메뉴 명령 | menu/menuButton/menubar | command activation과 submenu 규칙이 필요 |
-| 행/열 탐색 | grid/treeGrid | cell 단위 navigation이 필요 |
+| 행/열 탐색 | grid/treegrid | cell 단위 navigation이 필요 |
 
 pattern 이름은 화면 모양이 아니라 **상호작용 의미**로 고른다.

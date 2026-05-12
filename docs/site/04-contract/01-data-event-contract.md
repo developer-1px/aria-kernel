@@ -3,9 +3,9 @@ product: aria-kernel
 slug: data-event-contract
 title: "Data & Event Contract"
 description: "NormalizedData와 UiEvent가 왜 이 프로젝트의 핵심 public contract인지, zod schema와 reducer가 어떤 안정성을 제공하는지 설명한다."
-section: "03-contract"
+section: "04-contract"
 sectionLabel: "계약"
-sectionOrder: 3
+sectionOrder: 4
 order: 1
 status: "source-aligned"
 source:

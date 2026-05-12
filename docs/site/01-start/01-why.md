@@ -10,7 +10,7 @@ order: 2
 status: "source-aligned"
 source:
   - packages/aria-kernel/src/patterns/listbox.ts
-  - packages/aria-kernel/src/patterns/tree.ts
+  - packages/aria-kernel/src/patterns/treeview.ts
   - packages/aria-kernel/src/spec/apgKeyboardSpec.ts
 tags: [why, apg, headless]
 ---
@@ -40,7 +40,7 @@ tags: [why, apg, headless]
 | Kanban board | lane → card tree | 가로 board |
 | Slides thumbnail strip | section → slide tree | card list |
 | Outliner | recursive tree | editable text rows |
-| TreeGrid | tree + grid cells | table-like grid |
+| Treegrid | tree + grid cells | table-like grid |
 
 이때 컴포넌트 라이브러리의 `<TreeView>`는 tree 모양 markup을 기대하고, `<List>`는 tree 행동을 모른다. 소비자는 결국 키보드 이동, roving tabindex, typeahead, selection, expand/collapse를 직접 다시 구현한다.
 
@@ -81,7 +81,7 @@ function FileRows({ files }) {
 
 ```tsx
 const data = fromTree(files)
-const tree = useTreePattern(data, onEvent)
+const tree = useTreeviewPattern(data, onEvent)
 ```
 
 이 방식에서는 행동은 tree로 유지하고, 화면은 column이든 card든 직접 그린다. 핵심은 “tree component를 가져오는 것”이 아니라 “tree behavior를 가져오는 것”이다.

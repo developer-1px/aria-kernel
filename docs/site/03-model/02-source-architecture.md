@@ -3,9 +3,9 @@ product: aria-kernel
 slug: source-architecture
 title: "Source Architecture"
 description: "packages/aria-kernel 내부 디렉터리가 어떤 책임으로 나뉘는지, apps와 site가 어떤 검증 역할을 하는지 설명한다."
-section: "02-model"
+section: "03-model"
 sectionLabel: "모델"
-sectionOrder: 2
+sectionOrder: 3
 order: 2
 status: "source-aligned"
 source:
@@ -48,7 +48,6 @@ apps/
 | `roving/` | roving tabindex, active descendant, spatial navigation |
 | `gesture/` | activation and derived event helpers |
 | `state/` | reducer, builders, selection/value helpers |
-| `store/` | resource interface and zod-crud bridge |
 | `spec/` | APG keyboard spec mirror and implementation coverage data |
 
 이 구조의 목적은 “동작을 시각으로부터 격리”하는 것이다. `aria-kernel`은 CSS, token, brand, component chrome을 알지 않는다.
@@ -90,7 +89,7 @@ apps/
 예:
 
 - `useListboxPattern`
-- `useTreePattern`
+- `useTreeviewPattern`
 - `useTabsPattern`
 - `useMenuPattern`
 - `navigationListPattern`
@@ -113,7 +112,7 @@ pattern 파일은 보통 다음 질문에 답한다.
 
 ## state와 store
 
-`state/reduce.ts`는 `UiEvent`의 core 의미를 `NormalizedData`에 반영한다. `store/data.ts`는 React app이 resource를 읽고 쓰는 단일 인터페이스를 제공한다.
+`state/reduce.ts`는 `UiEvent`의 core 의미를 `NormalizedData`에 반영한다. `packages/resource/src/data.ts`는 React app이 resource를 읽고 쓰는 선택형 인터페이스를 제공한다.
 
 Outliner와 Kanban은 이 구조를 검증한다. 두 앱 모두 zod-crud 문서를 `defineResource`로 감싸고, `routeUiEventToCrud`로 편집 이벤트를 연결한다.
 

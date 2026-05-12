@@ -12,37 +12,29 @@ that proves it can ship real apps without ds layer.
 ```
 .
 ├── packages/
-│   ├── headless/           ⭐ THE PRODUCT — published, MIT
+│   ├── aria-kernel/        ⭐ THE PRODUCT — published, MIT
+│   ├── resource/           optional — external store / zod-crud bridge
+│   ├── slides/             internal — markdown deck domain helpers
 │   ├── fs/                 internal — markdown / file-tree / shiki helpers
+│   ├── source-viewer/      internal — code tabs for docs/site
 │   └── devtools/           internal — repro recorder · spacing overlay
 │
-├── site/                   ⭐ THE SITE — single deployable
-│   ├── index.html
-│   └── src/
-│       ├── main.tsx
-│       ├── router.tsx
-│       ├── routes/         TanStack file-based routing
-│       │   ├── index.tsx           landing (hero + showcase grid)
-│       │   ├── patterns.tsx        absorbs old apps/headless-site
-│       │   ├── apps.finder.$.tsx   → @apps/finder (Mac Finder)
-│       │   ├── apps.slides.$.tsx   → @apps/slides (markdown deck)
-│       │   ├── apps.admin.*.tsx    → @apps/edu-portal-admin (CRUD admin)
-│       │   └── apps.markdown.$.tsx → @apps/markdown (markdown viewer)
-│       └── headless-site/  patterns catalog source (lifted from old apps/headless-site)
-│
-├── apps/                   workspace packages, consumed by site/
+├── apps/
+│   ├── site/               ⭐ integrated docs + showcase Vite app
 │   ├── finder/             keyboard-first file browser
+│   ├── outliner/           editable tree + zod-crud harness
+│   ├── kanban/             board/resource harness
 │   ├── slides/             markdown → 16:9 deck
-│   ├── edu-portal-admin/   admin shell + 6 pages
 │   └── markdown/           markdown viewer
 │
-└── docs/                   markdown content (slides samples, READMEs)
+└── docs/
+    └── site/               official docs, grouped by frontmatter IA
 ```
 
 ## Stack
 
 - **Behavior**: `@p/aria-kernel` ARIA pattern recipes (`useListboxPattern`,
-  `useToolbarPattern`, `useTreeGridPattern`, `useRovingTabIndex`,
+  `useToolbarPattern`, `useTreegridPattern`, `useRovingTabIndex`,
   `useShortcut`, etc.).
 - **Visuals**: Tailwind v3 utility classes inline. No design tokens,
   no CSS-in-JS, no classless cascade — visual decisions live where they
@@ -76,7 +68,7 @@ pnpm preview      # serve dist/
 1. New reusable behavior → `packages/aria-kernel`.
 2. New visual decision → Tailwind utility class inline. No new token wrappers.
 3. New showcase app → `apps/<name>` workspace package, route added under
-   `site/src/routes/apps.<name>.*.tsx`.
+   `apps/site/src/routes/apps.<name>.*.tsx`.
 4. Naming follows W3C / WHATWG (ARIA roles, semantic HTML). Library name
    borrowing forbidden.
 5. See `CLAUDE.md` for the full invariant set and `packages/aria-kernel/INVARIANTS.md`

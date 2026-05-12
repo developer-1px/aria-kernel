@@ -3,22 +3,22 @@ product: aria-kernel
 slug: state-resource
 title: "State & Resource"
 description: "Reducer, resource, zod-crud bridge가 UiEvent를 실제 앱 상태와 연결하는 방식을 설명한다."
-section: "04-runtime"
+section: "05-runtime"
 sectionLabel: "런타임"
-sectionOrder: 4
+sectionOrder: 5
 order: 1
 status: "source-aligned"
 source:
   - packages/aria-kernel/src/state/reduce.ts
-  - packages/aria-kernel/src/store/data.ts
-  - packages/aria-kernel/src/store/routeUiEventToCrud.ts
+  - packages/resource/src/data.ts
+  - packages/resource/src/routeUiEventToCrud.ts
   - apps/outliner/src/resource.ts
 tags: [state, resource, reducer]
 ---
 
 # State & Resource
 
-`@p/aria-kernel`은 UI event를 생성하는 데서 멈추지 않는다. `UiEvent`를 실제 앱 상태와 연결하기 위한 reducer와 resource rail도 제공한다.
+`@p/aria-kernel`은 UI event를 생성하고 core reducer를 제공한다. `@p/resource`는 그 `UiEvent`를 실제 앱 상태와 연결하기 위한 선택형 resource rail을 제공한다.
 
 ## 한 문장 요약
 

@@ -112,7 +112,7 @@ export function FruitListbox() {
 
 ## 왜 문서도 Markdown 기반인가
 
-이 문서 사이트는 `docs/site/*.md`를 source of truth로 삼는다. route는 frontmatter가 `product: aria-kernel`인 문서만 게시한다. 예전 `ds` 방향성 초안은 보존되지만, 공식 사이트에는 노출되지 않는다.
+이 문서 사이트는 `docs/site/**/*.md` 중 frontmatter가 `product: aria-kernel`인 문서만 source of truth로 삼는다. 예전 `ds` 방향성 초안은 보존되지만, 공식 사이트에는 노출되지 않는다.
 
 이 구조를 택한 이유는 코드와 같다.
 
