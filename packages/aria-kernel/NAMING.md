@@ -89,7 +89,7 @@ use<X>Pattern(opts?): { ...props, open, setOpen, ... }
 | `aria-label` / `aria-labelledby` ↔ `label?: string` / `labelledBy?: string` | ARIA spec |
 | `role` 값 | ARIA roles 그대로 (`'tree'`, `'treegrid'`, `'menubar'`, …) |
 | `selectionFollowsFocus: boolean` | APG patterns 명시 용어 |
-| `activationMode: 'auto' \| 'manual'` | APG tabs 명시 용어 |
+| `activationMode: 'automatic' \| 'manual'` | APG tabs activation mode 명시 용어 |
 | `focusMode: 'roving' \| 'activeDescendant'` | ARIA spec 두 메커니즘 이름 직역 |
 | `autocomplete: 'none' \| 'list' \| 'both' \| 'inline'` | APG combobox §autocomplete (`aria-autocomplete` 값) |
 

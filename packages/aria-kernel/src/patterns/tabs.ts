@@ -25,7 +25,7 @@ import type { BaseItem, ItemProps, RootProps } from './types'
 /** Options for {@link useTabsPattern}. */
 export interface TabsOptions {
   orientation?: 'horizontal' | 'vertical'
-  /** APG: auto = ArrowKey 가 즉시 panel 전환. manual = Enter/Space 로 활성화. */
+  /** APG: automatic = ArrowKey 가 즉시 panel 전환. manual = Enter/Space 로 활성화. */
   activationMode?: 'automatic' | 'manual'
   autoFocus?: boolean
   /** stable id prefix (SSR-safe). */

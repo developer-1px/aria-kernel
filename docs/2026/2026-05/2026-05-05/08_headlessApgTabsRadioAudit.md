@@ -26,7 +26,7 @@ Implementation source:
 - Public export: `packages/aria-kernel/src/patterns/index.ts:22`
 - Existing axe smoke test: `packages/aria-kernel/src/patterns/a11y.test.tsx:57`
 
-Pilot verdict: partial. Roles and relationships are mostly aligned. Remaining risk is state validity: `aria-selected`, panel visibility, and focus target all mirror host `NormalizedData`, so invalid host data can produce APG-invalid tab state. There is also doc/API drift between `PATTERNS.md` (`auto | manual`) and implementation (`automatic | manual`).
+Pilot verdict: partial. Roles and relationships are mostly aligned. Remaining risk is state validity: `aria-selected`, panel visibility, and focus target all mirror host `NormalizedData`, so invalid host data can produce APG-invalid tab state.
 
 ### Clause Results
 
@@ -54,10 +54,9 @@ Pilot verdict: partial. Roles and relationships are mostly aligned. Remaining ri
 
 ### Tabs Gaps
 
-1. `PATTERNS.md` lists `activationMode?: 'auto'|'manual'`, but implementation exposes `'automatic'|'manual'`. Decide which naming is canonical before generating machine-readable contracts.
-2. Decide whether recipe contracts assume valid single-selected host data or should enforce exactly one active tab/panel.
-3. Decide whether unconditional `tabpanel tabIndex=0` is acceptable as a headless default or should move to host responsibility.
-4. Add executable APG contract tests beyond the current axe smoke test. The current smoke test sets `data.entities.t1!.data.selected`, but pattern code reads `entity.selected`; that setup does not prove selected-tab behavior.
+1. Decide whether recipe contracts assume valid single-selected host data or should enforce exactly one active tab/panel.
+2. Decide whether unconditional `tabpanel tabIndex=0` is acceptable as a headless default or should move to host responsibility.
+3. Add executable APG contract tests beyond the current focused tabs tests.
 
 ## 2. Radio Group
 
@@ -98,13 +97,12 @@ Pilot verdict: partial. Basic role/state/focus behavior is present, including bo
 2. Decide whether toolbar-contained radio groups need a separate recipe/contract instead of relying on `useRadioGroupPattern`.
 3. Decide whether per-radio `aria-label`, `aria-labelledby`, and `aria-describedby` should be explicit options or remain host markup responsibility.
 4. Add executable APG contract tests for checked focus entry, arrow selection, active-descendant mode, and invalid multiple-checked host data.
-5. The current axe smoke test sets `data.entities.s!.data.selected`, but pattern code reads `entity.selected`; it does not prove selected-radio behavior.
 
 ## 3. Batch Result
 
 | Pattern | Verdict | Main risk |
 |---|---|---|
-| `useTabsPattern` | partial | host data can produce invalid selected/panel state; doc/API drift for activation mode |
+| `useTabsPattern` | partial | host data can produce invalid selected/panel state |
 | `useRadioGroupPattern` | partial | Enter over-activation and toolbar-contained radio variant not represented |
 
 Recommended next batch: `useTreePattern` and `useTreeGridPattern`, because they share hierarchy, expansion, disabled-skip, and selection/focus risks.
