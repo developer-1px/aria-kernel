@@ -69,6 +69,18 @@ export { switchPattern, switchAxis, type SwitchOptions } from './switch'
 export { navigationListPattern, type NavigationListOptions } from './navigationList'
 export { alertPattern } from './alert'
 
+export { useAnnouncer } from './liveRegion'
+export type {
+  AnnounceOptions,
+  AnnouncerRegionProps,
+  UseAnnouncerOptions,
+  UseAnnouncerResult,
+} from './liveRegion'
+export { useSkipLink } from './skipLink'
+export type { UseSkipLinkOptions, UseSkipLinkResult, SkipLinkProps } from './skipLink'
+export { Landmark, LandmarksProvider, useLandmarks } from './landmarks'
+export type { LandmarkEntry, LandmarkProps, LandmarkRole } from './landmarks'
+
 // L1 pattern-named reducer hooks — useReducer(reduce*, items, from*) shortcut
 export {
   useListboxReducer, useTreeReducer, useGridReducer, useTreeGridReducer,

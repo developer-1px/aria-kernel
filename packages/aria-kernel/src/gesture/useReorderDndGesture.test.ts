@@ -2,10 +2,10 @@ import { describe, expect, it, vi } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
 import { fromTree } from '../state/fromTree'
 import {
-  useReorderDnDGesture,
-  useReorderDnDGestureRaw,
+  useReorderDndGesture,
+  useReorderDndGestureRaw,
   positionToMoveMode,
-} from './useReorderDnDGesture'
+} from './useReorderDndGesture'
 import type { UiEvent } from '../types'
 
 type Node = { id: string; children?: Node[] }
@@ -25,10 +25,10 @@ const dragEvent = (clientY: number, height = 20): React.DragEvent => {
   } as unknown as React.DragEvent
 }
 
-describe('useReorderDnDGestureRaw (#165)', () => {
+describe('useReorderDndGestureRaw (#165)', () => {
   it('dragstart(A) → onDragStart(A) 호출', () => {
     const onDragStart = vi.fn()
-    const { result } = renderHook(() => useReorderDnDGestureRaw({ onDragStart }))
+    const { result } = renderHook(() => useReorderDndGestureRaw({ onDragStart }))
     const h = result.current.getItemHandlers('A')
     act(() => h.onDragStart(dragEvent(0)))
     expect(onDragStart).toHaveBeenCalledWith('A')
@@ -36,7 +36,7 @@ describe('useReorderDnDGestureRaw (#165)', () => {
 
   it('dragstart(A) → dragover(B, y=상단) → onDragOver(A, B, "before")', () => {
     const onDragOver = vi.fn()
-    const { result } = renderHook(() => useReorderDnDGestureRaw({ onDragOver }))
+    const { result } = renderHook(() => useReorderDndGestureRaw({ onDragOver }))
     act(() => result.current.getItemHandlers('A').onDragStart(dragEvent(0)))
     act(() => result.current.getItemHandlers('B').onDragOver(dragEvent(2, 20)))
     expect(onDragOver).toHaveBeenCalledWith('A', 'B', 'before')
@@ -44,7 +44,7 @@ describe('useReorderDnDGestureRaw (#165)', () => {
 
   it('dragstart(A) → dragover(B, y=하단) → onDragOver(A, B, "after")', () => {
     const onDragOver = vi.fn()
-    const { result } = renderHook(() => useReorderDnDGestureRaw({ onDragOver }))
+    const { result } = renderHook(() => useReorderDndGestureRaw({ onDragOver }))
     act(() => result.current.getItemHandlers('A').onDragStart(dragEvent(0)))
     act(() => result.current.getItemHandlers('B').onDragOver(dragEvent(18, 20)))
     expect(onDragOver).toHaveBeenCalledWith('A', 'B', 'after')
@@ -52,7 +52,7 @@ describe('useReorderDnDGestureRaw (#165)', () => {
 
   it('allowInside: dragover(B, y=중앙) → "inside"', () => {
     const onDragOver = vi.fn()
-    const { result } = renderHook(() => useReorderDnDGestureRaw({ onDragOver, allowInside: true }))
+    const { result } = renderHook(() => useReorderDndGestureRaw({ onDragOver, allowInside: true }))
     act(() => result.current.getItemHandlers('A').onDragStart(dragEvent(0)))
     act(() => result.current.getItemHandlers('B').onDragOver(dragEvent(10, 20)))
     expect(onDragOver).toHaveBeenCalledWith('A', 'B', 'inside')
@@ -60,7 +60,7 @@ describe('useReorderDnDGestureRaw (#165)', () => {
 
   it('drop(B) → onDrop(A, B, position) + 자기 자신 drop 무시', () => {
     const onDrop = vi.fn()
-    const { result } = renderHook(() => useReorderDnDGestureRaw({ onDrop }))
+    const { result } = renderHook(() => useReorderDndGestureRaw({ onDrop }))
     act(() => result.current.getItemHandlers('A').onDragStart(dragEvent(0)))
     act(() => result.current.getItemHandlers('A').onDrop(dragEvent(0)))
     expect(onDrop).not.toHaveBeenCalled()
@@ -71,7 +71,7 @@ describe('useReorderDnDGestureRaw (#165)', () => {
   it('드래그 없이 dragover/drop → 무시', () => {
     const onDragOver = vi.fn()
     const onDrop = vi.fn()
-    const { result } = renderHook(() => useReorderDnDGestureRaw({ onDragOver, onDrop }))
+    const { result } = renderHook(() => useReorderDndGestureRaw({ onDragOver, onDrop }))
     act(() => result.current.getItemHandlers('B').onDragOver(dragEvent(0)))
     act(() => result.current.getItemHandlers('B').onDrop(dragEvent(0)))
     expect(onDragOver).not.toHaveBeenCalled()
@@ -80,7 +80,7 @@ describe('useReorderDnDGestureRaw (#165)', () => {
 
   it('dragend 후 dragover 무시', () => {
     const onDragOver = vi.fn()
-    const { result } = renderHook(() => useReorderDnDGestureRaw({ onDragOver }))
+    const { result } = renderHook(() => useReorderDndGestureRaw({ onDragOver }))
     act(() => result.current.getItemHandlers('A').onDragStart(dragEvent(0)))
     act(() => result.current.getItemHandlers('A').onDragEnd(dragEvent(0)))
     act(() => result.current.getItemHandlers('B').onDragOver(dragEvent(2, 20)))
@@ -88,10 +88,10 @@ describe('useReorderDnDGestureRaw (#165)', () => {
   })
 })
 
-describe('useReorderDnDGesture (bound)', () => {
+describe('useReorderDndGesture (bound)', () => {
   it('drop → dispatch({type:"move", id, targetId, mode}) emit', () => {
     const dispatch = vi.fn<(e: UiEvent) => void>()
-    const { result } = renderHook(() => useReorderDnDGesture(list, dispatch))
+    const { result } = renderHook(() => useReorderDndGesture(list, dispatch))
     act(() => result.current.getItemHandlers('A').onDragStart(dragEvent(0)))
     act(() => result.current.getItemHandlers('C').onDrop(dragEvent(18, 20)))
     expect(dispatch).toHaveBeenCalledWith({ type: 'move', id: 'A', targetId: 'C', mode: 'sibling-after' })
@@ -99,7 +99,7 @@ describe('useReorderDnDGesture (bound)', () => {
 
   it('allowInside: 중앙 drop → mode "child"', () => {
     const dispatch = vi.fn<(e: UiEvent) => void>()
-    const { result } = renderHook(() => useReorderDnDGesture(list, dispatch, { allowInside: true }))
+    const { result } = renderHook(() => useReorderDndGesture(list, dispatch, { allowInside: true }))
     act(() => result.current.getItemHandlers('A').onDragStart(dragEvent(0)))
     act(() => result.current.getItemHandlers('C').onDrop(dragEvent(10, 20)))
     expect(dispatch).toHaveBeenCalledWith({ type: 'move', id: 'A', targetId: 'C', mode: 'child' })
