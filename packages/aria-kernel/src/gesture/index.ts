@@ -6,6 +6,13 @@
  * 같은 헬퍼가 의도 이벤트로 분해.
  */
 export { useClickOutsideGesture, type ClickOutsideRef } from './useClickOutsideGesture'
+export {
+  useFileDropGesture,
+  type FileDropGestureOptions,
+  type FileDropGestureResult,
+  type FileDropGestureState,
+  type FileDropRejectReason,
+} from './useFileDropGesture'
 export { useContextMenuGesture, type ContextMenuGestureOptions } from './useContextMenuGesture'
 export { useResizeGesture, type ResizeGestureOptions } from './useResizeGesture'
 export { useGridDragSelectGesture, useGridDragSelectGestureRaw } from './useGridDragSelectGesture'
