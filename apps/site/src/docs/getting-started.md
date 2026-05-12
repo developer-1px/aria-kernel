@@ -79,7 +79,7 @@ export default function Demo() {
 }
 ```
 
-경계 — **행동은 `useListboxPattern`, 시각은 Tailwind utility class.** 두 축은 절대 섞지 않는다 (CLAUDE.md invariant 4).
+경계 — **행동은 `useListboxPattern`, 시각은 Tailwind utility class.** 두 축은 섞지 않는다.
 
 ## 키보드 동작 확인
 
@@ -93,7 +93,7 @@ export default function Demo() {
 | `Enter` / `Space` | activate (selection-follows-focus 기본 활성) |
 | 인쇄 가능 문자 | typeahead — label prefix 매칭 |
 
-검증 체크리스트 (CLAUDE.md §5):
+검증 체크리스트:
 
 1. `npx tsc --noEmit -p tsconfig.app.json`
 2. `npx vite dev` — 콘솔 에러 0

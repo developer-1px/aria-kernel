@@ -11,7 +11,7 @@
 import { extractFrontmatter, normalizeFrontmatter, type DocFrontmatter } from './frontmatter'
 
 export type DocEntry = {
-  /** /docs/2026/2026-04/2026-04-26/foo.md */
+  /** source document path */
   path: string
   /** 표시용 파일명 — fm.title > body H1 > basename */
   label: string

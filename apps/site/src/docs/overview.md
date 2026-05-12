@@ -141,7 +141,6 @@ data → 화면 → 이벤트 → reducer → data
 | Axis primitive | `@p/aria-kernel` | navigate · activate · expand · typeahead · multiSelect … (recipe 가 부족할 때 직접 합성) |
 | 데이터 빌더 | `@p/aria-kernel` | `fromList`, `fromTree`, `pathAncestors` |
 | 단일 dispatch 어휘 | `@p/aria-kernel` (`UiEvent`) | 11 variant union |
-| LLM 컨텍스트 | [/llms.txt](/llms.txt) · [/llms-full.txt](/llms-full.txt) | 226 export 인덱스 + 시그니처 전문 |
 
 라이브 데모: [/patterns](/patterns) · [/axes](/axes) · [/matrix](/matrix) · [/data](/data) · [/uievents](/uievents)
 
@@ -155,4 +154,3 @@ data → 화면 → 이벤트 → reducer → data
 ## 참조
 
 - [W3C WAI-ARIA APG](https://www.w3.org/WAI/ARIA/apg/) — 정본 어휘 출처
-- [/llms.txt](/llms.txt) — 전체 export 인덱스

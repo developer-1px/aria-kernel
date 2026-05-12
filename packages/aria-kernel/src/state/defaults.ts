@@ -9,7 +9,7 @@ import { setValue } from './value'
  * listbox(single) · tabs · menu · toolbar · accordion 등 가장 보편 시나리오.
  *
  * 합성: select 축 single + check 축 multi-toggle + value. 두 축이 서로 다른 event
- * (`select` vs `check`/`checkMany`) 라 충돌 없이 합성.
+ * (`select` vs `check`) 라 충돌 없이 합성.
  */
 export const reduceSingleSelect: Reducer = composeReducers(reduce, singleSelect, checkToggle, setValue)
 
@@ -27,4 +27,3 @@ export const reduceMultiSelect: Reducer = composeReducers(reduce, multiSelectTog
  * aria-selected 가 아니라 aria-checked 로 표현).
  */
 export const reduceRadio: Reducer = composeReducers(reduce, singleCheck, setValue)
-

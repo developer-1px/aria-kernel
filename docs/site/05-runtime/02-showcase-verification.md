@@ -41,7 +41,6 @@ tags: [showcase, verification, site]
 - wrappers
 - demo apps
 - Markdown 기반 공식 문서
-- `/llms.txt`, `/llms-full.txt`
 
 라우팅은 TanStack file-based routing을 사용한다. 각 route는 `staticData.palette`를 노출하고, sidebar와 landing은 palette를 수집해 navigation을 구성한다.
 

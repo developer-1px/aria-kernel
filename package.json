@@ -11,8 +11,6 @@
     "guard:chords": "node scripts/guardChordRegistry.mjs",
     "audit:axis": "node scripts/auditAxisCompleteness.mjs",
     "preview": "vite preview",
-    "docs:api": "cd packages/aria-kernel && npx typedoc --json ../../docs/api.json --out ../../docs/api",
-    "docs:llms": "pnpm docs:api && node scripts/gen-llms-txt.mjs",
     "prepare": "husky"
   },
   "dependencies": {

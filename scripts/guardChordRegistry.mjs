@@ -4,7 +4,6 @@
  *
  * Why: 같은 (chord, uiEvent) descriptor 가 두 번 등록되면 UI 가 chord+uiEvent 키로 list rendering 시
  * React duplicate-key collision 이 터지고, runtime routing 에서 기대치 못한 분기가 생긴다.
- * (사례: 2026-05-06 listbox.ts 의 'Backspaceremove' 사건 — docs/2026/2026-05/2026-05-06/04_chordDescriptorDup.md)
  *
  * How: pattern 파일을 읽어 top-level `const X = ['..'] as const` 상수 맵을 만들고,
  * 각 `*BuiltinChords` 배열 entry 의 `chord:` 값(literal 또는 CONST[i])을 resolve 해 (chord, uiEvent) 쌍이

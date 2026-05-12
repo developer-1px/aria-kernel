@@ -8,7 +8,7 @@ import { INTENT_CHORDS } from './intentChords'
  * multiSelect — `aria-multiselectable` axis. anchor-range, Ctrl+A, Shift+Click.
  * single-select 단일 토글은 별도 `select` axis. activate (default action) 와도 분리.
  * Click/Space toggle, Shift+Arrow / Shift+Click anchor-range, Ctrl/Meta+A all.
- * Emits `select` (per-id toggle) and `selectMany` (batch).
+ * Emits unified `select { ids, to? }` events for per-id and batch selection.
  *
  * Range semantics — de facto (Mac Finder · Shopify · Radix · React Aria):
  *   anchor..current = selected · everything outside that range = deselected.

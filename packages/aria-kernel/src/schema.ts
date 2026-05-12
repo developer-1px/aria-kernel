@@ -80,10 +80,7 @@ export const CollectionDataSchema = NormalizedDataBaseSchema.extend({
   meta: CollectionMetaSchema,
 }).superRefine(validateGraphRefs)
 
-/**
- * navigate dir 어휘 — axis 마이그레이션이 채워가는 의도형 방향 enum.
- * PRD: docs/2026/2026-05/2026-05-05/06_prd_keymap_serializable.md
- */
+/** navigate dir 어휘 — axis가 사용하는 의도형 방향 enum. */
 export const NavigateDirSchema = z.enum([
   'next', 'prev', 'start', 'end',
   'pageNext', 'pagePrev',

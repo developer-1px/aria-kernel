@@ -188,13 +188,10 @@ URL  /slides/<md-path>
   renderMarkdown(slide.source) ─ @p/fs/markdown
         │
         ▼
-  <Prose html={...} />  ← ds/ui/0-primitive (HTML payload entity)
-        │
-        ▼
   16:9 article frame  ← apps/slides/style.ts
 ```
 
-레이어 직교: `slides`는 `@p/ds`·`@p/fs`만 의존. finder 의존 0.
+레이어 직교: slides harness 는 `@p/slides`, `@p/fs`, `@p/aria-kernel` public export 만 소비한다.
 
 ---
 
@@ -203,7 +200,7 @@ URL  /slides/<md-path>
 - ❌ CRUD — 편집·생성·삭제 없음
 - ❌ 트랜지션 — 페이드/슬라이드 효과 없음
 - ❌ Speaker notes — 발표자 모드 없음
-- ❌ Custom themes — DS 토큰 그대로
+- ❌ Custom themes
 - ❌ Vue/React 컴포넌트 임베드
 - ❌ Per-slide frontmatter — 본문만
 - ❌ Drawing/annotation

@@ -70,8 +70,8 @@ type UiEvent =
   | { type: 'navigate';   id: string }
   | { type: 'activate';   id: string }
   | { type: 'expand';     id: string; open: boolean }
-  | { type: 'select';     id: string }
-  | { type: 'selectMany'; ids: string[]; to?: boolean }
+  | { type: 'select';     ids: string[]; to?: boolean; anchor?: boolean }
+  | { type: 'check';      ids: string[]; to?: boolean | 'mixed' }
   | { type: 'value';      id: string; value: unknown }
   | { type: 'open';       id: string; open: boolean }
   | { type: 'typeahead';  buf: string; deadline: number }
@@ -86,8 +86,8 @@ type UiEvent =
 | `navigate` | siblings prev/next focus 이동 | Arrow / Home / End |
 | `activate` | default action (Enter/Space/click) | INVARIANT A3 |
 | `expand` | accordion·menu open/close | aria-expanded |
-| `select` | single-select per-id | Space / click |
-| `selectMany` | batch select (range/all/none) | Shift+Arrow / Ctrl+A |
+| `select` | select ids, replace/set/unset/range | Space / click / Shift+Arrow / Ctrl+A |
+| `check` | checked ids, set/unset/mixed | checkbox/radio/switch |
 | `value` | numeric value (slider/spinbutton) | numericStep axis |
 | `open` | popover/menu/dialog visibility | aria-haspopup |
 | `typeahead` | printable key buffer (500ms) | typeahead axis |
@@ -160,7 +160,7 @@ type Recipe<P extends string> = (
 
 ### `use*Pattern` vs `*Pattern` — 명명 규약
 
-CLAUDE.md §2:
+Pattern naming:
 
 | 형태 | 의미 | 예 |
 |---|---|---|
@@ -197,7 +197,7 @@ drop-in reducers:
 
 - `reduce` — focus/expand/open/typeahead/pan/zoom (코어)
 - `singleSelect` — single-selection
-- `multiSelectToggle` — `select` per-id + `selectMany` batch (O(N))
+- `multiSelectToggle` — unified `select { ids, to? }` batch handling (O(N))
 - `singleExpand` — accordion single-open invariant
 - `singleCurrent` — navigation single-current
 - `setValue` — numeric `value`
@@ -208,9 +208,7 @@ drop-in reducers:
 
 ## Where Tailwind fits
 
-CLAUDE.md invariant 4 그대로:
-
-> **Headless behavior, Tailwind visuals.** 행동 = `@p/aria-kernel` 패턴 (`useListboxPattern`, `useToolbarPattern`, `useTreegridPattern`, `useRovingTabIndex`…) · 시각 = Tailwind utility class. 두 축 절대 섞지 않는다.
+**Headless behavior, Tailwind visuals.** 행동 = `@p/aria-kernel` 패턴 (`useListboxPattern`, `useToolbarPattern`, `useTreegridPattern`, `useRovingTabIndex`…) · 시각 = Tailwind utility class. 두 축은 섞지 않는다.
 
 규칙:
 - Tailwind utility class 직접. 별도 토큰 wrapper 만들지 않는다

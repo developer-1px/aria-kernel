@@ -44,16 +44,14 @@ spredsheet 개밥먹기에서 5개의 ad-hoc 패턴이 발견됐다:
 
 5 invariant 신설 (INVARIANTS §B-ter.1~5).
 
-검증 8 layer:
-1. llms.txt (root + public) — LLM 진입
-2. README.md (root + kernel + spredsheet) — 인간 진입
-3. INVARIANTS.md §B-ter — 권위 등급
-4. NAMING.md §4 — 어휘 등록
-5. PATTERNS.md — recipe identity checklist
-6. kernel SSOT test 17개
-7. lab demo 5 + black-box test 25개
-8. spredsheet 적용 5 파일
+검증 layer:
+1. README.md — 인간 진입
+2. INVARIANTS.md — 권위 등급
+3. NAMING.md — 어휘 등록
+4. PATTERNS.md — recipe identity checklist
+5. kernel SSOT test
+6. lab demo + black-box test
 
 ## Out of scope (별 ADR 후보)
 
-- **Grid Clipboard transport** — W3C Clipboard API + UIEvent 흡수 (mod+c/x/v/z/y). 무거움, WriteAdapter + zod-crud 결합. 별 PR.
+- **Grid Clipboard transport** — W3C Clipboard API + UIEvent 흡수 (mod+c/x/v/y). 별 PR.
