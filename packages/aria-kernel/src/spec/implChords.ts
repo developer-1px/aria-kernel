@@ -19,16 +19,16 @@ import { listboxAxis } from '../patterns/listbox'
 import { menuAxis } from '../patterns/menu'
 import { menuButtonAxis } from '../patterns/menuButton'
 import { menubarAxis } from '../patterns/menubar'
-import { radioGroupAxis } from '../patterns/radioGroup'
+import { radioAxis } from '../patterns/radio'
 import { sliderAxis } from '../patterns/slider'
-import { sliderRangeAxis } from '../patterns/sliderRange'
+import { sliderMultithumbAxis } from '../patterns/sliderMultithumb'
 import { spinbuttonAxis } from '../patterns/spinbutton'
-import { splitterAxis } from '../patterns/splitter'
+import { windowsplitterAxis } from '../patterns/windowsplitter'
 import { switchAxis } from '../patterns/switch'
 import { tabsAxis } from '../patterns/tabs'
 import { toolbarAxis } from '../patterns/toolbar'
-import { treeAxis } from '../patterns/tree'
-import { treeGridAxis } from '../patterns/treeGrid'
+import { treeviewAxis } from '../patterns/treeview'
+import { treegridAxis } from '../patterns/treegrid'
 import { toggle, activate, escape } from '../axes'
 import type { Axis } from '../axes'
 
@@ -45,11 +45,11 @@ export const IMPL_CHORDS: Record<string, () => readonly string[]> = {
   menu: () => chords(menuAxis({})),
   menuButton: () => chords(menuButtonAxis()),
   menubar: () => chords(menubarAxis()),
-  radioGroup: () => chords(radioGroupAxis()),
+  radio: () => chords(radioAxis()),
   slider: () => chords(sliderAxis({})),
-  sliderRange: () => chords(sliderRangeAxis({})),
+  sliderMultithumb: () => chords(sliderMultithumbAxis({})),
   spinbutton: () => chords(spinbuttonAxis()),
-  splitter: () => chords(splitterAxis({})),
+  windowsplitter: () => chords(windowsplitterAxis({})),
   switch: () => chords(switchAxis()),
   // tabs/toolbar: orientation 별로 chord 가 다르다 — 양 orientation union (max advertise).
   tabs: () => [
@@ -60,15 +60,15 @@ export const IMPL_CHORDS: Record<string, () => readonly string[]> = {
     ...chords(toolbarAxis({ orientation: 'horizontal' })),
     ...chords(toolbarAxis({ orientation: 'vertical' })),
   ],
-  tree: () => chords(treeAxis({ multiSelectable: true })),
-  treeGrid: () => chords(treeGridAxis({ multiSelectable: true })),
+  treeview: () => chords(treeviewAxis({ multiSelectable: true })),
+  treegrid: () => chords(treegridAxis({ multiSelectable: true })),
 
   // 단순 axis 직접 사용
   checkbox: () => chords(toggle),
 
   // pattern hook 이 escape axis 사용 (Tab 은 focusTrap 명령형 mechanic — 별도 정책)
-  dialog: () => chords(escape),
-  alertDialog: () => chords(escape),
+  dialogModal: () => chords(escape),
+  alertdialog: () => chords(escape),
   tooltip: () => chords(escape),
 
   // pattern hook 없는 단순 HTML 요소

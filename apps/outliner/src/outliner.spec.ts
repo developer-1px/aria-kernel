@@ -90,7 +90,7 @@ export const outlinerSpec = {
   pattern: {
     /** 따르는 W3C APG recipe. */
     aria: 'tree' as const,
-    /** Pattern 옵션 — useTreePattern 에 그대로 패스. */
+    /** Pattern 옵션 — useTreeviewPattern 에 그대로 패스. */
     options: { label: 'outline' },
   },
 

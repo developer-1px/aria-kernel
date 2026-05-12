@@ -4,13 +4,13 @@ import { numericStep } from '../axes/numericStep'
 import type { ItemProps, RootProps } from './types'
 
 /** Splitter 가 등록하는 axis — SSOT. (vertical separator → horizontal arrow keys, vice versa) */
-export const splitterAxis = (opts: { orientation?: 'horizontal' | 'vertical' } = {}) => {
+export const windowsplitterAxis = (opts: { orientation?: 'horizontal' | 'vertical' } = {}) => {
   const o = opts.orientation ?? 'vertical'
   return numericStep(o === 'vertical' ? 'horizontal' : 'vertical')
 }
 
-/** Options for {@link splitterPattern}. */
-export interface SplitterOptions {
+/** Options for {@link windowsplitterPattern}. */
+export interface WindowsplitterOptions {
   orientation?: 'horizontal' | 'vertical'
   min?: number
   max?: number
@@ -27,12 +27,12 @@ export interface SplitterOptions {
  *
  * @example canonical (#148)
  *   const [pos, setPos] = useState(40)
- *   const { handleProps, ... } = splitterPattern(pos, (e) => setPos(e.value), { min: 10, max: 90 })
+ *   const { handleProps, ... } = windowsplitterPattern(pos, (e) => setPos(e.value), { min: 10, max: 90 })
  */
-export function splitterPattern(
+export function windowsplitterPattern(
   value: number,
   dispatch?: (e: ValueEvent<number>) => void,
-  opts: SplitterOptions = {},
+  opts: WindowsplitterOptions = {},
 ): {
   rootProps: RootProps
   handleProps: ItemProps
@@ -40,7 +40,7 @@ export function splitterPattern(
   const { orientation = 'vertical', min = 0, max = 100, step = 1, label, disabled = false } = opts
 
   const { onKey } = bindValueAxis(
-    splitterAxis({ orientation }),
+    windowsplitterAxis({ orientation }),
     { value, min, max, step },
     dispatch,
     pickNumericValue,

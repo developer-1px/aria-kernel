@@ -1,8 +1,8 @@
 /**
- * Tree — useTreePattern 위에 ul/li skeleton + 인라인 edit 통합을 얹은 기본형.
+ * Tree — useTreeviewPattern 위에 ul/li skeleton + 인라인 edit 통합을 얹은 기본형.
  *
- *   data·onEvent  → useTreePattern 그대로 패스
- *   options       → TreeOptions 그대로 forward (label, commands, variant 등)
+ *   data·onEvent  → useTreeviewPattern 그대로 패스
+ *   options       → TreeviewOptions 그대로 forward (label, commands, variant 등)
  *   slots         → marker · label · trailing 3구간. label slot 은 edit 모드를
  *                   editProps 형태로 받아 직접 렌더 가능 (default = EditInput).
  *   className /
@@ -12,7 +12,7 @@
  * lifecycle 만 책임. focus 복원은 EditInput 가 closest treeitem 으로 처리.
  */
 import { type CSSProperties, type ReactNode } from 'react'
-import { useTreePattern, type TreeItem, type TreeOptions } from '@p/aria-kernel/patterns'
+import { useTreeviewPattern, type TreeItem, type TreeviewOptions } from '@p/aria-kernel/patterns'
 import type { NormalizedData, UiEvent } from '@p/aria-kernel'
 import { EditInput } from './EditInput'
 
@@ -33,7 +33,7 @@ export interface TreeSlots {
 export interface TreeProps {
   data: NormalizedData
   onEvent: (e: UiEvent) => void
-  options?: TreeOptions
+  options?: TreeviewOptions
   slots?: TreeSlots
   /** root <ul> 추가 class. */
   className?: string
@@ -58,7 +58,7 @@ export function Tree({
   data, onEvent, options, slots,
   className, itemClassName, indent = '1rem',
 }: TreeProps) {
-  const tree = useTreePattern(data, onEvent, options)
+  const tree = useTreeviewPattern(data, onEvent, options)
   const marker = slots?.marker ?? defaultMarker
   const label = slots?.label ?? defaultLabel
   const trailing = slots?.trailing

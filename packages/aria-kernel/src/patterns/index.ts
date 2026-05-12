@@ -10,7 +10,7 @@
  *   - subpath/파일명은 W3C APG URL slug 미러 (변경 ❌)
  *
  * 사용:
- *   import { useListboxPattern, useTabsPattern, useTreePattern } from '@p/aria-kernel/patterns'
+ *   import { useListboxPattern, useTabsPattern, useTreeviewPattern } from '@p/aria-kernel/patterns'
  *
  * primitive 직접 조립 (escape hatch):
  *   import { useRovingTabIndex, composeAxes } from '@p/aria-kernel'
@@ -20,10 +20,10 @@
 
 export { useListboxPattern, listboxAxis, listboxEditKeys, listboxKeys, type ListboxOptions } from './listbox'
 export { useTabsPattern, tabsAxis, tabsKeys, type TabsOptions } from './tabs'
-export { useTreePattern, treeAxis, treeKeys, defaultTreeCommands, type TreeOptions } from './tree'
+export { useTreeviewPattern, treeviewAxis, treeviewKeys, defaultTreeviewCommands, type TreeviewOptions } from './treeview'
 export { type KeyDescriptor, type TreeCommand, type TreeCommandDescriptor } from './types'
 export { mergeRefs } from './mergeRefs'
-export { useRadioGroupPattern, radioGroupAxis, radioGroupKeys, type RadioGroupOptions } from './radioGroup'
+export { useRadioPattern, radioAxis, radioKeys, type RadioOptions } from './radio'
 export { useToolbarPattern, toolbarAxis, type ToolbarOptions } from './toolbar'
 
 export { useMenuPattern, menuAxis, menuKeys, menuButtonTriggerKeys, type MenuOptions } from './menu'
@@ -46,12 +46,12 @@ export {
   useComboboxGridPattern, comboboxGridAxis,
   type ComboboxGridOptions, type ComboboxGridCell,
 } from './comboboxGrid'
-export { useTreeGridPattern, treeGridAxis, treeGridEditKeys, treeGridKeys, type TreeGridOptions } from './treeGrid'
+export { useTreegridPattern, treegridAxis, treegridEditKeys, treegridKeys, type TreegridOptions } from './treegrid'
 export { useAccordionPattern, accordionAxis, type AccordionOptions } from './accordion'
-export { useDialogPattern, dialogKeys, type DialogOptions } from './dialog'
+export { useDialogModalPattern, dialogModalKeys, type DialogModalOptions } from './dialogModal'
 export { useFocusTrap, focusTrapKeys } from './focusTrap'
-export { useAlertDialogPattern, type AlertDialogOptions } from './alertDialog'
-export { sliderRangePattern, sliderRangeAxis, type SliderRangeOptions } from './sliderRange'
+export { useAlertdialogPattern, type AlertdialogOptions } from './alertdialog'
+export { sliderMultithumbPattern, sliderMultithumbAxis, type SliderMultithumbOptions } from './sliderMultithumb'
 export { useTooltipPattern, tooltipKeys, type TooltipOptions } from './tooltip'
 
 export {
@@ -64,7 +64,7 @@ export { spinbuttonPattern, spinbuttonAxis, type SpinbuttonOptions } from './spi
 
 export { disclosurePattern, disclosureAxis, type DisclosureOptions } from './disclosure'
 export { sliderPattern, sliderAxis, type SliderOptions } from './slider'
-export { splitterPattern, splitterAxis, type SplitterOptions } from './splitter'
+export { windowsplitterPattern, windowsplitterAxis, type WindowsplitterOptions } from './windowsplitter'
 export { switchPattern, switchAxis, type SwitchOptions } from './switch'
 export { navigationListPattern, type NavigationListOptions } from './navigationList'
 export { alertPattern } from './alert'
@@ -83,12 +83,12 @@ export type { LandmarkEntry, LandmarkProps, LandmarkRole } from './landmarks'
 
 // L1 pattern-named reducer hooks — useReducer(reduce*, items, from*) shortcut
 export {
-  useListboxReducer, useTreeReducer, useGridReducer, useTreeGridReducer,
+  useListboxReducer, useTreeviewReducer, useGridReducer, useTreegridReducer,
   useTabsReducer, useAccordionReducer, useToolbarReducer, useCheckboxGroupReducer,
   useComboboxReducer, useComboboxSelectReducer, useComboboxGridReducer,
   useDisclosureReducer, useNavigationListReducer,
   useMenuReducer, useMenubarReducer, useMenuButtonReducer,
-  useRadioGroupReducer,
+  useRadioReducer,
   type SelectableReducerOptions, type SingleReducerOptions,
 } from './reducers'
 
@@ -96,4 +96,3 @@ export type {
   BaseItem, TreeItem, RootProps, ItemProps,
   PatternProps, ControlProps,
 } from './types'
-

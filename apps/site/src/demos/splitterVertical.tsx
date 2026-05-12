@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { splitterAxis, splitterPattern } from '@p/aria-kernel/patterns'
+import { windowsplitterAxis, windowsplitterPattern } from '@p/aria-kernel/patterns'
 import { axisKeys } from '@p/aria-kernel'
 
 export const meta = {
@@ -7,12 +7,12 @@ export const meta = {
   apg: 'windowsplitter',
   kind: 'single-value' as const,
   blurb: 'A vertically resizable split panel controlled by a single percentage value.',
-  keys: () => axisKeys(splitterAxis()),
+  keys: () => axisKeys(windowsplitterAxis()),
 }
 
 export default function SplitterVerticalDemo() {
   const [value, setValue] = useState(40)
-  const { rootProps, handleProps } = splitterPattern(value, (e) => setValue(e.value), {
+  const { rootProps, handleProps } = windowsplitterPattern(value, (e) => setValue(e.value), {
     orientation: 'vertical',
     min: 10,
     max: 90,

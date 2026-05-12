@@ -64,7 +64,7 @@ PPT 썸네일 예제로 돌아가 봅시다 — 데이터는 tree, 시각은 평
 
 ```ts
 import { fromTree } from '@p/aria-kernel'
-import { useTreePattern } from '@p/aria-kernel/patterns'
+import { useTreeviewPattern } from '@p/aria-kernel/patterns'
 
 // 데이터: tree (섹션 > 슬라이드)
 const data = fromTree([
@@ -77,7 +77,7 @@ const data = fromTree([
   ]},
 ])
 
-const { rootProps, itemProps, items } = useTreePattern(data, onEvent)
+const { rootProps, itemProps, items } = useTreeviewPattern(data, onEvent)
 
 // 시각: 평평한 카드 list (들여쓰기·disclosure 화살표 없음)
 return (
@@ -94,7 +94,7 @@ return (
 **행동은 tree** — 화살표로 섹션을 접고 펼치고, 자식 건너뛰기, 부모 이동, `aria-level` · `aria-expanded` · roving tabindex 다 들어 있습니다.
 **시각은 list** — 들여쓰기·disclosure 화살표 없이 카드를 세로로 쌓을 뿐입니다.
 
-`useTreePattern` 이 행동을 보증하고, markup 과 className 은 본인이 결정합니다. 카드 grid 로 바꾸고 싶다면? `flex flex-col` 을 `grid grid-cols-3` 로 바꾸기만 하면 됩니다 — 행동은 그대로.
+`useTreeviewPattern` 이 행동을 보증하고, markup 과 className 은 본인이 결정합니다. 카드 grid 로 바꾸고 싶다면? `flex flex-col` 을 `grid grid-cols-3` 로 바꾸기만 하면 됩니다 — 행동은 그대로.
 
 **행동은 끝났고**, 이제 시각은 마음껏.
 

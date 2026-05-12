@@ -1,19 +1,19 @@
 import { useEffect, useId, useRef } from 'react'
 import { matchAnyChord } from '../axes'
-import { useDialogPattern, dialogKeys, type DialogOptions } from './dialog'
+import { useDialogModalPattern, dialogModalKeys, type DialogModalOptions } from './dialogModal'
 import type { ItemProps, RootProps } from './types'
 
 /**
  * useComboboxDialogPattern 이 흡수하는 키 — SSOT.
  * - ArrowDown / Alt+ArrowDown: open (APG combobox-datepicker)
- * - dialogKeys: Escape (+ modal=true 인 경우 Tab)
+ * - dialogModalKeys: Escape (+ modal=true 인 경우 Tab)
  */
 export const comboboxDialogKeys = (opts: { modal?: boolean } = {}): readonly string[] =>
-  ['ArrowDown', 'Alt+ArrowDown', ...dialogKeys({ modal: opts.modal ?? false })]
+  ['ArrowDown', 'Alt+ArrowDown', ...dialogModalKeys({ modal: opts.modal ?? false })]
 
 /** Options for {@link useComboboxDialogPattern}. */
 export interface ComboboxDialogOptions
-  extends Pick<DialogOptions, 'returnFocusRef' | 'initialFocusRef' | 'modal'> {
+  extends Pick<DialogModalOptions, 'returnFocusRef' | 'initialFocusRef' | 'modal'> {
   label?: string
   labelledBy?: string
   required?: boolean
@@ -26,7 +26,7 @@ export interface ComboboxDialogOptions
 export interface ComboboxDialogReturn {
   /** input/textbox element 에 spread. role="combobox" + aria-* 자동. */
   inputProps: ItemProps
-  /** popover container (dialog) 에 spread. useDialogPattern 의 rootProps. */
+  /** popover container (dialog) 에 spread. useDialogModalPattern 의 rootProps. */
   popoverProps: RootProps
   /** open icon button 에 spread (선택사항). */
   triggerProps: ItemProps
@@ -41,8 +41,8 @@ export interface ComboboxDialogReturn {
  * data 없음 — popup 내용은 호스트가 임의 dialog 콘텐츠로 채움 (calendar grid 등).
  * 자유 텍스트 입력 충돌 방지: openOnType / openOnFocus default false.
  *
- * 키 흡수: ArrowDown / Alt+ArrowDown → open. Escape / outside click → close (useDialogPattern).
- * focus trap / returnFocus / Escape 모두 useDialogPattern 합성.
+ * 키 흡수: ArrowDown / Alt+ArrowDown → open. Escape / outside click → close (useDialogModalPattern).
+ * focus trap / returnFocus / Escape 모두 useDialogModalPattern 합성.
  *
  * 격리 근거 (계약 4축 모두 다름):
  *   ① 입력: data 없음
@@ -60,7 +60,7 @@ export function useComboboxDialogPattern(opts: ComboboxDialogOptions): ComboboxD
   } = opts
   const dialogId = useId()
   const inputRef = useRef<HTMLElement | null>(null)
-  const dialog = useDialogPattern({
+  const dialog = useDialogModalPattern({
     modal,
     returnFocusRef: returnFocusRef ?? (inputRef as React.RefObject<HTMLElement | null>),
     initialFocusRef,
@@ -93,7 +93,7 @@ export function useComboboxDialogPattern(opts: ComboboxDialogOptions): ComboboxD
       }
       return
     }
-    // Escape close — useDialogPattern 의 global Escape 가 처리.
+    // Escape close — useDialogModalPattern 의 global Escape 가 처리.
   }
 
   const inputProps: ItemProps = {

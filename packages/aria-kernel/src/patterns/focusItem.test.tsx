@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import { fromList } from '../state/fromTree'
 import { fromTree } from '../state/fromTree'
 import { useListboxPattern } from './listbox'
-import { useTreePattern } from './tree'
+import { useTreeviewPattern } from './treeview'
 
 // Issue #164 — imperative focusItem(id) on listbox/tree.
 // 패턴이 이미 추적 중인 focus map 을 setter 로 노출. mutation 후 새 id 로 focus 이동.
@@ -56,7 +56,7 @@ function TreeHarness({ focusTarget }: { focusTarget: string }) {
     { id: 'root1', label: 'r1', children: [{ id: 'child1', label: 'c1' }] },
     { id: 'root2', label: 'r2' },
   ])
-  const { rootProps, itemProps, items, focusItem } = useTreePattern(data, undefined, { label: 't' })
+  const { rootProps, itemProps, items, focusItem } = useTreeviewPattern(data, undefined, { label: 't' })
   const fired = useRef(false)
   if (!fired.current) {
     queueMicrotask(() => {
@@ -73,7 +73,7 @@ function TreeHarness({ focusTarget }: { focusTarget: string }) {
   )
 }
 
-describe('useTreePattern — focusItem(id) (#164)', () => {
+describe('useTreeviewPattern — focusItem(id) (#164)', () => {
   it('focusItem(id) — pointer-like id 로 treeitem 에 DOM focus 이동', async () => {
     const { container } = render(<TreeHarness focusTarget="root2" />)
     await new Promise((r) => setTimeout(r, 0))

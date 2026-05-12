@@ -43,7 +43,7 @@ export const APG_PATTERN_EXAMPLE_SPEC: readonly ApgPatternExample[] =
     pattern('alert', ['alert'], [
       example('alert', 'Alert Example'),
     ]),
-    pattern('alertdialog', ['alertDialog'], [
+    pattern('alertdialog', ['alertdialog'], [
       example('alertdialog', 'Alert Dialog Example'),
     ]),
     pattern('breadcrumb', ['breadcrumb'], [
@@ -67,11 +67,11 @@ export const APG_PATTERN_EXAMPLE_SPEC: readonly ApgPatternExample[] =
       example('combobox-autocomplete-list', 'Editable Combobox with List Autocomplete'),
       example('combobox-autocomplete-none', 'Editable Combobox Without Autocomplete'),
       example('grid-combo', 'Editable Combobox with Grid Popup', ['combobox', 'comboboxGrid', 'grid']),
-      example('combobox-datepicker', 'Date Picker Combobox', ['combobox', 'dialog', 'grid', 'button']),
+      example('combobox-datepicker', 'Date Picker Combobox', ['combobox', 'dialogModal', 'grid', 'button']),
     ]),
-    pattern('dialog-modal', ['dialog'], [
+    pattern('dialog-modal', ['dialogModal'], [
       example('dialog', 'Modal Dialog Example'),
-      example('datepicker-dialog', 'Date Picker Dialog Example', ['dialog', 'grid', 'button']),
+      example('datepicker-dialog', 'Date Picker Dialog Example', ['dialogModal', 'grid', 'button']),
     ]),
     pattern('disclosure', ['disclosure'], [
       example('disclosure-image-description', 'Disclosure (Show/Hide) of Image Description'),
@@ -109,7 +109,7 @@ export const APG_PATTERN_EXAMPLE_SPEC: readonly ApgPatternExample[] =
     pattern('meter', ['meter'], [
       example('meter', 'Meter Example'),
     ]),
-    pattern('radio', ['radioGroup'], [
+    pattern('radio', ['radio'], [
       example('radio', 'Radio Group Example Using Roving tabindex'),
       example('radio-activedescendant', 'Radio Group Example Using aria-activedescendant'),
       example('radio-rating', 'Rating Radio Group Example'),
@@ -120,7 +120,7 @@ export const APG_PATTERN_EXAMPLE_SPEC: readonly ApgPatternExample[] =
       example('slider-rating', 'Rating Slider Example'),
       example('slider-seek', 'Media Seek Slider Example'),
     ]),
-    pattern('slider-multithumb', ['sliderRange'], [
+    pattern('slider-multithumb', ['sliderMultithumb'], [
       example('slider-multithumb', 'Horizontal Multi-Thumb Slider Example'),
     ]),
     pattern('spinbutton', ['spinbutton'], [
@@ -143,7 +143,7 @@ export const APG_PATTERN_EXAMPLE_SPEC: readonly ApgPatternExample[] =
       example('toolbar', 'Toolbar Example', [
         'toolbar',
         'button',
-        'radioGroup',
+        'radio',
         'menuButton',
         'menu',
         'spinbutton',
@@ -153,15 +153,15 @@ export const APG_PATTERN_EXAMPLE_SPEC: readonly ApgPatternExample[] =
       ]),
     ]),
     pattern('tooltip', ['tooltip'], []),
-    pattern('treeview', ['tree'], [
+    pattern('treeview', ['treeview'], [
       example('treeview-1a', 'File Directory Treeview Example Using Computed Properties'),
       example('treeview-1b', 'File Directory Treeview Example Using Declared Properties'),
-      example('treeview-navigation', 'Navigation Treeview Example', ['tree', 'navigationList']),
+      example('treeview-navigation', 'Navigation Treeview Example', ['treeview', 'navigationList']),
     ]),
-    pattern('treegrid', ['treeGrid'], [
+    pattern('treegrid', ['treegrid'], [
       example('treegrid-1', 'E-mail Inbox'),
     ]),
-    pattern('windowsplitter', ['splitter'], []),
+    pattern('windowsplitter', ['windowsplitter'], []),
   ])
 
 export const allApgExamples = (): readonly (ApgExample & { patternSlug: string })[] =>

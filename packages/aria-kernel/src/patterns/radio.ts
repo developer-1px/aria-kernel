@@ -5,8 +5,8 @@ import { selectionFollowsFocus as applySelectionFollowsFocus } from '../gesture'
 import { usePatternBase } from './usePatternBase'
 import type { BaseItem, ItemProps, RootProps } from './types'
 
-/** Options for {@link useRadioGroupPattern}. */
-export interface RadioGroupOptions {
+/** Options for {@link useRadioPattern}. */
+export interface RadioOptions {
   /** 시각·aria-orientation 만. 키보드는 양 축 모두 항상 활성. */
   orientation?: 'horizontal' | 'vertical'
   autoFocus?: boolean
@@ -34,32 +34,32 @@ export interface RadioGroupOptions {
 
 // APG radiogroup: 양 축 Arrow 모두 navigate. activate 는 click 활성화 위해 axis 에 포함.
 /** RadioGroup 이 등록하는 axis — SSOT (behavior 용). */
-export const radioGroupAxis = () =>
+export const radioAxis = () =>
   composeAxes(navigate('vertical'), navigate('horizontal'), activate)
-const axis = radioGroupAxis()
+const axis = radioAxis()
 
 /**
  * RadioGroup 이 advertise 하는 키 — sff 가 navigate 와 함께 selection 을 가져가
  * Enter/Space 는 redundant. APG radio 도 Enter 미지정 / Space 는 form submit 컨텍스트
  * 한정 → 본 라이브러리는 일관성 위해 둘 다 advertise 제외.
  */
-export const radioGroupKeys = (): readonly string[] =>
-  axisKeysFn(radioGroupAxis()).filter((k) => k !== 'Enter' && k !== ' ')
+export const radioKeys = (): readonly string[] =>
+  axisKeysFn(radioAxis()).filter((k) => k !== 'Enter' && k !== ' ')
 
 /**
- * radioGroup — APG `/radio/` recipe.
+ * radio — APG `/radio/` recipe.
  * https://www.w3.org/WAI/ARIA/apg/patterns/radio/
  *
  * 항상 selection-follows-focus (APG 강제). single-select.
  *
  * @example canonical
- *   const [data, dispatch] = useRadioGroupReducer(ITEMS)
- *   const { rootProps, radioProps, items } = useRadioGroupPattern(data, dispatch)
+ *   const [data, dispatch] = useRadioReducer(ITEMS)
+ *   const { rootProps, radioProps, items } = useRadioPattern(data, dispatch)
  */
-export function useRadioGroupPattern(
+export function useRadioPattern(
   data: NormalizedData,
   onEvent?: (e: UiEvent) => void,
-  opts: RadioGroupOptions = {},
+  opts: RadioOptions = {},
 ): {
   rootProps: RootProps
   radioProps: (id: string) => ItemProps

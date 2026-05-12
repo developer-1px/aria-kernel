@@ -88,7 +88,7 @@ function Toolbar() {
 | **Gesture** | `composeGestures` · `navigateOnActivate` · `selectionFollowsFocus` · `expandBranchOnActivate` · `expandOnActivate` · `activateProps` · `useZoomPanGesture` |
 | **Key** | `@p/aria-kernel/key` (subpath) — `useShortcut` · `onShortcut` · `bindGlobalKeyMap` · `useKeyMap` · `routeInsideEditable` · `isEditable` · `fromKeyboardEvent` |
 | **Spec** | `APG_KEYBOARD_SPEC` · `allApgChords` · `APG_PATTERN_EXAMPLE_SPEC` · `allApgExamples` · `IMPL_CHORDS` · `normalizeChord` · `normalizeChordSet` |
-| **Patterns** | `@p/aria-kernel/patterns` (subpath) — `useListboxPattern` · `useTreePattern` · ... 21종 |
+| **Patterns** | `@p/aria-kernel/patterns` (subpath) — `useListboxPattern` · `useTreeviewPattern` · ... 21종 |
 
 ## Subpath imports
 

@@ -10,10 +10,10 @@
 
 | 형태 | 규칙 | 예 |
 |---|---|---|
-| `use<Pascal>Pattern` | 내부에 React state(`useState`/`useRef`/`useEffect`) | `useListboxPattern`, `useDialogPattern` |
+| `use<Pascal>Pattern` | 내부에 React state(`useState`/`useRef`/`useEffect`) | `useListboxPattern`, `useDialogModalPattern` |
 | `<camel>Pattern` | 순수 함수, 외부 주입만 | `switchPattern`, `sliderPattern`, `checkboxPattern` |
 | `<camel>Axis` | composeAxes 결과 함수, keyboard mapping SSOT | `listboxAxis`, `gridAxis`, `comboboxAxis` |
-| 파일명 | APG URL slug 그대로 (camelCase 변환만) | `treeGrid.ts` ← `/treegrid/`, `sliderRange.ts` ← `/slider-multithumb/` |
+| 파일명 | APG URL slug 그대로 (camelCase 변환만) | `treegrid.ts` ← `/treegrid/`, `sliderMultithumb.ts` ← `/slider-multithumb/` |
 
 **파일명 ≠ export 이름**: 파일명은 APG URL slug, export 이름은 React rules-of-hooks 규약.
 
@@ -23,19 +23,19 @@
 ```ts
 use<X>Pattern(data: NormalizedData, onEvent?: (e: UiEvent) => void, opts?): { rootProps, ...partProps, items }
 ```
-적용: listbox, tabs, tree, treeGrid, grid, radioGroup, toolbar, menu, menubar, accordion, feed, navigationList, combobox, comboboxGrid, checkboxGroup
+적용: listbox, tabs, treeview, treegrid, grid, radio, toolbar, menu, menubar, accordion, feed, navigationList, combobox, comboboxGrid, checkboxGroup
 
 ### B. Single-value (scalar)
 ```ts
 <x>Pattern(value: T, dispatch?: (e: ValueEvent<T>) => void, opts?): { ...props }
 ```
-적용: switch, slider, sliderRange, splitter, spinbutton, checkbox, disclosure
+적용: switch, slider, sliderMultithumb, windowsplitter, spinbutton, checkbox, disclosure
 
 ### C. Stateful preset (no external state)
 ```ts
 use<X>Pattern(opts?): { ...props, open, setOpen, ... }
 ```
-적용: dialog, alertDialog, tooltip, carousel, menuButton
+적용: dialogModal, alertdialog, tooltip, carousel, menuButton
 
 **파라미터 이름 고정**: `data` / `onEvent` (collection) — `value` / `dispatch` (scalar). 메모리 *Single data interface — useResource* 정합. 섞지 않는다.
 
@@ -45,10 +45,10 @@ use<X>Pattern(opts?): { ...props, open, setOpen, ... }
 |---|---|---|
 | listbox | `rootProps` (role=listbox) | `optionProps(id)`, `groupProps(groupId)` |
 | tabs | `rootProps` (role=tablist) | `tabProps(id)`, `panelProps(id)` |
-| tree | `rootProps` (role=tree) | `itemProps(id)` (role=treeitem) |
-| treeGrid | `rootProps` (role=treegrid) | `rowProps(id)`, `columnHeaderProps(id)`, `rowHeaderProps(id)`, `gridcellProps(id)` |
+| treeview | `rootProps` (role=tree) | `itemProps(id)` (role=treeitem) |
+| treegrid | `rootProps` (role=treegrid) | `rowProps(id)`, `columnHeaderProps(id)`, `rowHeaderProps(id)`, `gridcellProps(id)` |
 | grid | `rootProps` (role=grid) | `rowProps(id)`, `columnHeaderProps(id)`, `rowHeaderProps(id)`, `cellProps(id)` |
-| radioGroup | `rootProps` (role=radiogroup) | `radioProps(id)` |
+| radio | `rootProps` (role=radiogroup) | `radioProps(id)` |
 | toolbar | `rootProps` (role=toolbar) | `itemProps(id)` |
 | menu | `rootProps` (role=menu) | `menuitemProps(id)` |
 | menubar | `rootProps` (role=menubar) | `menubarItemProps(id)`, `menuProps(topId)`, `menuitemProps(id)` |
@@ -57,16 +57,16 @@ use<X>Pattern(opts?): { ...props, open, setOpen, ... }
 | navigationList | `rootProps` (`<nav>`) | `linkProps(id)` |
 | **combobox** | `comboboxProps` (input, role=combobox) ⚠️ no rootProps — APG 예외 | `listboxProps`, `optionProps(id)` |
 | comboboxGrid | `comboboxProps` ⚠️ same exception | `gridProps`, `rowProps(id)`, `cellProps(id)` |
-| dialog | `rootProps` (role=dialog) | `closeProps` |
-| alertDialog | `rootProps` (role=alertdialog) | `closeProps` |
+| dialogModal | `rootProps` (role=dialog) | `closeProps` |
+| alertdialog | `rootProps` (role=alertdialog) | `closeProps` |
 | tooltip | `triggerProps` ⚠️ trigger-anchored | `tipProps` (role=tooltip) |
 | disclosure | `triggerProps` ⚠️ trigger-anchored | `panelProps` |
 | menuButton | `triggerProps` ⚠️ trigger-anchored | `menuProps`, `itemProps(id)` |
 | carousel | `rootProps` (role=region) | `slideProps(i)`, `prevButtonProps`, `nextButtonProps`, `rotationButtonProps`, `liveRegionProps`, `tablistProps`, `tabProps(i)` |
 | switch | `switchProps` (role=switch) | — |
 | slider | `rootProps` | `trackProps`, `rangeProps`, `thumbProps` |
-| sliderRange | `rootProps` (role=group) | `trackProps`, `rangeProps`, `thumbProps(index)` |
-| splitter | `rootProps` | `handleProps` (role=separator) |
+| sliderMultithumb | `rootProps` (role=group) | `trackProps`, `rangeProps`, `thumbProps(index)` |
+| windowsplitter | `rootProps` | `handleProps` (role=separator) |
 | spinbutton | `spinbuttonProps` (role=spinbutton) | — |
 | checkbox | `checkboxProps` (role=checkbox) | — |
 | checkboxGroup | `groupProps` (role=group) | `parentProps` (mixed checkbox), `childProps(id)` |
@@ -107,21 +107,21 @@ use<X>Pattern(opts?): { ...props, open, setOpen, ... }
 | `containerId?: string` | NormalizedData root id (default `ROOT`) | 모든 collection |
 | `idPrefix?: string` | useId 기반 안정 ID 네임스페이스 | 모든 패턴 |
 | `autoFocus?: boolean` | mount 시 첫 항목 focus | collection |
-| `defaultOpen` / `open` / `onOpenChange` | controlled/uncontrolled 짝 | dialog, disclosure, menuButton |
+| `defaultOpen` / `open` / `onOpenChange` | controlled/uncontrolled 짝 | dialogModal, disclosure, menuButton |
 | `defaultChecked` / `checked` / `onCheckedChange` | 동일 짝, switch | switch |
-| `returnFocusRef` | dialog close 시 focus 복귀 | dialog, alertDialog |
-| `initialFocusRef` | dialog open 시 첫 focus | dialog, alertDialog |
+| `returnFocusRef` | dialog close 시 focus 복귀 | dialogModal, alertdialog |
+| `initialFocusRef` | dialog open 시 첫 focus | dialogModal, alertdialog |
 | `active?: string` | controlled active id (외부 SSOT 동기화 시 entities mutation 0) | tabs |
-| `backdropProps` | modal backdrop self-target close props | dialog |
+| `backdropProps` | modal backdrop self-target close props | dialogModal |
 | `onInteractOutside?: () => void` | 외부 클릭(open 동안 document mousedown) | menu (Radix de facto) |
-| `on?: Record<chord, () => void>` | open 동안 window keydown 미들웨어 (editable-guard 준수) | dialog |
+| `on?: Record<chord, () => void>` | open 동안 window keydown 미들웨어 (editable-guard 준수) | dialogModal |
 
 ## 5. 식별된 위반 (현재 코드)
 
 | 위치 | 문제 | 판정 | 처방 |
 |---|---|---|---|
-| `dialog.ts` `alert: boolean` opt | role discriminator via option — *1 role = 1 pattern* 위반 | ✅ **반영 완료** (2026-05-05) | `alert` 제거. `useAlertDialogPattern` 만 `role="alertdialog"` |
-| `treeGrid.ts` `navMode` | APG 는 "row focus" / "cell focus" | ✅ **반영 완료** (2026-05-05) | `navigationMode: 'row' \| 'cell' \| 'cellOnly'` |
+| `dialogModal.ts` `alert: boolean` opt | role discriminator via option — *1 role = 1 pattern* 위반 | ✅ **반영 완료** (2026-05-05) | `alert` 제거. `useAlertdialogPattern` 만 `role="alertdialog"` |
+| `treegrid.ts` `navMode` | APG 는 "row focus" / "cell focus" | ✅ **반영 완료** (2026-05-05) | `navigationMode: 'row' \| 'cell' \| 'cellOnly'` |
 | `checkbox.ts` group: disabled child 가 parent toggle 에 포함 | APG `/checkbox-mixed/` 위반 | ✅ **반영 완료** (2026-05-05) | enabled-only 연산. `disabled` 옵션 + auto-disable + `aria-controls` + label pass-through |
 | `toolbar.ts` `entity.itemRole` vs `menu.ts` `entity.kind` | 동일 개념 두 이름 | ⚠️ **백로그** | 하나로 통일. ARIA 어휘 우선이면 `itemRole`, 둘 다 ARIA 직역 아님 — 결정 보류 |
 | 일부 패턴 outer 가 `rootProps` 미사용 | combobox/tooltip/disclosure/menuButton 은 메모리 예외 — 허용 | ✅ keep | 문서화만 (이 문서) |
@@ -130,14 +130,14 @@ use<X>Pattern(opts?): { ...props, open, setOpen, ... }
 
 | 제안 | 기각 이유 |
 |---|---|
-| `sliderRangePattern` → `sliderMultithumbPattern` | role 은 단일 `slider`. range 는 de facto. APG slug 만으로는 약함 |
+| `sliderMultithumbPattern` → range 계열 이름 | APG slug 정본 우선. range 는 de facto 이름이라 채택하지 않음 |
 | `parentProps`/`childProps` → `controllerProps`/`controlledProps` | APG mixed checkbox 가 parent/child 어휘 사용. `aria-controls` 와 의미 충돌 |
 | `itemRole` → `kind` | ARIA `role` 어휘를 일반어로 희석. 방향 반대 |
-| tree `variant` → `treeviewType` / `semanticRole` | 둘 다 spec 어휘 아님. `semanticRole` 은 `role` 과 충돌 |
+| treeview `variant` → `treeviewType` / `semanticRole` | 둘 다 spec 어휘 아님. `semanticRole` 은 `role` 과 충돌 |
 | `dispatch` → `onEvent` 일괄 통일 | scalar `(value, dispatch)` / collection `(data, onEvent)` 분리가 의도. 메모리 정합 |
 | `idPrefix` 일괄 제거 / 자동화 | SSR id 안정성 위협. 호출부가 충돌 회피용 prefix 필요한 경우 있음 |
 | Menu `onEscape` 콜백 제거 | gesture/intent split 의 의도적 hook (`escape axis emit → close + onEscape`). 제거 시 host 가 직접 다뤄야 함 |
-| `focusMode` 공통화 (radioGroup/menuButton 외 패턴까지) | 실제 사용 사례 부족. 백로그 |
+| `focusMode` 공통화 (radio/menuButton 외 패턴까지) | 실제 사용 사례 부족. 백로그 |
 | Options 일괄 mass-mixin (BasePatternOptions/CollectionOptions extends) | 25+패턴 영향 mechanical 변경. types.ts 에 base type 만 노출하고 mass-extends 는 보류. 신규 pattern 부터 점진 적용 |
 
 ## 7. Cheat-sheet — LLM 작성 시 의사결정

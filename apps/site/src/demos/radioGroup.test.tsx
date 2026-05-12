@@ -9,7 +9,7 @@ const radios = () => screen.getAllByRole('radio') as HTMLElement[]
 const focused = () => radios().find((r) => r.tabIndex === 0)!
 const checked = () => radios().filter((r) => r.getAttribute('aria-checked') === 'true')
 
-describe('radioGroup demo — black-box (keyboard + mouse)', () => {
+describe('radio demo — black-box (keyboard + mouse)', () => {
   it('초기 — Medium 이 checked', () => {
     render(<Demo />)
     expect(checked().length).toBe(1)

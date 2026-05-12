@@ -1,19 +1,19 @@
 import { axisKeys } from '@p/aria-kernel'
-import { radioGroupAxis, useRadioGroupPattern, useRadioGroupReducer } from '@p/aria-kernel/patterns'
+import { radioAxis, useRadioPattern, useRadioReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Radio Group · activeDescendant',
   apg: 'radio',
   kind: 'collection' as const,
   blurb: 'DOM focus stays on the radiogroup; aria-activedescendant points to the active radio.',
-  keys: () => axisKeys(radioGroupAxis()),
+  keys: () => axisKeys(radioAxis()),
 }
 
 const SIZES = [{ label: 'Small' }, { label: 'Medium', checked: true }, { label: 'Large' }]
 
 export default function RadioGroupActiveDescendantDemo() {
-  const [data, dispatch] = useRadioGroupReducer(SIZES)
-  const { rootProps, radioProps, items } = useRadioGroupPattern(data, dispatch, {
+  const [data, dispatch] = useRadioReducer(SIZES)
+  const { rootProps, radioProps, items } = useRadioPattern(data, dispatch, {
     focusMode: 'activeDescendant',
     label: 'Size',
   })

@@ -1,9 +1,9 @@
 import type { RefObject } from 'react'
-import { useDialogPattern, type DialogOptions } from './dialog'
+import { useDialogModalPattern, type DialogModalOptions } from './dialogModal'
 import type { ItemProps, RootProps } from './types'
 
-/** Options for {@link useAlertDialogPattern}. */
-export type AlertDialogOptions = DialogOptions & {
+/** Options for {@link useAlertdialogPattern}. */
+export type AlertdialogOptions = DialogModalOptions & {
   /**
    * cancel/dismiss action 의 ref. open 시 자동 focus 우선 대상 (`initialFocusRef`
    * 가 따로 주어지지 않은 경우). 파괴적 동작 (Confirm) 보다 안전한 기본 focus.
@@ -15,13 +15,13 @@ export type AlertDialogOptions = DialogOptions & {
  * alert-dialog — APG `/alertdialog/` recipe.
  * https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/
  *
- * `useDialogPattern` 의 preset — `role="alertdialog"` + cancel 버튼 자동 focus.
+ * `useDialogModalPattern` 의 preset — `role="alertdialog"` + cancel 버튼 자동 focus.
  * confirm/destructive prompt 에 사용.
  *
  * @example canonical (#148 §4) — opts-only 패턴 (단일 인스턴스, 데이터 컬렉션 아님)
- *   const { rootProps, closeProps } = useAlertDialogPattern({ open, onClose, cancelRef })
+ *   const { rootProps, closeProps } = useAlertdialogPattern({ open, onClose, cancelRef })
  */
-export function useAlertDialogPattern(opts: AlertDialogOptions = {}): {
+export function useAlertdialogPattern(opts: AlertdialogOptions = {}): {
   rootRef: RefObject<HTMLElement | null>
   rootProps: RootProps
   closeProps: ItemProps
@@ -29,7 +29,7 @@ export function useAlertDialogPattern(opts: AlertDialogOptions = {}): {
   setOpen: (open: boolean) => void
 } {
   const { cancelRef, initialFocusRef, ...rest } = opts
-  const r = useDialogPattern({
+  const r = useDialogModalPattern({
     ...rest,
     initialFocusRef: initialFocusRef ?? cancelRef,
   })

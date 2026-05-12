@@ -1,12 +1,12 @@
 import { axisKeys } from '@p/aria-kernel'
-import { treeGridAxis, useTreeGridPattern, useTreeGridReducer } from '@p/aria-kernel/patterns'
+import { treegridAxis, useTreegridPattern, useTreegridReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Tree Grid · Cells-Only',
   apg: 'treegrid',
   kind: 'collection' as const,
   blurb: 'Only cells receive focus; rows do not advertise selection state.',
-  keys: () => axisKeys(treeGridAxis()),
+  keys: () => axisKeys(treegridAxis()),
 }
 
 interface Row {
@@ -26,11 +26,11 @@ const rows: Row[] = [
 
 const COLS = ['Name', 'Size', 'Modified']
 
-export default function TreeGridCellsOnlyDemo() {
-  const [data, dispatch] = useTreeGridReducer(rows, { defaultExpanded: ['src'] })
+export default function TreegridCellsOnlyDemo() {
+  const [data, dispatch] = useTreegridReducer(rows, { defaultExpanded: ['src'] })
   const {
     treegridProps, headerRowProps, rowProps, columnheaderProps, rowheaderProps, gridcellProps, items,
-  } = useTreeGridPattern(data, dispatch, {
+  } = useTreegridPattern(data, dispatch, {
     label: 'Files (cells-only)',
     colCount: COLS.length,
     navigationMode: 'cellOnly',

@@ -66,15 +66,14 @@ export const APG_KEYBOARD_SPEC: Record<string, readonly ApgEntry[]> = {
     { chord: 'Enter', action: 'Activates the disclosure control (toggles content)', sourceAnchor: APG('disclosure') },
     { chord: 'Space', action: 'Activates the disclosure control (toggles content)', sourceAnchor: APG('disclosure') },
   ],
-  // pattern slug = 'dialog-modal' (APG URL). 프로젝트 패턴명은 'dialog' — 본 SPEC 키도
-  // 프로젝트 정합 위해 'dialog' 사용. sourceAnchor 만 APG slug 반영.
-  dialog: [
+  // APG `dialog-modal` slug → TS key `dialogModal`.
+  dialogModal: [
     { chord: 'Tab', action: 'Moves focus to the next tabbable element inside the dialog', sourceAnchor: 'https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/#keyboardinteraction' },
     { chord: 'Shift+Tab', action: 'Moves focus to the previous tabbable element inside the dialog', sourceAnchor: 'https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/#keyboardinteraction' },
     { chord: 'Escape', action: 'Closes the dialog', sourceAnchor: 'https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/#keyboardinteraction' },
   ],
-  // SPEC key 는 프로젝트 패턴 파일명 (camelCase) 정합. APG slug 는 'alertdialog'.
-  alertDialog: [
+  // APG slug `alertdialog` 그대로.
+  alertdialog: [
     { chord: 'Tab', action: 'Moves focus to the next tabbable element inside the dialog', sourceAnchor: APG('alertdialog') },
     { chord: 'Shift+Tab', action: 'Moves focus to the previous tabbable element inside the dialog', sourceAnchor: APG('alertdialog') },
     { chord: 'Escape', action: 'Closes the alertdialog', sourceAnchor: APG('alertdialog') },
@@ -89,8 +88,8 @@ export const APG_KEYBOARD_SPEC: Record<string, readonly ApgEntry[]> = {
     // Enter 는 spec 에서 명시되어 있지는 않으나, 본 라이브러리는 Enter 도 토글로 처리할 수 있음.
     // APG 정본 비교에서는 누락 없이 'Space' 만 있는 것이 원칙.
   ],
-  // APG: radio group. 프로젝트 패턴명은 radioGroup.
-  radioGroup: [
+  // APG radio group pattern slug is `radio`.
+  radio: [
     { chord: 'Tab', action: 'Moves focus into the radio group (to the checked radio, or first radio if none checked)', sourceAnchor: APG('radio') },
     { chord: 'Shift+Tab', action: 'Moves focus out of the radio group', sourceAnchor: APG('radio') },
     { chord: 'Space', action: 'When focused radio is not checked, checks it', sourceAnchor: APG('radio') },
@@ -201,8 +200,8 @@ export const APG_KEYBOARD_SPEC: Record<string, readonly ApgEntry[]> = {
     { chord: 'Home', action: 'Sets value to minimum', sourceAnchor: APG('slider') },
     { chord: 'End', action: 'Sets value to maximum', sourceAnchor: APG('slider') },
   ],
-  // sliderRange: APG slider-multithumb. 동일 chord (per focused thumb).
-  sliderRange: [
+  // sliderMultithumb: APG slider-multithumb. 동일 chord (per focused thumb).
+  sliderMultithumb: [
     { chord: 'ArrowRight', action: 'Increases focused thumb value by step', sourceAnchor: APG('slider-multithumb') },
     { chord: 'ArrowUp', action: 'Increases focused thumb value by step', sourceAnchor: APG('slider-multithumb') },
     { chord: 'ArrowLeft', action: 'Decreases focused thumb value by step', sourceAnchor: APG('slider-multithumb') },
@@ -212,7 +211,7 @@ export const APG_KEYBOARD_SPEC: Record<string, readonly ApgEntry[]> = {
     { chord: 'Home', action: 'Sets focused thumb to its minimum', sourceAnchor: APG('slider-multithumb') },
     { chord: 'End', action: 'Sets focused thumb to its maximum', sourceAnchor: APG('slider-multithumb') },
   ],
-  splitter: [
+  windowsplitter: [
     { chord: 'ArrowRight', action: 'Moves splitter right (horizontal orientation)', sourceAnchor: APG('windowsplitter') },
     { chord: 'ArrowLeft', action: 'Moves splitter left (horizontal orientation)', sourceAnchor: APG('windowsplitter') },
     { chord: 'ArrowDown', action: 'Moves splitter down (vertical orientation)', sourceAnchor: APG('windowsplitter') },
@@ -231,8 +230,8 @@ export const APG_KEYBOARD_SPEC: Record<string, readonly ApgEntry[]> = {
     { chord: 'End', action: 'Sets value to maximum', sourceAnchor: APG('spinbutton') },
   ],
 
-  // ── tree / grid ────────────────────────────────────────────────
-  tree: [
+  // ── treeview / grid ────────────────────────────────────────────
+  treeview: [
     { chord: 'ArrowDown', action: 'Moves focus to next visible node', sourceAnchor: APG('treeview') },
     { chord: 'ArrowUp', action: 'Moves focus to previous visible node', sourceAnchor: APG('treeview') },
     { chord: 'ArrowRight', action: 'When closed, opens node; when open, moves focus to first child; on leaf, no action', sourceAnchor: APG('treeview') },
@@ -243,8 +242,8 @@ export const APG_KEYBOARD_SPEC: Record<string, readonly ApgEntry[]> = {
     { chord: 'Space', action: 'Toggles selection of focused node (multi-select trees)', sourceAnchor: APG('treeview') },
     // Type-ahead — printable key matches first node starting with characters
   ],
-  // treeGrid (project) ↔ APG treegrid.
-  treeGrid: [
+  // APG slug `treegrid` 그대로.
+  treegrid: [
     { chord: 'ArrowRight', action: 'Moves focus right one cell; on collapsed row header, expands row', sourceAnchor: APG('treegrid') },
     { chord: 'ArrowLeft', action: 'Moves focus left one cell; on expanded row header, collapses row', sourceAnchor: APG('treegrid') },
     { chord: 'ArrowDown', action: 'Moves focus down one row', sourceAnchor: APG('treegrid') },

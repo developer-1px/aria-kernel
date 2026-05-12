@@ -4,11 +4,11 @@ import { numericStep } from '../axes/numericStep'
 import { eventToChord } from '../trigger'
 
 /** Range slider axis — single-axis numericStep, applied per thumb. */
-export const sliderRangeAxis = (opts: { orientation?: 'horizontal' | 'vertical' } = {}) =>
+export const sliderMultithumbAxis = (opts: { orientation?: 'horizontal' | 'vertical' } = {}) =>
   numericStep(opts.orientation ?? 'horizontal')
 
-/** Options for {@link sliderRangePattern}. */
-export interface SliderRangeOptions {
+/** Options for {@link sliderMultithumbPattern}. */
+export interface SliderMultithumbOptions {
   orientation?: 'horizontal' | 'vertical'
   min?: number
   max?: number
@@ -28,10 +28,10 @@ export interface SliderRangeOptions {
  *   thumb[i] ∈ [values[i-1] ?? min, values[i+1] ?? max].
  * 키보드: Arrow ±step, Home/End thumb 의 clamp 양 끝, PageUp/PageDown ±step*10.
  */
-export function sliderRangePattern(
+export function sliderMultithumbPattern(
   values: number[],
   dispatch?: (e: ValueEvent<number[]>) => void,
-  opts: SliderRangeOptions = {},
+  opts: SliderMultithumbOptions = {},
 ): {
   rootProps: RootProps
   trackProps: ItemProps
@@ -71,7 +71,7 @@ export function sliderRangePattern(
       : { bottom: `${lo}%`, height: `${hi - lo}%` },
   } as unknown as ItemProps
 
-  const axis = sliderRangeAxis({ orientation })
+  const axis = sliderMultithumbAxis({ orientation })
 
   const thumbProps = (index: number): ItemProps => {
     const v = values[index]

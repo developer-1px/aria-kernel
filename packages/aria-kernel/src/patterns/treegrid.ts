@@ -4,13 +4,13 @@ import { ROOT, getChildren, getCollectionChildren, getLabel, isDisabled, getExpa
 import { activate, composeAxes, multiSelect, treeExpand, treeNavigate, INTENT_CHORDS, matchAnyChord } from '../axes'
 import { parseChord } from '../axes/chord'
 
-/** treeGrid edit-mode chord registry — declarative SSOT. */
+/** treegrid edit-mode chord registry — declarative SSOT. */
 const TREEGRID_EDIT_INSERT = ['Enter'] as const
 const TREEGRID_EDIT_REMOVE = ['Backspace'] as const
 const TREEGRID_EDIT_ACTIVATE_TAB = ['Tab'] as const
 
-/** treeGridEditKeys — chord registry 합집합 도출. */
-export const treeGridEditKeys = (): readonly string[] =>
+/** treegridEditKeys — chord registry 합집합 도출. */
+export const treegridEditKeys = (): readonly string[] =>
   Array.from(new Set([
     ...TREEGRID_EDIT_INSERT, ...TREEGRID_EDIT_REMOVE, ...TREEGRID_EDIT_ACTIVATE_TAB,
   ].map((c) => parseChord(c).key)))
@@ -21,8 +21,8 @@ import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializ
 import type { KeyDescriptor, ItemProps, RootProps, TreeItem } from './types'
 import { warnMultiSelectPairing } from './devWarnMultiSelect'
 
-/** Options for {@link useTreeGridPattern}. */
-export interface TreeGridOptions {
+/** Options for {@link useTreegridPattern}. */
+export interface TreegridOptions {
   /** aria-orientation. Spec implicit value: 'horizontal' for grid family. */
   orientation?: 'horizontal' | 'vertical'
   /** Default: `!multiSelectable` (APG: single sff, multi explicit toggle). */
@@ -38,7 +38,7 @@ export interface TreeGridOptions {
   /** aria-colcount — total columns (header column count). */
   colCount?: number
   /**
-   * APG TreeGrid §"Row Focus" / §"Cell Focus". default `'row'`.
+   * APG Treegrid §"Row Focus" / §"Cell Focus". default `'row'`.
    * - `'row'`: focus 단위 = row. 화살표 = treeNavigate (위/아래 row, 좌/우 expand/collapse).
    * - `'cell'`: focus 단위 = cell. 2D 화살표, row 의 `aria-selected` 가 focused cell 의 row 를 반영.
    * - `'cellOnly'`: cell 와 동일 키보드, 단 row 자체엔 `aria-selected` 표시 안 함 (spec 외 변종).
@@ -68,11 +68,11 @@ export interface TreeGridOptions {
 }
 
 /**
- * treeGrid 가 디폴트로 흡수하는 chord 목록 — descriptor SSOT.
- * treeGrid 는 Backspace 가 'editable' 모드의 remove 와도 겹치므로,
+ * treegrid 가 디폴트로 흡수하는 chord 목록 — descriptor SSOT.
+ * treegrid 는 Backspace 가 'editable' 모드의 remove 와도 겹치므로,
  * 빌트인 clipboard 'remove' 와 동일 의미로 통합된다.
  */
-export const treeGridKeys: readonly KeyDescriptor[] = [
+export const treegridKeys: readonly KeyDescriptor[] = [
   { chord: 'mod+z',       uiEvent: 'undo',   description: 'Undo last operation' },
   { chord: 'mod+shift+z', uiEvent: 'redo',   description: 'Redo' },
   { chord: 'mod+y',       uiEvent: 'redo',   description: 'Redo (Windows fallback)' },
@@ -95,28 +95,28 @@ const findParent = (data: NormalizedData, id: string): string | null => {
   return null
 }
 
-/** TreeGrid 가 등록하는 axis — SSOT. */
-export const treeGridAxis = (opts: { multiSelectable?: boolean } = {}) =>
+/** Treegrid 가 등록하는 axis — SSOT. */
+export const treegridAxis = (opts: { multiSelectable?: boolean } = {}) =>
   opts.multiSelectable
     ? composeAxes(multiSelect, treeNavigate, treeExpand, activate)
     : composeAxes(treeNavigate, treeExpand, activate)
-const singleAxis = treeGridAxis()
-const multiAxis = treeGridAxis({ multiSelectable: true })
+const singleAxis = treegridAxis()
+const multiAxis = treegridAxis({ multiSelectable: true })
 
 /**
- * treeGrid — APG `/treegrid/` recipe.
+ * treegrid — APG `/treegrid/` recipe.
  * https://www.w3.org/WAI/ARIA/apg/patterns/treegrid/
  *
  * Focus stays on rows; cells expose grid semantics through rowheader/gridcell + aria-colindex.
  *
  * @example canonical — expand gesture 는 default 로 박혀 있음
- *   const [data, dispatch] = useTreeGridReducer(ROWS, { defaultExpanded: ['src'] })
- *   const { treegridProps, rowProps, gridcellProps, items } = useTreeGridPattern(data, dispatch)
+ *   const [data, dispatch] = useTreegridReducer(ROWS, { defaultExpanded: ['src'] })
+ *   const { treegridProps, rowProps, gridcellProps, items } = useTreegridPattern(data, dispatch)
  */
-export function useTreeGridPattern(
+export function useTreegridPattern(
   data: NormalizedData,
   onEvent?: (e: UiEvent) => void,
-  opts: TreeGridOptions = {},
+  opts: TreegridOptions = {},
 ): {
   treegridProps: RootProps
   headerRowProps: ItemProps
@@ -132,7 +132,7 @@ export function useTreeGridPattern(
     insideEditable = 'forward',
   } = opts
   const sff = opts.selectionFollowsFocus ?? !multiSelectable
-  if (multiSelectable) warnMultiSelectPairing('useTreeGridPattern')
+  if (multiSelectable) warnMultiSelectPairing('useTreegridPattern')
   const cellsMode = navigationMode !== 'row'
   const colsCount = colCount ?? 1
 
@@ -247,7 +247,7 @@ export function useTreeGridPattern(
     activeId,
     insideEditable,
     on: opts.on,
-    builtinChords: treeGridKeys,
+    builtinChords: treegridKeys,
     serialize: opts.serialize,
     toClipboard: opts.toClipboard,
     fromClipboard: opts.fromClipboard,

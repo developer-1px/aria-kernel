@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { sliderRangePattern } from '@p/aria-kernel/patterns'
+import { sliderMultithumbPattern } from '@p/aria-kernel/patterns'
 
 export function SliderRangeDemo() {
   const [values, setValues] = useState([20, 70])
-  const { rootProps, trackProps, rangeProps, thumbProps } = sliderRangePattern(
+  const { rootProps, trackProps, rangeProps, thumbProps } = sliderMultithumbPattern(
     values,
     (e) => setValues(e.value),
     { min: 0, max: 100, step: 5, labels: ['최소가격', '최대가격'] },

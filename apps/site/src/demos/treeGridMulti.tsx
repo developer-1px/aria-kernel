@@ -1,12 +1,12 @@
 import { axisKeys } from '@p/aria-kernel'
-import { treeGridAxis, useTreeGridPattern, useTreeGridReducer } from '@p/aria-kernel/patterns'
+import { treegridAxis, useTreegridPattern, useTreegridReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Tree Grid · Multi',
   apg: 'treegrid',
   kind: 'collection' as const,
   blurb: 'A hierarchical table that supports selecting several visible rows at once.',
-  keys: () => axisKeys(treeGridAxis({ multiSelectable: true })),
+  keys: () => axisKeys(treegridAxis({ multiSelectable: true })),
 }
 
 interface Row {
@@ -33,8 +33,8 @@ const rows: Row[] = [
 
 const COLS = ['Name', 'Size', 'Modified']
 
-export default function TreeGridMultiDemo() {
-  const [data, dispatch] = useTreeGridReducer(rows, { multi: true, defaultExpanded: ['src'] })
+export default function TreegridMultiDemo() {
+  const [data, dispatch] = useTreegridReducer(rows, { multi: true, defaultExpanded: ['src'] })
   const {
     treegridProps,
     headerRowProps,
@@ -43,7 +43,7 @@ export default function TreeGridMultiDemo() {
     rowheaderProps,
     gridcellProps,
     items,
-  } = useTreeGridPattern(data, dispatch, {
+  } = useTreegridPattern(data, dispatch, {
     multiSelectable: true,
     label: 'Files (multi-select)',
     colCount: COLS.length,

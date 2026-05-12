@@ -9,7 +9,7 @@ export type ReorderPosition = 'before' | 'after' | 'inside'
  *
  * NormalizedData / UiEvent 의존 ❌. dragged id 와 hovered id + drop position 만으로
  * dragstart → dragover → drop 라이프사이클을 노출. dispatch / store wiring 은 소비자 책임 —
- * useListbox/useTreePattern 자체 모델 또는 외부 store 둘 다 지원.
+ * useListbox/useTreeviewPattern 자체 모델 또는 외부 store 둘 다 지원.
  *
  * Drop position 결정 — listbox(reorder only): hovered item bounding box 의 Y 중점 기준
  * 위면 'before', 아래면 'after'. tree(중첩 허용): 상/하 1/4 zone 은 before/after, 중앙 1/2 는 'inside'.
@@ -151,7 +151,7 @@ export interface ReorderDndGestureOptions {
 }
 
 /**
- * useReorderDndGesture — NormalizedData/dispatch 바인딩 wrapper. useListboxPattern/useTreePattern 소비자용 (#165).
+ * useReorderDndGesture — NormalizedData/dispatch 바인딩 wrapper. useListboxPattern/useTreeviewPattern 소비자용 (#165).
  *
  * Drop 시 `{ type: 'move', id: draggedId, targetId: overId, mode: 'sibling-before'|'sibling-after'|'child' }`
  * UiEvent emit — tree reducer 가 이미 흡수하는 어휘 (axes/reducers `move` op). 소비자가 onEvent 에서

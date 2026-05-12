@@ -9,7 +9,7 @@ const rows = () => screen.getAllByRole('row') as HTMLElement[]
 const dataRows = () => rows().slice(1) // header row 제외
 const focused = () => dataRows().find((r) => r.tabIndex === 0)
 
-describe('treeGrid demo — black-box (keyboard + mouse)', () => {
+describe('treegrid demo — black-box (keyboard + mouse)', () => {
   it('treegrid role + columnheader 3개', () => {
     render(<Demo />)
     expect(grid().getAttribute('role')).toBe('treegrid')

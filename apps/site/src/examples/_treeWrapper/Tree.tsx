@@ -1,4 +1,4 @@
-import { useTreePattern, type PatternProps, type TreeItem } from '@p/aria-kernel/patterns'
+import { useTreeviewPattern, type PatternProps, type TreeItem } from '@p/aria-kernel/patterns'
 import { defaultLabel, emptySlot, renderSlot, type Slot } from '../../catalog/slots'
 
 export interface TreeSlots<TItem extends object = Record<string, unknown>> {
@@ -18,7 +18,7 @@ export function Tree<TItem extends object = Record<string, unknown>>({
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
 }: TreeProps<TItem>) {
-  const { rootProps, itemProps, items } = useTreePattern(data, onEvent)
+  const { rootProps, itemProps, items } = useTreeviewPattern(data, onEvent)
 
   return (
     <ul

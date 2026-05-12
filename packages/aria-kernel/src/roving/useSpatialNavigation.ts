@@ -2,7 +2,7 @@ import { useEffect, useRef, type KeyboardEvent, type RefObject } from 'react'
 import { matchChord } from '../axes/chord'
 
 /**
- * useSpatialNavigation — children 자유 JSX 컴포넌트(Toolbar/Menubar/DataGrid/TreeGrid 등)의
+ * useSpatialNavigation — children 자유 JSX 컴포넌트(Toolbar/Menubar/DataGrid/Treegrid 등)의
  * APG roving tabindex. **시각 좌표 기반** 이동 — `getBoundingClientRect()` 로 다음 element 결정.
  *
  * W3C `spatnav` (Spatial Navigation, https://drafts.csswg.org/css-nav-1/) 정렬:
@@ -20,7 +20,7 @@ export interface UseSpatialNavigationOptions {
   orientation?: 'horizontal' | 'vertical' | 'both'
   /** Home/End 키 처리 (기본 `true`). */
   homeEnd?: boolean
-  /** 명시적 item 셀렉터. tabindex=-1 도 포함해서 발견 가능 (TreeGrid/Listbox 류). */
+  /** 명시적 item 셀렉터. tabindex=-1 도 포함해서 발견 가능 (Treegrid/Listbox 류). */
   itemSelector?: string
 }
 
@@ -89,7 +89,7 @@ export const spatialNavigationKeys = (
  * useSpatialNavigation — W3C CSS Spatial Navigation 기반 roving tabindex.
  * **시각 좌표 기반** 이동 — `getBoundingClientRect()` 로 다음 element 결정.
  *
- * 데이터 그래프가 없는 자유 JSX 배치(Toolbar/Menubar/DataGrid/TreeGrid 등) 에서 사용.
+ * 데이터 그래프가 없는 자유 JSX 배치(Toolbar/Menubar/DataGrid/Treegrid 등) 에서 사용.
  * 관계 그래프가 있는 컬렉션은 {@link useRovingTabIndex} (APG canonical) 을 쓴다.
  *
  * @param externalRef - container ref. 생략 시 내부 ref 반환

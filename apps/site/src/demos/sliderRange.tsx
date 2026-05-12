@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { sliderRangePattern, sliderRangeAxis } from '@p/aria-kernel/patterns'
+import { sliderMultithumbPattern, sliderMultithumbAxis } from '@p/aria-kernel/patterns'
 import { axisKeys } from '@p/aria-kernel'
 
 export const meta = {
@@ -7,12 +7,12 @@ export const meta = {
   apg: 'slider',
   kind: 'single-value' as const,
   blurb: 'Two-thumb price range — each thumb is clamped by its neighbor.',
-  keys: () => axisKeys(sliderRangeAxis()),
+  keys: () => axisKeys(sliderMultithumbAxis()),
 }
 
 export default function SliderRangeDemo() {
   const [values, setValues] = useState<number[]>([20, 70])
-  const { rootProps, trackProps, rangeProps, thumbProps } = sliderRangePattern(
+  const { rootProps, trackProps, rangeProps, thumbProps } = sliderMultithumbPattern(
     values,
     (e) => setValues(e.value),
     {

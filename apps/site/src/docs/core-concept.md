@@ -133,7 +133,7 @@ const axis = composeAxes([typeahead(), navigate('vertical'), activate()])
 
 - 왼쪽부터 차례로 적용
 - 첫 non-null 반환을 채택 — 나머지 axis 는 단락(short-circuit)
-- 각 recipe 가 자신의 axis 묶음을 정의 (`listboxAxis`, `tabsAxis`, `treeAxis`, `gridAxis`, ...) — recipe 와 axis SSOT 가 1:1
+- 각 recipe 가 자신의 axis 묶음을 정의 (`listboxAxis`, `tabsAxis`, `treeviewAxis`, `gridAxis`, ...) — recipe 와 axis SSOT 가 1:1
 
 ## Pattern recipe
 
@@ -164,7 +164,7 @@ CLAUDE.md §2:
 
 | 형태 | 의미 | 예 |
 |---|---|---|
-| `use*Pattern` | 내부에 React state (`useState`/`useRef`/`useEffect`) | `useListboxPattern`, `useTreePattern`, `useDialogPattern` |
+| `use*Pattern` | 내부에 React state (`useState`/`useRef`/`useEffect`) | `useListboxPattern`, `useTreeviewPattern`, `useDialogModalPattern` |
 | `*Pattern` | 순수 함수, 외부 주입만 | `switchPattern`, `sliderPattern`, `disclosurePattern` |
 
 이름이 카테고리를 알려준다 (React `rules-of-hooks` 규약). 데이터성 state(checked/value)는 항상 외부 주입, 순수 UI 일시 state(open/timer)는 내부 캡슐화.
@@ -210,7 +210,7 @@ drop-in reducers:
 
 CLAUDE.md invariant 4 그대로:
 
-> **Headless behavior, Tailwind visuals.** 행동 = `@p/aria-kernel` 패턴 (`useListboxPattern`, `useToolbarPattern`, `useTreeGridPattern`, `useRovingTabIndex`…) · 시각 = Tailwind utility class. 두 축 절대 섞지 않는다.
+> **Headless behavior, Tailwind visuals.** 행동 = `@p/aria-kernel` 패턴 (`useListboxPattern`, `useToolbarPattern`, `useTreegridPattern`, `useRovingTabIndex`…) · 시각 = Tailwind utility class. 두 축 절대 섞지 않는다.
 
 규칙:
 - Tailwind utility class 직접. 별도 토큰 wrapper 만들지 않는다

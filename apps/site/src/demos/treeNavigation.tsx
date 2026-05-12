@@ -1,13 +1,13 @@
 import { useReducer } from 'react'
 import { applyGesture, axisKeys, expandBranchOnActivate, fromTree, reduceSingleSelect } from '@p/aria-kernel'
-import { treeAxis, useTreePattern } from '@p/aria-kernel/patterns'
+import { treeviewAxis, useTreeviewPattern } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Tree · Navigation',
   apg: 'treeview',
   kind: 'collection' as const,
   blurb: 'Site-navigation tree — selected treeitem carries aria-current="page".',
-  keys: () => axisKeys(treeAxis()),
+  keys: () => axisKeys(treeviewAxis()),
 }
 
 interface Node { id: string; label: string; children?: Node[] }
@@ -34,7 +34,7 @@ const initNav = () => {
 
 export default function TreeNavigationDemo() {
   const [data, dispatch] = useReducer(reducer, undefined, initNav)
-  const { rootProps, itemProps, items } = useTreePattern(data, dispatch, {
+  const { rootProps, itemProps, items } = useTreeviewPattern(data, dispatch, {
     label: 'Site navigation',
     variant: 'navigation',
   })

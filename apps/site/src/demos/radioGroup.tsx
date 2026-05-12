@@ -1,19 +1,19 @@
 
-import { radioGroupKeys, useRadioGroupPattern, useRadioGroupReducer } from '@p/aria-kernel/patterns'
+import { radioKeys, useRadioPattern, useRadioReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Radio Group',
   apg: 'radio',
   kind: 'collection' as const,
   blurb: 'A compact choice set where moving between options updates the selected value.',
-  keys: () => radioGroupKeys(),
+  keys: () => radioKeys(),
 }
 
 const SIZES = [{ label: 'Small' }, { label: 'Medium', checked: true }, { label: 'Large' }]
 
 export default function RadioGroupDemo() {
-  const [data, dispatch] = useRadioGroupReducer(SIZES)
-  const { rootProps, radioProps, items } = useRadioGroupPattern(data, dispatch)
+  const [data, dispatch] = useRadioReducer(SIZES)
+  const { rootProps, radioProps, items } = useRadioPattern(data, dispatch)
 
   return (
     <div {...rootProps} aria-label="Size" className="flex flex-col gap-2">

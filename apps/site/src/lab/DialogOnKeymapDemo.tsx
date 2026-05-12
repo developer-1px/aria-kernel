@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useDialogPattern } from '@p/aria-kernel/patterns'
+import { useDialogModalPattern } from '@p/aria-kernel/patterns'
 
 const HAYSTACK = ['alpha', 'banana', 'cherry', 'durian', 'elder', 'fig']
 
@@ -14,7 +14,7 @@ export function DialogOnKeymapDemo() {
   const next = () => setIdx((i) => (matches.length ? (i + 1) % matches.length : 0))
   const prev = () => setIdx((i) => (matches.length ? (i - 1 + matches.length) % matches.length : 0))
 
-  const { rootProps } = useDialogPattern({
+  const { rootProps } = useDialogModalPattern({
     open, modal: false, label: 'Find',
     onOpenChange: setOpen,
     on: { Enter: next, 'shift+Enter': prev },

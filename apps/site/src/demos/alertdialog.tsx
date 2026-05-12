@@ -1,18 +1,18 @@
 import { useRef } from 'react'
-import { dialogKeys, useAlertDialogPattern } from '@p/aria-kernel/patterns'
+import { dialogModalKeys, useAlertdialogPattern } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Alert Dialog',
   apg: 'alertdialog',
   kind: 'overlay' as const,
   blurb: 'A blocking confirmation dialog for decisions that need immediate attention.',
-  keys: () => dialogKeys(),
+  keys: () => dialogModalKeys(),
 }
 
 export default function AlertdialogDemo() {
   const triggerRef = useRef<HTMLButtonElement>(null)
   const cancelRef = useRef<HTMLButtonElement>(null)
-  const { rootProps, closeProps, open, setOpen } = useAlertDialogPattern({
+  const { rootProps, closeProps, open, setOpen } = useAlertdialogPattern({
     returnFocusRef: triggerRef,
     cancelRef,
     label: 'Delete confirmation',

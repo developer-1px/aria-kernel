@@ -9,11 +9,11 @@ import {
   disclosurePattern,
   sliderPattern,
   spinbuttonPattern,
-  splitterPattern,
+  windowsplitterPattern,
   switchPattern,
   useCheckboxGroupPattern,
   useMenuButtonPattern,
-  useRadioGroupPattern,
+  useRadioPattern,
 } from '../patterns'
 
 afterEach(cleanup)
@@ -60,7 +60,7 @@ function SpinbuttonHarness() {
 
 function SplitterHarness() {
   const [value, setValue] = useState(40)
-  const { handleProps } = splitterPattern(
+  const { handleProps } = windowsplitterPattern(
     value,
     (event) => setValue(event.value),
     { min: 20, max: 80, step: 10, label: 'Sidebar width' },
@@ -117,7 +117,7 @@ function RadioGroupHarness() {
     ]),
   )
   const dispatch = (event: UiEvent) => setData((prev) => reduceRadio(prev, event))
-  const { rootProps, radioProps } = useRadioGroupPattern(data, dispatch, {
+  const { rootProps, radioProps } = useRadioPattern(data, dispatch, {
     label: 'Size',
     orientation: 'horizontal',
   })

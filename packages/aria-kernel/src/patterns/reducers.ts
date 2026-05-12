@@ -33,7 +33,7 @@ export interface SelectableReducerOptions {
   enhance?: Enhance
 }
 
-/** Tree/TreeGrid 옵션 — expand 기본 박힘 + 초기 expanded seed. */
+/** Tree/Treegrid 옵션 — expand 기본 박힘 + 초기 expanded seed. */
 export interface TreeReducerOptions extends SelectableReducerOptions {
   /** 초기 expanded id seed. `fromTree(roots, { expanded })`로 thread. */
   defaultExpanded?: string[]
@@ -50,7 +50,7 @@ const pickSelectable = (multi: boolean | undefined, enhance?: Enhance): Reducer 
   return enhance ? enhance(base) : base
 }
 
-/** Tree/TreeGrid 정본 reducer — `applyGesture(base, expandBranchOnActivate)` 후 enhance.
+/** Tree/Treegrid 정본 reducer — `applyGesture(base, expandBranchOnActivate)` 후 enhance.
  *  APG `treeview` 자구: Enter/Space는 parent면 expand, leaf면 activate. */
 const pickTreeSelectable = (multi: boolean | undefined, enhance?: Enhance): Reducer => {
   const base = multi ? reduceMultiSelect : reduceSingleSelect
@@ -74,7 +74,7 @@ export function useListboxReducer<T extends Record<string, unknown>>(items: T[],
  * Tree-based (fromTree) — multi 지원
  * ───────────────────────────────────────────────────────────── */
 
-export function useTreeReducer<T extends { id: string; children?: T[] }>(
+export function useTreeviewReducer<T extends { id: string; children?: T[] }>(
   roots: T[],
   opts: TreeReducerOptions = {},
 ): Result {
@@ -91,7 +91,7 @@ export function useGridReducer<T extends { id: string; children?: T[] }>(
   return useReducer(pickSelectable(opts.multi, opts.enhance), rows, fromTree)
 }
 
-export function useTreeGridReducer<T extends { id: string; children?: T[] }>(
+export function useTreegridReducer<T extends { id: string; children?: T[] }>(
   rows: T[],
   opts: TreeReducerOptions = {},
 ): Result {
@@ -173,6 +173,6 @@ export function useComboboxGridReducer<T extends { id: string; children?: T[] }>
  * Radio — `role="radiogroup"` (reduceRadio)
  * ───────────────────────────────────────────────────────────── */
 
-export function useRadioGroupReducer<T extends Record<string, unknown>>(items: T[], opts: SingleReducerOptions = {}): Result {
+export function useRadioReducer<T extends Record<string, unknown>>(items: T[], opts: SingleReducerOptions = {}): Result {
   return useReducer(pickRadio(opts.enhance), items, fromList)
 }

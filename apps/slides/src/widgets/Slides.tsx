@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useZodCrudResource } from '@p/resource/zod-crud'
-import { useTreePattern } from '@p/aria-kernel/patterns'
+import { useTreeviewPattern } from '@p/aria-kernel/patterns'
 import type { NormalizedData, UiEvent } from '@p/aria-kernel'
 import { dispatchSlideEvent, slideText, slideTreeCommands, slideTreeEventFromKeyboard, updateSlideText } from '@p/slides'
 import { crud, deckResource, normalizeDeck } from '../resource'
@@ -40,7 +40,7 @@ export function Slides() {
 }
 
 function SlideTree({ data, onEvent }: { data: NormalizedData; onEvent: (event: UiEvent) => void }) {
-  const tree = useTreePattern(data, onEvent, {
+  const tree = useTreeviewPattern(data, onEvent, {
     label: 'Slides',
     multiSelectable: true,
     editable: true,

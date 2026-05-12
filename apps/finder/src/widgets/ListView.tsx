@@ -1,5 +1,5 @@
 import type { ComponentPropsWithoutRef } from 'react'
-import { useTreeGridPattern } from '@p/aria-kernel/patterns'
+import { useTreegridPattern } from '@p/aria-kernel/patterns'
 import { fromList } from '@p/aria-kernel'
 import { formatDate, formatSize } from '../features/data'
 import type { FsNode } from '../entities/types'
@@ -32,7 +32,7 @@ export function ListView({
     gridcellProps,
     columnheaderProps,
     items: rows,
-  } = useTreeGridPattern(data, onEvent, { label: '목록뷰', colCount: 4 })
+  } = useTreegridPattern(data, onEvent, { label: '목록뷰', colCount: 4 })
 
   return (
     <section className="overflow-auto">

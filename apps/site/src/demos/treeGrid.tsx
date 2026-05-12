@@ -1,12 +1,12 @@
 import { axisKeys } from '@p/aria-kernel'
-import { treeGridAxis, useTreeGridPattern, useTreeGridReducer } from '@p/aria-kernel/patterns'
+import { treegridAxis, useTreegridPattern, useTreegridReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Tree Grid',
   apg: 'treegrid',
   kind: 'collection' as const,
   blurb: 'A hierarchical table that combines expandable rows with column data.',
-  keys: () => axisKeys(treeGridAxis()),
+  keys: () => axisKeys(treegridAxis()),
 }
 
 interface Row {
@@ -33,8 +33,8 @@ const rows: Row[] = [
 
 const COLS = ['Name', 'Size', 'Modified']
 
-export default function TreeGridDemo() {
-  const [data, dispatch] = useTreeGridReducer(rows, { defaultExpanded: ['src'] })
+export default function TreegridDemo() {
+  const [data, dispatch] = useTreegridReducer(rows, { defaultExpanded: ['src'] })
   const {
     treegridProps,
     headerRowProps,
@@ -43,7 +43,7 @@ export default function TreeGridDemo() {
     rowheaderProps,
     gridcellProps,
     items,
-  } = useTreeGridPattern(data, dispatch, { label: 'Files', colCount: COLS.length })
+  } = useTreegridPattern(data, dispatch, { label: 'Files', colCount: COLS.length })
 
   return (
     <div

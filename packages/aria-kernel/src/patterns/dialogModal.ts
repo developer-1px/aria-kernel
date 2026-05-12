@@ -13,11 +13,11 @@ import type { ItemProps, RootProps } from './types'
  *
  * 손으로 적은 사본 0 — 모든 키가 자기 primitive 의 선언에서 도출됨.
  */
-export const dialogKeys = (opts: { modal?: boolean } = {}): readonly string[] =>
+export const dialogModalKeys = (opts: { modal?: boolean } = {}): readonly string[] =>
   (opts.modal ?? true) ? [...escapeKeys(), ...focusTrapKeys()] : [...escapeKeys()]
 
-/** Options for {@link useDialogPattern}. */
-export interface DialogOptions {
+/** Options for {@link useDialogModalPattern}. */
+export interface DialogModalOptions {
   open?: boolean
   defaultOpen?: boolean
   modal?: boolean
@@ -64,9 +64,9 @@ const FOCUSABLE_SELECTOR = [
  *   준수 (modifier-less chord 는 입력 위젯 안에서 탈취 안 함). (`/lab/dialog-on-keymap`)
  *
  * @example canonical (#148 §4) — opts-only 패턴 (단일 인스턴스)
- *   const { rootProps, backdropProps, closeProps } = useDialogPattern({ open, onClose, label: '…' })
+ *   const { rootProps, backdropProps, closeProps } = useDialogModalPattern({ open, onClose, label: '…' })
  */
-export function useDialogPattern(opts: DialogOptions = {}): {
+export function useDialogModalPattern(opts: DialogModalOptions = {}): {
   rootRef: RefObject<HTMLElement | null>
   rootProps: RootProps
   backdropProps: RootProps

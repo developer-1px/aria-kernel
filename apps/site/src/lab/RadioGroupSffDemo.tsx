@@ -1,5 +1,5 @@
 import type { UiEvent } from '@p/aria-kernel'
-import { useRadioGroupPattern, useRadioGroupReducer } from '@p/aria-kernel/patterns'
+import { useRadioPattern, useRadioReducer } from '@p/aria-kernel/patterns'
 
 const ITEMS = [
   { id: 'small', label: '소형' },
@@ -8,8 +8,8 @@ const ITEMS = [
 ]
 
 export function RadioGroupSffDemo() {
-  const [data, dispatch] = useRadioGroupReducer(ITEMS)
-  const { rootProps, radioProps, items } = useRadioGroupPattern(
+  const [data, dispatch] = useRadioReducer(ITEMS)
+  const { rootProps, radioProps, items } = useRadioPattern(
     data, (e: UiEvent) => dispatch(e), { label: '사이즈', autoFocus: true },
   )
 

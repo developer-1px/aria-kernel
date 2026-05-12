@@ -15,7 +15,7 @@ exports[`APG ↔ axis chord coverage (Issue #123) > coverage matrix matches snap
   {
     "apgGap": [],
     "implExtra": [],
-    "pattern": "alertDialog",
+    "pattern": "alertdialog",
   },
   {
     "apgGap": [],
@@ -50,7 +50,7 @@ exports[`APG ↔ axis chord coverage (Issue #123) > coverage matrix matches snap
   {
     "apgGap": [],
     "implExtra": [],
-    "pattern": "dialog",
+    "pattern": "dialogModal",
   },
   {
     "apgGap": [],
@@ -110,7 +110,7 @@ exports[`APG ↔ axis chord coverage (Issue #123) > coverage matrix matches snap
   {
     "apgGap": [],
     "implExtra": [],
-    "pattern": "radioGroup",
+    "pattern": "radio",
   },
   {
     "apgGap": [],
@@ -120,17 +120,12 @@ exports[`APG ↔ axis chord coverage (Issue #123) > coverage matrix matches snap
   {
     "apgGap": [],
     "implExtra": [],
-    "pattern": "sliderRange",
+    "pattern": "sliderMultithumb",
   },
   {
     "apgGap": [],
     "implExtra": [],
     "pattern": "spinbutton",
-  },
-  {
-    "apgGap": [],
-    "implExtra": [],
-    "pattern": "splitter",
   },
   {
     "apgGap": [],
@@ -160,12 +155,17 @@ exports[`APG ↔ axis chord coverage (Issue #123) > coverage matrix matches snap
   {
     "apgGap": [],
     "implExtra": [],
-    "pattern": "tree",
+    "pattern": "treegrid",
   },
   {
     "apgGap": [],
     "implExtra": [],
-    "pattern": "treeGrid",
+    "pattern": "treeview",
+  },
+  {
+    "apgGap": [],
+    "implExtra": [],
+    "pattern": "windowsplitter",
   },
 ]
 `;

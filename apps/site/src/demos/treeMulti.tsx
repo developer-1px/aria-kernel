@@ -1,12 +1,12 @@
 import { axisKeys } from '@p/aria-kernel'
-import { treeAxis, useTreePattern, useTreeReducer } from '@p/aria-kernel/patterns'
+import { treeviewAxis, useTreeviewPattern, useTreeviewReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Tree · Multi',
   apg: 'treeview',
   kind: 'collection' as const,
   blurb: 'A nested file tree that supports selecting several visible items at once.',
-  keys: () => axisKeys(treeAxis({ multiSelectable: true })),
+  keys: () => axisKeys(treeviewAxis({ multiSelectable: true })),
 }
 
 interface Node {
@@ -35,8 +35,8 @@ const tree: Node[] = [
 ]
 
 export default function TreeMultiDemo() {
-  const [data, dispatch] = useTreeReducer(tree, { multi: true, defaultExpanded: ['src', 'demos'] })
-  const { rootProps, itemProps, items } = useTreePattern(data, dispatch, {
+  const [data, dispatch] = useTreeviewReducer(tree, { multi: true, defaultExpanded: ['src', 'demos'] })
+  const { rootProps, itemProps, items } = useTreeviewPattern(data, dispatch, {
     multiSelectable: true,
   })
 

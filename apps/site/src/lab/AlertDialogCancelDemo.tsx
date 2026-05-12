@@ -1,11 +1,11 @@
 import { useRef, useState } from 'react'
-import { useAlertDialogPattern } from '@p/aria-kernel/patterns'
+import { useAlertdialogPattern } from '@p/aria-kernel/patterns'
 
 export function AlertDialogCancelDemo() {
   const [open, setOpen] = useState(false)
   const [result, setResult] = useState<string>('—')
   const cancelRef = useRef<HTMLButtonElement>(null)
-  const { rootRef, rootProps, closeProps } = useAlertDialogPattern({
+  const { rootRef, rootProps, closeProps } = useAlertdialogPattern({
     open,
     onOpenChange: setOpen,
     label: '삭제 확인',

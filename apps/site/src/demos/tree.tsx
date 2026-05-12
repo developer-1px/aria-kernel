@@ -1,12 +1,12 @@
 import { axisKeys } from '@p/aria-kernel'
-import { treeAxis, useTreePattern, useTreeReducer } from '@p/aria-kernel/patterns'
+import { treeviewAxis, useTreeviewPattern, useTreeviewReducer } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Tree',
   apg: 'treeview',
   kind: 'collection' as const,
   blurb: 'A collapsible hierarchy for browsing nested files and folders.',
-  keys: () => axisKeys(treeAxis()),
+  keys: () => axisKeys(treeviewAxis()),
 }
 
 interface Node {
@@ -35,8 +35,8 @@ const tree: Node[] = [
 ]
 
 export default function TreeDemo() {
-  const [data, dispatch] = useTreeReducer(tree, { defaultExpanded: ['src', 'demos'] })
-  const { rootProps, itemProps, items } = useTreePattern(data, dispatch)
+  const [data, dispatch] = useTreeviewReducer(tree, { defaultExpanded: ['src', 'demos'] })
+  const { rootProps, itemProps, items } = useTreeviewPattern(data, dispatch)
 
   return (
     <ul

@@ -10,7 +10,7 @@
 
 | 결정 | 어떻게 |
 |---|---|
-| ✅ **Recipe layer 추가** | `@p/aria-kernel/patterns` subpath. 19개 APG recipe (`listbox`/`tabs`/`tree`/`combobox`/`menu`/`menubar`/`treeGrid`/`disclosure`/`accordion`/`slider`/`splitter`/`toggleSwitch`/`radioGroup`/`toolbar`/`navigationList`/`dialog`/`tooltip`/`alert`/`alertdialog`). |
+| ✅ **Recipe layer 추가** | `@p/aria-kernel/patterns` subpath. 19개 APG recipe (`listbox`/`tabs`/`tree`/`combobox`/`menu`/`menubar`/`treegrid`/`disclosure`/`accordion`/`slider`/`splitter`/`toggleSwitch`/`radio`/`toolbar`/`navigationList`/`dialog`/`tooltip`/`alert`/`alertdialog`). |
 | ✅ **Combobox `aria-activedescendant` 모드** | `useActiveDescendant` hook 신규. INVARIANT B11 코드화. |
 | ✅ **Multi-select / numeric step axis** | `multiSelect`/`numericStep` axis 신규. listbox/slider/splitter 의 재료 갭 해소. |
 | ✅ **Sidebar ≠ Listbox 의미 분리** | `navigationList` recipe — `aria-current="page"` + native `<nav>` landmark. |
@@ -76,12 +76,12 @@ const { rootProps, optionProps, items } = listbox(data, onEvent, opts?)
 | 7 | Sidebar Navigation | ✅ `navigationList` recipe — `aria-current="page"`, sidebar≠listbox 강제 |
 | 8 | Combobox (`aria-activedescendant`) | ✅ `combobox` recipe + `useActiveDescendant` hook 신규 |
 | 9 | Tree | ✅ `tree` recipe |
-| 10 | TreeGrid | ✅ `treeGrid` recipe |
+| 10 | Treegrid | ✅ `treegrid` recipe |
 | 11 | Zoom/Pan Canvas | ❌ compound 거절. `useZoomPanGesture` primitive 그대로 — 정체성 부합 |
 | 12 | Splitter | ✅ `splitter` recipe + `numericStep` axis 신규 |
 | 13 | Slider | ✅ `slider` recipe + `numericStep` axis 신규 |
 | 14 | Disclosure / Accordion | ✅ `disclosure`/`accordion` recipe |
-| 15 | Switch / RadioGroup | ✅ `toggleSwitch`/`radioGroup` recipe |
+| 15 | Switch / RadioGroup | ✅ `toggleSwitch`/`radio` recipe |
 | 16 | Data-driven Collection | ✅ 변경 없음 — 이미 `useRovingTabIndex + composeAxes` 만족 사례 |
 | 17 | Feature (screen state) | ✅ 변경 없음 — `defineFeature/useFeature` 만족 사례 |
 | 18 | Layout DSL | ✅ 변경 없음 — `definePage` 만족 사례 |

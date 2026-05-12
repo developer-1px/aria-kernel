@@ -8,27 +8,9 @@
 
 Options for useAccordionPattern.
 
-## AlertdialogOptions
-
-Options for alertdialogPattern.
-
 ## BaseItem
 
 모든 recipe 의 item view 공통 필드. pattern 별로 추가 필드 확장.
-
-## BasePatternOptions
-
-Pattern Options 공통 base — 거의 모든 Options interface 가 extends.
- label · labelledBy : ARIA accessible name (둘 중 하나 강제)
-
-## BuiltinChordDescriptor
-
-Builtin chord descriptor — pattern 이 자기 디폴트로 흡수하는 chord 한 entry.
-llms.txt / 문서 자동 추출 + 사용자/LLM 이 어떤 chord 가 reserved 인지 알게 함.
- chord       : axes/chord parseChord 형식 (e.g. 'mod+z', 'Shift+Tab')
- uiEvent     : emit 되는 UiEvent['type']
- description : 한 줄 설명
- scope       : 'root' (default) | 'item' (focused item 필요)
 
 ## CarouselOptions
 
@@ -45,12 +27,6 @@ Options for useCheckboxGroupPattern.
 ## CheckboxOptions
 
 Options for checkboxPattern.
-
-## CollectionOptions
-
-Collection Options base — data-driven pattern 들이 공유.
- containerId · idPrefix · autoFocus · orientation
-각 패턴이 미지원 옵션은 Omit 또는 단순히 사용 안 함.
 
 ## ComboboxDialogOptions
 
@@ -87,11 +63,11 @@ Radix · React Aria de facto: value + defaultValue + single dispatch via onEvent
 value 주입   → controlled
 value 미주입 → 패턴 내부 useState (defaultValue 시작값)
 
-표준 어댑터: `useControlValue` (state/useControlValue).
+표준 어댑터: `useControlValue` (patterns/_useControlValue).
 
-## DialogOptions
+## DialogModalOptions
 
-Options for useDialogPattern.
+Options for useDialogModalPattern.
 
 ## DisclosureOptions
 
@@ -113,6 +89,15 @@ Cell view fed to consumer for rendering.
 
 Options for useGridPattern.
 
+## KeyDescriptor
+
+Builtin chord descriptor — pattern 이 자기 디폴트로 흡수하는 chord 한 entry.
+llms.txt / 문서 자동 추출 + 사용자/LLM 이 어떤 chord 가 reserved 인지 알게 함.
+ chord       : axes/chord parseChord 형식 (e.g. 'mod+z', 'Shift+Tab')
+ uiEvent     : emit 되는 UiEvent['type']
+ description : 한 줄 설명
+ scope       : 'root' (default) | 'item' (focused item 필요)
+
 ## ListboxOptions
 
 Options for useListboxPattern.
@@ -120,6 +105,12 @@ Options for useListboxPattern.
 ## MenubarOptions
 
 ## MenuButtonOptions
+
+## MenuItem
+
+모든 recipe 의 item view 공통 필드. pattern 별로 추가 필드 확장.
+
+## MenuLevel
 
 ## MenuOptions
 
@@ -136,25 +127,29 @@ Wrapper 의 표준 props base — 모든 컬렉션 wrapper 가 공유.
 
 wrapper-specific 옵션(slots/placeholder/orientation 등)은 extends 로 추가.
 
-## RadioGroupOptions
+## RadioOptions
 
-Options for useRadioGroupPattern.
+Options for useRadioPattern.
+
+## SelectableReducerOptions
+
+select-multi 지원 패턴 옵션.
+
+## SingleReducerOptions
+
+select-single 전용 패턴 옵션.
+
+## SliderMultithumbOptions
+
+Options for sliderMultithumbPattern.
 
 ## SliderOptions
 
 Options for sliderPattern.
 
-## SliderRangeOptions
-
-Options for sliderRangePattern.
-
 ## SpinbuttonOptions
 
 Options for spinbuttonPattern.
-
-## SplitterOptions
-
-Options for splitterPattern.
 
 ## SwitchOptions
 
@@ -177,25 +172,29 @@ Options for useTooltipPattern.
 TreeCommandDescriptor — chord ↔ effect 매핑 SSOT.
  effect 는 데이터로 표현된 비즈니스 로직 — 새 command 추가 = 라이브러리 변경 없이 entry 1개.
 
-## TreeGridOptions
+## TreegridOptions
 
-Options for useTreeGridPattern.
+Options for useTreegridPattern.
 
 ## TreeItem
 
 Tree/treegrid item view — BaseItem + level/expanded/hasChildren.
 
-## TreeOptions
+## TreeviewOptions
 
-Options for useTreePattern.
+Options for useTreeviewPattern.
 
-## AlertDialogOptions
+## WindowsplitterOptions
+
+Options for windowsplitterPattern.
+
+## AlertdialogOptions
 
 ```ts
-AlertDialogOptions: DialogOptions & object
+AlertdialogOptions: DialogModalOptions & object
 ```
 
-Options for useAlertDialogPattern.
+Options for useAlertdialogPattern.
 
 ## CheckboxState
 
@@ -219,6 +218,12 @@ ItemProps: HTMLAttributes<HTMLElement> & object
 
 itemProps(id) 형태의 part-getter 반환 타입.
 
+## MenuItemKind
+
+```ts
+MenuItemKind: "menuitem" | "menuitemcheckbox" | "menuitemradio"
+```
+
 ## RootProps
 
 ```ts
@@ -236,59 +241,59 @@ TreeCommand: string
 TreeCommand — 의미 식별자(메뉴/팔레트 라벨링). 라이브러리 switch 에서는 더 이상 사용하지
 않음 — 실제 동작은 descriptor.effect 가 결정. 자유 문자열로 확장 가능.
 
-## defaultTreeCommands
+## defaultTreeviewCommands
 
 ```ts
-defaultTreeCommands: readonly TreeCommandDescriptor[]
+defaultTreeviewCommands: readonly TreeCommandDescriptor[]
 ```
 
-defaultTreeCommands — editable tree 의 기본 keymap (chord ↔ effect SSOT).
+defaultTreeviewCommands — editable tree 의 기본 keymap (chord ↔ effect SSOT).
 모든 비즈니스 로직이 effect 데이터로 직렬화돼 있음 — 새 command 추가는 entry 한 줄,
 라이브러리(runEffect) 변경 없음 (axis/op 어휘 내에서 표현 가능한 한).
 
-## feedBuiltinChords
+## feedKeys
 
 ```ts
-feedBuiltinChords: readonly BuiltinChordDescriptor[]
+feedKeys: readonly KeyDescriptor[]
 ```
 
 feed 가 디폴트로 흡수하는 chord 목록 — descriptor SSOT.
 feed 는 read-only article bundle 이지만 clipboard/history chord 일관 정책상 동일 chord 흡수.
 호스트가 read-only 라면 dispatch 에서 해당 UiEvent 를 무시하면 된다.
 
-## gridBuiltinChords
+## gridKeys
 
 ```ts
-gridBuiltinChords: readonly BuiltinChordDescriptor[]
+gridKeys: readonly KeyDescriptor[]
 ```
 
 grid 가 디폴트로 흡수하는 chord 목록 — descriptor SSOT.
 
-## listboxBuiltinChords
+## listboxKeys
 
 ```ts
-listboxBuiltinChords: readonly BuiltinChordDescriptor[]
+listboxKeys: readonly KeyDescriptor[]
 ```
 
 listbox 가 디폴트로 흡수하는 chord 목록 — descriptor SSOT.
 
-## treeBuiltinChords
+## treegridKeys
 
 ```ts
-treeBuiltinChords: readonly BuiltinChordDescriptor[]
+treegridKeys: readonly KeyDescriptor[]
 ```
 
-treeBuiltinChords — backward-compat. KeymapPanel 등이 쓰던 옛 SSOT 의 default keymap 형태.
-
-## treeGridBuiltinChords
-
-```ts
-treeGridBuiltinChords: readonly BuiltinChordDescriptor[]
-```
-
-treeGrid 가 디폴트로 흡수하는 chord 목록 — descriptor SSOT.
-treeGrid 는 Backspace 가 'editable' 모드의 remove 와도 겹치므로,
+treegrid 가 디폴트로 흡수하는 chord 목록 — descriptor SSOT.
+treegrid 는 Backspace 가 'editable' 모드의 remove 와도 겹치므로,
 빌트인 clipboard 'remove' 와 동일 의미로 통합된다.
+
+## treeviewKeys
+
+```ts
+treeviewKeys: readonly KeyDescriptor[]
+```
+
+treeviewKeys — backward-compat. KeymapPanel 등이 쓰던 옛 SSOT 의 default keymap 형태.
 
 ## accordionAxis
 
@@ -297,18 +302,6 @@ accordionAxis (): Axis
 ```
 
 Accordion 이 등록하는 axis — SSOT.
-
-## alertdialogPattern
-
-```ts
-alertdialogPattern (opts: AlertdialogOptions): object
-```
-
-alertdialog — APG `/alertdialog/`.
-https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/
-
-dialog 변종 — 즉시 주의 필요. role=alertdialog. focus trap 등 동작은 useDialogPattern 사용.
-본 함수는 declarative props 만 — 행동까지 필요하면 `useAlertDialogPattern`.
 
 ## alertPattern
 
@@ -320,6 +313,16 @@ alert — ARIA `alert` role.
 https://www.w3.org/TR/wai-aria-1.2/#alert
 
 즉시 announce. live region 자동 (role=alert 가 aria-live=assertive 묵시).
+
+## carouselKeys
+
+```ts
+carouselKeys (opts: object): readonly string[]
+```
+
+useCarouselPattern 이 흡수하는 키 — SSOT.
+control='tabs' 일 때만 tablist 가 ArrowLeft/Right/Home/End 처리.
+control='buttons' 는 키 흡수 없음 (prev/next 버튼 클릭).
 
 ## checkboxKeys
 
@@ -344,8 +347,15 @@ Native `<input type="checkbox">` 가 가능하면 그쪽이 우선. 본 recipe �
 두 변종을 흡수. mixed → click 은 false → true 로 진행 (APG default).
 
 시그니처는 `switchPattern` 정합 — `(checked, dispatch?, opts)`. dispatch 는
-`{type:'value', value: !current}` 만 emit (mixed → true). uncontrolled 모드는
-`useLocalValue` 와 조합.
+`{type:'value', value: !current}` 만 emit (mixed → true).
+
+**Example**
+
+```ts
+canonical (#148)
+  const [checked, setChecked] = useState<CheckboxState>(false)
+  const { checkboxProps } = checkboxPattern(checked, (e) => setChecked(e.value), { label: '…' })
+```
 
 ## comboboxAxis
 
@@ -354,6 +364,16 @@ comboboxAxis (): Axis
 ```
 
 Combobox 가 등록하는 axis — SSOT. (Escape · Alt+Arrow popup control · Arrow/Home/End · Enter)
+
+## comboboxDialogKeys
+
+```ts
+comboboxDialogKeys (opts: object): readonly string[]
+```
+
+useComboboxDialogPattern 이 흡수하는 키 — SSOT.
+- ArrowDown / Alt+ArrowDown: open (APG combobox-datepicker)
+- dialogModalKeys: Escape (+ modal=true 인 경우 Tab)
 
 ## comboboxGridAxis
 
@@ -371,10 +391,10 @@ comboboxSelectAxis (): Axis
 
 Combobox select-only 가 등록하는 axis — listbox variant 와 동일 합성.
 
-## dialogKeys
+## dialogModalKeys
 
 ```ts
-dialogKeys (opts: object): readonly string[]
+dialogModalKeys (opts: object): readonly string[]
 ```
 
 Dialog 가 등록하는 키 — declarative SSOT 합집합.
@@ -389,7 +409,7 @@ Dialog 가 등록하는 키 — declarative SSOT 합집합.
 disclosureAxis (): Axis
 ```
 
-Disclosure 가 등록하는 axis — SSOT. 데모/문서는 이걸 probe.
+Disclosure 가 등록하는 axis — SSOT. 데모/문서는 `axis.chords` 직접 read.
 
 ## disclosurePattern
 
@@ -429,7 +449,7 @@ Feed 가 등록하는 axis — SSOT. ArrowDown/Up + Home/End (navigate) + PageUp
 focusTrapKeys (): readonly string[]
 ```
 
-focusTrapKeys — 선언형 SSOT. probe / dialogKeys 가 읽음.
+focusTrapKeys — 선언형 SSOT. dialog 등 wrapper 가 표시용으로 읽음.
 
 ## gridAxis
 
@@ -453,7 +473,7 @@ gridEditKeys — chord registry 도출.
 listboxAxis (opts: ListboxOptions): Axis
 ```
 
-Listbox 가 등록하는 axis — SSOT. 데모/문서는 이걸 probe 해서 키 목록 도출.
+Listbox 가 등록하는 axis — SSOT. 데모/문서는 `axis.chords` 직접 read.
 옵션을 그대로 받아 동일한 합성을 노출.
 
 ## listboxEditKeys
@@ -519,6 +539,25 @@ menuKeys (orientation: "vertical" | "horizontal"): readonly string[]
 
 keys SSOT — axisKeys 정본 사용.
 
+## mergeRefs
+
+```ts
+mergeRefs (refs: Ref<T> | undefined[]): (node: T | null) => void
+```
+
+mergeRefs — 패턴이 rootProps.ref 를 부착하면서 소비자도 같은 DOM 노드에 ref 가
+필요할 때 (outside-click · ResizeObserver · 포털 focus-trap 등) 두 ref 를 합친다.
+
+Radix · React Aria · React-ARIA-Spectrum de facto. callback 과 RefObject 둘 다 지원.
+
+**Example**
+
+```ts
+const userRef = useRef<HTMLDivElement | null>(null)
+  const { rootProps } = useMenuPattern(data, onEvent)
+  <div {...rootProps} ref={mergeRefs(userRef, rootProps.ref)} />
+```
+
 ## navigationListPattern
 
 ```ts
@@ -532,23 +571,24 @@ navigationList — sidebar/route navigation recipe.
 
 - `aria-selected` 아닌 `aria-current="page"` (`entity.current` 가 SSoT)
 - role=listbox/option 아닌 native nav/a
-- 키보드는 native Tab/Enter — pattern 이 추가 axis 등록 안 함
+- 키보드는 기본적으로 native Tab/Enter — `roving: true` opt-in 시에만 화살표 이동 추가
+- 데이터가 2단(group → links) 이면 `groups` 배열도 함께 반환 — wrapper 가 헤더 렌더링
 
 https://html.spec.whatwg.org/multipage/sections.html#the-nav-element
 https://www.w3.org/TR/wai-aria-1.2/#aria-current
 
-## radioGroupAxis
+## radioAxis
 
 ```ts
-radioGroupAxis (): Axis
+radioAxis (): Axis
 ```
 
 RadioGroup 이 등록하는 axis — SSOT (behavior 용).
 
-## radioGroupKeys
+## radioKeys
 
 ```ts
-radioGroupKeys (): readonly string[]
+radioKeys (): readonly string[]
 ```
 
 RadioGroup 이 advertise 하는 키 — sff 가 navigate 와 함께 selection 을 가져가
@@ -562,6 +602,27 @@ sliderAxis (opts: object): Axis
 ```
 
 Slider 가 등록하는 axis — SSOT.
+
+## sliderMultithumbAxis
+
+```ts
+sliderMultithumbAxis (opts: object): Axis
+```
+
+Range slider axis — single-axis numericStep, applied per thumb.
+
+## sliderMultithumbPattern
+
+```ts
+sliderMultithumbPattern (values: number[], dispatch?: (e: ValueEvent<number[]>) => void, opts: SliderMultithumbOptions): object
+```
+
+slider (multi-thumb) — APG `/slider-multithumb/` recipe.
+https://www.w3.org/WAI/ARIA/apg/patterns/slider-multithumb/
+
+다중 thumb 컨트롤. 각 thumb 의 가용 범위는 인접 thumb 가 clamp:
+  thumb[i] ∈ [values[i-1] ?? min, values[i+1] ?? max].
+키보드: Arrow ±step, Home/End thumb 의 clamp 양 끝, PageUp/PageDown ±step*10.
 
 ## sliderPattern
 
@@ -577,31 +638,11 @@ https://www.w3.org/WAI/ARIA/apg/patterns/slider/
 **Example**
 
 ```ts
-const [value, dispatch] = useLocalValue(40)
-  const { thumbProps, ... } = sliderPattern(value, dispatch,
+canonical (#148)
+  const [value, setValue] = useState(40)
+  const { thumbProps, ... } = sliderPattern(value, (e) => setValue(e.value),
     { min: 0, max: 100, step: 5, label: 'Volume' })
 ```
-
-## sliderRangeAxis
-
-```ts
-sliderRangeAxis (opts: object): Axis
-```
-
-Range slider axis — single-axis numericStep, applied per thumb.
-
-## sliderRangePattern
-
-```ts
-sliderRangePattern (values: number[], dispatch?: (e: ValueEvent<number[]>) => void, opts: SliderRangeOptions): object
-```
-
-slider (multi-thumb) — APG `/slider-multithumb/` recipe.
-https://www.w3.org/WAI/ARIA/apg/patterns/slider-multithumb/
-
-다중 thumb 컨트롤. 각 thumb 의 가용 범위는 인접 thumb 가 clamp:
-  thumb[i] ∈ [values[i-1] ?? min, values[i+1] ?? max].
-키보드: Arrow ±step, Home/End thumb 의 clamp 양 끝, PageUp/PageDown ±step*10.
 
 ## spinbuttonAxis
 
@@ -632,35 +673,10 @@ native `<input type="number">` 가 충분할 때는 그쪽이 우선. custom wid
 **Example**
 
 ```ts
-const [n, dispatch] = useLocalValue(5)
-  const { spinbuttonProps } = spinbuttonPattern(n, dispatch,
+canonical (#148)
+  const [n, setN] = useState(5)
+  const { spinbuttonProps } = spinbuttonPattern(n, (e) => setN(e.value),
     { min: 0, max: 10, step: 1, label: 'Quantity' })
-```
-
-## splitterAxis
-
-```ts
-splitterAxis (opts: object): Axis
-```
-
-Splitter 가 등록하는 axis — SSOT. (vertical separator → horizontal arrow keys, vice versa)
-
-## splitterPattern
-
-```ts
-splitterPattern (value: number, dispatch?: (e: ValueEvent<number>) => void, opts: SplitterOptions): object
-```
-
-splitter — APG `Window Splitter`.
-https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/
-
-단일 number 컨트롤 — slider 와 axis 공유 (numericStep), role=separator 만 다름.
-
-**Example**
-
-```ts
-const [pos, dispatch] = useLocalValue(40)
-  const { handleProps, ... } = splitterPattern(pos, dispatch, { min: 10, max: 90 })
 ```
 
 ## switchAxis
@@ -685,8 +701,9 @@ https://www.w3.org/TR/wai-aria-1.2/#switch
 **Example**
 
 ```ts
-const [on, dispatch] = useLocalValue(false)
-  const { switchProps } = switchPattern(on, dispatch, { label: 'Mute' })
+canonical (#148)
+  const [on, setOn] = useState(false)
+  const { switchProps } = switchPattern(on, (e) => setOn(e.value), { label: 'Mute' })
 ```
 
 ## tabsAxis
@@ -723,29 +740,29 @@ tooltipKeys (): readonly string[]
 
 Tooltip 키 — declarative SSOT. escape axis 의 chord 도출.
 
-## treeAxis
+## treegridAxis
 
 ```ts
-treeAxis (opts: object): Axis
+treegridAxis (opts: object): Axis
+```
+
+Treegrid 가 등록하는 axis — SSOT.
+
+## treegridEditKeys
+
+```ts
+treegridEditKeys (): readonly string[]
+```
+
+treegridEditKeys — chord registry 합집합 도출.
+
+## treeviewAxis
+
+```ts
+treeviewAxis (opts: object): Axis
 ```
 
 Tree 가 등록하는 axis — SSOT.
-
-## treeGridAxis
-
-```ts
-treeGridAxis (opts: object): Axis
-```
-
-TreeGrid 가 등록하는 axis — SSOT.
-
-## treeGridEditKeys
-
-```ts
-treeGridEditKeys (): readonly string[]
-```
-
-treeGridEditKeys — chord registry 합집합 도출.
 
 ## useAccordionPattern
 
@@ -759,17 +776,38 @@ https://www.w3.org/WAI/ARIA/apg/patterns/accordion/
 `meta.expanded` 가 expanded 항목 SSoT. `single` mode 는 패턴이 형제 자동
 collapse 를 emit. activate(click) → expand toggle.
 
-## useAlertDialogPattern
+**Example**
 
 ```ts
-useAlertDialogPattern (opts: AlertDialogOptions): object
+canonical
+  const [data, dispatch] = useAccordionReducer(ITEMS)
+  const { rootProps, buttonProps, regionProps, items } = useAccordionPattern(data, dispatch)
+```
+
+## useAccordionReducer
+
+```ts
+useAccordionReducer (items: T[], opts: SingleReducerOptions): Result
+```
+
+## useAlertdialogPattern
+
+```ts
+useAlertdialogPattern (opts: AlertdialogOptions): object
 ```
 
 alert-dialog — APG `/alertdialog/` recipe.
 https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/
 
-`useDialogPattern` 의 preset — `role="alertdialog"` + cancel 버튼 자동 focus.
+`useDialogModalPattern` 의 preset — `role="alertdialog"` + cancel 버튼 자동 focus.
 confirm/destructive prompt 에 사용.
+
+**Example**
+
+```ts
+canonical (#148 §4) — opts-only 패턴 (단일 인스턴스, 데이터 컬렉션 아님)
+  const { rootProps, closeProps } = useAlertdialogPattern({ open, onClose, cancelRef })
+```
 
 ## useCarouselPattern
 
@@ -786,6 +824,13 @@ https://www.w3.org/WAI/ARIA/apg/patterns/carousel/
   3. rotation control 토글 → 명시적 재개/정지
 
 roleDescription="carousel"·"slide" 는 APG 권장 — 스크린리더가 "carousel"·"slide" 로 읽음.
+
+**Example**
+
+```ts
+canonical (#148 §4) — opts-only 패턴 (slides 는 props, 라이프사이클은 hook 내부)
+  const { rootProps, slideProps, prevProps, nextProps } = useCarouselPattern({ slides, label: '…' })
+```
 
 ## useCheckboxGroupPattern
 
@@ -805,6 +850,21 @@ checked 상태. 부모 state 는 자동 계산:
 parent click 시 자식 전체를 true (mixed/false 일 때) / false (all true 일 때) 로
 `checkMany` emit. 자식 click 은 host 가 `check` event 로 dispatch.
 
+**Example**
+
+```ts
+canonical
+  const [data, dispatch] = useCheckboxGroupReducer(ITEMS)
+  const { groupProps, parentProps, childProps, items } =
+    useCheckboxGroupPattern(data, dispatch)
+```
+
+## useCheckboxGroupReducer
+
+```ts
+useCheckboxGroupReducer (items: T[], opts: SingleReducerOptions): Result
+```
+
 ## useComboboxDialogPattern
 
 ```ts
@@ -817,14 +877,21 @@ https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-datepicker/
 data 없음 — popup 내용은 호스트가 임의 dialog 콘텐츠로 채움 (calendar grid 등).
 자유 텍스트 입력 충돌 방지: openOnType / openOnFocus default false.
 
-키 흡수: ArrowDown / Alt+ArrowDown → open. Escape / outside click → close (useDialogPattern).
-focus trap / returnFocus / Escape 모두 useDialogPattern 합성.
+키 흡수: ArrowDown / Alt+ArrowDown → open. Escape / outside click → close (useDialogModalPattern).
+focus trap / returnFocus / Escape 모두 useDialogModalPattern 합성.
 
 격리 근거 (계약 4축 모두 다름):
   ① 입력: data 없음
   ② 반환: inputProps/popoverProps/triggerProps (listbox variant 와 다른 키 집합)
   ③ 상태: collection 없음
   ④ 라이프사이클: navigate/activate 없음, open/close 만
+
+**Example**
+
+```ts
+canonical (#148 §4) — opts-only 패턴 (collection 없는 wrapper, popup 안에서 별도 합성)
+  const { inputProps, popoverProps, triggerProps, open } = useComboboxDialogPattern({ label: '…' })
+```
 
 ## useComboboxGridPattern
 
@@ -840,6 +907,20 @@ gridcell 을 가리킨다. 2D navigation: Arrow Up/Down (row), Arrow Left/Right 
 Enter 시 focused row 의 첫 cell label 을 input value 로 commit.
 
 data: ROOT children = rowIds, 각 row 의 children = cellIds.
+
+**Example**
+
+```ts
+canonical
+  const [data, dispatch] = useComboboxGridReducer(ROWS)
+  const { comboboxProps, inputProps, gridProps, rowProps, cellProps } = useComboboxGridPattern(data, dispatch)
+```
+
+## useComboboxGridReducer
+
+```ts
+useComboboxGridReducer (rows: T[], opts: SingleReducerOptions): Result
+```
 
 ## useComboboxPattern
 
@@ -875,6 +956,32 @@ https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
 
 INVARIANT B11: input 에 focus 유지, popup option 활성은 aria-activedescendant.
 
+**Ephemeral derived list 사용 (chat @-mention · /-command 등 키스트로크당 재계산):**
+
+  const base = useMemo(() => fromList(filtered), [filtered])
+  const [data, dispatch] = useControlState(base)
+  const cb = useComboboxPattern(data, (e) => {
+    dispatch(e)                              // keyboard nav meta 영속화
+    if (e.type === 'activate') commit(e.id)  // intent 처리
+  })
+
+`useControlState` 가 base(entities/relationships) 와 local meta(focus/expanded)
+를 분리 — filtered 갱신 시 entities 만 swap, 키보드 nav 상태는 보존.
+
+**Example**
+
+```ts
+canonical — 안정 리스트
+  const [data, dispatch] = useComboboxReducer(ITEMS)
+  const { comboboxProps, inputProps, listboxProps, items } = useComboboxPattern(data, dispatch)
+```
+
+## useComboboxReducer
+
+```ts
+useComboboxReducer (items: T[], opts: SingleReducerOptions): Result
+```
+
 ## useComboboxSelectPattern
 
 ```ts
@@ -895,10 +1002,24 @@ https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/
   escape  → {type:'open', id:ROOT, open:false}
   click   → {type:'open', open:!expanded}
 
-## useDialogPattern
+**Example**
 
 ```ts
-useDialogPattern (opts: DialogOptions): object
+canonical
+  const [data, dispatch] = useComboboxSelectReducer(ITEMS)
+  const { comboboxProps, listboxProps, optionProps, items } = useComboboxSelectPattern(data, dispatch)
+```
+
+## useComboboxSelectReducer
+
+```ts
+useComboboxSelectReducer (items: T[], opts: SingleReducerOptions): Result
+```
+
+## useDialogModalPattern
+
+```ts
+useDialogModalPattern (opts: DialogModalOptions): object
 ```
 
 dialog — APG `/dialog-modal/` recipe.
@@ -915,6 +1036,19 @@ focus 진입/복귀 는 별도 layer (focus management) — useEffect 잔존.
   로 drag-out 방지. (`/lab/dialog-backdrop`)
 - `on: Record<chord, () => void>` — open 동안 window keydown 미들웨어. editable-guard
   준수 (modifier-less chord 는 입력 위젯 안에서 탈취 안 함). (`/lab/dialog-on-keymap`)
+
+**Example**
+
+```ts
+canonical (#148 §4) — opts-only 패턴 (단일 인스턴스)
+  const { rootProps, backdropProps, closeProps } = useDialogModalPattern({ open, onClose, label: '…' })
+```
+
+## useDisclosureReducer
+
+```ts
+useDisclosureReducer (items: T[], opts: SingleReducerOptions): Result
+```
 
 ## useFeedPattern
 
@@ -933,6 +1067,13 @@ focusable 자식이 native Tab 흐름. delegate.onKeyDown 의 `e.target.closest(
 위임이 깊은 자식에서도 article id 추적.
 
 Ctrl+Home/End (feed 바깥 first/last focusable) 은 host 책임.
+
+**Example**
+
+```ts
+canonical (#148 §4) — feed 는 FeedItem[] 직접 (NormalizedData 미사용)
+  const { rootProps, articleProps } = useFeedPattern(items, (e) => { ... })
+```
 
 ## useFocusTrap
 
@@ -963,6 +1104,20 @@ treegrid 와의 차이: treegrid 는 row 단위 focus + tree 확장, grid 는 ce
 
 소비자는 `editStart` 를 edit intent 로 받고, Enter 시 함께 오는 `activate` 는 무시.
 
+**Example**
+
+```ts
+canonical — row → cells 중첩 트리
+  const [data, dispatch] = useGridReducer(ROWS)
+  const { rootProps, rowProps, cellProps, rows } = useGridPattern(data, dispatch)
+```
+
+## useGridReducer
+
+```ts
+useGridReducer (rows: T[], opts: SelectableReducerOptions): Result
+```
+
 ## useListboxPattern
 
 ```ts
@@ -971,6 +1126,20 @@ useListboxPattern (data: NormalizedData, onEvent?: (e: UiEvent) => void, opts: L
 
 listbox — APG `/listbox/` recipe.
 https://www.w3.org/WAI/ARIA/apg/patterns/listbox/
+
+**Example**
+
+```ts
+canonical
+  const [data, dispatch] = useListboxReducer(ITEMS)
+  const { rootProps, optionProps, items } = useListboxPattern(data, dispatch)
+```
+
+## useListboxReducer
+
+```ts
+useListboxReducer (items: T[], opts: SelectableReducerOptions): Result
+```
 
 ## useMenubarPattern
 
@@ -994,6 +1163,20 @@ entity 필드:
   current: 'page' | etc — aria-current
 
 키 매핑은 모두 axis 합성. inline switch 0.
+
+**Example**
+
+```ts
+canonical — 트리 데이터
+  const [data, dispatch] = useMenubarReducer(TREE)
+  const { rootProps, menubarItemProps, topItems, getSubmenu } = useMenubarPattern(data, dispatch)
+```
+
+## useMenubarReducer
+
+```ts
+useMenubarReducer (roots: T[], opts: SingleReducerOptions): Result
+```
 
 ## useMenuButtonPattern
 
@@ -1024,6 +1207,20 @@ Submenu 렌더 (재귀):
     ))}</ul>
   }
 
+**Example**
+
+```ts
+canonical
+  const [data, dispatch] = useMenuButtonReducer(MENU)
+  const { triggerProps, rootLevel, getSubmenu } = useMenuButtonPattern(data, dispatch)
+```
+
+## useMenuButtonReducer
+
+```ts
+useMenuButtonReducer (roots: T[], opts: SingleReducerOptions): Result
+```
+
 ## useMenuPattern
 
 ```ts
@@ -1046,16 +1243,50 @@ menuitem / menuitemcheckbox / menuitemradio 구분.
 trigger 가 필요하면 `useMenuButtonPattern` 사용. 본 패턴은 standalone menu
 (context menu, popover trigger 외부에서 관리) 케이스.
 
-## useRadioGroupPattern
+**Example**
 
 ```ts
-useRadioGroupPattern (data: NormalizedData, onEvent?: (e: UiEvent) => void, opts: RadioGroupOptions): object
+canonical
+  const [data, dispatch] = useMenuReducer(ITEMS)
+  const { rootProps, menuitemProps, items, open } = useMenuPattern(data, dispatch)
 ```
 
-radioGroup — APG `/radio/` recipe.
+## useMenuReducer
+
+```ts
+useMenuReducer (roots: T[], opts: SingleReducerOptions): Result
+```
+
+## useNavigationListReducer
+
+```ts
+useNavigationListReducer (items: T[], opts: SingleReducerOptions): Result
+```
+
+## useRadioPattern
+
+```ts
+useRadioPattern (data: NormalizedData, onEvent?: (e: UiEvent) => void, opts: RadioOptions): object
+```
+
+radio — APG `/radio/` recipe.
 https://www.w3.org/WAI/ARIA/apg/patterns/radio/
 
 항상 selection-follows-focus (APG 강제). single-select.
+
+**Example**
+
+```ts
+canonical
+  const [data, dispatch] = useRadioReducer(ITEMS)
+  const { rootProps, radioProps, items } = useRadioPattern(data, dispatch)
+```
+
+## useRadioReducer
+
+```ts
+useRadioReducer (items: T[], opts: SingleReducerOptions): Result
+```
 
 ## useTabsPattern
 
@@ -1068,9 +1299,23 @@ https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
 
 tabProps(id)·panelProps(id) 가 `aria-controls`/`aria-labelledby` 자동 연결.
 
+**Example**
+
+```ts
+canonical
+  const [data, dispatch] = useTabsReducer(ITEMS)
+  const { rootProps, tabProps, panelProps, items } = useTabsPattern(data, dispatch)
+
 **ARIA-punt 흡수 (INVARIANTS §B-ter.2):**
 `active?: string` — controlled selection. 제공 시 `data.entities[id].selected` 무시,
 `id === active` 로 도출. 외부 SSOT 와 동기화할 때 data mutation 0. (`/lab/tabs-controlled`)
+```
+
+## useTabsReducer
+
+```ts
+useTabsReducer (items: T[], opts: SingleReducerOptions): Result
+```
 
 ## useToolbarPattern
 
@@ -1089,6 +1334,20 @@ Per-item ARIA role 디스크리미네이터 — `entity.itemRole` 에 다음 중
   `'menubutton'`, `'spinbutton'`, `'link'`.
 APG toolbar example 의 혼합 itemRole 변종을 1:1 흡수.
 
+**Example**
+
+```ts
+canonical
+  const [data, dispatch] = useToolbarReducer(ITEMS)
+  const { rootProps, toolbarItemProps, items } = useToolbarPattern(data, dispatch)
+```
+
+## useToolbarReducer
+
+```ts
+useToolbarReducer (items: T[], opts: SingleReducerOptions): Result
+```
+
 ## useTooltipPattern
 
 ```ts
@@ -1101,25 +1360,117 @@ https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
 hover/focus 로 열림, blur/Escape 로 닫힘. Escape 처리는 `bindGlobalKeyMap`
 (declarative SSOT 메커니즘).
 
-## useTreeGridPattern
+**Example**
 
 ```ts
-useTreeGridPattern (data: NormalizedData, onEvent?: (e: UiEvent) => void, opts: TreeGridOptions): object
+canonical (#148 §4) — opts-only 패턴 (단일 인스턴스)
+  const { triggerProps, tooltipProps, open } = useTooltipPattern({ label: 'Help' })
 ```
 
-treeGrid — APG `/treegrid/` recipe.
+## useTreegridPattern
+
+```ts
+useTreegridPattern (data: NormalizedData, onEvent?: (e: UiEvent) => void, opts: TreegridOptions): object
+```
+
+treegrid — APG `/treegrid/` recipe.
 https://www.w3.org/WAI/ARIA/apg/patterns/treegrid/
 
 Focus stays on rows; cells expose grid semantics through rowheader/gridcell + aria-colindex.
 
-## useTreePattern
+**Example**
 
 ```ts
-useTreePattern (data: NormalizedData, onEvent?: (e: UiEvent) => void, opts: TreeOptions): object
+canonical — expand gesture 는 default 로 박혀 있음
+  const [data, dispatch] = useTreegridReducer(ROWS, { defaultExpanded: ['src'] })
+  const { treegridProps, rowProps, gridcellProps, items } = useTreegridPattern(data, dispatch)
+```
+
+## useTreegridReducer
+
+```ts
+useTreegridReducer (rows: T[], opts: TreeReducerOptions): Result
+```
+
+## useTreeviewPattern
+
+```ts
+useTreeviewPattern (data: NormalizedData, onEvent?: (e: UiEvent) => void, opts: TreeviewOptions): object
 ```
 
 tree — APG `/treeview/` recipe.
 https://www.w3.org/WAI/ARIA/apg/patterns/treeview/
+
+**Example**
+
+```ts
+canonical — expand gesture 는 default 로 박혀 있음
+  const [data, dispatch] = useTreeviewReducer(NODES, { defaultExpanded: ['src'] })
+  const { rootProps, itemProps, items } = useTreeviewPattern(data, dispatch)
+```
+
+## useTreeviewReducer
+
+```ts
+useTreeviewReducer (roots: T[], opts: TreeReducerOptions): Result
+```
+
+## windowsplitterAxis
+
+```ts
+windowsplitterAxis (opts: object): Axis
+```
+
+Splitter 가 등록하는 axis — SSOT. (vertical separator → horizontal arrow keys, vice versa)
+
+## windowsplitterPattern
+
+```ts
+windowsplitterPattern (value: number, dispatch?: (e: ValueEvent<number>) => void, opts: WindowsplitterOptions): object
+```
+
+splitter — APG `Window Splitter`.
+https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/
+
+단일 number 컨트롤 — slider 와 axis 공유 (numericStep), role=separator 만 다름.
+
+**Example**
+
+```ts
+canonical (#148)
+  const [pos, setPos] = useState(40)
+  const { handleProps, ... } = windowsplitterPattern(pos, (e) => setPos(e.value), { min: 10, max: 90 })
+```
+
+## AnnounceOptions
+
+## AnnouncerRegionProps
+
+## Landmark
+
+## LandmarkEntry
+
+## LandmarkProps
+
+## LandmarkRole
+
+## LandmarksProvider
+
+## SkipLinkProps
+
+## useAnnouncer
+
+## UseAnnouncerOptions
+
+## UseAnnouncerResult
+
+## useLandmarks
+
+## useSkipLink
+
+## UseSkipLinkOptions
+
+## UseSkipLinkResult
 
 # Module: axes
 
@@ -1432,7 +1783,7 @@ multiSelectToggle — multi-mode select (unified `select { ids; to? }`).
 REDUCE_PRESETS: Record<string, readonly EvType[]>
 ```
 
-Composition presets — 각 reduceWith* 가 cover 하는 events 합집합.
+Composition presets — 각 reduce* 변종이 cover 하는 events 합집합.
 
 ## reduceHandles
 
@@ -1533,13 +1884,17 @@ pickNumericValue (e: UiEvent): number | undefined
 reducer (`reduce` · `singleSelect` · `setValue` …) + 합성기(`composeReducers` · `applyGesture`)
 + tree/list 빌더 + React 브리지 hook(`useControlState` · `useEventBridge`).
 
+## reduceMultiSelect
+
 ## Reducer
 
-## reduceWithDefaults
+## reduceRadio
 
-## reduceWithMultiSelect
+## reduceSingleSelect
 
 ## setValue
+
+## singleCurrent
 
 ## singleSelect
 
@@ -1547,202 +1902,18 @@ reducer (`reduce` · `singleSelect` · `setValue` …) + 합성기(`composeReduc
 
 ## useEventBridge
 
-# Module: store
-
-## CommandBase
-
-모든 command 의 base — discriminated union 의 `type` 필드.
-
-## CrudPort
-
-CrudPort — UiEvent 편집 어휘를 받을 수 있는 minimal interface.
-시그니처는 zod-crud `JsonCrud` 와 1:1 — 추상화 0, opinionated.
-구현은 무엇이든 OK (FS, in-memory, server proxy).
-@p/aria-kernel 본체에 zod-crud import 0 — interface duck-typing.
-
-## FeatureSpec
-
-Feature spec — 한 화면의 SSOT. `state`(초기값) · `on`(reducer map) · `query`(외부 데이터 선언) · `view`(뷰모델).
-직렬화 가능한 plain object — class/ref/closure 잔재 금지.
-
-## QueryResult
-
-Query 의 현재 상태 — data + isLoading + error.
-
-## QuerySpec
-
-외부 데이터 fetch 선언 — TanStack Query 호환 시그니처.
-
-## Resource
-
-Resource 정의 — keyed external store spec. key/load/initial/subscribe/serialize/onEvent 슬롯.
-
-## QueryResults
-
-```ts
-QueryResults: mapped
-```
-
-query spec map → 같은 키에 QueryResult 가 채워진 결과 map.
-
-## ReducerMap
-
-```ts
-ReducerMap: mapped
-```
-
-command type → 그 type 의 reducer 함수. exhaustive map 강제.
-
-## ResourceDispatch
-
-```ts
-ResourceDispatch: (e: ResourceEvent<T> | UiEvent) => void
-```
-
-`(event) → void` — resource 쓰기 통로.
-ResourceEvent (set/patch/refetch/invalidate) 또는 UiEvent (활성화/편집/네비 등) 모두 수용한다.
-UiEvent 가 들어오면 `resource.onEvent` 라우터로 흘려 다음 값을 결정한다.
-
-## ResourceEvent
-
-```ts
-ResourceEvent: object | object | object | object
-```
-
-Resource dispatch 가 받는 4 종 이벤트 — set(전체)/patch(부분)/refetch(다시 load)/invalidate(캐시 비움).
-
-## ResourceEventRouter
-
-```ts
-ResourceEventRouter: (e: UiEvent, ctx: object) => T | undefined
-```
-
-ui/ UiEvent 를 받아 resource 의 다음 값으로 매핑하는 라우터 (undefined 면 무시 = no-op).
-
-## defineFeature
-
-```ts
-defineFeature (spec: FeatureSpec<S, Cmd, Q, V>): FeatureSpec<S, Cmd, Q, V>
-```
-
-Feature spec identity — 타입 추론 + 런타임 spec 통과 helper.
-라이프사이클: useFeature 가 spec 을 받아 useReducer 로 state 생성 → state 변화마다
-query → view 재계산. 직렬화 가능성: state 는 plain JSON 가능해야 한다 (HMR/replay 지원).
-
-**Example**
-
-```ts
-const counter = defineFeature({
-  state: { count: 0 },
-  on: { inc: (s) => ({ count: s.count + 1 }) },
-  view: (s) => ({ label: `count: ${s.count}` }),
-})
-```
-
-## defineResource
-
-```ts
-defineResource (spec: Resource<T, Args>): Resource<T, Args>
-```
-
-Resource spec identity — 타입 추론 + 런타임 spec 통과 helper.
-라이프사이클: 첫 useResource 호출 시 load/initial 로 hydrate → subscribe 로 외부 push 채널 attach
-(refCount=1 시) → dispatch 로 set/patch/refetch/invalidate → 마지막 구독자 unmount 시 unsub.
-직렬화 가능성: value 는 plain object 권장 — serialize 가 호출되어 외부 저장소(URL/localStorage)와 왕복.
-
-## invalidateQuery
-
-```ts
-invalidateQuery (key: readonly unknown[]): void
-```
-
-명시적 invalidate — mutation 이후 호출.
-
-## readQuery
-
-```ts
-readQuery (spec: QuerySpec<T>): QueryResult<T>
-```
-
-spec 을 캐시에서 읽거나 첫 read 시 fn 실행. enabled=false 면 idle 상태 반환.
-
-## routeUiEventToCrud
-
-```ts
-routeUiEventToCrud (crud: CrudPort<S, V>, e: UiEvent): S | undefined
-```
-
-routeUiEventToCrud — UiEvent 편집 어휘 9종 → CrudPort op 1:1 라우팅.
-매 resource 가 같은 switch 를 짜지 않도록.
-
-반환: CrudPort op 호출 시 다음 snapshot. edit 외 이벤트는 undefined.
-
-**Example**
-
-```ts
-defineResource({
-  key: () => 'doc',
-  initial: () => crud.snapshot(),
-  onEvent: (e) => routeUiEventToCrud(crud, e),
-})
-```
-
-## subscribeQueries
-
-```ts
-subscribeQueries (fn: () => void): () => void
-```
-
-query 변경 구독 — useFeature 가 view 재계산 트리거에 사용.
-
-## useFeature
-
-```ts
-useFeature (spec: FeatureSpec<S, Cmd, Q, V>): [V, (cmd: Cmd) => void]
-```
-
-Feature spec → React 연결. 라이프사이클: useReducer 로 spec.state 시드 → cmd dispatch 시
-spec.on[type] 적용 → state 변화마다 spec.query 재해석 → resolveQueries → spec.view 재계산.
-직렬화 가능성: state/cmd 모두 plain JSON — replay/HMR 가능.
-
-**Example**
-
-```ts
-const [view, send] = useFeature(counter)
-<button onClick={() => send({ type: 'inc' })}>{view.label}</button>
-```
-
-## useResource
-
-```ts
-useResource (resource: Resource<T, Args>, args: Args): [T | undefined, ResourceDispatch<T>]
-```
-
-Resource 를 React 에 연결 — 첫 read 시 load 트리거, 외부 채널 자동 attach/detach,
-useSyncExternalStore 로 tearing-free 구독. 반환은 `[value, dispatch]` 단일 인터페이스.
-
-**Example**
-
-```ts
-const userResource = defineResource({
-  key: (id: string) => `user:${id}`,
-  load: (id) => fetch(`/api/user/${id}`).then(r => r.json()),
-})
-const [user, dispatch] = useResource(userResource, userId)
-dispatch({ type: 'patch', partial: { name: 'New' } })
-```
-
-## writeResource
-
-```ts
-writeResource (resource: Resource<T, Args>, value: T, args: Args): void
-```
-
-컴포넌트 외부(이벤트 핸들러·HMR 콜백 등)에서 자원에 직접 쓰기.
-
 # Module: roving
 
 ## UseSpatialNavigationOptions
+
+## spatialNavigationKeys
+
+```ts
+spatialNavigationKeys (opts: object): readonly string[]
+```
+
+useSpatialNavigation 이 흡수하는 키 — SSOT.
+orientation 별 허용 방향 (ALLOWED_DIRS) + homeEnd 옵션을 그대로 derive.
 
 ## useActiveDescendant
 
@@ -1758,9 +1929,17 @@ roving — APG roving tabindex 의 두 축 + activedescendant 모드.
 
 # Module: key
 
+## CheatsheetBinding
+
+## CheatsheetGroup
+
 ## KeySpec
 
 KeySpec — `key` 와 modifier flag 의 정규화된 키 shape.
+
+## ShortcutEntry
+
+## ShortcutRegistry
 
 ## InsideEditableMode
 
@@ -1779,6 +1958,21 @@ native 입력 컨텍스트를 침범하지 않고 emit 여부를 결정한다.
 RouterDecision: "emit" | "skip" | "emit-prevent"
 ```
 
+## Scope
+
+```ts
+Scope: string
+```
+
+## BLUR_RACE_DELAY_MS
+
+```ts
+BLUR_RACE_DELAY_MS: 100
+```
+
+popover/combobox 가 host blur 직후 option mousedown→activate 가 도달할 때까지
+기다리는 race window. HeadlessUI · Radix · Reach Combobox de facto 100ms.
+
 ## bindGlobalKeyMap
 
 ```ts
@@ -1792,6 +1986,12 @@ fromKeyboardEvent (e: object): KeySpec
 ```
 
 KeyboardEvent (DOM/React) → KeySpec 정규화 변환.
+
+## isEditable
+
+```ts
+isEditable (el: Element | null): boolean
+```
 
 ## isPrintable
 
@@ -1823,6 +2023,15 @@ activeElement 가 editable 인지 + mode 에 따라 router decision 반환.
 - 'preventDefault'    : 항상 emit + native 막음
 
 input 밖이면 mode 무관 'emit-prevent'.
+
+## ShortcutRegistryProvider
+
+```ts
+ShortcutRegistryProvider (__namedParameters: object): Element
+```
+
+ShortcutRegistryProvider — page 루트에 한 번 mount.
+없으면 useShortcutRegistry() 가 stand-alone(컴포넌트 로컬 store) 모드.
 
 ## useKeyMap
 
@@ -1864,7 +2073,94 @@ editable 안에선 modifier 없는 단일 키 탈취 X.
 useShortcut('mod+k', () => openCommandPalette())
 ```
 
+## useShortcutRegistry
+
+```ts
+useShortcutRegistry (): ShortcutRegistry
+```
+
+useShortcutRegistry — page-level shortcut registry hook.
+
+Provider 가 있으면 그 store 를, 없으면 컴포넌트 로컬 store.
+
 # Module: gesture
+
+## ContextMenuGestureOptions
+
+## FileDropGestureOptions
+
+## FileDropGestureResult
+
+## KeyboardDndCommit
+
+## KeyboardDndGestureOptions
+
+## KeyboardDndGestureRawOptions
+
+## KeyboardDndGestureResult
+
+## KeyboardDndItemProps
+
+## KeyboardDndMessages
+
+## ReorderDndGestureOptions
+
+## ReorderDndGestureRawOptions
+
+useReorderDndGestureRaw — generic HTML5 native drag-and-drop reorder lifecycle (#165).
+
+NormalizedData / UiEvent 의존 ❌. dragged id 와 hovered id + drop position 만으로
+dragstart → dragover → drop 라이프사이클을 노출. dispatch / store wiring 은 소비자 책임 —
+useListbox/useTreeviewPattern 자체 모델 또는 외부 store 둘 다 지원.
+
+Drop position 결정 — listbox(reorder only): hovered item bounding box 의 Y 중점 기준
+위면 'before', 아래면 'after'. tree(중첩 허용): 상/하 1/4 zone 은 before/after, 중앙 1/2 는 'inside'.
+`allowInside` 옵션으로 토글 (default false = listbox semantic).
+
+- dragstart(id) → `onDragStart(id)`
+- dragover(id) while dragging → `onDragOver(draggedId, overId, position)` (id !== draggedId 일 때만)
+- drop(id) → `onDrop(draggedId, overId, position)` 또는 자기 자신 drop 시 호출 ❌
+- dragend → 종료
+
+**Example**
+
+```ts
+자체 store 소비자
+  const drag = useReorderDndGestureRaw({
+    onDrop: (from, to, pos) => store.move(from, to, pos),
+  })
+  // <li {...drag.getItemHandlers(id)} />
+```
+
+## ReorderItemHandlers
+
+## ResizeGestureOptions
+
+## ClickOutsideRef
+
+```ts
+ClickOutsideRef: RefObject<Element | null>
+```
+
+gesture — 제스처(activate) → 의도(expand/navigate/...) 변환 헬퍼 모음.
+
+ui/ role 은 activate 단발만 emit. 소비자가 reducer 직전에 골라 통과시킨다.
+키보드 axes(composeAxes) 와 대칭 — 마우스/터치/Enter 가 activate 로 합류한 뒤
+같은 헬퍼가 의도 이벤트로 분해.
+
+## FileDropGestureState
+
+```ts
+FileDropGestureState: "idle" | "over" | "rejecting"
+```
+
+## FileDropRejectReason
+
+```ts
+FileDropRejectReason: object | object | object
+```
+
+Reject reason — onReject 콜백에 전달되는 분류.
 
 ## GestureHelper
 
@@ -1873,6 +2169,52 @@ GestureHelper: (d: NormalizedData, e: UiEvent) => UiEvent[]
 ```
 
 GestureHelper — UiEvent 1개를 받아 0개 이상의 의도 이벤트로 분해/확장.
+
+## KeyboardDndAxis
+
+```ts
+KeyboardDndAxis: "vertical" | "horizontal"
+```
+
+useKeyboardDndGesture — APG-conformant keyboard drag-and-drop primitive (#168).
+
+APG keyboard DnD vocabulary (https://www.w3.org/WAI/ARIA/apg/patterns/):
+  - Space          → lift (idle → lifted)  / drop (lifted → idle, commit)
+  - Enter          → drop (lifted → idle, commit)
+  - ArrowUp/Down   → move (axis 'vertical')
+  - ArrowLeft/Right→ move (axis 'horizontal')
+  - Home / End     → first / last
+  - Escape         → cancel (lifted → idle, no commit)
+
+상태머신 + aria-grabbed + aria-live announcement 은 primitive 내부에 흡수.
+소비자는 items / axis / onCommit / announce 만 제공. gesture 는 activate 단발 emit —
+onCommit({from, to}) 는 drop 한 번에만 호출 (memory: feedback_gesture_intent_split).
+
+**Example**
+
+```ts
+const dnd = useKeyboardDndGestureRaw({
+    items,
+    axis: 'vertical',
+    onCommit: ({ from, to }) => store.move(from, to),
+    announce: (msg) => liveRef.current?.say(msg),
+  })
+  // <li {...dnd.handleProps(id)} />
+```
+
+## KeyboardDndState
+
+```ts
+KeyboardDndState: "idle" | "lifted"
+```
+
+## ReorderPosition
+
+```ts
+ReorderPosition: "before" | "after" | "inside"
+```
+
+drop position relative to the hovered item — same vocabulary as zod-crud `move` mode.
 
 ## expandBranchOnActivate
 
@@ -1932,45 +2274,201 @@ composeGestures (fns: GestureHelper[]): GestureHelper
 
 GestureHelper 합성. 왼쪽부터 차례로 통과 (각 단계의 출력이 다음 단계의 입력).
 
-# Module: local
-
-## useLocalData
+## positionToMoveMode
 
 ```ts
-useLocalData (initial: NormalizedData<Record<string, unknown>, Meta> | () => NormalizedData, reducer: Reducer): readonly [NormalizedData<Record<string, unknown>, Meta>, (e: UiEvent) => void]
+positionToMoveMode (pos: ReorderPosition): "child" | "sibling-after" | "sibling-before"
 ```
 
-컬렉션(NormalizedData) quick-start state — `[data, onEvent]` 한 줄.
+ReorderPosition → UiEvent move mode (W3C / zod-crud 어휘).
+
+## useClickOutsideGesture
+
+```ts
+useClickOutsideGesture (refs: ClickOutsideRef | ClickOutsideRef[], handler: (e: PointerEvent) => void, opts: object): void
+```
+
+useClickOutsideGesture — ref 밖 pointerdown 발생 시 handler 호출.
+
+Dialog/Popover 의 outside-dismiss 자리. `pointerdown` 기준 (click 보다 일찍 fire
+— focus race 방지). `document` capture phase 부착 — stopPropagation 우회.
+
+출처: W3C Pointer Events Level 3 + UI Events. `/gesture` 영역 — "ARIA 의미와
+결합된 pointer 어휘" (Dialog/Popover dismiss intent).
 
 **Example**
 
 ```ts
-const [data, onEvent] = useLocalData(() => fromList(items))
-  const { rootProps } = useListboxPattern(data, onEvent, { label: 'Mute' })
+Dialog dismiss
+  const ref = useRef<HTMLDivElement>(null)
+  useClickOutsideGesture(ref, () => setOpen(false), { enabled: open })
 ```
 
-## useLocalValue
+## useContextMenuGesture
 
 ```ts
-useLocalValue (initial: T | () => T): readonly [T, (e: ValueEvent<T>) => void]
+useContextMenuGesture (opts: ContextMenuGestureOptions<TId>): object
 ```
 
-단일값 컨트롤 (slider/switch/spinbutton/splitter) 의 quick-start state.
+useContextMenuGesture — `contextmenu` + `Shift+F10`/`ContextMenu` 키를 단일 `onOpen` 으로 흡수.
+
+**단일 대상 모드** — `onContextMenu`/`onKeyDown` 을 직접 spread:
+  const { onContextMenu, onKeyDown } = useContextMenuGesture<void>({ onOpen: (_, x, y) => ... })
+  <div onContextMenu={onContextMenu} onKeyDown={onKeyDown} tabIndex={0}>...</div>
+
+**항목당 모드** — `getHandlers(id)` factory 로 hook 1회 + N개 핸들러 (#156):
+  const ctx = useContextMenuGesture<string>({ onOpen: (id, x, y) => openMenu(id, x, y) })
+  {items.map(it => <div role="gridcell" {...ctx.getHandlers(it.id)} />)}
+
+키보드 진입 시 좌표는 target.getBoundingClientRect() 좌상단.
+출처: W3C UI Events `contextmenu` + Keyboard.
+
+## useFileDropGesture
+
+```ts
+useFileDropGesture (opts: FileDropGestureOptions): FileDropGestureResult
+```
+
+useFileDropGesture — HTML5 Drag and Drop file 입력 + keyboard picker fallback 흡수.
+
+dragenter/leave 의 자식 bubble 버그를 depth counter 로 해결 (well-known issue).
+accept(MIME glob + 확장자) + maxSize + multiple 검증을 reject reason 으로 분류.
+`openPicker()` 는 hidden `<input type=file>` 을 1회 트리거 (keyboard equivalent).
+
+출처: HTML Living Standard §Drag and drop, §The input element (type=file).
 
 **Example**
 
 ```ts
-const [on, dispatch] = useLocalValue(false)
-  const { switchProps } = switchPattern(on, dispatch, { label: 'Mute' })
+field-level drop
+  const drop = useFileDropGesture({ accept: ['image/*'], maxSize: 10_000_000, onFiles, onReject })
+  <div {...drop.rootProps} data-state={drop.state}>...</div>
+  <button onClick={drop.openPicker}>Browse...</button>
 ```
 
-## ValueEvent
+## useGridDragSelectGesture
+
+```ts
+useGridDragSelectGesture (data: NormalizedData, dispatch: (e: UiEvent) => void): object
+```
+
+useGridDragSelectGesture — NormalizedData/dispatch 바인딩 wrapper. useGridPattern 소비자용.
+
+키보드 Shift+Arrow / Shift+Click 와 같은 `select` UiEvent (rect in/out) 발생 — reducer 정합 동일.
+자체 selection state 소비자는 generic `useGridDragSelectGestureRaw` 사용 (#157).
+
+**Example**
+
+```ts
+useGridPattern 내부 합성 (자동 부착됨)
+  const drag = useGridDragSelectGesture(data, dispatch)
+  // cellProps(id) 에 ...drag.getCellHandlers(id) spread
+```
+
+## useGridDragSelectGestureRaw
+
+```ts
+useGridDragSelectGestureRaw (opts: object): object
+```
+
+useGridDragSelectGestureRaw — generic drag-select lifecycle (#157).
+
+NormalizedData / UiEvent 의존 ❌. anchor id 와 head id 만으로 mousedown → mouseenter → mouseup
+라이프사이클을 노출. rect 산출/dispatch 는 소비자 책임 — useGridPattern 자체 모델 둘 다 지원.
+
+- mousedown(id) → `onAnchorChange(id)`
+- mouseenter(id) while dragging → `onRectChange(anchorId, id)` (id !== anchor 일 때만)
+- mouseup → 종료
+
+**Example**
+
+```ts
+자체 selection state 소비자
+  const drag = useGridDragSelectGestureRaw({
+    onAnchorChange: (id) => { setFocusId(id); setSelectedIds([id]) },
+    onRectChange: (anchor, head) => setSelectedIds(rangeIds(anchor, head)),
+  })
+```
+
+## useKeyboardDndGesture
+
+```ts
+useKeyboardDndGesture (_data: NormalizedData, dispatch: (e: UiEvent) => void, opts: KeyboardDndGestureOptions): KeyboardDndGestureResult
+```
+
+useKeyboardDndGesture — NormalizedData/dispatch bound wrapper (#168).
+
+On commit emits `{ type: 'move', id: fromId, targetId: toId, mode: 'sibling-before' | 'sibling-after' }` —
+tree/list reducer 가 이미 흡수하는 어휘. `to < from` → 'sibling-before', `to > from` → 'sibling-after'.
+
+## useKeyboardDndGestureRaw
+
+```ts
+useKeyboardDndGestureRaw (opts: KeyboardDndGestureRawOptions): KeyboardDndGestureResult
+```
+
+## useReorderDndGesture
+
+```ts
+useReorderDndGesture (_data: NormalizedData, dispatch: (e: UiEvent) => void, opts: ReorderDndGestureOptions): object
+```
+
+useReorderDndGesture — NormalizedData/dispatch 바인딩 wrapper. useListboxPattern/useTreeviewPattern 소비자용 (#165).
+
+Drop 시 `{ type: 'move', id: draggedId, targetId: overId, mode: 'sibling-before'|'sibling-after'|'child' }`
+UiEvent emit — tree reducer 가 이미 흡수하는 어휘 (axes/reducers `move` op). 소비자가 onEvent 에서
+zod-crud `commands.move` 또는 자체 store mutation 으로 라우팅.
+
+grid 의 useGridDragSelectGesture 와 같은 결 — gesture 는 activate 단발 emit, 비즈니스 의미는
+UiEvent 어휘 그대로 reducer 또는 store 가 흡수 (memory: feedback_gesture_intent_split).
+
+**Example**
+
+```ts
+listbox reorder
+  const drag = useReorderDndGesture(data, dispatch)
+  // <li {...optionProps(id)} {...drag.getItemHandlers(id)} />
+```
+
+## useReorderDndGestureRaw
+
+```ts
+useReorderDndGestureRaw (opts: ReorderDndGestureRawOptions): object
+```
+
+## useResizeGesture
+
+```ts
+useResizeGesture (opts: ResizeGestureOptions): object
+```
+
+useResizeGesture — splitter / column-header drag-resize.
+mousedown → window mousemove/mouseup lifecycle 자동 관리. cleanup 보장.
+
+**Example**
+
+```ts
+column width resize
+  const { handleProps } = useResizeGesture({
+    axis: 'x', initial: () => widthOf(col),
+    onChange: (w) => setWidth(col, w), min: 20, max: 600,
+  })
+  <div {...handleProps} role="separator" />
+```
 
 # Module: index
+
+## AnnounceOptions
+
+## AnnouncerRegionProps
 
 ## ControlProps
 
 ControlProps — data + onEvent. 상호작용 컴포넌트의 공용 prop shape.
+
+## LandmarkEntry
+
+## LandmarkProps
 
 ## Meta
 
@@ -1989,6 +2487,24 @@ Invariants:
   - Object.keys(relationships) ⊆ Object.keys(entities)
   - meta is library-owned; entities are user-owned (modulo reserved per-item flags
     `selected` / `disabled` / `value` that the library reads)
+
+## SkipLinkProps
+
+## UseAnnouncerOptions
+
+## UseAnnouncerResult
+
+## UseFocusOnInsertOptions
+
+## UseFocusOnInsertResult
+
+## UseFocusOnRemoveOptions
+
+## UseFocusOnRemoveResult
+
+## UseSkipLinkOptions
+
+## UseSkipLinkResult
 
 ## ApgEntry
 
@@ -2029,8 +2545,8 @@ Axis: (d: NormalizedData, id: string, t: Trigger) => UiEvent[] | null & object
 Axis — function-with-property. 호출 가능 (data + trigger → UiEvent[] | null) 하면서
 `chords` 메타데이터로 자신이 응답하는 chord 목록을 노출.
 
-`chords` 는 phase 4 (PRD #38) 추가 — demo 가 `keys: () => dedupe(probe(...))`
-보일러플레이트 없이 `axisKeys(axis)` 한 줄로 chord 추출 가능.
+`chords` 는 phase 4 (PRD #38) 추가 — demo·문서가 `axis.chords` 직접 read 하여
+별도 probe 없이 chord 목록 추출 (`axisKeys(axis)` 는 key 부분만 추가 dedup).
 
 ## Chord
 
@@ -2091,6 +2607,12 @@ EntitySchema 추론 타입.
 KeyName: keyof typeof KEYS
 ```
 
+## LandmarkRole
+
+```ts
+LandmarkRole: "banner" | "complementary" | "contentinfo" | "form" | "main" | "navigation" | "region" | "search"
+```
+
 ## NavigateDir
 
 ```ts
@@ -2114,14 +2636,6 @@ Reducer: (d: NormalizedData, e: UiEvent) => NormalizedData
 ```
 
 `(data, event) → next data` — NormalizedData 위에 UiEvent 를 적용하는 pure 함수.
-
-## Tone
-
-```ts
-Tone: "default" | "info" | "success" | "warning" | "danger" | "primary"
-```
-
-Tone — 의미 색 토큰 (default/info/success/warning/danger/primary).
 
 ## UiEvent
 
@@ -2338,33 +2852,38 @@ PATTERN_EXTRA_ALLOW: Record<string, readonly string[]>
 
 per-pattern extra allowlist — APG 외 chord 중 의도된 확장. 정규화된 chord 기준.
 
-## reduceWithDefaults
+## reduceMultiSelect
 
 ```ts
-reduceWithDefaults: Reducer
+reduceMultiSelect: Reducer
 ```
 
-reduceWithDefaults — drop-in 기본 reducer. select 축은 single-mode, check 축은
-multi-mode (toggle). 두 축이 다른 이벤트 (`select` vs `check`/`checkMany`) 라
-충돌 없이 합성 — listbox-single, tabs, menu, checkbox group 데모가 zero config 로 동작.
+reduceMultiSelect — ARIA `aria-multiselectable="true"` 시나리오.
+listbox(multi) / tree(multi) / grid(multi).
 
-## reduceWithMultiSelect
+`multiSelectToggle` 가 `select{ids,to?}` (replace/additive/unset) 단일 축 처리.
+
+## reduceRadio
 
 ```ts
-reduceWithMultiSelect: Reducer
+reduceRadio: Reducer
 ```
 
-reduceWithMultiSelect — drop-in multi-select 변종. listbox(multi)/tree(multi)/grid(multi).
-`multiSelectToggle` 가 `select{ids,to?}` (replace/additive/unset) 단일 축을 처리.
+reduceRadio — ARIA `role="radiogroup"` 시나리오.
+check 축이 single-of-group (singleCheck) 으로 동작. select 축은 미사용 (radio 는
+aria-selected 가 아니라 aria-checked 로 표현).
 
-## reduceWithRadio
+## reduceSingleSelect
 
 ```ts
-reduceWithRadio: Reducer
+reduceSingleSelect: Reducer
 ```
 
-reduceWithRadio — radio 데모 전용 변종. check 축이 single-of-group (singleCheck)
-으로 동작. radio 는 select 축을 쓰지 않으므로 singleSelect 미포함.
+reduceSingleSelect — ARIA `aria-selected` (single) 정본 합성 reducer.
+listbox(single) · tabs · menu · toolbar · accordion 등 가장 보편 시나리오.
+
+합성: select 축 single + check 축 multi-toggle + value. 두 축이 서로 다른 event
+(`select` vs `check`/`checkMany`) 라 충돌 없이 합성.
 
 ## ROOT
 
@@ -2519,18 +3038,20 @@ allApgExamples (): readonly object & object[]
 ## applyGesture
 
 ```ts
-applyGesture (gesture: GestureHelper, reducer: Reducer): Reducer
+applyGesture (reducer: Reducer, gesture: GestureHelper): Reducer
 ```
 
-applyGesture — gesture + reducer 합성. gesture가 활성 이벤트를 의도 이벤트
-스트림으로 변환한 뒤, reducer가 각 이벤트를 적용해 최종 state로 reduce.
+applyGesture — gesture + reducer 합성. *주체 reducer 가 먼저, gesture 가 augmentation.*
+composeReducers 와 같은 인자 순서 (주체 먼저).
+
+작동: gesture 가 active event 를 의도 event 스트림으로 변환한 뒤, reducer 가 각 event 적용.
 
 예시:
   // accordion: activate → expand 토글
-  const accReducer = applyGesture(expandOnActivate, composeReducers(reduce, setValue))
+  const accReducer = applyGesture(composeReducers(reduce, setValue), expandOnActivate)
 
   // tree: branch click → expand, leaf click → select
-  const treeReducer = applyGesture(expandBranchOnActivate, reduceWithDefaults)
+  const treeReducer = applyGesture(reduceSingleSelect, expandBranchOnActivate)
 
 ## axisKeys
 
@@ -2586,9 +3107,24 @@ const data = fromFlatTree(crud.snapshot().nodes, crud.snapshot().rootId, {
 fromList (items: Record<string, unknown>[]): CollectionData
 ```
 
-fromList — flat array to NormalizedData.
-Items may omit `id`; in that case a synthetic id `__0`, `__1`, ... is assigned.
-All non-id keys become entity data.
+fromList — flat array → NormalizedData. ad-hoc 컬렉션 (검색 suggestion, chat
+@-mention 후보, /-command palette 등) 의 표준 빌더.
+
+Convention-based: `id` 와 나머지 키 모두 객체 그대로 spread. callback 없음 — 호출자가
+map 으로 shape 을 맞춰서 넘긴다.
+
+**Example**
+
+```ts
+// chat composer: @-mention 후보 (ephemeral, 키스트로크마다 재계산)
+  const data = useMemo(
+    () => fromList(filtered.map(u => ({ id: u.id, label: u.name, user: u }))),
+    [filtered],
+  )
+  useComboboxPattern(data, onEvent)
+
+id 누락 시 `__0`, `__1`, ... synthetic id 자동 할당.
+```
 
 ## fromTree
 
@@ -2742,6 +3278,21 @@ isSelected (d: NormalizedData, id: string): boolean
 
 entity.selected flag read.
 
+## Landmark
+
+```ts
+Landmark (__namedParameters: LandmarkProps): Element
+```
+
+Wrapper that emits a landmark element with role + aria-label and
+registers itself into the surrounding `<LandmarksProvider>`.
+
+## LandmarksProvider
+
+```ts
+LandmarksProvider (__namedParameters: object): Element
+```
+
 ## matchAnyChord
 
 ```ts
@@ -2887,6 +3438,12 @@ const inputRef = useRef<HTMLInputElement>(null)
 useActiveDescendant(inputRef, focusId)
 ```
 
+## useAnnouncer
+
+```ts
+useAnnouncer (_options: UseAnnouncerOptions): UseAnnouncerResult
+```
+
 ## useControlState
 
 ```ts
@@ -2900,31 +3457,9 @@ base 가 갱신되면 사용자가 아직 건드리지 않은 키만 base 시드
 **Example**
 
 ```ts
-const [data, dispatch] = useControlState(fromTree(roots, { focusId: ROOT }))
-<ListView data={data} onEvent={dispatch} />
-```
-
-## useControlValue
-
-```ts
-useControlValue (controlled: T | undefined, defaultValue: T, onEvent?: (e: UiEvent) => void, id: string): [T, (next: T) => void]
-```
-
-useControlValue<T> — control 패턴(switch/checkbox/radio/slider/spinbutton/textbox/combobox 입력)의
-value 표준 어댑터. controlled/uncontrolled hybrid storage + UiEvent dispatch 를 한 hook 으로 묶어
-`ControlProps<T>` 어휘를 그대로 받아 즉시 [value, setValue] 로 쓸 수 있게 한다.
-
- controlled 주입(value !== undefined)  → 외부 state 그대로 사용, setValue 는 onEvent 만 emit.
- controlled 미주입                     → 내부 useState 로 자체 보유, setValue 는 둘 다.
-
-모든 setValue 호출은 `{type:'value', id, value}` event 를 onEvent 로 emit —
-single dispatch interface 정합. host 가 받은 'value' 를 외부 store 와 동기화.
-
-**Example**
-
-```ts
-const [checked, setChecked] = useControlValue(props.value, false, props.onEvent)
- <button aria-pressed={checked} onClick={() => setChecked(!checked)} />
+tree/listbox — persistent collection
+  const [data, dispatch] = useControlState(fromTree(roots, { focusId: ROOT }))
+  <ListView data={data} onEvent={dispatch} />
 ```
 
 ## useEventBridge
@@ -2942,6 +3477,42 @@ UiEvent 라우팅 hook — gesture 통과 후 meta 이벤트는 control dispatch
 const onEvent = useEventBridge({ data, gestures: expandBranchOnActivate, dispatchMeta, onIntent })
 <TreeView data={data} onEvent={onEvent} />
 ```
+
+## useFocusBridge
+
+```ts
+useFocusBridge (focusId: string | null, autoFocus: boolean): object
+```
+
+focusId가 바뀔 때 해당 element에 .focus()를 위임하는 brige.
+
+마운트 직후 1회는 호출하지 않는다 — autoFocus를 명시하지 않은 collection이
+페이지 진입만으로 사용자 포커스를 가로채는 것을 막기 위함.
+tabIndex=0(roving) 덕분에 Tab으로 들어오면 정상 포커스되며, 사용자 조작
+이후의 focusId 변경(키보드/클릭 navigate)에만 .focus()가 발동한다.
+
+autoFocus=true를 넘기면 마운트 시 첫 focusId에도 .focus()가 발동한다 —
+다이얼로그/팝오버 등 진입과 동시에 포커스 이동이 의도된 곳에서만 사용.
+
+## useFocusOnInsert
+
+```ts
+useFocusOnInsert (opts: UseFocusOnInsertOptions): UseFocusOnInsertResult
+```
+
+## useFocusOnRemove
+
+```ts
+useFocusOnRemove (opts: UseFocusOnRemoveOptions): UseFocusOnRemoveResult
+```
+
+## useLandmarks
+
+```ts
+useLandmarks (): readonly LandmarkEntry[]
+```
+
+Snapshot of registered landmarks, ordered by DOM position.
 
 ## useRovingTabIndex
 
@@ -2967,6 +3538,12 @@ const { delegate, bindFocus, focusId } = useRovingTabIndex(axis, data, onEvent)
 return <ul {...delegate}>{ids.map(id => <li key={id} data-id={id} ref={bindFocus(id)} tabIndex={focusId === id ? 0 : -1}/>)}</ul>
 ```
 
+## useSkipLink
+
+```ts
+useSkipLink (options: UseSkipLinkOptions): UseSkipLinkResult
+```
+
 ## useSpatialNavigation
 
 ```ts
@@ -2976,7 +3553,7 @@ useSpatialNavigation (externalRef?: RefObject<T | null> | null, options: UseSpat
 useSpatialNavigation — W3C CSS Spatial Navigation 기반 roving tabindex.
 **시각 좌표 기반** 이동 — `getBoundingClientRect()` 로 다음 element 결정.
 
-데이터 그래프가 없는 자유 JSX 배치(Toolbar/Menubar/DataGrid/TreeGrid 등) 에서 사용.
+데이터 그래프가 없는 자유 JSX 배치(Toolbar/Menubar/DataGrid/Treegrid 등) 에서 사용.
 관계 그래프가 있는 컬렉션은 useRovingTabIndex (APG canonical) 을 쓴다.
 
 **Example**

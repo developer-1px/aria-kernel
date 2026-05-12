@@ -41,7 +41,7 @@ ARIA 정확도와 collection 추상화가 1순위면 RA 가 답입니다. **W3C 
 
 - **APG `/patterns/`** 카테고리를 미러 (24 항목 중 대부분)
 - 일부 ARIA role (`alert`, `switch`) — APG에는 없지만 ARIA 1.2 spec 에 있는 것
-- slug 규약: `useTreePattern` ↔ APG `treeview` 처럼 약간의 변환은 있지만 1:1
+- slug 규약: `useTreeviewPattern` ↔ APG `treeview` 처럼 약간의 변환은 있지만 1:1
 
 ### Q. APG 가 변하면?
 

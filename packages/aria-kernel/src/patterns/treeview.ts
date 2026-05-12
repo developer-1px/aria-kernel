@@ -17,11 +17,11 @@ import type {
 import { warnMultiSelectPairing } from './devWarnMultiSelect'
 
 /**
- * defaultTreeCommands — editable tree 의 기본 keymap (chord ↔ effect SSOT).
+ * defaultTreeviewCommands — editable tree 의 기본 keymap (chord ↔ effect SSOT).
  * 모든 비즈니스 로직이 effect 데이터로 직렬화돼 있음 — 새 command 추가는 entry 한 줄,
  * 라이브러리(runEffect) 변경 없음 (axis/op 어휘 내에서 표현 가능한 한).
  */
-export const defaultTreeCommands: readonly TreeCommandDescriptor[] = [
+export const defaultTreeviewCommands: readonly TreeCommandDescriptor[] = [
   { chord: 'Enter',       command: 'editStart',     description: 'Rename — enter inline edit',
     effect: { op: 'editStart' } },
   { chord: 'Shift+Enter', command: 'insertAfter',   description: 'Insert sibling (or child if root)',
@@ -53,16 +53,16 @@ export const defaultTreeCommands: readonly TreeCommandDescriptor[] = [
     effect: { op: 'paste', source: 'self', mode: 'child' } },
 ]
 
-/** treeKeys — backward-compat. KeymapPanel 등이 쓰던 옛 SSOT 의 default keymap 형태. */
-export const treeKeys: readonly KeyDescriptor[] = defaultTreeCommands.map((c) => ({
+/** treeviewKeys — backward-compat. KeymapPanel 등이 쓰던 옛 SSOT 의 default keymap 형태. */
+export const treeviewKeys: readonly KeyDescriptor[] = defaultTreeviewCommands.map((c) => ({
   chord: c.chord,
   uiEvent: c.command ?? (Array.isArray(c.effect) ? c.effect[0]?.op : (c.effect as EffectStep).op) ?? '',
   description: c.description ?? '',
   scope: 'item',
 }))
 
-/** Options for {@link useTreePattern}. */
-export interface TreeOptions {
+/** Options for {@link useTreeviewPattern}. */
+export interface TreeviewOptions {
   orientation?: 'horizontal' | 'vertical'
   selectionFollowsFocus?: boolean
   multiSelectable?: boolean
@@ -72,12 +72,12 @@ export interface TreeOptions {
   labelledBy?: string
   variant?: 'select' | 'navigation'
   /**
-   * editable 모드 — true 면 commands(미지정 시 defaultTreeCommands) 가 활성. false 면 chord 어휘 비활성(읽기-only).
+   * editable 모드 — true 면 commands(미지정 시 defaultTreeviewCommands) 가 활성. false 면 chord 어휘 비활성(읽기-only).
    */
   editable?: boolean
   /**
    * 사용자 chord ↔ command keymap. 앱이 SSOT 로 선언 — chord 추가/제거/재배치 자유.
-   * 미지정 + editable=true → defaultTreeCommands. 미지정 + editable=false → [] (chord 비활성).
+   * 미지정 + editable=true → defaultTreeviewCommands. 미지정 + editable=false → [] (chord 비활성).
    */
   commands?: readonly TreeCommandDescriptor[]
   insideEditable?: InsideEditableMode
@@ -98,12 +98,12 @@ const eventItemId = (e: React.KeyboardEvent): string | null =>
   (e.target as Element).closest<HTMLElement>('[data-id]')?.dataset.id ?? null
 
 /** Tree 가 등록하는 axis — SSOT. */
-export const treeAxis = (opts: { multiSelectable?: boolean } = {}) =>
+export const treeviewAxis = (opts: { multiSelectable?: boolean } = {}) =>
   opts.multiSelectable
     ? composeAxes(multiSelect, treeNavigate, treeExpand, activate, typeahead)
     : composeAxes(treeNavigate, treeExpand, activate, typeahead)
-const singleAxis = treeAxis()
-const multiAxis = treeAxis({ multiSelectable: true })
+const singleAxis = treeviewAxis()
+const multiAxis = treeviewAxis({ multiSelectable: true })
 
 /**
  * resolveAxis — focus 노드 기준 TreeAxis 를 NormalizedData 위에서 평가.
@@ -231,17 +231,17 @@ function runEffect(
  * https://www.w3.org/WAI/ARIA/apg/patterns/treeview/
  *
  * @example canonical — expand gesture 는 default 로 박혀 있음
- *   const [data, dispatch] = useTreeReducer(NODES, { defaultExpanded: ['src'] })
- *   const { rootProps, itemProps, items } = useTreePattern(data, dispatch)
+ *   const [data, dispatch] = useTreeviewReducer(NODES, { defaultExpanded: ['src'] })
+ *   const { rootProps, itemProps, items } = useTreeviewPattern(data, dispatch)
  *
  * @example multi-select — `multi: true` (두 곳 모두 설정 필요)
- *   const [data, dispatch] = useTreeReducer(NODES, { multi: true })
- *   const props = useTreePattern(data, dispatch, { multiSelectable: true })
+ *   const [data, dispatch] = useTreeviewReducer(NODES, { multi: true })
+ *   const props = useTreeviewPattern(data, dispatch, { multiSelectable: true })
  */
-export function useTreePattern(
+export function useTreeviewPattern(
   data: NormalizedData,
   onEvent?: (e: UiEvent) => void,
-  opts: TreeOptions = {},
+  opts: TreeviewOptions = {},
 ): {
   rootProps: RootProps
   itemProps: (id: string) => ItemProps
@@ -255,11 +255,11 @@ export function useTreePattern(
     insideEditable = 'forward',
   } = opts
   const sff = opts.selectionFollowsFocus ?? !multiSelectable
-  if (multiSelectable) warnMultiSelectPairing('useTreePattern')
+  if (multiSelectable) warnMultiSelectPairing('useTreeviewPattern')
 
   // commands SSOT 결정 — 앱이 명시 > editable=true 면 default > 그 외 빈 배열.
   const commands: readonly TreeCommandDescriptor[] =
-    opts.commands ?? (editable ? defaultTreeCommands : [])
+    opts.commands ?? (editable ? defaultTreeviewCommands : [])
 
   const relay = useCallback(
     (e: UiEvent) => {
@@ -323,7 +323,7 @@ export function useTreePattern(
     activeId,
     insideEditable,
     on: opts.on,
-    builtinChords: treeKeys,
+    builtinChords: treeviewKeys,
     disableBuiltinChords: true,  // tree 가 자체 commands 로 모든 chord 처리
     serialize: opts.serialize,
     toClipboard: opts.toClipboard,

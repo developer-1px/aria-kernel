@@ -1,5 +1,5 @@
 import { type UiEvent } from '@p/aria-kernel'
-import { useTreePattern, useTreeReducer } from '@p/aria-kernel/patterns'
+import { useTreeviewPattern, useTreeviewReducer } from '@p/aria-kernel/patterns'
 
 interface Node { id: string; label: string; children?: Node[]; [key: string]: unknown }
 
@@ -17,8 +17,8 @@ const TREE: Node[] = [
 ]
 
 export function TreeArrowDemo() {
-  const [data, dispatch] = useTreeReducer(TREE)
-  const { rootProps, itemProps, items } = useTreePattern(
+  const [data, dispatch] = useTreeviewReducer(TREE)
+  const { rootProps, itemProps, items } = useTreeviewPattern(
     data, (e: UiEvent) => dispatch(e), { label: '카테고리', autoFocus: true },
   )
 

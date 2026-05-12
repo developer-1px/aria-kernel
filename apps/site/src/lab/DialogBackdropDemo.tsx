@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { useDialogPattern } from '@p/aria-kernel/patterns'
+import { useDialogModalPattern } from '@p/aria-kernel/patterns'
 
 export function DialogBackdropDemo() {
   const [open, setOpen] = useState(false)
-  const { rootProps, backdropProps, closeProps } = useDialogPattern({
+  const { rootProps, backdropProps, closeProps } = useDialogModalPattern({
     open, onOpenChange: setOpen,
     modal: true, label: 'Backdrop demo',
   })
@@ -54,7 +54,7 @@ export function DialogBackdropDemo() {
       <details className="mt-8 text-sm">
         <summary className="cursor-pointer font-semibold">소비자 코드</summary>
         <pre className="mt-2 overflow-auto rounded bg-neutral-900 p-3 text-xs text-neutral-100">
-{`const { rootProps, backdropProps, closeProps } = useDialogPattern({
+{`const { rootProps, backdropProps, closeProps } = useDialogModalPattern({
   open, onOpenChange: setOpen, modal: true, label: 'Backdrop demo',
 })
 

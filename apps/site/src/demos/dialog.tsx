@@ -1,17 +1,17 @@
 import { useRef } from 'react'
-import { dialogKeys, useDialogPattern } from '@p/aria-kernel/patterns'
+import { dialogModalKeys, useDialogModalPattern } from '@p/aria-kernel/patterns'
 
 export const meta = {
   title: 'Dialog',
   apg: 'dialog-modal',
   kind: 'overlay' as const,
   blurb: 'A modal dialog that opens from a trigger and returns the user to where they started.',
-  keys: () => dialogKeys(),
+  keys: () => dialogModalKeys(),
 }
 
 export default function DialogDemo() {
   const triggerRef = useRef<HTMLButtonElement>(null)
-  const { rootProps, closeProps, open, setOpen } = useDialogPattern({
+  const { rootProps, closeProps, open, setOpen } = useDialogModalPattern({
     returnFocusRef: triggerRef,
     label: 'Confirm action',
   })
