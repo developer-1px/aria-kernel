@@ -8,10 +8,7 @@ import {
   type Heading,
 } from './schema'
 
-const sources = import.meta.glob<string>([
-  '../../../../docs/site/**/*.md',
-  '!../../../../docs/site/_archive/**/*.md',
-], {
+const sources = import.meta.glob<string>('../../../../docs/site/**/*.md', {
   eager: true,
   query: '?raw',
   import: 'default',
