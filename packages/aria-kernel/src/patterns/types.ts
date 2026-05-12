@@ -33,7 +33,7 @@ export interface PatternProps {
  * value 주입   → controlled
  * value 미주입 → 패턴 내부 useState (defaultValue 시작값)
  *
- * 표준 어댑터: `useControlValue` (state/useControlValue).
+ * 표준 어댑터: `useControlValue` (patterns/_useControlValue).
  */
 export interface ControlProps<T> {
   value?: T

@@ -22,7 +22,7 @@ export { fromTree, fromList, pathAncestors } from './state/fromTree'
 export { fromFlatTree } from './state/fromFlatTree'
 export { useControlState } from './state/useControlState'
 export { useEventBridge } from './state/useEventBridge'
-export { useAnnouncer } from './patterns/liveRegion'
+export { useAnnouncer } from './patterns/useAnnouncer'
 export { useSkipLink } from './patterns/skipLink'
 export type { UseSkipLinkOptions, UseSkipLinkResult, SkipLinkProps } from './patterns/skipLink'
 export { Landmark, LandmarksProvider, useLandmarks } from './patterns/landmarks'
@@ -32,7 +32,7 @@ export type {
   AnnouncerRegionProps,
   UseAnnouncerOptions,
   UseAnnouncerResult,
-} from './patterns/liveRegion'
+} from './patterns/useAnnouncer'
 export { useFocusBridge, useFocusOnRemove, useFocusOnInsert } from './focus'
 export type {
   UseFocusOnRemoveOptions, UseFocusOnRemoveResult,
