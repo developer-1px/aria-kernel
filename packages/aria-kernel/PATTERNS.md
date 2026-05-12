@@ -76,7 +76,7 @@ type Recipe<P extends string> = (
 | 영역 | 이유 |
 |---|---|
 | **Zoom/Pan** | `useZoomPanGesture` 가 이미 정체성 부합 primitive. compound `ZoomPan.Root` 는 컴포넌트 래퍼라 거부. 사용 가이드만 docs 추가 |
-| **Feature / Layout DSL** | `defineFeature` / `definePage` 이미 정체성 부합 |
+| **Feature helpers** | `defineFeature` 계열은 resource/support package 책임. Pattern recipe 로 감싸지 않음 |
 | **Escape hatch (custom)** | `composeAxes` + `useRovingTabIndex` 직접 — 의도적으로 보존 |
 
 ## 신규 axis/hook 갭 (recipe와 별개로 core에 추가 필요)

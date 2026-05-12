@@ -12,7 +12,6 @@
 `CONTEXT-MAP.md`가 정본. 요약:
 
 - `packages/aria-kernel/CONTEXT.md` — ARIA behavior infra (단 하나의 제품)
-- `packages/zod-crud/CONTEXT.md` — JsonCrud op 정본
 - `packages/fs/CONTEXT.md` — 파일시스템 추상
 - `packages/devtools/CONTEXT.md` — 개발 도구
 
@@ -30,4 +29,4 @@
 4. 작업 중 새 결정이 생기면 ADR 추가 (`NNNN-title.md`).
 5. 도메인 어휘에 변화가 생기면 해당 `CONTEXT.md` 업데이트.
 
-루트 `CLAUDE.md`의 코딩 규칙과 invariant은 모든 컨텍스트에 우선 적용된다.
+루트 `AGENTS.md`의 코딩 규칙과 현재 source tree가 모든 컨텍스트에 우선 적용된다.

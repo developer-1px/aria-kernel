@@ -6,7 +6,7 @@
 
 - `INVARIANTS.md` — 헤드리스 invariant (행동 규약, 데이터 형태, 직렬화)
 - `PATTERNS.md` — pattern recipe 시그니처 (use*Pattern · *Pattern 두 종류)
-- 루트 `CLAUDE.md` — 추구미·코딩 규칙·import 경로 표
+- 루트 `AGENTS.md` — 코드 SSOT, repo boundary, 작업 규칙
 
 ## 어휘 출처
 
