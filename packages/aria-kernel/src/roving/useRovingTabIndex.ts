@@ -63,7 +63,7 @@ export function useRovingTabIndex(
   const focusId = getFocus(data) ?? defaultFocusId(data, options.containerId ?? ROOT)
   const expanded = getExpanded(data)
   const { onKey, onClick } = bindAxis(axis, data, onEvent)
-  const bindFocus = useFocusBridge(focusId, options.autoFocus)
+  const { bindFocus, focusItem } = useFocusBridge(focusId, options.autoFocus)
 
   const delegate = {
     onClick: (e: MouseEvent) => {
@@ -78,5 +78,5 @@ export function useRovingTabIndex(
     },
   }
 
-  return { focusId, expanded, bindFocus, delegate, onKey, onClick }
+  return { focusId, expanded, bindFocus, focusItem, delegate, onKey, onClick }
 }

@@ -244,6 +244,7 @@ export function useTreePattern(
   itemProps: (id: string) => ItemProps
   items: TreeItem[]
   editProps: (id: string) => null | { initial: string; onCommit: (value: string, cancelled: boolean) => void }
+  focusItem: (id: string, options?: { preventScroll?: boolean }) => void
 } {
   const {
     autoFocus, multiSelectable, containerId = ROOT, orientation = 'vertical',
@@ -267,7 +268,7 @@ export function useTreePattern(
   )
 
   const axis = multiSelectable ? multiAxis : singleAxis
-  const { focusId, bindFocus, delegate } = useRovingTabIndex(axis, data, relay, {
+  const { focusId, bindFocus, focusItem, delegate } = useRovingTabIndex(axis, data, relay, {
     autoFocus,
     containerId,
   })
@@ -376,5 +377,5 @@ export function useTreePattern(
     }
   }
 
-  return { rootProps, itemProps, items: flat, editProps }
+  return { rootProps, itemProps, items: flat, editProps, focusItem }
 }

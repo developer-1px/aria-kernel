@@ -31,8 +31,16 @@ export const useFocusBridge = (focusId: string | null, autoFocus = false) => {
     prev.current = focusId
     if (focusId) map.current.get(focusId)?.focus()
   }, [focusId, autoFocus])
-  return (id: string) => (el: HTMLElement | null) => {
+  const bindFocus = (id: string) => (el: HTMLElement | null) => {
     if (el) map.current.set(id, el)
     else map.current.delete(id)
   }
+  /**
+   * focusItem — imperative focus by id. mutation 후 새 row 로 focus 이동 등에 쓴다.
+   * el 이 아직 마운트되지 않았으면 no-op (소비자가 다음 effect tick 에 재호출).
+   */
+  const focusItem = (id: string, options?: { preventScroll?: boolean }) => {
+    map.current.get(id)?.focus(options)
+  }
+  return { bindFocus, focusItem }
 }
