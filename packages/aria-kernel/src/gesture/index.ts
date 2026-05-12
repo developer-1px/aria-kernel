@@ -18,6 +18,18 @@ export {
   type ReorderDnDGestureRawOptions,
   type ReorderItemHandlers,
 } from './useReorderDnDGesture'
+export {
+  useKeyboardDndGesture,
+  useKeyboardDndGestureRaw,
+  type KeyboardDndAxis,
+  type KeyboardDndState,
+  type KeyboardDndCommit,
+  type KeyboardDndMessages,
+  type KeyboardDndGestureOptions,
+  type KeyboardDndGestureRawOptions,
+  type KeyboardDndGestureResult,
+  type KeyboardDndItemProps,
+} from './useKeyboardDndGesture'
 
 import { getChildren, getExpanded, type UiEvent, type NormalizedData } from '../types'
 import { INTENT_CHORDS } from '../axes/intentChords'
