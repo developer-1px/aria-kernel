@@ -17,7 +17,7 @@ export const treeGridEditKeys = (): readonly string[] =>
 import { selectionFollowsFocus as applySelectionFollowsFocus } from '../gesture'
 import { useRovingTabIndex } from '../roving/useRovingTabIndex'
 import type { InsideEditableMode } from '../key/insideEditable'
-import { usePatternClipboard, type ClipboardOnMiddleware } from './usePatternClipboard'
+import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from './usePatternClipboard'
 import type { KeyDescriptor, ItemProps, RootProps, TreeItem } from './types'
 import { warnMultiSelectPairing } from './devWarnMultiSelect'
 
@@ -62,6 +62,9 @@ export interface TreeGridOptions {
    * 사용자 chord 미들웨어. default 와 충돌 시 userFn(event, originalFn) 으로 wrap.
    */
   on?: ClipboardOnMiddleware
+  serialize?: ClipboardSerializerOptions['serialize']
+  toClipboard?: ClipboardSerializerOptions['toClipboard']
+  fromClipboard?: ClipboardSerializerOptions['fromClipboard']
 }
 
 /**
@@ -245,6 +248,9 @@ export function useTreeGridPattern(
     insideEditable,
     on: opts.on,
     builtinChords: treeGridKeys,
+    serialize: opts.serialize,
+    toClipboard: opts.toClipboard,
+    fromClipboard: opts.fromClipboard,
   })
 
   // cells-mode 에선 row 단위 onKeyDown delegate 를 끈다 (cell 이 직접 수신).

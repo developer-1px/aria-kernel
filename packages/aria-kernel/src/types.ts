@@ -102,7 +102,7 @@ export type UiEvent =
   | { type: 'remove'; id: string }
   | { type: 'copy'; id: string; event?: ClipboardEvent }
   | { type: 'cut'; id: string; event?: ClipboardEvent }
-  | { type: 'paste'; targetId: string; mode?: 'auto' | 'child' | 'overwrite'; index?: number; event?: ClipboardEvent }
+  | { type: 'paste'; targetId: string; mode?: 'auto' | 'child' | 'overwrite'; index?: number; payload?: unknown; event?: ClipboardEvent }
   /**
    * move — id 를 targetId 로 이동. clipboard 를 거치지 않음 (Tab demote/promote 같은
    * 구조 편집은 사용자의 cut/copy buffer 를 오염시키면 안 됨). adapter 가 read + insert +
