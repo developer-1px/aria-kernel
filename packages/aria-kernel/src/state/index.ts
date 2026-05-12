@@ -13,6 +13,13 @@ export { fromTree, fromList, pathAncestors } from './fromTree'
 export { fromFlatTree } from './fromFlatTree'
 export { useControlState } from './useControlState'
 export { useEventBridge } from './useEventBridge'
+export { useAnnouncer } from './useAnnouncer'
+export type {
+  AnnounceOptions,
+  AnnouncerRegionProps,
+  UseAnnouncerOptions,
+  UseAnnouncerResult,
+} from './useAnnouncer'
 export { bindAxis, bindValueAxis, pickNumericValue } from './bind'
 export {
   REDUCE_PRESETS,
