@@ -9,6 +9,15 @@ export { useClickOutsideGesture, type ClickOutsideRef } from './useClickOutsideG
 export { useContextMenuGesture, type ContextMenuGestureOptions } from './useContextMenuGesture'
 export { useResizeGesture, type ResizeGestureOptions } from './useResizeGesture'
 export { useGridDragSelectGesture, useGridDragSelectGestureRaw } from './useGridDragSelectGesture'
+export {
+  useReorderDnDGesture,
+  useReorderDnDGestureRaw,
+  positionToMoveMode,
+  type ReorderPosition,
+  type ReorderDnDGestureOptions,
+  type ReorderDnDGestureRawOptions,
+  type ReorderItemHandlers,
+} from './useReorderDnDGesture'
 
 import { getChildren, getExpanded, type UiEvent, type NormalizedData } from '../types'
 import { INTENT_CHORDS } from '../axes/intentChords'
