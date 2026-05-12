@@ -37,7 +37,7 @@ const warnChildlessTopLevel = (count: number): void => {
 }
 import { useRovingTabIndex } from '../roving/useRovingTabIndex'
 import { isEditable, type InsideEditableMode } from '../key/insideEditable'
-import { usePatternClipboard, type ClipboardOnMiddleware } from './usePatternClipboard'
+import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from './usePatternClipboard'
 import type { KeyDescriptor, ItemProps, RootProps } from './types'
 import { warnMultiSelectPairing } from './devWarnMultiSelect'
 
@@ -88,6 +88,9 @@ export interface GridOptions {
    * so the grid root doesn't intercept Backspace/Delete inside per-cell edit inputs.
    */
   disableBuiltinChords?: boolean
+  serialize?: ClipboardSerializerOptions['serialize']
+  toClipboard?: ClipboardSerializerOptions['toClipboard']
+  fromClipboard?: ClipboardSerializerOptions['fromClipboard']
 }
 
 /**
@@ -221,6 +224,9 @@ export function useGridPattern(
     on: opts.on,
     builtinChords: gridKeys,
     disableBuiltinChords: opts.disableBuiltinChords,
+    serialize: opts.serialize,
+    toClipboard: opts.toClipboard,
+    fromClipboard: opts.fromClipboard,
   })
 
   const rootHandleKeyDown = (e: React.KeyboardEvent) => {

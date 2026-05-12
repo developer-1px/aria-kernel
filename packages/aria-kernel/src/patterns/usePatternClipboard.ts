@@ -17,6 +17,17 @@ import { matchEventToChord } from '../axes/chord'
 import { routeInsideEditable, isEditable, type InsideEditableMode } from '../key/insideEditable'
 import type { KeyDescriptor } from './types'
 
+/**
+ * 패턴 hook 들이 자기 args 에 펼쳐 받아 usePatternClipboard 로 전달하는 슬롯 묶음.
+ * 라이브러리 default(JSON ↔ application/json + text/plain) 가 있고,
+ * grid/richtext 처럼 TSV/HTML 이 필요한 패턴은 toClipboard 만 override.
+ */
+export interface ClipboardSerializerOptions {
+  serialize?: (id: string) => unknown
+  toClipboard?: (payload: unknown) => Record<string, string>
+  fromClipboard?: (data: DataTransfer) => unknown
+}
+
 export type ClipboardOnMiddleware = Record<
   string,
   (event: Event, originalFn: () => void) => void
@@ -39,6 +50,36 @@ export interface UsePatternClipboardArgs {
    * DEFAULT_CHORDS 비활성, 'on' middleware 만 작동 (default 없이 user chord 만 처리).
    */
   disableBuiltinChords?: boolean
+  /**
+   * id → 직렬화 payload. 미지정 시 setData/getData 를 건드리지 않고 emit-only 동작.
+   * 지정하면 copy/cut 시 toClipboard(serialize(id)) 결과를 DataTransfer.setData 로 write.
+   */
+  serialize?: (id: string) => unknown
+  /**
+   * payload → mime → text. 기본: { 'application/json': JSON.stringify, 'text/plain': JSON.stringify }.
+   * serialize 가 지정되었을 때만 호출.
+   */
+  toClipboard?: (payload: unknown) => Record<string, string>
+  /**
+   * DataTransfer → payload. 기본: 'application/json' JSON.parse → 실패 시 'text/plain' raw.
+   * paste UiEvent 의 payload 필드로 전달.
+   */
+  fromClipboard?: (data: DataTransfer) => unknown
+}
+
+const DEFAULT_TO_CLIPBOARD = (payload: unknown): Record<string, string> => {
+  const json = JSON.stringify(payload)
+  return { 'application/json': json, 'text/plain': json }
+}
+
+const DEFAULT_FROM_CLIPBOARD = (data: DataTransfer): unknown => {
+  const json = data.getData('application/json')
+  if (json) {
+    try { return JSON.parse(json) } catch { /* fall through */ }
+  }
+  const text = data.getData('text/plain')
+  if (!text) return undefined
+  try { return JSON.parse(text) } catch { return text }
 }
 
 export interface UsePatternClipboardReturn {
@@ -67,7 +108,16 @@ const DEFAULT_CHORDS: ReadonlyArray<{ chord: string; build: DefaultBuilder }> = 
 const HAS_MODIFIER = /(?:Control|Ctrl|Alt|Meta|\$mod|mod)\+/i
 
 export function usePatternClipboard(args: UsePatternClipboardArgs): UsePatternClipboardReturn {
-  const { onEvent, activeId, insideEditable = 'forward', on, disableBuiltinChords = false } = args
+  const {
+    onEvent,
+    activeId,
+    insideEditable = 'forward',
+    on,
+    disableBuiltinChords = false,
+    serialize,
+    toClipboard = DEFAULT_TO_CLIPBOARD,
+    fromClipboard = DEFAULT_FROM_CLIPBOARD,
+  } = args
 
   const routeAndEmit = (e: React.ClipboardEvent, ev: UiEvent) => {
     if (!onEvent) return
@@ -80,17 +130,34 @@ export function usePatternClipboard(args: UsePatternClipboardArgs): UsePatternCl
     if (decision === 'emit-prevent') e.preventDefault()
   }
 
+  /** serialize + toClipboard 로 native DataTransfer 에 write. preventDefault 는 호출자 책임. */
+  const writeToDataTransfer = (e: React.ClipboardEvent, id: string) => {
+    if (!serialize) return
+    const data = e.nativeEvent.clipboardData
+    if (!data) return
+    const payload = serialize(id)
+    if (payload === undefined) return
+    const mimeMap = toClipboard(payload)
+    for (const [mime, text] of Object.entries(mimeMap)) data.setData(mime, text)
+    // serialize 가 있다는 건 라이브러리가 DataTransfer 를 점유한다는 뜻 → 브라우저 default suppress.
+    e.preventDefault()
+  }
+
   const onCopy = (e: React.ClipboardEvent) => {
     if (!activeId) return
+    writeToDataTransfer(e, activeId)
     routeAndEmit(e, { type: 'copy', id: activeId, event: e.nativeEvent })
   }
   const onCut = (e: React.ClipboardEvent) => {
     if (!activeId) return
+    writeToDataTransfer(e, activeId)
     routeAndEmit(e, { type: 'cut', id: activeId, event: e.nativeEvent })
   }
   const onPaste = (e: React.ClipboardEvent) => {
     if (!activeId) return
-    routeAndEmit(e, { type: 'paste', targetId: activeId, mode: 'auto', event: e.nativeEvent })
+    const data = e.nativeEvent.clipboardData
+    const payload = data ? fromClipboard(data) : undefined
+    routeAndEmit(e, { type: 'paste', targetId: activeId, mode: 'auto', payload, event: e.nativeEvent })
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

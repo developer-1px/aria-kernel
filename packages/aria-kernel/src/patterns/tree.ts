@@ -7,7 +7,7 @@ import {
 import { activate, composeAxes, multiSelect, treeExpand, treeNavigate, typeahead } from '../axes'
 import { matchEventToChord } from '../axes/chord'
 import type { InsideEditableMode } from '../key/insideEditable'
-import { usePatternClipboard, type ClipboardOnMiddleware } from './usePatternClipboard'
+import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from './usePatternClipboard'
 import { selectionFollowsFocus as applySelectionFollowsFocus } from '../gesture'
 import { useRovingTabIndex } from '../roving/useRovingTabIndex'
 import type {
@@ -82,6 +82,9 @@ export interface TreeOptions {
   commands?: readonly TreeCommandDescriptor[]
   insideEditable?: InsideEditableMode
   on?: ClipboardOnMiddleware
+  serialize?: ClipboardSerializerOptions['serialize']
+  toClipboard?: ClipboardSerializerOptions['toClipboard']
+  fromClipboard?: ClipboardSerializerOptions['fromClipboard']
 }
 
 const findParent = (data: NormalizedData, id: string): string | null => {
@@ -322,6 +325,9 @@ export function useTreePattern(
     on: opts.on,
     builtinChords: treeKeys,
     disableBuiltinChords: true,  // tree 가 자체 commands 로 모든 chord 처리
+    serialize: opts.serialize,
+    toClipboard: opts.toClipboard,
+    fromClipboard: opts.fromClipboard,
   })
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

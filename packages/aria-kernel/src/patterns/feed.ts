@@ -3,7 +3,7 @@ import type { NormalizedData, UiEvent } from '../types'
 import { composeAxes, navigate, pageNavigate } from '../axes'
 import { useRovingTabIndex } from '../roving/useRovingTabIndex'
 import type { InsideEditableMode } from '../key/insideEditable'
-import { usePatternClipboard, type ClipboardOnMiddleware } from './usePatternClipboard'
+import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from './usePatternClipboard'
 import type { KeyDescriptor, ItemProps, RootProps } from './types'
 
 /** Feed 가 등록하는 axis — SSOT. ArrowDown/Up + Home/End (navigate) + PageUp/PageDown (pageNavigate). */
@@ -35,6 +35,9 @@ export interface FeedOptions {
    * 사용자 chord 미들웨어. default 와 충돌 시 userFn(event, originalFn) 으로 wrap.
    */
   on?: ClipboardOnMiddleware
+  serialize?: ClipboardSerializerOptions['serialize']
+  toClipboard?: ClipboardSerializerOptions['toClipboard']
+  fromClipboard?: ClipboardSerializerOptions['fromClipboard']
 }
 
 /**
@@ -103,6 +106,9 @@ export function useFeedPattern(
     insideEditable,
     on: opts.on,
     builtinChords: feedKeys,
+    serialize: opts.serialize,
+    toClipboard: opts.toClipboard,
+    fromClipboard: opts.fromClipboard,
   })
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

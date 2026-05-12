@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { ROOT, getChildren, getCollectionChildren, getLabel, isDisabled, type NormalizedData, type UiEvent } from '../types'
 import { activate, composeAxes, multiSelect, navigate, typeahead, matchAnyChord } from '../axes'
 import type { InsideEditableMode } from '../key/insideEditable'
-import { usePatternClipboard, type ClipboardOnMiddleware } from './usePatternClipboard'
+import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from './usePatternClipboard'
 
 /** listbox edit-mode chord registry — declarative SSOT (Enter=insertAfter, Backspace=remove). */
 const LISTBOX_EDIT_INSERT = ['Enter'] as const
@@ -69,6 +69,9 @@ export interface ListboxOptions {
    * userFn(event, originalFn) 으로 wrap — originalFn 호출 여부로 default 실행 결정.
    */
   on?: ClipboardOnMiddleware
+  serialize?: ClipboardSerializerOptions['serialize']
+  toClipboard?: ClipboardSerializerOptions['toClipboard']
+  fromClipboard?: ClipboardSerializerOptions['fromClipboard']
 }
 
 /**
@@ -217,6 +220,9 @@ export function useListboxPattern(
     insideEditable,
     on: opts.on,
     builtinChords: listboxKeys,
+    serialize: opts.serialize,
+    toClipboard: opts.toClipboard,
+    fromClipboard: opts.fromClipboard,
   })
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
