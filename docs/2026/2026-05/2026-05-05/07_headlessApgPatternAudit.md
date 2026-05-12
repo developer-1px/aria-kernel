@@ -56,7 +56,8 @@ Use this priority order for every pattern:
 3. WHATWG HTML only for native semantic patterns like `navigationListPattern`.
 4. Repository docs only as implementation intent, never as the external authority.
 
-Each APG sentence becomes one audit clause with:
+Each APG sentence becomes one audit clause. The executable schema now lives at
+`packages/aria-kernel/src/spec/apgClauseSpec.ts`.
 
 ```ts
 import { z } from 'zod'

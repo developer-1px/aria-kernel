@@ -78,3 +78,9 @@ export { normalizeChord, normalizeChordSet } from './spec/normalizeChord'
 export {
   UNIVERSAL_EXTRA, PATTERN_EXTRA_ALLOW, PATTERN_APG_WAIVE,
 } from './spec/apgCoverageAllowlist'
+export {
+  ApgClauseSchema,
+  ApgClauseSpecSchema,
+  type ApgClause,
+  type ApgClauseSpec,
+} from './spec/apgClauseSpec'
