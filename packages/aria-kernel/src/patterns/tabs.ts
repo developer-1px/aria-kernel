@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
-import { getLabel, isDisabled, type NormalizedData, type UiEvent } from '../types'
-import { activate, axisKeys, composeAxes, navigate } from '../axes'
+import { getLabel, isDisabled, type NormalizedData, type UiEvent } from '../intent/events'
+import { activate, axisKeys, composeAxes, navigate } from '../input/keyboard/axes'
 
 /** Tabs 가 등록하는 axis — SSOT (behavior 용 — click activation 위해 항상 activate 포함). */
 export const tabsAxis = (opts: { orientation?: 'horizontal' | 'vertical' } = {}) =>
@@ -18,7 +18,7 @@ export const tabsKeys = (opts: {
   const all = axisKeys(tabsAxis(opts))
   return opts.activationMode === 'manual' ? all : all.filter((k) => k !== 'Enter' && k !== ' ')
 }
-import { selectionFollowsFocus as applySelectionFollowsFocus } from '../gesture'
+import { selectionFollowsFocus as applySelectionFollowsFocus } from '../input/gesture'
 import { usePatternBase } from './usePatternBase'
 import type { BaseItem, ItemProps, RootProps } from './types'
 

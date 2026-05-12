@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { BLUR_RACE_DELAY_MS } from '../key/timing'
+import { BLUR_RACE_DELAY_MS } from '../input/keyboard/key/timing'
 
 /**
  * usePopupBlurRace — popup host (combobox input · listbox button 등) 가 blur 직후

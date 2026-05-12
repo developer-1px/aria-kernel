@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest'
 import { act, cleanup, fireEvent, render, screen } from '@testing-library/react'
-import Demo, { meta } from './comboboxDatepicker'
+import Demo from './comboboxDatepicker'
+import { comboboxDialogKeys } from '@p/aria-kernel/patterns'
 
 afterEach(cleanup)
 
@@ -62,10 +63,10 @@ describe('combobox datepicker — dialog-popup variant', () => {
     expect(dialog()).toBeNull()
   })
 
-  it('meta.keys 의 모든 키가 dialog open/close 를 일으킨다', () => {
+  it('combobox dialog 키가 dialog open/close 를 일으킨다', () => {
     // ArrowDown / Alt+ArrowDown — 닫힌 상태에서 open. Escape — 열린 상태에서 close.
     const open = () => input().getAttribute('aria-expanded') === 'true'
-    for (const key of meta.keys!()) {
+    for (const key of comboboxDialogKeys()) {
       cleanup()
       render(<Demo />)
       input().focus()

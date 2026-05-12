@@ -1,7 +1,7 @@
 import type { ItemProps, RootProps } from './types'
-import { isExpanded, type NormalizedData, type UiEvent } from '../types'
-import { activate } from '../axes'
-import { bindAxis } from '../state/bind'
+import { isExpanded, type NormalizedData, type UiEvent } from '../intent/events'
+import { activate } from '../input/keyboard/axes'
+import { bindAxis } from '../view-state/bind'
 
 /** Disclosure 가 등록하는 axis — SSOT. 데모/문서는 `axis.chords` 직접 read. */
 export const disclosureAxis = () => activate

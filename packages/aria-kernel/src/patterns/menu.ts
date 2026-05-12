@@ -2,14 +2,14 @@ import { useEffect, useRef, useState } from 'react'
 import {
   ROOT, getChildren, getCollectionChildren, getLabel, isDisabled,
   type NormalizedData, type UiEvent,
-} from '../types'
+} from '../intent/events'
 import {
   activate, axisKeys, composeAxes, escape, navigate,
   submenuOpen, submenuClose, typeahead, matchAnyChord,
   type Axis,
-} from '../axes'
-import { bindAxis } from '../state/bind'
-import { parentOf } from '../axes/index'
+} from '../input/keyboard/axes'
+import { bindAxis } from '../view-state/bind'
+import { parentOf } from '../input/keyboard/axes/index'
 import type { ItemProps, RootProps } from './types'
 import type { MenuItem, MenuItemKind, MenuLevel } from './menuButton'
 

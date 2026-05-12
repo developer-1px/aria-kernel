@@ -1,7 +1,7 @@
 import type { ItemProps } from './types'
-import type { UiEvent, ValueEvent } from '../types'
-import { activate } from '../axes'
-import { bindValueAxis } from '../state/bind'
+import type { UiEvent, ValueEvent } from '../intent/events'
+import { activate } from '../input/keyboard/axes'
+import { bindValueAxis } from '../view-state/bind'
 
 /** Switch 가 등록하는 axis — SSOT. */
 export const switchAxis = () => activate

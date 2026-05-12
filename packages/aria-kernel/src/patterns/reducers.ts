@@ -16,11 +16,11 @@
  *   const [data, dispatch] = useListboxReducer(items, { enhance: undoable })
  */
 import { useReducer, useMemo, type Dispatch } from 'react'
-import { fromList, fromTree } from '../state/fromTree'
-import { reduceSingleSelect, reduceMultiSelect, reduceRadio } from '../state/defaults'
-import { applyGesture, type Reducer } from '../state/compose'
-import { expandBranchOnActivate } from '../gesture'
-import type { NormalizedData, UiEvent } from '../types'
+import { fromList, fromTree } from '../view-state/fromTree'
+import { reduceSingleSelect, reduceMultiSelect, reduceRadio } from '../view-state/defaults'
+import { applyGesture, type Reducer } from '../view-state/compose'
+import { expandBranchOnActivate } from '../input/gesture'
+import type { NormalizedData, UiEvent } from '../intent/events'
 
 type Enhance = (r: Reducer) => Reducer
 type Result = [NormalizedData, Dispatch<UiEvent>]

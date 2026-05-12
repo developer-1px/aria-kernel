@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState, type RefObject } from 'react'
-import { escapeKeys } from '../axes/escape'
-import { INTENT_CHORDS } from '../axes/intentChords'
-import { bindGlobalKeyMap } from '../key/bindGlobalKeyMap'
-import { matchAnyChord } from '../axes/chord'
+import { escapeKeys } from '../input/keyboard/axes/escape'
+import { INTENT_CHORDS } from '../input/keyboard/axes/intentChords'
+import { bindGlobalKeyMap } from '../input/keyboard/key/bindGlobalKeyMap'
+import { matchAnyChord } from '../input/keyboard/axes/chord'
 import { useFocusTrap, focusTrapKeys } from './focusTrap'
 import type { ItemProps, RootProps } from './types'
 

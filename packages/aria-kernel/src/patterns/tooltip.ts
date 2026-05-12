@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef, type RefObject } from 'react'
-import { INTENT_CHORDS } from '../axes/intentChords'
-import { escapeKeys } from '../axes/escape'
-import { bindGlobalKeyMap } from '../key/bindGlobalKeyMap'
+import { INTENT_CHORDS } from '../input/keyboard/axes/intentChords'
+import { escapeKeys } from '../input/keyboard/axes/escape'
+import { bindGlobalKeyMap } from '../input/keyboard/key/bindGlobalKeyMap'
 import type { ItemProps, RootProps } from './types'
 
 /** Tooltip 키 — declarative SSOT. escape axis 의 chord 도출. */

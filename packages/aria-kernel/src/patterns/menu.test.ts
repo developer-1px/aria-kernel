@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { renderHook } from '@testing-library/react'
-import { fromList } from '../state/fromTree'
+import { fromList } from '../view-state/fromTree'
 import { useMenuPattern } from './menu'
 
 const data = () => fromList([{ id: 'a', label: 'A' }, { id: 'b', label: 'B' }])

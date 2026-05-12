@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ROOT, type UiEvent } from '../types'
+import { ROOT, type UiEvent } from '../intent/events'
 
 /**
  * useControlValue<T> — control 패턴(switch/checkbox/radio/slider/spinbutton/textbox/combobox 입력)의

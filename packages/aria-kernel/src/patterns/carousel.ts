@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { KEYS } from '../axes'
+import { KEYS } from '../input/keyboard/axes'
 import type { ItemProps, RootProps } from './types'
 
 /** Carousel slide descriptor — id + label fragment. */

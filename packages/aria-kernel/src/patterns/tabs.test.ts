@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { renderHook } from '@testing-library/react'
-import { fromList } from '../state/fromTree'
+import { fromList } from '../view-state/fromTree'
 import { useTabsPattern } from './tabs'
 
 const data = (entries: Array<{ id: string; selected?: boolean }>) =>

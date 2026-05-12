@@ -1,7 +1,7 @@
 import type React from 'react'
-import { getCollectionChildren, getLabel, isDisabled, ROOT, type NormalizedData, type UiEvent } from '../types'
-import { activate, composeAxes, navigate } from '../axes'
-import { matchEventToChord } from '../axes/chord'
+import { getCollectionChildren, getLabel, isDisabled, ROOT, type NormalizedData, type UiEvent } from '../intent/events'
+import { activate, composeAxes, navigate } from '../input/keyboard/axes'
+import { matchEventToChord } from '../input/keyboard/axes/chord'
 import { usePatternBase } from './usePatternBase'
 import type { BaseItem, ItemProps, RootProps } from './types'
 

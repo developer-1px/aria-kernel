@@ -1,6 +1,6 @@
-import type { ValueEvent } from '../types'
-import { bindValueAxis, pickNumericValue } from '../state/bind'
-import { numericStep } from '../axes/numericStep'
+import type { ValueEvent } from '../intent/events'
+import { bindValueAxis, pickNumericValue } from '../view-state/bind'
+import { numericStep } from '../input/keyboard/axes/numericStep'
 import type { ItemProps, RootProps } from './types'
 
 /** Splitter 가 등록하는 axis — SSOT. (vertical separator → horizontal arrow keys, vice versa) */

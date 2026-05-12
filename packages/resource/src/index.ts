@@ -12,7 +12,7 @@
 export {
   type Resource, type ResourceEvent, type ResourceDispatch, type ResourceEventRouter,
   defineResource, useResource, writeResource,
-} from './data'
+} from './store/data'
 
 export {
   defineFeature, useFeature,
@@ -21,4 +21,4 @@ export {
   readQuery, invalidateQuery, subscribeQueries,
 } from './feature'
 
-export { routeUiEventToCrud, type CrudPort } from './routeUiEventToCrud'
+export { routeUiEventToCrud, type CrudPort } from './mutation/routeUiEventToCrud'

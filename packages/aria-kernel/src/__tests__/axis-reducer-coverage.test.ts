@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { ALL_AXIS_EMITS } from '../axes/emits'
-import { REDUCE_PRESETS } from '../state/handles'
+import { ALL_AXIS_EMITS } from '../input/keyboard/axes/emits'
+import { REDUCE_PRESETS } from '../view-state/handles'
 
 /**
  * EPIC #95 Layer 2.3 — axis emits ⊆ ∪(reducer presets) 정합.

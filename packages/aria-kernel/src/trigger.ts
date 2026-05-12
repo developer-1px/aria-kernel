@@ -9,8 +9,8 @@
  * `parseChord` 캐시로 O(1) 룩업.
  */
 
-import type { Chord } from './axes/chord'
-import { parseChord } from './axes/chord'
+import type { Chord } from './input/keyboard/axes/chord'
+import { parseChord } from './input/keyboard/axes/chord'
 
 export type Trigger = Chord
 

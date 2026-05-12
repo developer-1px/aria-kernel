@@ -2,15 +2,15 @@ import { useRef } from 'react'
 import {
   ROOT, getCollectionChildren, getLabel, isDisabled, getFocus, isOpen,
   type NormalizedData, type UiEvent,
-} from '../types'
+} from '../intent/events'
 import {
   activate, composeAxes, escape, INTENT_CHORDS, matchAnyChord,
   navigate, openControl,
-} from '../axes'
-import { bindAxis } from '../state/bind'
-import { useActiveDescendant } from '../roving/useActiveDescendant'
+} from '../input/keyboard/axes'
+import { bindAxis } from '../view-state/bind'
+import { useActiveDescendant } from '../read/roving/useActiveDescendant'
 import type { BaseItem, ItemProps, RootProps } from './types'
-import { BLUR_RACE_DELAY_MS } from '../key/timing'
+import { BLUR_RACE_DELAY_MS } from '../input/keyboard/key/timing'
 import { usePopupBlurRace } from './usePopupBlurRace'
 
 const ARROW_DOWN = ['ArrowDown'] as const

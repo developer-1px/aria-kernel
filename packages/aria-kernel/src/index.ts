@@ -10,18 +10,18 @@
  * Knows nothing about: tokens · CSS · component vocabulary.
  */
 
-export * from './types'
-export * from './schema'
+export * from './intent/events'
+export * from './intent/schema'
 
-export { reduce } from './state/reduce'
-export { composeReducers, applyGesture, type Reducer } from './state/compose'
-export { singleSelect, singleCurrent, multiSelectToggle } from './state/selection'
-export { setValue } from './state/value'
-export { reduceSingleSelect, reduceMultiSelect, reduceRadio } from './state/defaults'
-export { fromTree, fromList, pathAncestors } from './state/fromTree'
-export { fromFlatTree } from './state/fromFlatTree'
-export { useControlState } from './state/useControlState'
-export { useEventBridge } from './state/useEventBridge'
+export { reduce } from './view-state/reduce'
+export { composeReducers, applyGesture, type Reducer } from './view-state/compose'
+export { singleSelect, singleCurrent, multiSelectToggle } from './view-state/selection'
+export { setValue } from './view-state/value'
+export { reduceSingleSelect, reduceMultiSelect, reduceRadio } from './view-state/defaults'
+export { fromTree, fromList, pathAncestors } from './view-state/fromTree'
+export { fromFlatTree } from './view-state/fromFlatTree'
+export { useControlState } from './view-state/useControlState'
+export { useEventBridge } from './view-state/useEventBridge'
 export { useAnnouncer } from './patterns/useAnnouncer'
 export { useSkipLink } from './patterns/skipLink'
 export type { UseSkipLinkOptions, UseSkipLinkResult, SkipLinkProps } from './patterns/skipLink'
@@ -33,17 +33,17 @@ export type {
   UseAnnouncerOptions,
   UseAnnouncerResult,
 } from './patterns/useAnnouncer'
-export { useFocusBridge, useFocusOnRemove, useFocusOnInsert } from './focus'
+export { useFocusBridge, useFocusOnRemove, useFocusOnInsert } from './read/focus'
 export type {
   UseFocusOnRemoveOptions, UseFocusOnRemoveResult,
   UseFocusOnInsertOptions, UseFocusOnInsertResult,
-} from './focus'
+} from './read/focus'
 // useControlValue: 내부 (combobox/comboboxGrid query 입력) — 외부 export 안 함.
 // controlled/uncontrolled 표면은 #148 §7 폐기. 추후 combobox 합성 재설계 시 제거.
 
-export { useRovingTabIndex } from './roving/useRovingTabIndex'
-export { useSpatialNavigation } from './roving/useSpatialNavigation'
-export { useActiveDescendant } from './roving/useActiveDescendant'
+export { useRovingTabIndex } from './read/roving/useRovingTabIndex'
+export { useSpatialNavigation } from './read/roving/useSpatialNavigation'
+export { useActiveDescendant } from './read/roving/useActiveDescendant'
 
 export {
   composeAxes, axisKeys, tagAxis, parentOf, siblingsOf, enabledSiblings,
@@ -51,7 +51,7 @@ export {
   multiSelect, select, numericStep,
   KEYS, matchChord, matchAnyChord, matchEventToChord, gridNavigate, gridMultiSelect,
   type Axis, type Chord, type KeyName,
-} from './axes'
+} from './input/keyboard/axes'
 export {
   navigateOnActivate,
   selectionFollowsFocus,
@@ -60,7 +60,7 @@ export {
   composeGestures,
   activateProps,
   type GestureHelper,
-} from './gesture'
+} from './input/gesture'
 
 // APG ↔ axis 정합 매트릭스 (EPIC #121).
 export { APG_KEYBOARD_SPEC, allApgChords, type ApgEntry } from './spec/apgKeyboardSpec'

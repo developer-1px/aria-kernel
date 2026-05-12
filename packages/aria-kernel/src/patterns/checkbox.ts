@@ -1,8 +1,8 @@
 import {
   ROOT, getCollectionChildren, getLabel, isDisabled,
   type NormalizedData, type UiEvent, type ValueEvent,
-} from '../types'
-import { matchAnyChord, toggle, axisKeys, INTENT_CHORDS } from '../axes'
+} from '../intent/events'
+import { matchAnyChord, toggle, axisKeys, INTENT_CHORDS } from '../input/keyboard/axes'
 import type { BaseItem, ItemProps, RootProps } from './types'
 
 /** checkbox keymap registry — `toggle` axis 의 chord SSOT 재활용. */

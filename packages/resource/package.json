@@ -7,6 +7,9 @@
   "types": "src/index.ts",
   "exports": {
     ".": "./src/index.ts",
-    "./zod-crud": "./src/zod-crud/index.ts"
+    "./zod-crud": "./src/zod-crud/index.ts",
+    "./store": "./src/store/index.ts",
+    "./mutation": "./src/mutation/index.ts",
+    "./adapters/zod-crud": "./src/adapters/zod-crud/index.ts"
   }
 }

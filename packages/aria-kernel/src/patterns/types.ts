@@ -4,7 +4,7 @@
  */
 
 import type { HTMLAttributes, Ref } from 'react'
-import type { NormalizedData, UiEvent } from '../types'
+import type { NormalizedData, UiEvent } from '../intent/events'
 
 /**
  * Wrapper 의 표준 props base — 모든 컬렉션 wrapper 가 공유.

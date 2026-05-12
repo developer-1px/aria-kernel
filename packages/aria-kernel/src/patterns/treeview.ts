@@ -3,13 +3,13 @@ import { useCallback } from 'react'
 import {
   ROOT, getChildren, getCollectionChildren, getLabel, isDisabled, getExpanded,
   type NormalizedData, type UiEvent,
-} from '../types'
-import { activate, composeAxes, multiSelect, treeExpand, treeNavigate, typeahead } from '../axes'
-import { matchEventToChord } from '../axes/chord'
-import type { InsideEditableMode } from '../key/insideEditable'
-import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from './usePatternClipboard'
-import { selectionFollowsFocus as applySelectionFollowsFocus } from '../gesture'
-import { useRovingTabIndex } from '../roving/useRovingTabIndex'
+} from '../intent/events'
+import { activate, composeAxes, multiSelect, treeExpand, treeNavigate, typeahead } from '../input/keyboard/axes'
+import { matchEventToChord } from '../input/keyboard/axes/chord'
+import type { InsideEditableMode } from '../input/keyboard/key/insideEditable'
+import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from '../input/clipboard/usePatternClipboard'
+import { selectionFollowsFocus as applySelectionFollowsFocus } from '../input/gesture'
+import { useRovingTabIndex } from '../read/roving/useRovingTabIndex'
 import type {
   KeyDescriptor, ItemProps, RootProps, TreeItem,
   TreeAxis, EffectStep, Effect, TreeCommandDescriptor,

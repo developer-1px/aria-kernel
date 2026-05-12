@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 import {
   ROOT, getChildren, getCollectionChildren, getLabel, isDisabled,
   type NormalizedData, type UiEvent,
-} from '../types'
+} from '../intent/events'
 import {
   activate, axisKeys, composeAxes, escape, fromKeyMap, INTENT_CHORDS, navigate,
   submenuOpen, submenuClose, type Axis,
-} from '../axes'
-import { bindAxis } from '../state/bind'
+} from '../input/keyboard/axes'
+import { bindAxis } from '../view-state/bind'
 import type { BaseItem, ItemProps, RootProps } from './types'
 
 /**

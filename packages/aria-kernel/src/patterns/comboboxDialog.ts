@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef } from 'react'
-import { matchAnyChord } from '../axes'
+import { matchAnyChord } from '../input/keyboard/axes'
 import { useDialogModalPattern, dialogModalKeys, type DialogModalOptions } from './dialogModal'
 import type { ItemProps, RootProps } from './types'
 

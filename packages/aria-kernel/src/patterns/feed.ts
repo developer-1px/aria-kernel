@@ -1,9 +1,9 @@
 import { useMemo } from 'react'
-import type { NormalizedData, UiEvent } from '../types'
-import { composeAxes, navigate, pageNavigate } from '../axes'
-import { useRovingTabIndex } from '../roving/useRovingTabIndex'
-import type { InsideEditableMode } from '../key/insideEditable'
-import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from './usePatternClipboard'
+import type { NormalizedData, UiEvent } from '../intent/events'
+import { composeAxes, navigate, pageNavigate } from '../input/keyboard/axes'
+import { useRovingTabIndex } from '../read/roving/useRovingTabIndex'
+import type { InsideEditableMode } from '../input/keyboard/key/insideEditable'
+import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from '../input/clipboard/usePatternClipboard'
 import type { KeyDescriptor, ItemProps, RootProps } from './types'
 
 /** Feed 가 등록하는 axis — SSOT. ArrowDown/Up + Home/End (navigate) + PageUp/PageDown (pageNavigate). */

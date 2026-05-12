@@ -1,6 +1,6 @@
-import { ROOT, getCollectionChildren, getLabel, isDisabled, getExpanded, type NormalizedData, type UiEvent } from '../types'
-import { activate, composeAxes, navigate } from '../axes'
-import { useRovingTabIndex } from '../roving/useRovingTabIndex'
+import { ROOT, getCollectionChildren, getLabel, isDisabled, getExpanded, type NormalizedData, type UiEvent } from '../intent/events'
+import { activate, composeAxes, navigate } from '../input/keyboard/axes'
+import { useRovingTabIndex } from '../read/roving/useRovingTabIndex'
 import type { BaseItem, ItemProps, RootProps } from './types'
 
 /** Options for {@link useAccordionPattern}. */

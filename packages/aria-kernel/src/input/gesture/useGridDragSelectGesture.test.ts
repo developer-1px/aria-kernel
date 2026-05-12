@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest'
 import { renderHook } from '@testing-library/react'
-import { fromTree } from '../state/fromTree'
+import { fromTree } from '../../view-state/fromTree'
 import { useGridDragSelectGesture, useGridDragSelectGestureRaw } from './useGridDragSelectGesture'
-import type { UiEvent } from '../types'
+import type { UiEvent } from '../../intent/events'
 
 type Node = { id: string; children?: Node[] }
 const grid2x2 = fromTree<Node>([

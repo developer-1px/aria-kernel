@@ -2,16 +2,16 @@ import { useRef } from 'react'
 import {
   ROOT, getChildren, getCollectionChildren, getLabel, isDisabled, getFocus, isOpen,
   type NormalizedData, type UiEvent,
-} from '../types'
+} from '../intent/events'
 import {
   activate, composeAxes, escape,
   gridNavigate, matchAnyChord, openControl,
-} from '../axes'
-import { bindAxis } from '../state/bind'
+} from '../input/keyboard/axes'
+import { bindAxis } from '../view-state/bind'
 import { useControlValue } from './_useControlValue'
-import { useActiveDescendant } from '../roving/useActiveDescendant'
+import { useActiveDescendant } from '../read/roving/useActiveDescendant'
 import type { ItemProps, RootProps } from './types'
-import { BLUR_RACE_DELAY_MS } from '../key/timing'
+import { BLUR_RACE_DELAY_MS } from '../input/keyboard/key/timing'
 import { usePopupBlurRace } from './usePopupBlurRace'
 
 /** comboboxGrid open-trigger chord registry — declarative SSOT. */
