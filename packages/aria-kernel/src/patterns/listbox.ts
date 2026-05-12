@@ -128,6 +128,7 @@ export function useListboxPattern(
   groupProps: (groupId: string) => ItemProps
   items: BaseItem[]
   groups: { id: string; label: string; options: BaseItem[] }[]
+  focusItem: (id: string, options?: { preventScroll?: boolean }) => void
 } {
   const {
     multiSelectable, autoFocus, containerId = ROOT, orientation = 'vertical',
@@ -162,7 +163,7 @@ export function useListboxPattern(
     : data
 
   const axis = listboxAxis(opts)
-  const { focusId, bindFocus, delegate } = useRovingTabIndex(axis, navData, relay, {
+  const { focusId, bindFocus, focusItem, delegate } = useRovingTabIndex(axis, navData, relay, {
     autoFocus,
     containerId: groupsOpt ? ROOT : containerId,
   })
@@ -266,7 +267,7 @@ export function useListboxPattern(
     'aria-labelledby': groupLabelDomId(groupId),
   } as unknown as ItemProps)
 
-  return { rootProps, optionProps, groupProps, items, groups }
+  return { rootProps, optionProps, groupProps, items, groups, focusItem }
 }
 
 /** group 의 label 요소에 부여할 id (소비자가 groupProps 의 aria-labelledby 와 매칭). */
