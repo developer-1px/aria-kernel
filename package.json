@@ -10,6 +10,7 @@
     "lint": "eslint .",
     "guard:chords": "node scripts/guardChordRegistry.mjs",
     "audit:axis": "node scripts/auditAxisCompleteness.mjs",
+    "refactor:intent-folders": "node scripts/refactor-intent-kernel-folders.mjs",
     "preview": "vite preview",
     "prepare": "husky"
   },
