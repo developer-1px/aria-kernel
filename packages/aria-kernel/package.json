@@ -64,6 +64,11 @@
       "import": "./dist/state/index.js",
       "require": "./dist/state/index.cjs"
     },
+    "./focus": {
+      "types": "./dist/focus/index.d.ts",
+      "import": "./dist/focus/index.js",
+      "require": "./dist/focus/index.cjs"
+    },
     "./*": {
       "types": "./dist/*.d.ts",
       "import": "./dist/*.js",

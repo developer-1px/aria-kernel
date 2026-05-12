@@ -10,7 +10,7 @@ import {
   type UiEvent,
   type NormalizedData,
 } from '../types'
-import { useFocusBridge } from '../focus'
+import { useFocusBridge } from '../focus/useFocusBridge'
 
 // rovingItem 기본기: data-id 기반 이벤트 위임을 hook 내부에서 소유한다.
 // 소비자는 {...delegate}를 container에 그대로 꽂기만 하면 axis로 연결된다.

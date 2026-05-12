@@ -17,14 +17,14 @@ export { useContextMenuGesture, type ContextMenuGestureOptions } from './useCont
 export { useResizeGesture, type ResizeGestureOptions } from './useResizeGesture'
 export { useGridDragSelectGesture, useGridDragSelectGestureRaw } from './useGridDragSelectGesture'
 export {
-  useReorderDnDGesture,
-  useReorderDnDGestureRaw,
+  useReorderDndGesture,
+  useReorderDndGestureRaw,
   positionToMoveMode,
   type ReorderPosition,
-  type ReorderDnDGestureOptions,
-  type ReorderDnDGestureRawOptions,
+  type ReorderDndGestureOptions,
+  type ReorderDndGestureRawOptions,
   type ReorderItemHandlers,
-} from './useReorderDnDGesture'
+} from './useReorderDndGesture'
 export {
   useKeyboardDndGesture,
   useKeyboardDndGestureRaw,

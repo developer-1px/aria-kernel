@@ -5,7 +5,7 @@ import type { NormalizedData, UiEvent } from '../types'
 export type ReorderPosition = 'before' | 'after' | 'inside'
 
 /**
- * useReorderDnDGestureRaw — generic HTML5 native drag-and-drop reorder lifecycle (#165).
+ * useReorderDndGestureRaw — generic HTML5 native drag-and-drop reorder lifecycle (#165).
  *
  * NormalizedData / UiEvent 의존 ❌. dragged id 와 hovered id + drop position 만으로
  * dragstart → dragover → drop 라이프사이클을 노출. dispatch / store wiring 은 소비자 책임 —
@@ -21,12 +21,12 @@ export type ReorderPosition = 'before' | 'after' | 'inside'
  * - dragend → 종료
  *
  * @example 자체 store 소비자
- *   const drag = useReorderDnDGestureRaw({
+ *   const drag = useReorderDndGestureRaw({
  *     onDrop: (from, to, pos) => store.move(from, to, pos),
  *   })
  *   // <li {...drag.getItemHandlers(id)} />
  */
-export interface ReorderDnDGestureRawOptions {
+export interface ReorderDndGestureRawOptions {
   onDragStart?: (id: string) => void
   onDragOver?: (draggedId: string, overId: string, position: ReorderPosition) => void
   onDrop?: (draggedId: string, overId: string, position: ReorderPosition) => void
@@ -63,7 +63,7 @@ export interface ReorderItemHandlers {
   onDragEnd: (e: ReactDragEvent) => void
 }
 
-export function useReorderDnDGestureRaw(opts: ReorderDnDGestureRawOptions = {}): {
+export function useReorderDndGestureRaw(opts: ReorderDndGestureRawOptions = {}): {
   getItemHandlers: (id: string) => ReorderItemHandlers
   draggingId: string | null
   overId: string | null
@@ -143,7 +143,7 @@ export function useReorderDnDGestureRaw(opts: ReorderDnDGestureRawOptions = {}):
 export const positionToMoveMode = (pos: ReorderPosition): 'sibling-before' | 'sibling-after' | 'child' =>
   pos === 'before' ? 'sibling-before' : pos === 'after' ? 'sibling-after' : 'child'
 
-export interface ReorderDnDGestureOptions {
+export interface ReorderDndGestureOptions {
   /** allow 'inside' drop (tree nesting). default false. */
   allowInside?: boolean
   /** dataTransfer MIME. */
@@ -151,7 +151,7 @@ export interface ReorderDnDGestureOptions {
 }
 
 /**
- * useReorderDnDGesture — NormalizedData/dispatch 바인딩 wrapper. useListboxPattern/useTreePattern 소비자용 (#165).
+ * useReorderDndGesture — NormalizedData/dispatch 바인딩 wrapper. useListboxPattern/useTreePattern 소비자용 (#165).
  *
  * Drop 시 `{ type: 'move', id: draggedId, targetId: overId, mode: 'sibling-before'|'sibling-after'|'child' }`
  * UiEvent emit — tree reducer 가 이미 흡수하는 어휘 (axes/reducers `move` op). 소비자가 onEvent 에서
@@ -161,23 +161,23 @@ export interface ReorderDnDGestureOptions {
  * UiEvent 어휘 그대로 reducer 또는 store 가 흡수 (memory: feedback_gesture_intent_split).
  *
  * @example listbox reorder
- *   const drag = useReorderDnDGesture(data, dispatch)
+ *   const drag = useReorderDndGesture(data, dispatch)
  *   // <li {...optionProps(id)} {...drag.getItemHandlers(id)} />
  *
  * @example tree reorder + nesting
- *   const drag = useReorderDnDGesture(data, dispatch, { allowInside: true })
+ *   const drag = useReorderDndGesture(data, dispatch, { allowInside: true })
  */
-export function useReorderDnDGesture(
+export function useReorderDndGesture(
   _data: NormalizedData,
   dispatch: (e: UiEvent) => void,
-  opts: ReorderDnDGestureOptions = {},
+  opts: ReorderDndGestureOptions = {},
 ): {
   getItemHandlers: (id: string) => ReorderItemHandlers
   draggingId: string | null
   overId: string | null
   overPosition: ReorderPosition | null
 } {
-  return useReorderDnDGestureRaw({
+  return useReorderDndGestureRaw({
     allowInside: opts.allowInside,
     mime: opts.mime,
     onDrop: (from, to, pos) => {
