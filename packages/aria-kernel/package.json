@@ -1,6 +1,6 @@
 {
   "name": "@p/aria-kernel",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "React + Reducer 기반 ARIA 행동 인프라 — W3C/APG 패턴 recipe + axis 합성 + roving tabindex + gesture/intent 변환. 데이터는 use<Pattern>Reducer(items, opts?) 1줄. 토큰/CSS/UI 어휘 0건.",
   "keywords": [
     "aria",
