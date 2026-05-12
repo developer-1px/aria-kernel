@@ -23,6 +23,10 @@ export { fromFlatTree } from './state/fromFlatTree'
 export { useControlState } from './state/useControlState'
 export { useEventBridge } from './state/useEventBridge'
 export { useAnnouncer } from './state/useAnnouncer'
+export { useFocusOnRemove } from './state/useFocusOnRemove'
+export type { UseFocusOnRemoveOptions, UseFocusOnRemoveResult } from './state/useFocusOnRemove'
+export { useFocusOnInsert } from './state/useFocusOnInsert'
+export type { UseFocusOnInsertOptions, UseFocusOnInsertResult } from './state/useFocusOnInsert'
 export type {
   AnnounceOptions,
   AnnouncerRegionProps,
