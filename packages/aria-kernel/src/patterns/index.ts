@@ -69,13 +69,13 @@ export { switchPattern, switchAxis, type SwitchOptions } from './switch'
 export { navigationListPattern, type NavigationListOptions } from './navigationList'
 export { alertPattern } from './alert'
 
-export { useAnnouncer } from './liveRegion'
+export { useAnnouncer } from './useAnnouncer'
 export type {
   AnnounceOptions,
   AnnouncerRegionProps,
   UseAnnouncerOptions,
   UseAnnouncerResult,
-} from './liveRegion'
+} from './useAnnouncer'
 export { useSkipLink } from './skipLink'
 export type { UseSkipLinkOptions, UseSkipLinkResult, SkipLinkProps } from './skipLink'
 export { Landmark, LandmarksProvider, useLandmarks } from './landmarks'

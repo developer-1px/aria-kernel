@@ -8,7 +8,7 @@ import {
   navigate, openControl,
 } from '../axes'
 import { bindAxis } from '../state/bind'
-import { useControlValue } from '../state/useControlValue'
+import { useControlValue } from './_useControlValue'
 import { useActiveDescendant } from '../roving/useActiveDescendant'
 import type { BaseItem, ItemProps, RootProps } from './types'
 import { BLUR_RACE_DELAY_MS } from '../key/timing'
