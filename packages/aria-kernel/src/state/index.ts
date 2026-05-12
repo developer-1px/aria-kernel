@@ -14,6 +14,10 @@ export { fromFlatTree } from './fromFlatTree'
 export { useControlState } from './useControlState'
 export { useEventBridge } from './useEventBridge'
 export { useAnnouncer } from './useAnnouncer'
+export { useFocusOnRemove } from './useFocusOnRemove'
+export type { UseFocusOnRemoveOptions, UseFocusOnRemoveResult } from './useFocusOnRemove'
+export { useFocusOnInsert } from './useFocusOnInsert'
+export type { UseFocusOnInsertOptions, UseFocusOnInsertResult } from './useFocusOnInsert'
 export type {
   AnnounceOptions,
   AnnouncerRegionProps,
