@@ -30,51 +30,61 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "development": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
     "./patterns": {
+      "development": "./src/patterns/index.ts",
       "types": "./dist/patterns/index.d.ts",
       "import": "./dist/patterns/index.js",
       "require": "./dist/patterns/index.cjs"
     },
     "./axes": {
+      "development": "./src/axes/index.ts",
       "types": "./dist/axes/index.d.ts",
       "import": "./dist/axes/index.js",
       "require": "./dist/axes/index.cjs"
     },
     "./gesture": {
+      "development": "./src/gesture/index.ts",
       "types": "./dist/gesture/index.d.ts",
       "import": "./dist/gesture/index.js",
       "require": "./dist/gesture/index.cjs"
     },
     "./key": {
+      "development": "./src/key/index.ts",
       "types": "./dist/key/index.d.ts",
       "import": "./dist/key/index.js",
       "require": "./dist/key/index.cjs"
     },
     "./roving": {
+      "development": "./src/roving/index.ts",
       "types": "./dist/roving/index.d.ts",
       "import": "./dist/roving/index.js",
       "require": "./dist/roving/index.cjs"
     },
     "./state": {
+      "development": "./src/state/index.ts",
       "types": "./dist/state/index.d.ts",
       "import": "./dist/state/index.js",
       "require": "./dist/state/index.cjs"
     },
     "./focus": {
+      "development": "./src/focus/index.ts",
       "types": "./dist/focus/index.d.ts",
       "import": "./dist/focus/index.js",
       "require": "./dist/focus/index.cjs"
     },
     "./*": {
+      "development": "./src/*.ts",
       "types": "./dist/*.d.ts",
       "import": "./dist/*.js",
       "require": "./dist/*.cjs"
     },
     "./*/": {
+      "development": "./src/*/index.ts",
       "types": "./dist/*/index.d.ts",
       "import": "./dist/*/index.js",
       "require": "./dist/*/index.cjs"

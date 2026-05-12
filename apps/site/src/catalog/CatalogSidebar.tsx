@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import type { NormalizedData } from '@p/aria-kernel'
+import { useMemo, useState } from 'react'
+import { useControlState, type NormalizedData } from '@p/aria-kernel'
 import { Nav } from '../examples/_navigationListWrapper'
 import type { SlotProps } from './slots'
 
@@ -52,7 +52,8 @@ export function CatalogSidebar({
 }) {
   const [open, setOpen] = useState(false)
   const total = groups.reduce((n, g) => n + g.items.length, 0)
-  const data = buildData(groups, activeSlug)
+  const base = useMemo(() => buildData(groups, activeSlug), [groups, activeSlug])
+  const [data, dispatch] = useControlState(base)
 
   const panel = (
     <>
@@ -71,7 +72,10 @@ export function CatalogSidebar({
       <Nav
         aria-label={ariaLabel}
         data={data}
+        roving
+        selectionFollowsFocus
         onEvent={(e) => {
+          dispatch(e)
           if (e.type !== 'activate') return
           const ent = data.entities[e.id] as CatalogItem | undefined
           if (!ent) return
@@ -80,14 +84,7 @@ export function CatalogSidebar({
           setOpen(false)
         }}
         slots={{
-          label: ({ data: it }: SlotProps<CatalogItem>) => (
-            <span className="flex flex-1 items-center justify-between">
-              <span>{it.label}</span>
-              <code className="text-[10px] font-mono text-stone-400 [a[aria-current=page]_&]:text-stone-300">
-                #{it.slug}
-              </code>
-            </span>
-          ),
+          label: ({ data: it }: SlotProps<CatalogItem>) => <span>{it.label}</span>,
         }}
       />
     </>

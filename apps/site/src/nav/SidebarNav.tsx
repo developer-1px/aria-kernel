@@ -5,9 +5,9 @@
  * 표준 Wrapper 적용 — `<Nav data onEvent>` (navigationListPattern) 가 `<nav>` + `<a>` 를 emit.
  * 라우팅은 onEvent('activate') 를 받아 host (TanStack router) 가 navigate.
  */
-import { useRef } from 'react'
+import { useMemo, useRef } from 'react'
 import { useRouter, useRouterState } from '@tanstack/react-router'
-import type { NormalizedData } from '@p/aria-kernel'
+import { useControlState, type NormalizedData } from '@p/aria-kernel'
 import { Nav } from '../examples/_navigationListWrapper'
 import { collectPalette, paletteCategory, type PaletteEntry } from './palette'
 
@@ -61,9 +61,11 @@ export function SidebarNav() {
   }
 
   const pathname = useRouterState({ select: (s) => s.location.pathname })
-  const data = buildData(collectPalette(router), pathname)
+  const base = useMemo(() => buildData(collectPalette(router), pathname), [router, pathname])
+  const [data, dispatch] = useControlState(base)
 
   const onEvent = (event: { type: string; id?: string }) => {
+    dispatch(event as never)
     if (event.type !== 'activate' || !event.id) return
     const ent = data.entities[event.id]
     if (!ent) return
@@ -95,7 +97,7 @@ export function SidebarNav() {
         >
           @p/aria-kernel
         </a>
-        <Nav aria-label="Site navigation" data={data} onEvent={onEvent} />
+        <Nav aria-label="Site navigation" data={data} onEvent={onEvent} roving />
       </details>
     </div>
   )
