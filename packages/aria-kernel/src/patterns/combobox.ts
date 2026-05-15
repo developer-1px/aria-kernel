@@ -7,12 +7,12 @@ import {
 import {
   activate, composeAxes, escape,
   navigate, openControl,
-} from '../input/keyboard/axes'
-import { bindAxis } from '../view-state/bind'
+} from '../axes'
+import { bindAxis } from '../state/bind'
 import { useControlValue } from './_useControlValue'
-import { useActiveDescendant } from '../read/roving/useActiveDescendant'
+import { useActiveDescendant } from '../roving/useActiveDescendant'
 import type { BaseItem, ItemProps, RootProps } from './types'
-import { BLUR_RACE_DELAY_MS } from '../input/keyboard/key/timing'
+import { BLUR_RACE_DELAY_MS } from '../key/timing'
 import { usePopupBlurRace } from './usePopupBlurRace'
 
 /** combobox chord registry — declarative SSOT. */

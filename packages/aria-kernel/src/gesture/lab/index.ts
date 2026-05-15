@@ -1,1 +1,1 @@
-export * from '../../input/gesture/lab'
+export { useFillHandleGesture, type FillHandleGestureOptions } from './useFillHandleGesture'

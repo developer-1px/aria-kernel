@@ -9,8 +9,8 @@ import {
   type NormalizedData,
   type UiEvent,
 } from '../intent/events'
-import { activate, composeAxes, gridNavigate, gridMultiSelect } from '../input/keyboard/axes'
-import { useGridDragSelectGesture } from '../input/gesture/useGridDragSelectGesture'
+import { activate, composeAxes, gridNavigate, gridMultiSelect } from '../axes'
+import { useGridDragSelectGesture } from '../gesture/useGridDragSelectGesture'
 
 /**
  * grid edit-mode chord registry — declarative SSOT.
@@ -36,8 +36,8 @@ const warnChildlessTopLevel = (count: number): void => {
     'Avoid `rows.slice(N)` assumptions tied to header count.',
   )
 }
-import { useRovingTabIndex } from '../read/roving/useRovingTabIndex'
-import { isEditable, type InsideEditableMode } from '../input/keyboard/key/insideEditable'
+import { useRovingTabIndex } from '../roving/useRovingTabIndex'
+import { isEditable, type InsideEditableMode } from '../key/insideEditable'
 import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from '../input/clipboard/usePatternClipboard'
 import type { KeyDescriptor, ItemProps, RootProps } from './types'
 import { warnMultiSelectPairing } from './devWarnMultiSelect'

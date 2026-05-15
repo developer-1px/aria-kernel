@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { matches, parseShortcut } from '@interactive-os/keyboard'
 import { ROOT, getChildren, getCollectionChildren, getLabel, isDisabled, getExpanded, type NormalizedData, type UiEvent } from '../intent/events'
-import { activate, composeAxes, multiSelect, treeExpand, treeNavigate, INTENT_CHORDS } from '../input/keyboard/axes'
+import { activate, composeAxes, multiSelect, treeExpand, treeNavigate, INTENT_CHORDS } from '../axes'
 
 /** treegrid edit-mode chord registry — declarative SSOT. */
 const TREEGRID_EDIT_INSERT = ['Enter'] as const
@@ -14,9 +14,9 @@ export const treegridEditKeys = (): readonly string[] =>
   Array.from(new Set([
     ...TREEGRID_EDIT_INSERT, ...TREEGRID_EDIT_REMOVE, ...TREEGRID_EDIT_ACTIVATE_TAB,
   ].map((c) => parseShortcut(c)[0]?.key).filter((key): key is string => typeof key === 'string')))
-import { selectionFollowsFocus as applySelectionFollowsFocus } from '../input/gesture'
-import { useRovingTabIndex } from '../read/roving/useRovingTabIndex'
-import type { InsideEditableMode } from '../input/keyboard/key/insideEditable'
+import { selectionFollowsFocus as applySelectionFollowsFocus } from '../gesture'
+import { useRovingTabIndex } from '../roving/useRovingTabIndex'
+import type { InsideEditableMode } from '../key/insideEditable'
 import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from '../input/clipboard/usePatternClipboard'
 import type { KeyDescriptor, ItemProps, RootProps, TreeItem } from './types'
 import { warnMultiSelectPairing } from './devWarnMultiSelect'

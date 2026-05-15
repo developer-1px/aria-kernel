@@ -7,11 +7,11 @@ import {
 import {
   activate, composeAxes, escape, INTENT_CHORDS,
   navigate, openControl,
-} from '../input/keyboard/axes'
-import { bindAxis } from '../view-state/bind'
-import { useActiveDescendant } from '../read/roving/useActiveDescendant'
+} from '../axes'
+import { bindAxis } from '../state/bind'
+import { useActiveDescendant } from '../roving/useActiveDescendant'
 import type { BaseItem, ItemProps, RootProps } from './types'
-import { BLUR_RACE_DELAY_MS } from '../input/keyboard/key/timing'
+import { BLUR_RACE_DELAY_MS } from '../key/timing'
 import { usePopupBlurRace } from './usePopupBlurRace'
 
 const ARROW_DOWN = ['ArrowDown'] as const

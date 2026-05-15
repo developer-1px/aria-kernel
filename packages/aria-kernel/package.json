@@ -93,18 +93,6 @@
       "import": "./dist/*/index.js",
       "require": "./dist/*/index.cjs"
     },
-    "./read/*": {
-      "development": "./src/read/*/index.ts",
-      "types": "./dist/read/*/index.d.ts",
-      "import": "./dist/read/*/index.js",
-      "require": "./dist/read/*/index.cjs"
-    },
-    "./read/*/*": {
-      "development": "./src/read/*/*.ts",
-      "types": "./dist/read/*/*.d.ts",
-      "import": "./dist/read/*/*.js",
-      "require": "./dist/read/*/*.cjs"
-    },
     "./input/*": {
       "development": "./src/input/*/index.ts",
       "types": "./dist/input/*/index.d.ts",
@@ -117,35 +105,17 @@
       "import": "./dist/input/*/*.js",
       "require": "./dist/input/*/*.cjs"
     },
-    "./input/keyboard/*": {
-      "development": "./src/input/keyboard/*/index.ts",
-      "types": "./dist/input/keyboard/*/index.d.ts",
-      "import": "./dist/input/keyboard/*/index.js",
-      "require": "./dist/input/keyboard/*/index.cjs"
-    },
-    "./input/keyboard/*/*": {
-      "development": "./src/input/keyboard/*/*.ts",
-      "types": "./dist/input/keyboard/*/*.d.ts",
-      "import": "./dist/input/keyboard/*/*.js",
-      "require": "./dist/input/keyboard/*/*.cjs"
-    },
     "./intent/*": {
       "development": "./src/intent/*.ts",
       "types": "./dist/intent/*.d.ts",
       "import": "./dist/intent/*.js",
       "require": "./dist/intent/*.cjs"
     },
-    "./view-state": {
-      "development": "./src/view-state/index.ts",
-      "types": "./dist/view-state/index.d.ts",
-      "import": "./dist/view-state/index.js",
-      "require": "./dist/view-state/index.cjs"
-    },
-    "./view-state/*": {
-      "development": "./src/view-state/*.ts",
-      "types": "./dist/view-state/*.d.ts",
-      "import": "./dist/view-state/*.js",
-      "require": "./dist/view-state/*.cjs"
+    "./state/*": {
+      "development": "./src/state/*.ts",
+      "types": "./dist/state/*.d.ts",
+      "import": "./dist/state/*.js",
+      "require": "./dist/state/*.cjs"
     }
   },
   "files": [

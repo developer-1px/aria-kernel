@@ -5,11 +5,11 @@ import {
   ROOT, getChildren, getCollectionChildren, getLabel, isDisabled, getExpanded,
   type NormalizedData, type UiEvent,
 } from '../intent/events'
-import { activate, composeAxes, multiSelect, treeExpand, treeNavigate, typeahead } from '../input/keyboard/axes'
-import type { InsideEditableMode } from '../input/keyboard/key/insideEditable'
+import { activate, composeAxes, multiSelect, treeExpand, treeNavigate, typeahead } from '../axes'
+import type { InsideEditableMode } from '../key/insideEditable'
 import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from '../input/clipboard/usePatternClipboard'
-import { selectionFollowsFocus as applySelectionFollowsFocus } from '../input/gesture'
-import { useRovingTabIndex } from '../read/roving/useRovingTabIndex'
+import { selectionFollowsFocus as applySelectionFollowsFocus } from '../gesture'
+import { useRovingTabIndex } from '../roving/useRovingTabIndex'
 import type {
   KeyDescriptor, ItemProps, RootProps, TreeItem,
   TreeAxis, EffectStep, Effect, TreeCommandDescriptor,

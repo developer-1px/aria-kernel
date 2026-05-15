@@ -1,6 +1,6 @@
 import { ROOT, getCollectionChildren, type NormalizedData, type UiEvent } from '../intent/events'
-import type { Axis } from '../input/keyboard/axes'
-import { useRovingTabIndex } from '../read/roving/useRovingTabIndex'
+import type { Axis } from '../axes'
+import { useRovingTabIndex } from '../roving/useRovingTabIndex'
 
 export interface PatternBaseOptions {
   /** Container entity for the collection. Defaults to ROOT. */

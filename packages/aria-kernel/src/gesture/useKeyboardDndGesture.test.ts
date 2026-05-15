@@ -1,11 +1,11 @@
 import { describe, expect, it, vi } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
-import { fromTree } from '../../view-state/fromTree'
+import { fromTree } from '../state/fromTree'
 import {
   useKeyboardDndGesture,
   useKeyboardDndGestureRaw,
 } from './useKeyboardDndGesture'
-import type { UiEvent } from '../../intent/events'
+import type { UiEvent } from '../intent/events'
 
 type Node = { id: string; children?: Node[] }
 const list = fromTree<Node>([{ id: 'A' }, { id: 'B' }, { id: 'C' }])

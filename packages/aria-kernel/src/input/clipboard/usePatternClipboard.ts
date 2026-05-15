@@ -14,7 +14,7 @@
 import type React from 'react'
 import { matches } from '@interactive-os/keyboard'
 import type { UiEvent } from '../../intent/events'
-import { routeInsideEditable, isEditable, type InsideEditableMode } from '../keyboard/key/insideEditable'
+import { routeInsideEditable, isEditable, type InsideEditableMode } from '../../key/insideEditable'
 import type { KeyDescriptor } from '../../patterns/types'
 
 /**

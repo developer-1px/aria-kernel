@@ -10,7 +10,7 @@
  */
 
 import { parseShortcut } from '@interactive-os/keyboard'
-import type { Chord } from './input/keyboard/axes'
+import type { Chord } from './axes'
 
 export type Trigger = Chord
 

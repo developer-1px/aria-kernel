@@ -6,8 +6,8 @@ import {
 import {
   activate, axisKeys, composeAxes, escape, fromKeyMap, INTENT_CHORDS, navigate,
   submenuOpen, submenuClose, type Axis,
-} from '../input/keyboard/axes'
-import { bindAxis } from '../view-state/bind'
+} from '../axes'
+import { bindAxis } from '../state/bind'
 import type { BaseItem, ItemProps, RootProps } from './types'
 
 /**

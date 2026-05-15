@@ -29,8 +29,8 @@ import { tabsAxis } from '../patterns/tabs'
 import { toolbarAxis } from '../patterns/toolbar'
 import { treeviewAxis } from '../patterns/treeview'
 import { treegridAxis } from '../patterns/treegrid'
-import { toggle, activate, escape } from '../input/keyboard/axes'
-import type { Axis } from '../input/keyboard/axes'
+import { toggle, activate, escape } from '../axes'
+import type { Axis } from '../axes'
 
 const chords = (axis: Axis): readonly string[] => axis.chords
 

@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { getLabel, isDisabled, type NormalizedData, type UiEvent } from '../intent/events'
-import { activate, axisKeys as axisKeysFn, composeAxes, navigate } from '../input/keyboard/axes'
-import { selectionFollowsFocus as applySelectionFollowsFocus } from '../input/gesture'
+import { activate, axisKeys as axisKeysFn, composeAxes, navigate } from '../axes'
+import { selectionFollowsFocus as applySelectionFollowsFocus } from '../gesture'
 import { usePatternBase } from './usePatternBase'
 import type { BaseItem, ItemProps, RootProps } from './types'
 

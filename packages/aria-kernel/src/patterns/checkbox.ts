@@ -3,7 +3,7 @@ import {
   ROOT, getCollectionChildren, getLabel, isDisabled,
   type NormalizedData, type UiEvent, type ValueEvent,
 } from '../intent/events'
-import { toggle, axisKeys, INTENT_CHORDS } from '../input/keyboard/axes'
+import { toggle, axisKeys, INTENT_CHORDS } from '../axes'
 import type { BaseItem, ItemProps, RootProps } from './types'
 
 /** checkbox keymap registry — `toggle` axis 의 chord SSOT 재활용. */

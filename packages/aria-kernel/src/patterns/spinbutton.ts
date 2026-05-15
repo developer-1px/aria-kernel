@@ -1,6 +1,6 @@
 import type { ValueEvent } from '../intent/events'
-import { bindValueAxis, pickNumericValue } from '../view-state/bind'
-import { numericStep } from '../input/keyboard/axes/numericStep'
+import { bindValueAxis, pickNumericValue } from '../state/bind'
+import { numericStep } from '../axes/numericStep'
 import type { ItemProps } from './types'
 
 /** Spinbutton 이 등록하는 axis — SSOT. */

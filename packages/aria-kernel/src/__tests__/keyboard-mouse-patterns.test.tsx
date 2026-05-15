@@ -1,8 +1,8 @@
 import { afterEach, describe, expect, it } from 'vitest'
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { useState } from 'react'
-import { fromList, fromTree } from '../view-state/fromTree'
-import { reduceSingleSelect, reduceRadio } from '../view-state/defaults'
+import { fromList, fromTree } from '../state/fromTree'
+import { reduceSingleSelect, reduceRadio } from '../state/defaults'
 import type { NormalizedData, UiEvent } from '../intent/events'
 import {
   checkboxPattern,
