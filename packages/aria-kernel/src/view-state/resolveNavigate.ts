@@ -4,12 +4,10 @@
  * PRD #38 phase 3: axis 본체가 id 산수를 캡슐화하던 KeyHandler 를 제거하고,
  * 방향 의도 (`dir`) 만 emit. reducer 가 data + 현재 focus + dir 로 next id 계산.
  */
-import type { GridNavigationAction } from '@interactive-os/keyboard-navigation'
 import type { NavigateDir, NormalizedData } from '../intent/events'
-import { ROOT } from '../intent/events'
+import { ROOT, getChildren } from '../intent/events'
 import { siblingsOf, parentOf } from '../input/keyboard/axes/index'
 import { visibleEnabled } from '../input/keyboard/axes/_visibleFlat'
-import { gridCoord, gridRows } from '../input/keyboard/axes/gridNavigate'
 import { moveGrid, moveLinear } from '@interactive-os/keyboard-navigation'
 
 const enabledOf = (d: NormalizedData, ids: readonly string[]): string[] =>
@@ -55,14 +53,11 @@ export const resolveNavigate = (d: NormalizedData, dir: NavigateDir, from?: stri
   // grid 2D 좌표 (phase 3b)
   if (dir === 'gridLeft' || dir === 'gridRight' || dir === 'gridUp' || dir === 'gridDown'
       || dir === 'rowStart' || dir === 'rowEnd' || dir === 'gridStart' || dir === 'gridEnd') {
-    const c = gridCoord(d, focus)
-    if (!c) return null
-    const gridId = parentOf(d, c.rows[c.rowIdx])
+    const rowId = parentOf(d, focus)
+    const gridId = rowId ? parentOf(d, rowId) : undefined
     if (!gridId) return null
-    const actions: Record<
-      Extract<NavigateDir, 'gridLeft' | 'gridRight' | 'gridUp' | 'gridDown' | 'rowStart' | 'rowEnd' | 'gridStart' | 'gridEnd'>,
-      GridNavigationAction
-    > = {
+    const rows = getChildren(d, gridId).map((id) => getChildren(d, id))
+    const actions = {
       gridLeft: 'left',
       gridRight: 'right',
       gridUp: 'up',
@@ -71,9 +66,9 @@ export const resolveNavigate = (d: NormalizedData, dir: NavigateDir, from?: stri
       rowEnd: 'rowEnd',
       gridStart: 'gridStart',
       gridEnd: 'gridEnd',
-    }
+    } as const
     const action = actions[dir]
-    return moveGrid(gridRows(d, gridId), focus, action)
+    return moveGrid(rows, focus, action)
   }
 
   // pageNext/pagePrev 는 step 파라미터 필요 — phase 3c.
