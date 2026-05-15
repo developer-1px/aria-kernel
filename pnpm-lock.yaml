@@ -205,6 +205,9 @@ importers:
 
   packages/slides:
     dependencies:
+      '@interactive-os/keyboard':
+        specifier: file:../../../keyboard/packages/keyboard
+        version: file:../keyboard/packages/keyboard
       '@p/aria-kernel':
         specifier: workspace:*
         version: link:../aria-kernel

@@ -1,5 +1,5 @@
 import type { NormalizedData, UiEvent } from '@p/aria-kernel'
-import { matchEventToChord } from '@p/aria-kernel/axes'
+import { matches } from '@interactive-os/keyboard'
 import type { TreeCommandDescriptor } from '@p/aria-kernel/patterns'
 import type { JsonCrud, JsonValue, OperationResult } from 'zod-crud'
 import { normalizeDeck, propNode } from './normalize'
@@ -48,8 +48,8 @@ export function slideTreeEventFromKeyboard(
   id: string,
   event: KeyboardEvent,
 ): UiEvent | null {
-  const isOutdent = matchEventToChord(event, 'Shift+Tab')
-  const isIndent = !isOutdent && matchEventToChord(event, 'Tab')
+  const isOutdent = matches(event, 'Shift+Tab')
+  const isIndent = !isOutdent && matches(event, 'Tab')
   if (!isIndent && !isOutdent) return null
 
   const targetId = isOutdent ? parentOf(data, id) : previousSibling(data, id)
