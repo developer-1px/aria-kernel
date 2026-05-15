@@ -5,10 +5,10 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { useState } from 'react'
-import { useListboxPattern } from '../../patterns/listbox'
-import { fromList } from '../../state/fromTree'
-import { reduceSingleSelect } from '../../state/defaults'
-import type { NormalizedData, UiEvent } from '../../intent/events'
+import { useListboxPattern } from '../patterns/listbox'
+import { fromList } from '../state/fromTree'
+import { reduceSingleSelect } from '../state/defaults'
+import type { NormalizedData, UiEvent } from '../intent/events'
 
 afterEach(cleanup)
 

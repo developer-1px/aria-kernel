@@ -7,7 +7,7 @@ import {
 } from '../intent/events'
 import { activate, composeAxes, multiSelect, treeExpand, treeNavigate, typeahead } from '../axes'
 import type { InsideEditableMode } from '../key/insideEditable'
-import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from '../input/clipboard/usePatternClipboard'
+import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from '../clipboard/usePatternClipboard'
 import { selectionFollowsFocus as applySelectionFollowsFocus } from '../gesture'
 import { useRovingTabIndex } from '../roving/useRovingTabIndex'
 import type {

@@ -61,6 +61,13 @@ export {
   activateProps,
   type GestureHelper,
 } from './gesture'
+export {
+  usePatternClipboard,
+  type ClipboardOnMiddleware,
+  type ClipboardSerializerOptions,
+  type UsePatternClipboardArgs,
+  type UsePatternClipboardReturn,
+} from './clipboard'
 
 // APG ↔ axis 정합 매트릭스 (EPIC #121).
 export { APG_KEYBOARD_SPEC, allApgChords, type ApgEntry } from './spec/apgKeyboardSpec'

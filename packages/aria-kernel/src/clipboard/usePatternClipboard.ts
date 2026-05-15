@@ -13,9 +13,9 @@
  */
 import type React from 'react'
 import { matches } from '@interactive-os/keyboard'
-import type { UiEvent } from '../../intent/events'
-import { routeInsideEditable, isEditable, type InsideEditableMode } from '../../key/insideEditable'
-import type { KeyDescriptor } from '../../patterns/types'
+import type { UiEvent } from '../intent/events'
+import { routeInsideEditable, isEditable, type InsideEditableMode } from '../key/insideEditable'
+import type { KeyDescriptor } from '../patterns/types'
 
 /**
  * 패턴 hook 들이 자기 args 에 펼쳐 받아 usePatternClipboard 로 전달하는 슬롯 묶음.

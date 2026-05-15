@@ -3,7 +3,7 @@ import { matches } from '@interactive-os/keyboard'
 import { ROOT, getChildren, getCollectionChildren, getLabel, isDisabled, type NormalizedData, type UiEvent } from '../intent/events'
 import { activate, composeAxes, multiSelect, navigate, typeahead } from '../axes'
 import type { InsideEditableMode } from '../key/insideEditable'
-import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from '../input/clipboard/usePatternClipboard'
+import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from '../clipboard/usePatternClipboard'
 
 /** listbox edit-mode chord registry — declarative SSOT (Enter=insertAfter, Backspace=remove). */
 const LISTBOX_EDIT_INSERT = ['Enter'] as const

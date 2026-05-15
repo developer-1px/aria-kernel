@@ -79,6 +79,12 @@
       "import": "./dist/focus/index.js",
       "require": "./dist/focus/index.cjs"
     },
+    "./clipboard": {
+      "development": "./src/clipboard/index.ts",
+      "types": "./dist/clipboard/index.d.ts",
+      "import": "./dist/clipboard/index.js",
+      "require": "./dist/clipboard/index.cjs"
+    },
     "./gesture/index.ts": "./src/gesture/index.ts",
     "./types.ts": "./src/types.ts",
     "./*": {
@@ -92,18 +98,6 @@
       "types": "./dist/*/index.d.ts",
       "import": "./dist/*/index.js",
       "require": "./dist/*/index.cjs"
-    },
-    "./input/*": {
-      "development": "./src/input/*/index.ts",
-      "types": "./dist/input/*/index.d.ts",
-      "import": "./dist/input/*/index.js",
-      "require": "./dist/input/*/index.cjs"
-    },
-    "./input/*/*": {
-      "development": "./src/input/*/*.ts",
-      "types": "./dist/input/*/*.d.ts",
-      "import": "./dist/input/*/*.js",
-      "require": "./dist/input/*/*.cjs"
     },
     "./intent/*": {
       "development": "./src/intent/*.ts",

@@ -3,7 +3,7 @@ import type { NormalizedData, UiEvent } from '../intent/events'
 import { composeAxes, navigate, pageNavigate } from '../axes'
 import { useRovingTabIndex } from '../roving/useRovingTabIndex'
 import type { InsideEditableMode } from '../key/insideEditable'
-import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from '../input/clipboard/usePatternClipboard'
+import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from '../clipboard/usePatternClipboard'
 import type { KeyDescriptor, ItemProps, RootProps } from './types'
 
 /** Feed 가 등록하는 axis — SSOT. ArrowDown/Up + Home/End (navigate) + PageUp/PageDown (pageNavigate). */

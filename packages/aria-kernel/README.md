@@ -86,6 +86,7 @@ function Toolbar() {
 | **Axes** | `composeAxes` · `navigate` · `activate` · `expand` · `treeNavigate` · `typeahead` · `toggle` · `multiSelect` · `gridMultiSelect` |
 | **Roving** | `useRovingTabIndex` · `useSpatialNavigation` · `useActiveDescendant` |
 | **Gesture** | `composeGestures` · `navigateOnActivate` · `selectionFollowsFocus` · `expandBranchOnActivate` · `expandOnActivate` · `activateProps` · `useZoomPanGesture` |
+| **Clipboard** | `@interactive-os/aria-kernel/clipboard` — `usePatternClipboard` · `ClipboardSerializerOptions` |
 | **Key** | `@interactive-os/aria-kernel/key` (subpath) — `useShortcut` · `onShortcut` · `bindGlobalKeyMap` · `useKeyMap` · `routeInsideEditable` · `isEditable` · `fromKeyboardEvent` |
 | **Spec** | `APG_KEYBOARD_SPEC` · `allApgChords` · `APG_PATTERN_EXAMPLE_SPEC` · `allApgExamples` · `IMPL_CHORDS` · `normalizeChord` · `normalizeChordSet` |
 | **Patterns** | `@interactive-os/aria-kernel/patterns` (subpath) — `useListboxPattern` · `useTreeviewPattern` · ... 21종 |

@@ -17,7 +17,7 @@ export const treegridEditKeys = (): readonly string[] =>
 import { selectionFollowsFocus as applySelectionFollowsFocus } from '../gesture'
 import { useRovingTabIndex } from '../roving/useRovingTabIndex'
 import type { InsideEditableMode } from '../key/insideEditable'
-import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from '../input/clipboard/usePatternClipboard'
+import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from '../clipboard/usePatternClipboard'
 import type { KeyDescriptor, ItemProps, RootProps, TreeItem } from './types'
 import { warnMultiSelectPairing } from './devWarnMultiSelect'
 
