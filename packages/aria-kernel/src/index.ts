@@ -1,10 +1,10 @@
 /**
- * @p/aria-kernel — APG-correct headless behavior layer.
+ * @interactive-os/aria-kernel — APG-correct headless behavior layer.
  *
  * Owns: axis composition · roving tabindex · gesture/intent split · patterns ·
  * shared data vocabulary (NormalizedData / UiEvent) · middleware.
  *
- * Data: 컬렉션 패턴은 `use<Pattern>Reducer(items, opts?)` (canonical, `@p/aria-kernel/patterns`).
+ * Data: 컬렉션 패턴은 `use<Pattern>Reducer(items, opts?)` (canonical, `@interactive-os/aria-kernel/patterns`).
  * Escape: React `useReducer(reduceSingleSelect, items, fromList)` 직접 (custom init / 합성).
  *
  * Knows nothing about: tokens · CSS · component vocabulary.
@@ -13,15 +13,15 @@
 export * from './intent/events'
 export * from './intent/schema'
 
-export { reduce } from './view-state/reduce'
-export { composeReducers, applyGesture, type Reducer } from './view-state/compose'
-export { singleSelect, singleCurrent, multiSelectToggle } from './view-state/selection'
-export { setValue } from './view-state/value'
-export { reduceSingleSelect, reduceMultiSelect, reduceRadio } from './view-state/defaults'
-export { fromTree, fromList, pathAncestors } from './view-state/fromTree'
-export { fromFlatTree } from './view-state/fromFlatTree'
-export { useControlState } from './view-state/useControlState'
-export { useEventBridge } from './view-state/useEventBridge'
+export { reduce } from './state/reduce'
+export { composeReducers, applyGesture, type Reducer } from './state/compose'
+export { singleSelect, singleCurrent, multiSelectToggle } from './state/selection'
+export { setValue } from './state/value'
+export { reduceSingleSelect, reduceMultiSelect, reduceRadio } from './state/defaults'
+export { fromTree, fromList, pathAncestors } from './state/fromTree'
+export { fromFlatTree } from './state/fromFlatTree'
+export { useControlState } from './state/useControlState'
+export { useEventBridge } from './state/useEventBridge'
 export { useAnnouncer } from './patterns/useAnnouncer'
 export { useSkipLink } from './patterns/skipLink'
 export type { UseSkipLinkOptions, UseSkipLinkResult, SkipLinkProps } from './patterns/skipLink'
@@ -33,25 +33,25 @@ export type {
   UseAnnouncerOptions,
   UseAnnouncerResult,
 } from './patterns/useAnnouncer'
-export { useFocusBridge, useFocusOnRemove, useFocusOnInsert } from './read/focus'
+export { useFocusBridge, useFocusOnRemove, useFocusOnInsert } from './focus'
 export type {
   UseFocusOnRemoveOptions, UseFocusOnRemoveResult,
   UseFocusOnInsertOptions, UseFocusOnInsertResult,
-} from './read/focus'
+} from './focus'
 // useControlValue: 내부 (combobox/comboboxGrid query 입력) — 외부 export 안 함.
 // controlled/uncontrolled 표면은 #148 §7 폐기. 추후 combobox 합성 재설계 시 제거.
 
-export { useRovingTabIndex } from './read/roving/useRovingTabIndex'
-export { useSpatialNavigation } from './read/roving/useSpatialNavigation'
-export { useActiveDescendant } from './read/roving/useActiveDescendant'
+export { useRovingTabIndex } from './roving/useRovingTabIndex'
+export { useSpatialNavigation } from './roving/useSpatialNavigation'
+export { useActiveDescendant } from './roving/useActiveDescendant'
 
 export {
   composeAxes, axisKeys, tagAxis, parentOf, siblingsOf, enabledSiblings,
   navigate, activate, toggle, expand, escape, typeahead, treeNavigate, treeExpand,
   multiSelect, select, numericStep,
-  KEYS, matchChord, matchAnyChord, matchEventToChord, gridNavigate, gridMultiSelect,
+  KEYS, gridNavigate, gridMultiSelect,
   type Axis, type Chord, type KeyName,
-} from './input/keyboard/axes'
+} from './axes'
 export {
   navigateOnActivate,
   selectionFollowsFocus,
@@ -60,7 +60,14 @@ export {
   composeGestures,
   activateProps,
   type GestureHelper,
-} from './input/gesture'
+} from './gesture'
+export {
+  usePatternClipboard,
+  type ClipboardOnMiddleware,
+  type ClipboardSerializerOptions,
+  type UsePatternClipboardArgs,
+  type UsePatternClipboardReturn,
+} from './clipboard'
 
 // APG ↔ axis 정합 매트릭스 (EPIC #121).
 export { APG_KEYBOARD_SPEC, allApgChords, type ApgEntry } from './spec/apgKeyboardSpec'

@@ -19,19 +19,12 @@ It owns:
 
 It does not own reusable visual components, design tokens, brand themes, or app-specific screens.
 
-## Support Packages
-
-- `packages/resource`: optional resource/store bridge and CRUD adapter surface.
-- `packages/fs`: file tree, markdown/frontmatter, tags, and code highlighting helpers.
-- `packages/slides`: deck schema, markdown normalization, slide commands, PPTX export.
-- `packages/source-viewer`: docs/site source-code presentation.
-- `packages/devtools`: debugging helpers that consume the product but do not change product behavior.
-
 ## Harnesses
 
-`apps/*` are consumer harnesses. They may contain app-specific UI, sample data, and presentation. Reusable behavior discovered in an app should move to `packages/aria-kernel` or a support package.
-
-`apps/site` is the integrated documentation and showcase app.
+Consumer harnesses live in the sibling workspace `../aria-kernel-apps`. They may
+contain app-specific UI, sample data, presentation, resource adapters, source
+viewers, and devtools. Reusable ARIA behavior discovered there should move to
+`packages/aria-kernel`.
 
 ## Data And Event Contracts
 
@@ -58,8 +51,8 @@ Use targeted verification based on the changed boundary:
 
 ```bash
 pnpm build
-pnpm --filter @p/aria-kernel test
-pnpm --filter @p/site test
+pnpm test
+pnpm typecheck
 ```
 
 Docs must not describe packages, routes, or APIs that are absent from the current source tree.

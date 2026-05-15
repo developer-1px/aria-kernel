@@ -1,6 +1,6 @@
 import type { ValueEvent } from '../intent/events'
 import type { ItemProps, RootProps } from './types'
-import { numericStep } from '../input/keyboard/axes/numericStep'
+import { numericStep } from '../axes/numericStep'
 import { eventToChord } from '../trigger'
 
 /** Range slider axis — single-axis numericStep, applied per thumb. */

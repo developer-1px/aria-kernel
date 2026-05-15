@@ -1,4 +1,4 @@
-# `@p/aria-kernel` invariants
+# `@interactive-os/aria-kernel` invariants
 
 > Naming dictionary: [NAMING.md](./NAMING.md) · Recipe signatures: [PATTERNS.md](./PATTERNS.md)
 
@@ -28,7 +28,7 @@ If this file conflicts with source, source wins and this file should be fixed.
 
 ## Lab Contracts
 
-The lab absorbs behavior that specs leave implementation-defined. These are active contracts while the corresponding source and tests exist.
+The lab absorbs behavior that specs leave implementation-defined. These are active contracts while the corresponding package source and sibling harness tests exist.
 
 - Dialog backdrop close only when `event.target === event.currentTarget`.
 - Controlled tabs derive selected state from the controlled active id.

@@ -1,7 +1,7 @@
 import type React from 'react'
+import { matches } from '@interactive-os/keyboard'
 import { getCollectionChildren, getLabel, isDisabled, ROOT, type NormalizedData, type UiEvent } from '../intent/events'
-import { activate, composeAxes, navigate } from '../input/keyboard/axes'
-import { matchEventToChord } from '../input/keyboard/axes/chord'
+import { activate, composeAxes, navigate } from '../axes'
 import { usePatternBase } from './usePatternBase'
 import type { BaseItem, ItemProps, RootProps } from './types'
 
@@ -96,7 +96,7 @@ export function useToolbarPattern(
         if (e.defaultPrevented) return
         const ke = e.nativeEvent as unknown as KeyboardEvent
         for (const chord of Object.keys(on)) {
-          if (!matchEventToChord(ke, chord)) continue
+          if (!matches(ke, chord)) continue
           on[chord](ke, () => delegateKeyDown?.(e))
           return
         }

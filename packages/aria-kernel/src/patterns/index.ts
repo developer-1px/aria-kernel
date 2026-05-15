@@ -1,5 +1,5 @@
 /**
- * @p/aria-kernel/patterns — W3C APG `/patterns/` recipe layer.
+ * @interactive-os/aria-kernel/patterns — W3C APG `/patterns/` recipe layer.
  *
  * 정체성: 컴포넌트 0건, markup 어휘 0건, 토큰/CSS 0건.
  * 각 recipe = `(data, onEvent, opts?) → { rootProps, <part>Props(id), items }` 통일 시그니처.
@@ -10,10 +10,10 @@
  *   - subpath/파일명은 W3C APG URL slug 미러 (변경 ❌)
  *
  * 사용:
- *   import { useListboxPattern, useTabsPattern, useTreeviewPattern } from '@p/aria-kernel/patterns'
+ *   import { useListboxPattern, useTabsPattern, useTreeviewPattern } from '@interactive-os/aria-kernel/patterns'
  *
  * primitive 직접 조립 (escape hatch):
- *   import { useRovingTabIndex, composeAxes } from '@p/aria-kernel'
+ *   import { useRovingTabIndex, composeAxes } from '@interactive-os/aria-kernel'
  *
  * 자세한 명세는 packages/aria-kernel/PATTERNS.md
  */
@@ -25,6 +25,9 @@ export { type KeyDescriptor, type TreeCommand, type TreeCommandDescriptor } from
 export { mergeRefs } from './mergeRefs'
 export { useRadioPattern, radioAxis, radioKeys, type RadioOptions } from './radio'
 export { useToolbarPattern, toolbarAxis, type ToolbarOptions } from './toolbar'
+export { progressbarPattern, type ProgressbarOptions } from './progressbar'
+export { tagsPattern, type Tag, type TagsOptions } from './tags'
+export { sortablePattern, type SortableItem, type SortableOptions } from './sortable'
 
 export { useMenuPattern, menuAxis, menuKeys, menuButtonTriggerKeys, type MenuOptions } from './menu'
 export { useMenuButtonPattern, menuButtonAxis, menuButtonKeys, type MenuButtonOptions, type MenuItem, type MenuItemKind, type MenuLevel } from './menuButton'

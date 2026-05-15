@@ -1,16 +1,16 @@
 /**
  * Trigger — axis primitive 가 받는 입력 이벤트의 string 표현 (PRD #38 phase 2.5a).
  *
- * tinykeys de facto syntax 그대로. 키와 클릭을 같은 어휘로 표현:
- *   "Escape" · "Shift+Tab" · "$mod+c" · "ArrowDown"     ← key
- *   "Click" · "Shift+Click" · "$mod+Click" · "Alt+Click" ← click
+ * Keyboard chords use `@interactive-os/keyboard` aria-keyshortcuts notation.
+ * Click remains an aria-kernel trigger because it is not a keyboard input:
+ *   "Escape" · "Shift+Tab" · "Control+c" · "ArrowDown" ← key
+ *   "Click" · "Shift+Click" · "Control+Click"          ← click
  *
  * boolean modifier map (`{ctrl?, alt?, meta?, shift?}`) 폐기됨. 매칭은 string 비교 +
- * `parseChord` 캐시로 O(1) 룩업.
  */
 
-import type { Chord } from './input/keyboard/axes/chord'
-import { parseChord } from './input/keyboard/axes/chord'
+import { parseShortcut } from '@interactive-os/keyboard'
+import type { Chord } from './axes'
 
 export type Trigger = Chord
 
@@ -51,21 +51,25 @@ export const eventToChord = (e: KeyboardEvent | MouseEvent): Trigger => {
 }
 
 /**
- * triggerMatches — Trigger 가 chord 에 매치되는지. 정규화된 ParsedChord 비교.
- * 둘 다 parseChord 캐시 통과 → modifier flag · key 비교.
+ * triggerMatches — Trigger 가 chord 에 매치되는지.
  */
 export const triggerMatches = (t: Trigger, chord: Chord): boolean => {
-  const a = parseChord(t)
-  const b = parseChord(chord)
+  const a = parseTrigger(t)
+  const b = parseTrigger(chord)
+  if (a.kind !== b.kind) return false
+  if (a.kind === 'click' && b.kind === 'click') {
+    return a.ctrl === b.ctrl && a.alt === b.alt && a.meta === b.meta && a.shift === b.shift
+  }
+  if (a.kind === 'click' || b.kind === 'click') return false
   return a.key === b.key
-    && Boolean(a.ctrl)  === Boolean(b.ctrl)
-    && Boolean(a.alt)   === Boolean(b.alt)
-    && Boolean(a.meta)  === Boolean(b.meta)
-    && Boolean(a.shift) === Boolean(b.shift)
+    && a.ctrl === b.ctrl
+    && a.alt === b.alt
+    && a.meta === b.meta
+    && a.shift === b.shift
 }
 
 /** isClickTrigger — trigger 가 click 계열인지. */
-export const isClickTrigger = (t: Trigger): boolean => parseChord(t).key === 'Click'
+export const isClickTrigger = (t: Trigger): boolean => parseTrigger(t).kind === 'click'
 
 /** isKeyTrigger — trigger 가 key 계열인지. */
 export const isKeyTrigger = (t: Trigger): boolean => !isClickTrigger(t)
@@ -80,13 +84,41 @@ export type ParsedTrigger =
   | { kind: 'click'; ctrl: boolean; alt: boolean; meta: boolean; shift: boolean }
 
 export const parseTrigger = (t: Trigger): ParsedTrigger => {
-  const p = parseChord(t)
-  const mods = {
-    ctrl:  Boolean(p.ctrl),
-    alt:   Boolean(p.alt),
-    meta:  Boolean(p.meta),
-    shift: Boolean(p.shift),
+  if (t === 'Click' || t.endsWith('+Click')) return parseClickTrigger(t)
+
+  const [shortcut] = parseShortcut(t)
+  if (!shortcut) throw new Error(`Invalid trigger: "${t}"`)
+  return {
+    kind: 'key',
+    key: shortcut.key,
+    ctrl: shortcut.control,
+    alt: shortcut.alt,
+    meta: shortcut.meta,
+    shift: shortcut.shift,
   }
-  if (p.key === 'Click') return { kind: 'click', ...mods }
-  return { kind: 'key', key: p.key, ...mods }
+}
+
+const parseClickTrigger = (t: Trigger): ParsedTrigger => {
+  const modifiers = t === 'Click' ? [] : t.slice(0, -'+Click'.length).split('+')
+  const out = { kind: 'click' as const, ctrl: false, alt: false, meta: false, shift: false }
+  for (const modifier of modifiers) {
+    switch (modifier.toLowerCase()) {
+      case 'control':
+      case 'ctrl':
+        out.ctrl = true
+        break
+      case 'alt':
+        out.alt = true
+        break
+      case 'meta':
+        out.meta = true
+        break
+      case 'shift':
+        out.shift = true
+        break
+      default:
+        throw new Error(`Invalid click trigger: "${t}"`)
+    }
+  }
+  return out
 }

@@ -1,4 +1,4 @@
-# `@p/aria-kernel/patterns` — APG recipe layer
+# `@interactive-os/aria-kernel/patterns` — APG recipe layer
 
 > Naming dictionary: [NAMING.md](./NAMING.md) — canonical export/option/prop 이름 SSOT.
 

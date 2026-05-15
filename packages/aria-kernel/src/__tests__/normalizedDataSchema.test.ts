@@ -5,7 +5,7 @@ import {
   parseCollectionData,
 } from '../intent/schema'
 import { getCollectionRoot } from '../intent/events'
-import { fromList, fromTree } from '../view-state/fromTree'
+import { fromList, fromTree } from '../state/fromTree'
 
 describe('NormalizedData schema', () => {
   it('accepts the actual entity payload shape emitted by builders', () => {

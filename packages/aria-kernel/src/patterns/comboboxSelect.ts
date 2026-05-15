@@ -1,16 +1,17 @@
 import { useRef } from 'react'
+import { matches } from '@interactive-os/keyboard'
 import {
   ROOT, getCollectionChildren, getLabel, isDisabled, getFocus, isOpen,
   type NormalizedData, type UiEvent,
 } from '../intent/events'
 import {
-  activate, composeAxes, escape, INTENT_CHORDS, matchAnyChord,
+  activate, composeAxes, escape, INTENT_CHORDS,
   navigate, openControl,
-} from '../input/keyboard/axes'
-import { bindAxis } from '../view-state/bind'
-import { useActiveDescendant } from '../read/roving/useActiveDescendant'
+} from '../axes'
+import { bindAxis } from '../state/bind'
+import { useActiveDescendant } from '../roving/useActiveDescendant'
 import type { BaseItem, ItemProps, RootProps } from './types'
-import { BLUR_RACE_DELAY_MS } from '../input/keyboard/key/timing'
+import { BLUR_RACE_DELAY_MS } from '../key/timing'
 import { usePopupBlurRace } from './usePopupBlurRace'
 
 const ARROW_DOWN = ['ArrowDown'] as const
@@ -115,22 +116,22 @@ export function useComboboxSelectPattern(
   const { onKey: dispatchKey } = bindAxis(axis, data, intent)
 
   const onKeyDown = (e: React.KeyboardEvent) => {
-    const ev = e as unknown as KeyboardEvent
+    const ev = e.nativeEvent
     // closed: Enter/Space/Down/Up/Home/End all open popup (APG select-only).
     if (!expanded && (
-      matchAnyChord(ev, INTENT_CHORDS.activate.trigger) ||
-      matchAnyChord(ev, ARROW_DOWN) || matchAnyChord(ev, ARROW_UP) ||
-      matchAnyChord(ev, HOME) || matchAnyChord(ev, END)
+      matches(ev, INTENT_CHORDS.activate.trigger.join(' ')) ||
+      matches(ev, ARROW_DOWN.join(' ')) || matches(ev, ARROW_UP.join(' ')) ||
+      matches(ev, HOME.join(' ')) || matches(ev, END.join(' '))
     )) {
       e.preventDefault()
       onEvent?.({ type: 'open', id: ROOT, open: true })
-      const target = matchAnyChord(ev, BACKWARD_OPEN)
+      const target = matches(ev, BACKWARD_OPEN.join(' '))
         ? allIds[allIds.length - 1]
         : (selectedId ?? allIds[0])
       if (target) onEvent?.({ type: 'navigate', id: target })
       return
     }
-    if ((matchAnyChord(ev, HOME) || matchAnyChord(ev, END)) && !expanded) return
+    if ((matches(ev, HOME.join(' ')) || matches(ev, END.join(' '))) && !expanded) return
     dispatchKey(e, activeId ?? ROOT)
   }
 

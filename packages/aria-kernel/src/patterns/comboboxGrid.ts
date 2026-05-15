@@ -1,17 +1,18 @@
 import { useRef } from 'react'
+import { matches } from '@interactive-os/keyboard'
 import {
   ROOT, getChildren, getCollectionChildren, getLabel, isDisabled, getFocus, isOpen,
   type NormalizedData, type UiEvent,
 } from '../intent/events'
 import {
   activate, composeAxes, escape,
-  gridNavigate, matchAnyChord, openControl,
-} from '../input/keyboard/axes'
-import { bindAxis } from '../view-state/bind'
+  gridNavigate, openControl,
+} from '../axes'
+import { bindAxis } from '../state/bind'
 import { useControlValue } from './_useControlValue'
-import { useActiveDescendant } from '../read/roving/useActiveDescendant'
+import { useActiveDescendant } from '../roving/useActiveDescendant'
 import type { ItemProps, RootProps } from './types'
-import { BLUR_RACE_DELAY_MS } from '../input/keyboard/key/timing'
+import { BLUR_RACE_DELAY_MS } from '../key/timing'
 import { usePopupBlurRace } from './usePopupBlurRace'
 
 /** comboboxGrid open-trigger chord registry — declarative SSOT. */
@@ -156,11 +157,11 @@ export function useComboboxGridPattern(
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     // closed + ArrowDown/Up → open + 첫/마지막 row 의 첫 cell focus
-    const ev = e as unknown as KeyboardEvent
-    if (!expanded && (matchAnyChord(ev, ARROW_DOWN) || matchAnyChord(ev, ARROW_UP))) {
+    const ev = e.nativeEvent
+    if (!expanded && (matches(ev, ARROW_DOWN.join(' ')) || matches(ev, ARROW_UP.join(' ')))) {
       e.preventDefault()
       onEvent?.({ type: 'open', id: ROOT, open: true })
-      const targetRow = matchAnyChord(ev, ARROW_UP) ? visibleRowIds[visibleRowIds.length - 1] : visibleRowIds[0]
+      const targetRow = matches(ev, ARROW_UP.join(' ')) ? visibleRowIds[visibleRowIds.length - 1] : visibleRowIds[0]
       const targetCell = targetRow ? getChildren(data, targetRow)[0] : undefined
       if (targetCell) onEvent?.({ type: 'navigate', id: targetCell })
       return
@@ -168,7 +169,7 @@ export function useComboboxGridPattern(
     // Escape — open scope 는 ROOT (popup 자체). axis 가 activeId 로 dispatch 하면
     // ROOT 의 expanded 가 변하지 않아 닫히지 않음 → 명시적으로 ROOT id 로 emit.
     // APG combobox: Escape MUST close popup.
-    if (expanded && matchAnyChord(ev, ESCAPE)) {
+    if (expanded && matches(ev, ESCAPE.join(' '))) {
       e.preventDefault()
       onEvent?.({ type: 'open', id: ROOT, open: false })
       return

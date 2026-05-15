@@ -1,5 +1,5 @@
 import { useEffect, type RefObject } from 'react'
-import { KEYS } from '../input/keyboard/axes/keys'
+import { KEYS } from '../axes/keys'
 
 const FOCUSABLE_SELECTOR = [
   'a[href]', 'area[href]',

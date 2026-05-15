@@ -1,17 +1,18 @@
 import { useRef, useMemo } from 'react'
+import { matches } from '@interactive-os/keyboard'
 import {
   ROOT, getCollectionChildren, getLabel, isDisabled, getFocus, isOpen,
   type NormalizedData, type UiEvent,
 } from '../intent/events'
 import {
-  activate, composeAxes, escape, matchAnyChord,
+  activate, composeAxes, escape,
   navigate, openControl,
-} from '../input/keyboard/axes'
-import { bindAxis } from '../view-state/bind'
+} from '../axes'
+import { bindAxis } from '../state/bind'
 import { useControlValue } from './_useControlValue'
-import { useActiveDescendant } from '../read/roving/useActiveDescendant'
+import { useActiveDescendant } from '../roving/useActiveDescendant'
 import type { BaseItem, ItemProps, RootProps } from './types'
-import { BLUR_RACE_DELAY_MS } from '../input/keyboard/key/timing'
+import { BLUR_RACE_DELAY_MS } from '../key/timing'
 import { usePopupBlurRace } from './usePopupBlurRace'
 
 /** combobox chord registry — declarative SSOT. */
@@ -195,22 +196,22 @@ export function useComboboxPattern(
   const { onKey: dispatchKey } = bindAxis(axis, data, intent)
 
   const onKeyDown = (e: React.KeyboardEvent) => {
-    const ev = e as unknown as KeyboardEvent
+    const ev = e.nativeEvent
     if (!activeId) {
-      if (matchAnyChord(ev, FORWARD_OPEN)) {
+      if (matches(ev, FORWARD_OPEN.join(' '))) {
         e.preventDefault()
         const target = visibleIds[0]
         if (target) intent({ type: 'navigate', id: target })
         return
       }
-      if (matchAnyChord(ev, BACKWARD_OPEN)) {
+      if (matches(ev, BACKWARD_OPEN.join(' '))) {
         e.preventDefault()
         const target = visibleIds[visibleIds.length - 1]
         if (target) intent({ type: 'navigate', id: target })
         return
       }
     }
-    if ((matchAnyChord(ev, HOME) || matchAnyChord(ev, END)) && !expanded) return
+    if ((matches(ev, HOME.join(' ')) || matches(ev, END.join(' '))) && !expanded) return
     dispatchKey(e, activeId ?? ROOT)
   }
 

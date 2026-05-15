@@ -1,8 +1,9 @@
 import { useCallback } from 'react'
+import { matches } from '@interactive-os/keyboard'
 import { ROOT, getChildren, getCollectionChildren, getLabel, isDisabled, type NormalizedData, type UiEvent } from '../intent/events'
-import { activate, composeAxes, multiSelect, navigate, typeahead, matchAnyChord } from '../input/keyboard/axes'
-import type { InsideEditableMode } from '../input/keyboard/key/insideEditable'
-import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from '../input/clipboard/usePatternClipboard'
+import { activate, composeAxes, multiSelect, navigate, typeahead } from '../axes'
+import type { InsideEditableMode } from '../key/insideEditable'
+import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from '../clipboard/usePatternClipboard'
 
 /** listbox edit-mode chord registry — declarative SSOT (Enter=insertAfter, Backspace=remove). */
 const LISTBOX_EDIT_INSERT = ['Enter'] as const
@@ -11,8 +12,8 @@ const LISTBOX_EDIT_REMOVE = ['Backspace'] as const
 /** listboxEditKeys — chord registry 합집합 도출. editable 모드 추가 키. */
 export const listboxEditKeys = (): readonly string[] =>
   [...LISTBOX_EDIT_INSERT, ...LISTBOX_EDIT_REMOVE]
-import { selectionFollowsFocus as applySelectionFollowsFocus } from '../input/gesture'
-import { useRovingTabIndex } from '../read/roving/useRovingTabIndex'
+import { selectionFollowsFocus as applySelectionFollowsFocus } from '../gesture'
+import { useRovingTabIndex } from '../roving/useRovingTabIndex'
 import type { BaseItem, KeyDescriptor, ItemProps, RootProps } from './types'
 import { warnMultiSelectPairing } from './devWarnMultiSelect'
 
@@ -197,12 +198,12 @@ export function useListboxPattern(
     ? (e: React.KeyboardEvent) => {
         const id = focusId
         if (id && id !== containerId) {
-          if (matchAnyChord(e as unknown as KeyboardEvent, LISTBOX_EDIT_INSERT)) {
+          if (matches(e.nativeEvent, LISTBOX_EDIT_INSERT.join(' '))) {
             e.preventDefault()
             relay({ type: 'insertAfter', siblingId: id })
             return
           }
-          if (matchAnyChord(e as unknown as KeyboardEvent, LISTBOX_EDIT_REMOVE)) {
+          if (matches(e.nativeEvent, LISTBOX_EDIT_REMOVE.join(' '))) {
             e.preventDefault()
             relay({ type: 'remove', id })
             return

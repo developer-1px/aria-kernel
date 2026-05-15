@@ -1,5 +1,5 @@
 /**
- * @p/aria-kernel/patterns 공용 타입 — recipe 시그니처 통일을 위한 building blocks.
+ * @interactive-os/aria-kernel/patterns 공용 타입 — recipe 시그니처 통일을 위한 building blocks.
  * PATTERNS.md 의 통일 시그니처 참조.
  */
 
@@ -64,7 +64,7 @@ export interface TreeItem extends BaseItem {
 /**
  * Builtin chord descriptor — pattern 이 자기 디폴트로 흡수하는 chord 한 entry.
  * llms.txt / 문서 자동 추출 + 사용자/LLM 이 어떤 chord 가 reserved 인지 알게 함.
- *  chord       : axes/chord parseChord 형식 (e.g. 'mod+z', 'Shift+Tab')
+ *  chord       : `@interactive-os/keyboard` shortcut notation (e.g. 'Mod+z', 'Shift+Tab')
  *  uiEvent     : emit 되는 UiEvent['type']
  *  description : 한 줄 설명
  *  scope       : 'root' (default) | 'item' (focused item 필요)

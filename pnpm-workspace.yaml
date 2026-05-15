@@ -1,5 +1,2 @@
 packages:
-  - 'packages/*'
-  - '!packages/zod-crud'
-  - 'site'
-  - 'apps/*'
+  - 'packages/aria-kernel'

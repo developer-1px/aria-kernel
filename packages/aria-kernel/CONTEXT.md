@@ -1,4 +1,4 @@
-# `@p/aria-kernel` — Context
+# `@interactive-os/aria-kernel` — Context
 
 이 repo의 단 하나의 제품. ARIA 행동 인프라 (axes · roving · gesture · patterns).
 

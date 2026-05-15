@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
+import { matches } from '@interactive-os/keyboard'
 import {
   ROOT, getChildren, getCollectionChildren, getLabel, isDisabled,
   type NormalizedData, type UiEvent,
 } from '../intent/events'
 import {
   activate, axisKeys, composeAxes, escape, navigate,
-  submenuOpen, submenuClose, typeahead, matchAnyChord,
+  submenuOpen, submenuClose, typeahead,
   type Axis,
-} from '../input/keyboard/axes'
-import { bindAxis } from '../view-state/bind'
-import { parentOf } from '../input/keyboard/axes/index'
+} from '../axes'
+import { bindAxis } from '../state/bind'
+import { parentOf } from '../axes/index'
 import type { ItemProps, RootProps } from './types'
 import type { MenuItem, MenuItemKind, MenuLevel } from './menuButton'
 
@@ -343,7 +344,7 @@ export function useMenuPattern(
     'aria-controls': rootMenuId,
     onClick: () => setOpen(!open),
     onKeyDown: (e: React.KeyboardEvent) => {
-      if (!open && matchAnyChord(e as unknown as KeyboardEvent, TRIGGER_OPEN_CHORDS)) {
+      if (!open && matches(e.nativeEvent, TRIGGER_OPEN_CHORDS.join(' '))) {
         e.preventDefault()
         setOpen(true)
         const first = getCollectionChildren(data, containerId).filter((id) => !isDisabled(data, id))[0]
