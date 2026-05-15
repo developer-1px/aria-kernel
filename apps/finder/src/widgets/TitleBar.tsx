@@ -1,6 +1,6 @@
 import { useMemo, type ComponentPropsWithoutRef } from 'react'
-import { fromList, type UiEvent } from '@p/aria-kernel'
-import { useToolbarPattern } from '@p/aria-kernel/patterns'
+import { fromList, type UiEvent } from '@interactive-os/aria-kernel'
+import { useToolbarPattern } from '@interactive-os/aria-kernel/patterns'
 import type { ViewMode } from '../entities/types'
 
 const VIEW_ITEMS = [

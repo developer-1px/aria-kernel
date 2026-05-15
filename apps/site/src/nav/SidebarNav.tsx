@@ -7,7 +7,7 @@
  */
 import { useMemo, useRef } from 'react'
 import { useRouter, useRouterState } from '@tanstack/react-router'
-import { useControlState, type NormalizedData } from '@p/aria-kernel'
+import { useControlState, type NormalizedData } from '@interactive-os/aria-kernel'
 import { Nav } from '../examples/_navigationListWrapper'
 import { collectPalette, paletteCategory, type PaletteEntry } from './palette'
 
@@ -84,7 +84,7 @@ export function SidebarNav() {
         open
       >
         <summary className="cursor-pointer list-none rounded px-2 py-1 font-semibold text-stone-900 marker:hidden hover:bg-stone-200 md:hidden">
-          ☰ @p/aria-kernel
+          ☰ @interactive-os/aria-kernel
         </summary>
         <a
           href="/"
@@ -95,7 +95,7 @@ export function SidebarNav() {
           }}
           className="hidden rounded px-2 py-1 font-semibold text-stone-900 hover:bg-stone-200 md:block"
         >
-          @p/aria-kernel
+          @interactive-os/aria-kernel
         </a>
         <Nav aria-label="Site navigation" data={data} onEvent={onEvent} roving />
       </details>

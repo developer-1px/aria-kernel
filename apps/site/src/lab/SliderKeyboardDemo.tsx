@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { sliderPattern } from '@p/aria-kernel/patterns'
+import { sliderPattern } from '@interactive-os/aria-kernel/patterns'
 
 export function SliderKeyboardDemo() {
   const [value, setValue] = useState(40)

@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
-import { fromList, type UiEvent } from '@p/aria-kernel'
-import { useTabsPattern } from '@p/aria-kernel/patterns'
+import { fromList, type UiEvent } from '@interactive-os/aria-kernel'
+import { useTabsPattern } from '@interactive-os/aria-kernel/patterns'
 
 const TABS = ['Sheet1', 'Sheet2', 'Sheet3']
 

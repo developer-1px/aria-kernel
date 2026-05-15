@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useCarouselPattern } from '@p/aria-kernel/patterns'
+import { useCarouselPattern } from '@interactive-os/aria-kernel/patterns'
 
 const SLIDES = [
   { id: 's1', label: '첫 번째 슬라이드' },

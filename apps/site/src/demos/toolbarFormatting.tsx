@@ -1,7 +1,7 @@
 import { useId, useMemo, useState } from 'react'
 import type React from 'react'
-import { fromList, type UiEvent, axisKeys } from '@p/aria-kernel'
-import { toolbarAxis, useToolbarPattern, useMenuPattern } from '@p/aria-kernel/patterns'
+import { fromList, type UiEvent, axisKeys } from '@interactive-os/aria-kernel'
+import { toolbarAxis, useToolbarPattern, useMenuPattern } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Toolbar · APG Editor Example',

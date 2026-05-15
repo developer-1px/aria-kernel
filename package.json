@@ -2,7 +2,7 @@
   "name": "aria-kernel",
   "private": true,
   "version": "0.0.0",
-  "description": "@p/aria-kernel workspace with Tailwind-based app showcases (slides, finder, markdown).",
+  "description": "@interactive-os/aria-kernel workspace with Tailwind-based app showcases (slides, finder, markdown).",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -1,5 +1,5 @@
-import { axisKeys } from '@p/aria-kernel'
-import { listboxAxis, useListboxPattern, useListboxReducer } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@interactive-os/aria-kernel'
+import { listboxAxis, useListboxPattern, useListboxReducer } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Listbox · Grouped',

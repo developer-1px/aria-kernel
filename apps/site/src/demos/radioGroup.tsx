@@ -1,5 +1,5 @@
 
-import { radioKeys, useRadioPattern, useRadioReducer } from '@p/aria-kernel/patterns'
+import { radioKeys, useRadioPattern, useRadioReducer } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Radio Group',

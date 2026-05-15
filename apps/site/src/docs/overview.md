@@ -56,15 +56,15 @@ PowerPoint 의 좌측 슬라이드 썸네일 목록을 떠올려 보세요.
 
 이 어긋남을 메우는 도구가 있다면 — 행동 그래프는 spec 그대로 보증되고, 시각은 자유롭게 (썸네일이든 컬럼이든 카드든) 그릴 수 있다면 — 어떨까요?
 
-## 답 — `@p/aria-kernel`
+## 답 — `@interactive-os/aria-kernel`
 
-`@p/aria-kernel` 는 정확히 그 한 가지만 합니다.
+`@interactive-os/aria-kernel` 는 정확히 그 한 가지만 합니다.
 
 PPT 썸네일 예제로 돌아가 봅시다 — 데이터는 tree, 시각은 평평한 카드 list.
 
 ```ts
-import { fromTree } from '@p/aria-kernel'
-import { useTreeviewPattern } from '@p/aria-kernel/patterns'
+import { fromTree } from '@interactive-os/aria-kernel'
+import { useTreeviewPattern } from '@interactive-os/aria-kernel/patterns'
 
 // 데이터: tree (섹션 > 슬라이드)
 const data = fromTree([
@@ -137,10 +137,10 @@ data → 화면 → 이벤트 → reducer → data
 
 | 진입점 | 어디 | 무엇 |
 |--------|------|------|
-| Pattern recipe (24개) | `@p/aria-kernel/patterns` | listbox · tabs · tree · menu · combobox · dialog · slider … |
-| Axis primitive | `@p/aria-kernel` | navigate · activate · expand · typeahead · multiSelect … (recipe 가 부족할 때 직접 합성) |
-| 데이터 빌더 | `@p/aria-kernel` | `fromList`, `fromTree`, `pathAncestors` |
-| 단일 dispatch 어휘 | `@p/aria-kernel` (`UiEvent`) | 11 variant union |
+| Pattern recipe (24개) | `@interactive-os/aria-kernel/patterns` | listbox · tabs · tree · menu · combobox · dialog · slider … |
+| Axis primitive | `@interactive-os/aria-kernel` | navigate · activate · expand · typeahead · multiSelect … (recipe 가 부족할 때 직접 합성) |
+| 데이터 빌더 | `@interactive-os/aria-kernel` | `fromList`, `fromTree`, `pathAncestors` |
+| 단일 dispatch 어휘 | `@interactive-os/aria-kernel` (`UiEvent`) | 11 variant union |
 
 라이브 데모: [/patterns](/patterns) · [/axes](/axes) · [/matrix](/matrix) · [/data](/data) · [/uievents](/uievents)
 

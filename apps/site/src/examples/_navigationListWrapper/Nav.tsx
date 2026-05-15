@@ -1,5 +1,5 @@
-import type { NormalizedData } from '@p/aria-kernel'
-import { navigationListPattern, type PatternProps } from '@p/aria-kernel/patterns'
+import type { NormalizedData } from '@interactive-os/aria-kernel'
+import { navigationListPattern, type PatternProps } from '@interactive-os/aria-kernel/patterns'
 import { defaultLabel, renderSlot, type Slot } from '../../catalog/slots'
 
 export interface NavSlots<TItem extends object = Record<string, unknown>> {

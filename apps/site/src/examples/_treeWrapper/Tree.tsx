@@ -1,4 +1,4 @@
-import { useTreeviewPattern, type PatternProps, type TreeItem } from '@p/aria-kernel/patterns'
+import { useTreeviewPattern, type PatternProps, type TreeItem } from '@interactive-os/aria-kernel/patterns'
 import { defaultLabel, emptySlot, renderSlot, type Slot } from '../../catalog/slots'
 
 export interface TreeSlots<TItem extends object = Record<string, unknown>> {

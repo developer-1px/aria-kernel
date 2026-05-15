@@ -1,11 +1,11 @@
-# @p/aria-kernel
+# @interactive-os/aria-kernel
 
 **React + Reducer 기반 ARIA 행동 인프라.** W3C/APG 패턴 recipe + axis 합성 + roving tabindex + gesture/intent 변환. 데이터는 `use<Pattern>Reducer` 한 줄. 토큰/CSS/UI 어휘 0건.
 
 ## Canonical 합성 (with side effect)
 
 ```tsx
-import { useListboxReducer, useListboxPattern } from '@p/aria-kernel/patterns'
+import { useListboxReducer, useListboxPattern } from '@interactive-os/aria-kernel/patterns'
 import { useNavigate } from '@tanstack/react-router'
 
 const FRUITS = [{ id: 'apple', label: 'Apple' }, { id: 'banana', label: 'Banana' }]
@@ -38,7 +38,7 @@ function Picker() {
 ## 설치
 
 ```bash
-npm install @p/aria-kernel
+npm install @interactive-os/aria-kernel
 # peer
 npm install react@^19
 ```
@@ -58,12 +58,12 @@ export default defineConfig({
 })
 ```
 
-npm registry 설치(`npm install @p/aria-kernel`)에서는 불필요. 대안으로 `pnpm pack` 으로 tarball 을 만들어 설치하면 dedupe 없이 작동한다.
+npm registry 설치(`npm install @interactive-os/aria-kernel`)에서는 불필요. 대안으로 `pnpm pack` 으로 tarball 을 만들어 설치하면 dedupe 없이 작동한다.
 
 ## 한 줄 사용
 
 ```tsx
-import { useSpatialNavigation } from '@p/aria-kernel'
+import { useSpatialNavigation } from '@interactive-os/aria-kernel'
 
 function Toolbar() {
   const { ref, onKeyDown } = useSpatialNavigation<HTMLDivElement>(null, {
@@ -86,17 +86,17 @@ function Toolbar() {
 | **Axes** | `composeAxes` · `navigate` · `activate` · `expand` · `treeNavigate` · `typeahead` · `toggle` · `multiSelect` · `gridMultiSelect` |
 | **Roving** | `useRovingTabIndex` · `useSpatialNavigation` · `useActiveDescendant` |
 | **Gesture** | `composeGestures` · `navigateOnActivate` · `selectionFollowsFocus` · `expandBranchOnActivate` · `expandOnActivate` · `activateProps` · `useZoomPanGesture` |
-| **Key** | `@p/aria-kernel/key` (subpath) — `useShortcut` · `onShortcut` · `bindGlobalKeyMap` · `useKeyMap` · `routeInsideEditable` · `isEditable` · `fromKeyboardEvent` |
+| **Key** | `@interactive-os/aria-kernel/key` (subpath) — `useShortcut` · `onShortcut` · `bindGlobalKeyMap` · `useKeyMap` · `routeInsideEditable` · `isEditable` · `fromKeyboardEvent` |
 | **Spec** | `APG_KEYBOARD_SPEC` · `allApgChords` · `APG_PATTERN_EXAMPLE_SPEC` · `allApgExamples` · `IMPL_CHORDS` · `normalizeChord` · `normalizeChordSet` |
-| **Patterns** | `@p/aria-kernel/patterns` (subpath) — `useListboxPattern` · `useTreeviewPattern` · ... 21종 |
+| **Patterns** | `@interactive-os/aria-kernel/patterns` (subpath) — `useListboxPattern` · `useTreeviewPattern` · ... 21종 |
 
 ## Subpath imports
 
 ```ts
-import { composeAxes, navigate } from '@p/aria-kernel/axes'
-import { useRovingTabIndex } from '@p/aria-kernel/roving'
-import { useShortcut } from '@p/aria-kernel/key'
-import { useListboxPattern } from '@p/aria-kernel/patterns'
+import { composeAxes, navigate } from '@interactive-os/aria-kernel/axes'
+import { useRovingTabIndex } from '@interactive-os/aria-kernel/roving'
+import { useShortcut } from '@interactive-os/aria-kernel/key'
+import { useListboxPattern } from '@interactive-os/aria-kernel/patterns'
 ```
 
 ## UI Registry Augmentation
@@ -104,7 +104,7 @@ import { useListboxPattern } from '@p/aria-kernel/patterns'
 `UiNode.component`을 등록된 이름 set으로 좁히기:
 
 ```ts
-declare module '@p/aria-kernel/layout/nodes' {
+declare module '@interactive-os/aria-kernel/layout/nodes' {
   interface Register {
     component: keyof typeof uiRegistry
   }

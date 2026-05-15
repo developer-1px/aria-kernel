@@ -1,5 +1,5 @@
 /**
- * @p/aria-kernel/state — UiEvent → NormalizedData 변환 레이어.
+ * @interactive-os/aria-kernel/state — UiEvent → NormalizedData 변환 레이어.
  * reducer (`reduce` · `singleSelect` · `setValue` …) + 합성기(`composeReducers` · `applyGesture`)
  * + tree/list 빌더 + React 브리지 hook(`useControlState` · `useEventBridge`).
  */

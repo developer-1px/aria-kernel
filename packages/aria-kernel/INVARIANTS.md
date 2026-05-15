@@ -1,4 +1,4 @@
-# `@p/aria-kernel` invariants
+# `@interactive-os/aria-kernel` invariants
 
 > Naming dictionary: [NAMING.md](./NAMING.md) · Recipe signatures: [PATTERNS.md](./PATTERNS.md)
 

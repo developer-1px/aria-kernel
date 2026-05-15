@@ -17,10 +17,10 @@
 
 가장 가까운 이웃입니다. 두 차이:
 
-1. **어휘** — RA 는 자체 어휘(`<ListBox>`, `Item`, `Section`, `useListBox`), `@p/aria-kernel` 는 W3C ARIA 그대로 (`role="listbox"`, `optionProps`)
-2. **데이터·이벤트** — RA 는 Collection iterator + 다중 callback, `@p/aria-kernel` 는 NormalizedData + 단일 `onEvent(UiEvent)`
+1. **어휘** — RA 는 자체 어휘(`<ListBox>`, `Item`, `Section`, `useListBox`), `@interactive-os/aria-kernel` 는 W3C ARIA 그대로 (`role="listbox"`, `optionProps`)
+2. **데이터·이벤트** — RA 는 Collection iterator + 다중 callback, `@interactive-os/aria-kernel` 는 NormalizedData + 단일 `onEvent(UiEvent)`
 
-ARIA 정확도와 collection 추상화가 1순위면 RA 가 답입니다. **W3C 어휘 일치 + 단일 dispatch** 가 1순위면 `@p/aria-kernel`.
+ARIA 정확도와 collection 추상화가 1순위면 RA 가 답입니다. **W3C 어휘 일치 + 단일 dispatch** 가 1순위면 `@interactive-os/aria-kernel`.
 
 ### Q. `useListboxPattern` · `rootProps` 도 라이브러리 어휘 아닌가?
 
@@ -61,7 +61,7 @@ const normalized = useMemo(() => fromList(data ?? []), [data])
 return <Listbox data={normalized} ... />
 ```
 
-또는 `useResource` (`@p/resource`) 가 query/cache 어댑터 역할을 할 수 있습니다.
+또는 `useResource` (`@interactive-os/resource`) 가 query/cache 어댑터 역할을 할 수 있습니다.
 
 ### Q. UiEvent 11 variant 가 부족하지 않나?
 
@@ -93,7 +93,7 @@ return <Listbox data={normalized} ... />
 
 부분 그렇습니다. 다만 **회귀가 아니라 의도된 분업**입니다:
 
-- `@p/aria-kernel` = 행동 SSOT (24 패턴 행동을 한 곳에)
+- `@interactive-os/aria-kernel` = 행동 SSOT (24 패턴 행동을 한 곳에)
 - 사용자 wrapper = 시각 SSOT (자기 디자인시스템에 한 번만 입힘)
 
 shadcn/ui 도 결국 같은 구조입니다 — Radix UI 위에 Tailwind 입혀서 사용자 코드베이스로 복사. 차이는 "시각 결정을 라이브러리가 안 한다"는 것뿐.

@@ -1,5 +1,5 @@
 {
-  "name": "@p/slides",
+  "name": "@interactive-os/slides",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@interactive-os/keyboard": "file:../../../keyboard/packages/keyboard",
-    "@p/aria-kernel": "workspace:*",
+    "@interactive-os/aria-kernel": "workspace:*",
     "pptxgenjs": "^4.0.1",
     "zod": "^4.3.6",
     "zod-crud": "file:../../../zod-crud/packages/zod-crud"

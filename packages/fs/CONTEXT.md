@@ -1,4 +1,4 @@
-# `@p/fs` — Context
+# `@interactive-os/fs` — Context
 
 파일시스템 추상. `apps/finder`·`apps/markdown` 등이 소비.
 

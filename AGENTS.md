@@ -28,7 +28,7 @@ This repo's source tree is the source of truth. If a markdown rule conflicts wit
 - State crossing a package/app boundary should be serializable plain data.
 - Keep the flow one-way: data -> UI props -> `UiEvent` -> reducer/resource -> data.
 - `UiEvent` in `packages/aria-kernel/src/types.ts` is the public event vocabulary.
-- `@p/resource` may adapt `UiEvent` to CRUD backends. Keep backend-specific details out of `@p/aria-kernel` imports.
+- `@interactive-os/resource` may adapt `UiEvent` to CRUD backends. Keep backend-specific details out of `@interactive-os/aria-kernel` imports.
 
 ## Search Before Create
 
@@ -54,8 +54,8 @@ Use the smallest verification that covers the changed boundary:
 
 ```bash
 pnpm build
-pnpm --filter @p/aria-kernel test
-pnpm --filter @p/site test
+pnpm --filter @interactive-os/aria-kernel test
+pnpm --filter @interactive-os/site test
 ```
 
 For docs-only cleanup, run targeted text checks for stale names from removed code:

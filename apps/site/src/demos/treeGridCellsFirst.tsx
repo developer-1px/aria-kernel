@@ -1,5 +1,5 @@
-import { axisKeys } from '@p/aria-kernel'
-import { treegridAxis, useTreegridPattern, useTreegridReducer } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@interactive-os/aria-kernel'
+import { treegridAxis, useTreegridPattern, useTreegridReducer } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Tree Grid · Cells-First',

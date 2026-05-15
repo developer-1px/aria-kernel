@@ -16,11 +16,11 @@
  */
 import {useEffect, useMemo, useState} from 'react'
 import type {ZodType} from 'zod'
-import {reduce} from '@p/aria-kernel'
-import {reduceSingleSelect, reduceMultiSelect} from '@p/aria-kernel'
+import {reduce} from '@interactive-os/aria-kernel'
+import {reduceSingleSelect, reduceMultiSelect} from '@interactive-os/aria-kernel'
 import {useResource, type Resource} from '../../store/data'
 import {routeUiEventToCrud, type CrudPort} from '../../mutation/routeUiEventToCrud'
-import type {Meta, NormalizedData, UiEvent} from '@p/aria-kernel'
+import type {Meta, NormalizedData, UiEvent} from '@interactive-os/aria-kernel'
 import {decode, encode} from './codec'
 
 type Kind = 'list' | 'tree' | 'grid'

@@ -1,5 +1,5 @@
-import { axisKeys } from '@p/aria-kernel'
-import { radioAxis, useRadioPattern, useRadioReducer } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@interactive-os/aria-kernel'
+import { radioAxis, useRadioPattern, useRadioReducer } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Radio Group · activeDescendant',

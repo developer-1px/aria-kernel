@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { fromList, getFocus, type UiEvent } from '@p/aria-kernel'
-import { listboxAxis, useListboxPattern } from '@p/aria-kernel/patterns'
-import { axisKeys } from '@p/aria-kernel'
+import { fromList, getFocus, type UiEvent } from '@interactive-os/aria-kernel'
+import { listboxAxis, useListboxPattern } from '@interactive-os/aria-kernel/patterns'
+import { axisKeys } from '@interactive-os/aria-kernel'
 
 export const meta = {
   title: 'Listbox · Rearrangeable',

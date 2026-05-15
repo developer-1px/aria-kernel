@@ -1,4 +1,4 @@
-import { fromList, useRovingTabIndex, composeAxes, navigate, activate, type UiEvent } from '@p/aria-kernel'
+import { fromList, useRovingTabIndex, composeAxes, navigate, activate, type UiEvent } from '@interactive-os/aria-kernel'
 import type { Slide } from '../entities/schema'
 
 const axis = composeAxes(navigate('horizontal'), activate)

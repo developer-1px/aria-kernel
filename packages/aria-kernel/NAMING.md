@@ -1,4 +1,4 @@
-# `@p/aria-kernel` — Canonical Naming Dictionary
+# `@interactive-os/aria-kernel` — Canonical Naming Dictionary
 
 > **출처 우선순위**: 1) WAI-ARIA 1.2 → 2) APG patterns URL slug → 3) WHATWG HTML → 4) WCAG.
 > 라이브러리·DS(Radix·Material·shadcn) 어휘 차용 ❌. 행동만 차용, 이름은 W3C.

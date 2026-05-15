@@ -1,5 +1,5 @@
-import type { UiEvent } from '@p/aria-kernel'
-import { useRadioPattern, useRadioReducer } from '@p/aria-kernel/patterns'
+import type { UiEvent } from '@interactive-os/aria-kernel'
+import { useRadioPattern, useRadioReducer } from '@interactive-os/aria-kernel/patterns'
 
 const ITEMS = [
   { id: 'small', label: '소형' },

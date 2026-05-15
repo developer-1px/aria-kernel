@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { CatalogRow } from './CatalogRow'
 import type { AxisEntry } from './registry.axes'
 import { slugForAxis, PKG_SOURCES } from './registry.axes'
-import { buildAppTabs } from '@p/source-viewer'
+import { buildAppTabs } from '@interactive-os/source-viewer'
 
 /**
  * 한 axis 의 화면 — 좌측에 그 axis 를 쓰는 pattern 목록(탭 전환), 우측에 선택된 pattern 의 raw 소스.

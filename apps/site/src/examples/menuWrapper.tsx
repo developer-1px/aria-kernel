@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { useReducer } from 'react'
-import { reduceSingleSelect, type NormalizedData } from '@p/aria-kernel'
+import { reduceSingleSelect, type NormalizedData } from '@interactive-os/aria-kernel'
 import { Menu, type MenuSlots, menuWrapperKeys } from './_menuWrapper'
 import type { SlotProps } from '../catalog/slots'
 

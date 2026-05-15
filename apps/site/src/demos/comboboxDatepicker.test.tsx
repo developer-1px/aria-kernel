@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest'
 import { act, cleanup, fireEvent, render, screen } from '@testing-library/react'
 import Demo from './comboboxDatepicker'
-import { comboboxDialogKeys } from '@p/aria-kernel/patterns'
+import { comboboxDialogKeys } from '@interactive-os/aria-kernel/patterns'
 
 afterEach(cleanup)
 

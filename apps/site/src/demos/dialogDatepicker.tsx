@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { useDialogModalPattern, dialogModalKeys } from '@p/aria-kernel/patterns'
+import { useDialogModalPattern, dialogModalKeys } from '@interactive-os/aria-kernel/patterns'
 import { CalendarGrid, calendarGridKeys } from './_calendarGrid'
 
 export const meta = {

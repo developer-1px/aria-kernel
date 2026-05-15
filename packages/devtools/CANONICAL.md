@@ -1,6 +1,6 @@
-# Canonical move notice — `@p/devtools` → `@interactive-os/devtools`
+# Canonical move notice — `@interactive-os/devtools` → `@interactive-os/devtools`
 
-`@p/devtools` 의 REC 모듈 정본은 `@interactive-os/devtools/rec` 로 이전 (2026-05-15).
+`@interactive-os/devtools` 의 REC 모듈 정본은 `@interactive-os/devtools/rec` 로 이전 (2026-05-15).
 
 | 원본 (여기) | 정본 |
 |---|---|

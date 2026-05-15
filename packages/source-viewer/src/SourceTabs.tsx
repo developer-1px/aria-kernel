@@ -1,6 +1,6 @@
 import { useReducer, useState } from 'react'
-import { fromList, reduceSingleSelect } from '@p/aria-kernel'
-import { useTabsPattern } from '@p/aria-kernel/patterns'
+import { fromList, reduceSingleSelect } from '@interactive-os/aria-kernel'
+import { useTabsPattern } from '@interactive-os/aria-kernel/patterns'
 import { CopyButton } from './CopyButton'
 import { HighlightedCode } from './HighlightedCode'
 import { buildAppTabs, type AppTab } from './buildAppTabs'

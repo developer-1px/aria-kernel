@@ -1,4 +1,4 @@
-import type { NormalizedData } from '@p/aria-kernel'
+import type { NormalizedData } from '@interactive-os/aria-kernel'
 import type { JsonDoc, NodeId } from 'zod-crud'
 import { isSlideObject } from './crud'
 

@@ -12,8 +12,8 @@
  * lifecycle 만 책임. focus 복원은 EditInput 가 closest treeitem 으로 처리.
  */
 import { type CSSProperties, type ReactNode } from 'react'
-import { useTreeviewPattern, type TreeItem, type TreeviewOptions } from '@p/aria-kernel/patterns'
-import type { NormalizedData, UiEvent } from '@p/aria-kernel'
+import { useTreeviewPattern, type TreeItem, type TreeviewOptions } from '@interactive-os/aria-kernel/patterns'
+import type { NormalizedData, UiEvent } from '@interactive-os/aria-kernel'
 import { EditInput } from './EditInput'
 
 export interface TreeEdit {

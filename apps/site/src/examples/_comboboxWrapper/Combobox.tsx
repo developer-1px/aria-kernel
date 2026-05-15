@@ -1,5 +1,5 @@
-import { useControlState, type UiEvent } from '@p/aria-kernel'
-import { useComboboxPattern, type ControlProps, type PatternProps } from '@p/aria-kernel/patterns'
+import { useControlState, type UiEvent } from '@interactive-os/aria-kernel'
+import { useComboboxPattern, type ControlProps, type PatternProps } from '@interactive-os/aria-kernel/patterns'
 import { defaultLabel, renderSlot, type Slot } from '../../catalog/slots'
 
 export interface ComboboxSlots<TItem extends object = Record<string, unknown>> {

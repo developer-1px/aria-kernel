@@ -1,4 +1,4 @@
-import { ReproRecorderOverlay } from '@p/devtools'
+import { ReproRecorderOverlay } from '@interactive-os/devtools'
 import { CatalogSidebar } from './CatalogSidebar'
 import { Intro } from './Intro'
 import { PatternScreen } from './PatternScreen'

@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Outliner, outlineCrud, outlinerSpec } from '@apps/outliner'
-import { SourceTabs } from '@p/source-viewer'
+import { SourceTabs } from '@interactive-os/source-viewer'
 import { KeymapPanel } from '../debug/KeymapPanel'
 import { JsonInspector } from '../debug/JsonInspector'
 
@@ -41,7 +41,7 @@ export const Route = createFileRoute('/apps/outliner/$')({
     palette: {
       label: 'Outliner',
       to: '/apps/outliner/$',
-      sub: 'Keyboard-only Workflowy clone — zod-crud × @p/aria-kernel example',
+      sub: 'Keyboard-only Workflowy clone — zod-crud × @interactive-os/aria-kernel example',
     },
   },
 })

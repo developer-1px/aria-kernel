@@ -1,5 +1,5 @@
-import { axisKeys } from '@p/aria-kernel'
-import { comboboxAxis, useComboboxPattern, useComboboxReducer } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@interactive-os/aria-kernel'
+import { comboboxAxis, useComboboxPattern, useComboboxReducer } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Combobox · Autocomplete Both',

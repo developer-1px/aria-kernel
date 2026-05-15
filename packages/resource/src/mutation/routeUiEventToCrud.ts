@@ -1,10 +1,10 @@
-import type { UiEvent } from '@p/aria-kernel'
+import type { UiEvent } from '@interactive-os/aria-kernel'
 
 /**
  * CrudPort — UiEvent 편집 어휘를 받을 수 있는 minimal interface.
  * 시그니처는 zod-crud `JsonCrud` 와 1:1 — 추상화 0, opinionated.
  * 구현은 무엇이든 OK (FS, in-memory, server proxy).
- * @p/aria-kernel 본체에 zod-crud import 0 — interface duck-typing.
+ * @interactive-os/aria-kernel 본체에 zod-crud import 0 — interface duck-typing.
  */
 export interface CrudPort<Snap = unknown, Val = unknown> {
   snapshot(): Snap

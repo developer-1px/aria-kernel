@@ -1,5 +1,5 @@
-import { axisKeys, isExpanded } from '@p/aria-kernel'
-import { disclosureAxis, disclosurePattern, useDisclosureReducer } from '@p/aria-kernel/patterns'
+import { axisKeys, isExpanded } from '@interactive-os/aria-kernel'
+import { disclosureAxis, disclosurePattern, useDisclosureReducer } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Disclosure · FAQ',
@@ -10,7 +10,7 @@ export const meta = {
 }
 
 const QA = [
-  { id: 'q1', q: 'How do I install?', a: 'Run npm install @p/aria-kernel.' },
+  { id: 'q1', q: 'How do I install?', a: 'Run npm install @interactive-os/aria-kernel.' },
   { id: 'q2', q: 'Does it work with Vite?', a: 'Yes — see the Vite plugin guide.' },
   { id: 'q3', q: 'How do I report a bug?', a: 'Open an issue on the GitHub repository.' },
 ]

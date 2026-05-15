@@ -1,8 +1,8 @@
 // @ts-nocheck — pre-existing zod-crud API drift / virtual module, tracked in #132
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { useListboxPattern } from '@p/aria-kernel/patterns'
-import { KEYS, type UiEvent } from '@p/aria-kernel'
-import { useZodCrudResource } from '@p/resource/zod-crud'
+import { useListboxPattern } from '@interactive-os/aria-kernel/patterns'
+import { KEYS, type UiEvent } from '@interactive-os/aria-kernel'
+import { useZodCrudResource } from '@interactive-os/resource/zod-crud'
 import { boardResource } from '../features/boardResource'
 import { normalizeBoard } from '../features/normalizeBoard'
 import { crud } from '../features/boardCrud'
@@ -94,7 +94,7 @@ function AutoEditOnInsert({
 }: {
   focus: string | undefined
   editingId: string | null
-  data: import('@p/aria-kernel').NormalizedData
+  data: import('@interactive-os/aria-kernel').NormalizedData
   onEnter: (id: string) => void
 }) {
   const last = useRef<string | undefined>(undefined)
@@ -111,7 +111,7 @@ function Column({
   id, data, onEvent, editingId, onStartEdit, onCommitEdit, onCancelEdit, onMoveAcrossColumn,
 }: {
   id: string
-  data: import('@p/aria-kernel').NormalizedData
+  data: import('@interactive-os/aria-kernel').NormalizedData
   onEvent: (e: UiEvent) => void
   editingId: string | null
   onStartEdit: (id: string) => void

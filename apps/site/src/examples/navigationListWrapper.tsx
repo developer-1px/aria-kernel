@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { useState } from 'react'
-import type { NormalizedData } from '@p/aria-kernel'
+import type { NormalizedData } from '@interactive-os/aria-kernel'
 import { Nav, navigationListWrapperKeys } from './_navigationListWrapper'
 
 const buildData = (currentId: string): NormalizedData => ({

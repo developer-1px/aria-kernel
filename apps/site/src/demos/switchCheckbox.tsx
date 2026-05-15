@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { axisKeys } from '@p/aria-kernel'
-import { switchAxis } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@interactive-os/aria-kernel'
+import { switchAxis } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Switch · checkbox input',

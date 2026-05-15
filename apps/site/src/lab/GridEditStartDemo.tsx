@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { fromTree, type UiEvent } from '@p/aria-kernel'
-import { useGridPattern } from '@p/aria-kernel/patterns'
+import { fromTree, type UiEvent } from '@interactive-os/aria-kernel'
+import { useGridPattern } from '@interactive-os/aria-kernel/patterns'
 
 interface Node { id: string; label: string; children?: Node[] }
 

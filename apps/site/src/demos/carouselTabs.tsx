@@ -1,4 +1,4 @@
-import { useCarouselPattern, carouselKeys } from '@p/aria-kernel/patterns'
+import { useCarouselPattern, carouselKeys } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Carousel · Tablist',

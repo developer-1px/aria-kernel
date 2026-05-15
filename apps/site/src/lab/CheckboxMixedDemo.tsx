@@ -1,5 +1,5 @@
-import type { UiEvent } from '@p/aria-kernel'
-import { useCheckboxGroupPattern, useCheckboxGroupReducer } from '@p/aria-kernel/patterns'
+import type { UiEvent } from '@interactive-os/aria-kernel'
+import { useCheckboxGroupPattern, useCheckboxGroupReducer } from '@interactive-os/aria-kernel/patterns'
 
 const ITEMS = [
   { id: 'apple', label: '사과' },

@@ -1,10 +1,10 @@
 /**
- * @p/resource — 옵션 데이터 흐름 어댑터.
+ * @interactive-os/resource — 옵션 데이터 흐름 어댑터.
  *
  * - `useResource` / `defineResource` / `writeResource` — keyed external store with cache
  * - `useFeature` / `defineFeature` — single-spec mini reducer + query selector
  *
- * 정체성: ARIA 행동 인프라(`@p/aria-kernel`) 와 별개. 복잡한 데이터 흐름이 필요한
+ * 정체성: ARIA 행동 인프라(`@interactive-os/aria-kernel`) 와 별개. 복잡한 데이터 흐름이 필요한
  * 앱(URL/cache/HMR/server 가 얽힘)을 위한 *옵션*. 단순 state 는 React `useState` /
  * `use<Pattern>Reducer(items, opts?)` (canonical) 사용. escape 는 React `useReducer`.
  */

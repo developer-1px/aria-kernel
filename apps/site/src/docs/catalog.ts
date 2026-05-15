@@ -1,5 +1,5 @@
 import { marked } from 'marked'
-import { extractFrontmatter } from '@p/fs'
+import { extractFrontmatter } from '@interactive-os/fs'
 import {
   DocFrontmatterSchema,
   DocRecordSchema,

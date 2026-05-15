@@ -1,5 +1,5 @@
-import { axisKeys } from '@p/aria-kernel'
-import { menuButtonAxis, useMenuButtonPattern, type MenuLevel, useMenuButtonReducer } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@interactive-os/aria-kernel'
+import { menuButtonAxis, useMenuButtonPattern, type MenuLevel, useMenuButtonReducer } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Menu Button',

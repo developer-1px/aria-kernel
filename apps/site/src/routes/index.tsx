@@ -9,7 +9,7 @@ function Landing() {
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-col gap-10 p-8">
       <header className="flex flex-col gap-3">
-        <h1 className="text-3xl font-semibold tracking-tight text-neutral-900">@p/aria-kernel</h1>
+        <h1 className="text-3xl font-semibold tracking-tight text-neutral-900">@interactive-os/aria-kernel</h1>
         <p className="text-base text-neutral-600">
           ARIA-correct headless behavior infra — axes, roving tabindex, gesture/intent split,
           declarative page tree, single resource interface. Visuals via Tailwind. No tokens, no CSS-in-JS.

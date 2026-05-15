@@ -1,5 +1,5 @@
 {
-  "name": "@p/site",
+  "name": "@interactive-os/site",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -8,8 +8,11 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@p/aria-kernel": "workspace:*",
-    "@p/source-viewer": "workspace:*"
+    "@interactive-os/aria-kernel": "workspace:*",
+    "@interactive-os/devtools": "workspace:*",
+    "@interactive-os/fs": "workspace:*",
+    "@interactive-os/resource": "workspace:*",
+    "@interactive-os/source-viewer": "workspace:*"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.1",

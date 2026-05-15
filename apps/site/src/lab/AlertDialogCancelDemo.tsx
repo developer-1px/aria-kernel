@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { useAlertdialogPattern } from '@p/aria-kernel/patterns'
+import { useAlertdialogPattern } from '@interactive-os/aria-kernel/patterns'
 
 export function AlertDialogCancelDemo() {
   const [open, setOpen] = useState(false)

@@ -7,7 +7,7 @@ import { router } from './router'
 
 // devtools overlay 는 DEV 에서만 lazy 로드.
 const Devtools = import.meta.env.DEV
-  ? lazy(() => import('@p/devtools').then((m) => ({
+  ? lazy(() => import('@interactive-os/devtools').then((m) => ({
       default: () => <m.ReproRecorderOverlay />,
     })))
   : null
@@ -31,7 +31,7 @@ const idle = (cb: () => void) => {
 idle(() => { void loadAppsLayer() })
 
 if (import.meta.env.DEV) {
-  import('@p/devtools/guides')
+  import('@interactive-os/devtools/guides')
 }
 
 createRoot(document.getElementById('root')!).render(

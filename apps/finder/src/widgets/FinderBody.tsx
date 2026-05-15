@@ -1,8 +1,8 @@
 // @ts-nocheck — pre-existing zod-crud API drift / virtual module, tracked in #132
 import type { ComponentPropsWithoutRef } from 'react'
-import { type NormalizedData, type UiEvent } from '@p/aria-kernel'
-import { useFeature } from '@p/resource'
-import { useListboxPattern, useToolbarPattern } from '@p/aria-kernel/patterns'
+import { type NormalizedData, type UiEvent } from '@interactive-os/aria-kernel'
+import { useFeature } from '@interactive-os/resource'
+import { useListboxPattern, useToolbarPattern } from '@interactive-os/aria-kernel/patterns'
 import { Link } from '@tanstack/react-router'
 import { finderFeature } from '../features/feature'
 import { PreviewPane } from './Preview'

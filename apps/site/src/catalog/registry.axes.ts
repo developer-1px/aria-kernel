@@ -21,7 +21,7 @@ export const PKG_SOURCES: Record<string, string> = (() => {
   const out: Record<string, string> = {}
   for (const [k, v] of Object.entries(pkgRawAll)) {
     const m = k.match(/\/packages\/([^/]+)\/src\/(.+)$/)
-    if (m) out[`@p/${m[1]}/${m[2]}`] = v
+    if (m) out[`@interactive-os/${m[1]}/${m[2]}`] = v
   }
   return out
 })()
@@ -95,7 +95,7 @@ const patterns: Pattern[] = Object.entries(sources)
   .map(([path, source]) => ({ path, source }))
   .map(({ path, source }) => {
     const name = path.split('/').pop()!.replace(/\.ts$/, '')
-    const filename = `@p/aria-kernel/patterns/${name}.ts`
+    const filename = `@interactive-os/aria-kernel/patterns/${name}.ts`
     return { name, filename, source, axes: [] as string[] }
   })
   .filter((p) => !SKIP.has(p.name))

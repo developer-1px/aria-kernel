@@ -1,5 +1,5 @@
-import type { UiEvent } from '@p/aria-kernel'
-import { useMenuButtonPattern, useMenuButtonReducer } from '@p/aria-kernel/patterns'
+import type { UiEvent } from '@interactive-os/aria-kernel'
+import { useMenuButtonPattern, useMenuButtonReducer } from '@interactive-os/aria-kernel/patterns'
 
 const ITEMS = [
   { id: 'new', label: '새로 만들기' },

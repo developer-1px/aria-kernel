@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { dialogModalKeys, useDialogModalPattern } from '@p/aria-kernel/patterns'
+import { dialogModalKeys, useDialogModalPattern } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Dialog',

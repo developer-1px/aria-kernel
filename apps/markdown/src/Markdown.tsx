@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from '@tanstack/react-router'
-import { loadText, renderMarkdown } from '@p/fs'
+import { loadText, renderMarkdown } from '@interactive-os/fs'
 
 export function Markdown() {
   const { _splat } = useParams({ strict: false }) as { _splat?: string }

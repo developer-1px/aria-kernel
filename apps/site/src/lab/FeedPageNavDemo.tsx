@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useFeedPattern } from '@p/aria-kernel/patterns'
+import { useFeedPattern } from '@interactive-os/aria-kernel/patterns'
 
 const ARTICLES = Array.from({ length: 6 }, (_, i) => ({
   id: `a${i + 1}`,

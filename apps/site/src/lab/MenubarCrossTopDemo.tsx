@@ -1,5 +1,5 @@
-import { type UiEvent } from '@p/aria-kernel'
-import { useMenubarPattern, useMenubarReducer } from '@p/aria-kernel/patterns'
+import { type UiEvent } from '@interactive-os/aria-kernel'
+import { useMenubarPattern, useMenubarReducer } from '@interactive-os/aria-kernel/patterns'
 
 interface Node { id: string; label: string; children?: Node[]; [key: string]: unknown }
 

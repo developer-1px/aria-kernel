@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
-import { fromList, type UiEvent } from '@p/aria-kernel'
-import { useMenuPattern } from '@p/aria-kernel/patterns'
+import { fromList, type UiEvent } from '@interactive-os/aria-kernel'
+import { useMenuPattern } from '@interactive-os/aria-kernel/patterns'
 
 const ITEMS = [
   { id: 'cut', label: '잘라내기' },

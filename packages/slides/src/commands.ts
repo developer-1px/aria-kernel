@@ -1,6 +1,6 @@
-import type { NormalizedData, UiEvent } from '@p/aria-kernel'
+import type { NormalizedData, UiEvent } from '@interactive-os/aria-kernel'
 import { matches } from '@interactive-os/keyboard'
-import type { TreeCommandDescriptor } from '@p/aria-kernel/patterns'
+import type { TreeCommandDescriptor } from '@interactive-os/aria-kernel/patterns'
 import type { JsonCrud, JsonValue, OperationResult } from 'zod-crud'
 import { normalizeDeck, propNode } from './normalize'
 import type { DeckDoc } from './schema'

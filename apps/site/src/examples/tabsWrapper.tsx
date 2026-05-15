@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { useReducer } from 'react'
-import { fromList, reduceSingleSelect } from '@p/aria-kernel'
+import { fromList, reduceSingleSelect } from '@interactive-os/aria-kernel'
 import { Tabs, type TabsSlots, tabsWrapperKeys } from './_tabsWrapper'
 import type { SlotProps } from '../catalog/slots'
 

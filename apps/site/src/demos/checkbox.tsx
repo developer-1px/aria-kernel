@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { axisKeys, toggle } from '@p/aria-kernel'
-import { checkboxPattern, type CheckboxState } from '@p/aria-kernel/patterns'
+import { axisKeys, toggle } from '@interactive-os/aria-kernel'
+import { checkboxPattern, type CheckboxState } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Checkbox',

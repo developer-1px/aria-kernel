@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { switchPattern } from '@p/aria-kernel/patterns'
+import { switchPattern } from '@interactive-os/aria-kernel/patterns'
 
 export function SwitchToggleDemo() {
   const [on, setOn] = useState(false)

@@ -1,5 +1,5 @@
 
-import { useMenuButtonPattern, useMenuButtonReducer, menuButtonKeys } from '@p/aria-kernel/patterns'
+import { useMenuButtonPattern, useMenuButtonReducer, menuButtonKeys } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Menu Button · activeDescendant',

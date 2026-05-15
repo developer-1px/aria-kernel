@@ -1,6 +1,6 @@
 import { useReducer, useMemo } from 'react'
-import { fromList, composeReducers, reduce, singleCurrent, type UiEvent } from '@p/aria-kernel'
-import { navigationListPattern } from '@p/aria-kernel/patterns'
+import { fromList, composeReducers, reduce, singleCurrent, type UiEvent } from '@interactive-os/aria-kernel'
+import { navigationListPattern } from '@interactive-os/aria-kernel/patterns'
 
 const PAGES = [
   { id: 'home', label: '홈', href: '#/home', current: true },

@@ -1,4 +1,4 @@
-import type { NormalizedData } from '@p/aria-kernel'
+import type { NormalizedData } from '@interactive-os/aria-kernel'
 
 export function selectedEventIds(data: NormalizedData, id: string): string[] {
   const selected = Object.entries(data.entities)

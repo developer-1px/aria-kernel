@@ -1,6 +1,6 @@
 import { useReducer } from 'react'
-import { fromList, singleCurrent } from '@p/aria-kernel'
-import { navigationListPattern } from '@p/aria-kernel/patterns'
+import { fromList, singleCurrent } from '@interactive-os/aria-kernel'
+import { navigationListPattern } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Navigation List',

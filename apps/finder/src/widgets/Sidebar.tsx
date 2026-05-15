@@ -1,5 +1,5 @@
 import { useId } from 'react'
-import { useListboxPattern } from '@p/aria-kernel/patterns'
+import { useListboxPattern } from '@interactive-os/aria-kernel/patterns'
 import { useSidebarNav } from './useSidebarNav'
 
 export function Sidebar() {

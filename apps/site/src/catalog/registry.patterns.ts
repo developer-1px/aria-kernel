@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react'
 import { KINDS, type Kind } from './kind'
-import { buildAppTabs, type AppTab } from '@p/source-viewer'
+import { buildAppTabs, type AppTab } from '@interactive-os/source-viewer'
 
 export interface DemoMeta {
   title: string
@@ -48,10 +48,10 @@ const sources: Record<string, string> = {}
 for (const [k, v] of Object.entries(sourcesRaw)) {
   sources[k.startsWith(PREFIX) ? k.slice(PREFIX.length) : k] = v
 }
-// @p/<pkg>/<rel-from-src> 키 부여 — buildAppTabs 가 `@p/aria-kernel` 같은 bare spec 도 그대로 매칭.
+// @interactive-os/<pkg>/<rel-from-src> 키 부여 — buildAppTabs 가 `@interactive-os/aria-kernel` 같은 bare spec 도 그대로 매칭.
 for (const [k, v] of Object.entries(pkgRaw)) {
   const m = k.match(/\/packages\/([^/]+)\/src\/(.+)$/)
-  if (m) sources[`@p/${m[1]}/${m[2]}`] = v
+  if (m) sources[`@interactive-os/${m[1]}/${m[2]}`] = v
 }
 
 const isTest = (path: string) => /\.test\.tsx$/.test(path)

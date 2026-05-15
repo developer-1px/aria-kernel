@@ -1,4 +1,4 @@
-import { useResource } from '@p/resource'
+import { useResource } from '@interactive-os/resource'
 import { formatDate, formatSize } from '../features/data'
 import { extToLang, extToPreviewKind, type FsNode } from '../entities/types'
 import {

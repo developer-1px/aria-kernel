@@ -1,5 +1,5 @@
-import { axisKeys, isExpanded } from '@p/aria-kernel'
-import { disclosureAxis, disclosurePattern, useDisclosureReducer } from '@p/aria-kernel/patterns'
+import { axisKeys, isExpanded } from '@interactive-os/aria-kernel'
+import { disclosureAxis, disclosurePattern, useDisclosureReducer } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Disclosure · Image Description',

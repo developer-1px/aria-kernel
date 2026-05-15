@@ -1,6 +1,6 @@
 import { useReducer, useMemo } from 'react'
-import { fromList, reduce, type UiEvent } from '@p/aria-kernel'
-import { useAccordionPattern } from '@p/aria-kernel/patterns'
+import { fromList, reduce, type UiEvent } from '@interactive-os/aria-kernel'
+import { useAccordionPattern } from '@interactive-os/aria-kernel/patterns'
 
 const ITEMS = [
   { id: 'q1', label: '주문은 어떻게 하나요?' },

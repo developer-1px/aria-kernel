@@ -7,7 +7,7 @@ import {
   PATTERN_APG_WAIVE,
   PATTERN_EXTRA_ALLOW,
   UNIVERSAL_EXTRA,
-} from '@p/aria-kernel'
+} from '@interactive-os/aria-kernel'
 
 /**
  * /coverage — APG ↔ axis 3-way SSOT 매트릭스 (EPIC #121).

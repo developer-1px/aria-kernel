@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import src from '@p/aria-kernel/key/index.ts?raw'
+import src from '@interactive-os/aria-kernel/key/index.ts?raw'
 import { ExportList } from '../catalog/ExportList'
 
 export const Route = createFileRoute('/key')({

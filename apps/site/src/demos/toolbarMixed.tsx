@@ -1,5 +1,5 @@
-import { axisKeys } from '@p/aria-kernel'
-import { toolbarAxis, useToolbarPattern, useToolbarReducer } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@interactive-os/aria-kernel'
+import { toolbarAxis, useToolbarPattern, useToolbarReducer } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Toolbar · Mixed Items',

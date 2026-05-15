@@ -1,5 +1,5 @@
 
-import { tabsKeys, useTabsPattern, useTabsReducer } from '@p/aria-kernel/patterns'
+import { tabsKeys, useTabsPattern, useTabsReducer } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Tabs',

@@ -1,5 +1,5 @@
-import { createDeckCrud, normalizeDeck } from '@p/slides'
-import { defineResource, routeUiEventToCrud, type CrudPort } from '@p/resource'
+import { createDeckCrud, normalizeDeck } from '@interactive-os/slides'
+import { defineResource, routeUiEventToCrud, type CrudPort } from '@interactive-os/resource'
 import type { JsonDoc } from 'zod-crud'
 
 export const crud = createDeckCrud()

@@ -1,12 +1,12 @@
 {
-  "name": "@p/source-viewer",
+  "name": "@interactive-os/source-viewer",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "main": "src/index.ts",
   "exports": { ".": "./src/index.ts", "./*": "./src/*" },
   "dependencies": {
-    "@p/aria-kernel": "workspace:*",
+    "@interactive-os/aria-kernel": "workspace:*",
     "@babel/parser": "^7.29.2",
     "@babel/types": "^7.29.0"
   },

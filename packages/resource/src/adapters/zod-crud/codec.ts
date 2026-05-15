@@ -1,5 +1,5 @@
 /**
- * Pure clipboard codec for @p/aria-kernel collection patterns.
+ * Pure clipboard codec for @interactive-os/aria-kernel collection patterns.
  *
  * Triple-MIME encoding (Lexical/ProseMirror convergence):
  *   - application/x-p-headless+json — canonical JSON.stringify(value)

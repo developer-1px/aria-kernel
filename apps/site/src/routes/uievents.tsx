@@ -1,11 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
-import typesSrc from '@p/aria-kernel/types.ts?raw'
+import typesSrc from '@interactive-os/aria-kernel/types.ts?raw'
 import {
   UI_EVENT_CATEGORY,
   UI_EVENT_CATEGORY_META,
   UI_EVENT_CATEGORY_ORDER,
   type UiEventCategory,
-} from '@p/aria-kernel'
+} from '@interactive-os/aria-kernel'
 
 export const Route = createFileRoute('/uievents')({
   component: UiEventsApp,

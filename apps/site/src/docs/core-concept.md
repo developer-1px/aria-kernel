@@ -107,7 +107,7 @@ type Axis = (data: NormalizedData, currentId: string | null, trigger: Trigger) =
 - 입력: `(data, currentId, trigger)` — `Trigger = key | click`
 - 출력: `UiEvent[]` (소비됨) 또는 `null` (다음 axis 로 위임)
 
-내장 axis (`@p/aria-kernel/axes`):
+내장 axis (`@interactive-os/aria-kernel/axes`):
 
 | axis | 역할 | APG 출처 |
 |---|---|---|
@@ -208,7 +208,7 @@ drop-in reducers:
 
 ## Where Tailwind fits
 
-**Headless behavior, Tailwind visuals.** 행동 = `@p/aria-kernel` 패턴 (`useListboxPattern`, `useToolbarPattern`, `useTreegridPattern`, `useRovingTabIndex`…) · 시각 = Tailwind utility class. 두 축은 섞지 않는다.
+**Headless behavior, Tailwind visuals.** 행동 = `@interactive-os/aria-kernel` 패턴 (`useListboxPattern`, `useToolbarPattern`, `useTreegridPattern`, `useRovingTabIndex`…) · 시각 = Tailwind utility class. 두 축은 섞지 않는다.
 
 규칙:
 - Tailwind utility class 직접. 별도 토큰 wrapper 만들지 않는다
@@ -216,7 +216,7 @@ drop-in reducers:
 - 임의 값은 `[]` arbitrary syntax: `w-[min(100%,42rem)]`
 - `aria-selected:bg-stone-900` 같은 ARIA variant 로 상태 → 시각 매핑
 
-`@p/aria-kernel` 가 ARIA attribute 와 stable data attrs 를 부여하면, Tailwind 의 `aria-*` / `data-*` variant 가 그것을 시각으로 옮긴다 — 두 축이 만나는 단 한 지점.
+`@interactive-os/aria-kernel` 가 ARIA attribute 와 stable data attrs 를 부여하면, Tailwind 의 `aria-*` / `data-*` variant 가 그것을 시각으로 옮긴다 — 두 축이 만나는 단 한 지점.
 
 ```tsx
 <li

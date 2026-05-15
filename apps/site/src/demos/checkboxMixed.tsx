@@ -1,5 +1,5 @@
-import { axisKeys, toggle } from '@p/aria-kernel'
-import { useCheckboxGroupPattern, useCheckboxGroupReducer } from '@p/aria-kernel/patterns'
+import { axisKeys, toggle } from '@interactive-os/aria-kernel'
+import { useCheckboxGroupPattern, useCheckboxGroupReducer } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Checkbox · Mixed (Group)',

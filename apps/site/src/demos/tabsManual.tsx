@@ -1,5 +1,5 @@
-import { axisKeys } from '@p/aria-kernel'
-import { tabsAxis, useTabsPattern, useTabsReducer } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@interactive-os/aria-kernel'
+import { tabsAxis, useTabsPattern, useTabsReducer } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Tabs · Manual Activation',

@@ -1,5 +1,5 @@
-import { axisKeys, fromTree } from '@p/aria-kernel'
-import { menubarAxis, useMenubarPattern, type MenuLevel, useMenubarReducer } from '@p/aria-kernel/patterns'
+import { axisKeys, fromTree } from '@interactive-os/aria-kernel'
+import { menubarAxis, useMenubarPattern, type MenuLevel, useMenubarReducer } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Menubar · Navigation',

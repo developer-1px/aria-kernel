@@ -1,12 +1,12 @@
 import { z } from 'zod'
 
 /** finder 도메인 UI 엔티티 zod 스키마.
- *  fs entity(FsNode)는 @p/fs/schema 가 owner — 여기서는 finder UI 메타만. */
+ *  fs entity(FsNode)는 @interactive-os/fs/schema 가 owner — 여기서는 finder UI 메타만. */
 
 const iconToken = z.string()
 
-export { FsNodeSchema } from '@p/fs'
-export type { FsNode } from '@p/fs'
+export { FsNodeSchema } from '@interactive-os/fs'
+export type { FsNode } from '@interactive-os/fs'
 
 export const SidebarItemSchema = z.object({
   id: z.string(),
@@ -45,7 +45,7 @@ export const PreviewKindSchema = z.enum(['image', 'markdown', 'code', 'text', 'b
 export type PreviewKind = z.infer<typeof PreviewKindSchema>
 
 // ── Feature state·cmd·VM (spec 에서 파생) ──────────────────────────────
-import { FsNodeSchema } from '@p/fs'
+import { FsNodeSchema } from '@interactive-os/fs'
 import { FinderStateSpec, FinderCmdSpec } from './spec'
 
 /** spec.state 의 { key: { schema } } → z.object({ key: schema }) */

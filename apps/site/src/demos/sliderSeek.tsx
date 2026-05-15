@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { sliderAxis, sliderPattern } from '@p/aria-kernel/patterns'
-import { axisKeys } from '@p/aria-kernel'
+import { sliderAxis, sliderPattern } from '@interactive-os/aria-kernel/patterns'
+import { axisKeys } from '@interactive-os/aria-kernel'
 
 export const meta = {
   title: 'Slider · Media Seek',

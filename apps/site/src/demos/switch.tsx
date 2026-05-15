@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { switchAxis, switchPattern } from '@p/aria-kernel/patterns'
-import { axisKeys } from '@p/aria-kernel'
+import { switchAxis, switchPattern } from '@interactive-os/aria-kernel/patterns'
+import { axisKeys } from '@interactive-os/aria-kernel'
 
 export const meta = {
   title: 'Switch',

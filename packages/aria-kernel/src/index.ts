@@ -1,10 +1,10 @@
 /**
- * @p/aria-kernel — APG-correct headless behavior layer.
+ * @interactive-os/aria-kernel — APG-correct headless behavior layer.
  *
  * Owns: axis composition · roving tabindex · gesture/intent split · patterns ·
  * shared data vocabulary (NormalizedData / UiEvent) · middleware.
  *
- * Data: 컬렉션 패턴은 `use<Pattern>Reducer(items, opts?)` (canonical, `@p/aria-kernel/patterns`).
+ * Data: 컬렉션 패턴은 `use<Pattern>Reducer(items, opts?)` (canonical, `@interactive-os/aria-kernel/patterns`).
  * Escape: React `useReducer(reduceSingleSelect, items, fromList)` 직접 (custom init / 합성).
  *
  * Knows nothing about: tokens · CSS · component vocabulary.

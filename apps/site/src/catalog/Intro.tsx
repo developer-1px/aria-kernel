@@ -28,7 +28,7 @@ function SlideHero() {
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
           v0.0.1 · MIT · {ENTRIES.length} APG patterns
         </div>
-        <h1 className="text-7xl font-bold tracking-tight text-stone-900">@p/aria-kernel</h1>
+        <h1 className="text-7xl font-bold tracking-tight text-stone-900">@interactive-os/aria-kernel</h1>
         <p className="mt-6 max-w-2xl text-2xl leading-relaxed text-stone-600">
           Behavior infrastructure for WAI-ARIA. Roving tabindex, axis composition,{' '}
           <span className="font-medium text-stone-900">{ENTRIES.length} APG patterns</span> — zero
@@ -52,7 +52,7 @@ function SlideHero() {
 
         <div className="mt-10 flex flex-wrap items-center gap-4">
           <code className="rounded-md bg-stone-900 px-3 py-2 text-sm font-mono text-white">
-            pnpm add @p/aria-kernel
+            pnpm add @interactive-os/aria-kernel
           </code>
           <a
             href="/docs/overview"

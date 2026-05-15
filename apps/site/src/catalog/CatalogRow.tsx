@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react'
 import { fmtKey } from './keys'
-import { SourceTabs, type AppTab } from '@p/source-viewer'
+import { SourceTabs, type AppTab } from '@interactive-os/source-viewer'
 
 /**
  * 모든 카탈로그 surface 가 공유하는 풀스크린 row.

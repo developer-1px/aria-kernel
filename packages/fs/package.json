@@ -1,5 +1,5 @@
 {
-  "name": "@p/fs",
+  "name": "@interactive-os/fs",
   "private": true,
   "version": "0.0.0",
   "type": "module",

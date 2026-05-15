@@ -1,10 +1,10 @@
-# @p/aria-kernel
+# @interactive-os/aria-kernel
 
 **ARIA-correct headless behavior infra** — axes composition, roving tabindex,
 gesture/intent split, reducer-backed state, APG pattern recipes, focus and
 shortcut helpers.
 
-The repo is one product (`@p/aria-kernel`) plus consumer harness apps that prove
+The repo is one product (`@interactive-os/aria-kernel`) plus consumer harness apps that prove
 the package behavior in realistic screens.
 
 ## Layout
@@ -33,7 +33,7 @@ the package behavior in realistic screens.
 
 ## Stack
 
-- **Behavior**: `@p/aria-kernel` ARIA pattern recipes (`useListboxPattern`,
+- **Behavior**: `@interactive-os/aria-kernel` ARIA pattern recipes (`useListboxPattern`,
   `useToolbarPattern`, `useTreegridPattern`, `useRovingTabIndex`,
   `useShortcut`, etc.).
 - **Visuals**: Tailwind v3 utility classes inline. No design tokens,

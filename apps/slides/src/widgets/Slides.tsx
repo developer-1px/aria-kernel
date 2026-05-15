@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useZodCrudResource } from '@p/resource/zod-crud'
-import { useTreeviewPattern } from '@p/aria-kernel/patterns'
-import type { NormalizedData, UiEvent } from '@p/aria-kernel'
-import { dispatchSlideEvent, slideText, slideTreeCommands, slideTreeEventFromKeyboard, updateSlideText } from '@p/slides'
+import { useZodCrudResource } from '@interactive-os/resource/zod-crud'
+import { useTreeviewPattern } from '@interactive-os/aria-kernel/patterns'
+import type { NormalizedData, UiEvent } from '@interactive-os/aria-kernel'
+import { dispatchSlideEvent, slideText, slideTreeCommands, slideTreeEventFromKeyboard, updateSlideText } from '@interactive-os/slides'
 import { crud, deckResource, normalizeDeck } from '../resource'
 
 export function Slides() {

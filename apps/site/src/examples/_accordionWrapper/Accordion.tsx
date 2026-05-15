@@ -1,4 +1,4 @@
-import { useAccordionPattern, type BaseItem, type PatternProps } from '@p/aria-kernel/patterns'
+import { useAccordionPattern, type BaseItem, type PatternProps } from '@interactive-os/aria-kernel/patterns'
 import { defaultLabel, emptySlot, renderSlot, type Slot } from '../../catalog/slots'
 
 type AccordionItem = BaseItem & { expanded: boolean }

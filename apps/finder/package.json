@@ -8,5 +8,10 @@
   "exports": {
     ".": "./src/index.ts",
     "./*": "./src/*"
+  },
+  "dependencies": {
+    "@interactive-os/aria-kernel": "workspace:*",
+    "@interactive-os/fs": "workspace:*",
+    "@interactive-os/resource": "workspace:*"
   }
 }

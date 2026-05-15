@@ -1,5 +1,5 @@
-import { axisKeys } from '@p/aria-kernel'
-import { treeviewAxis, useTreeviewPattern, useTreeviewReducer } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@interactive-os/aria-kernel'
+import { treeviewAxis, useTreeviewPattern, useTreeviewReducer } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Tree',

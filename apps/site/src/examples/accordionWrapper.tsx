@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { useReducer } from 'react'
-import { fromList, reduceSingleSelect } from '@p/aria-kernel'
-import type { BaseItem } from '@p/aria-kernel/patterns'
+import { fromList, reduceSingleSelect } from '@interactive-os/aria-kernel'
+import type { BaseItem } from '@interactive-os/aria-kernel/patterns'
 import { Accordion, type AccordionSlots, accordionWrapperKeys } from './_accordionWrapper'
 import type { SlotProps } from '../catalog/slots'
 
@@ -13,7 +13,7 @@ interface FaqItem extends Record<string, unknown> {
 }
 
 const FAQ = [
-  { id: 'what',   label: 'What is @p/aria-kernel?',  body: 'ARIA behavior infrastructure — axes, roving, gesture, patterns.' },
+  { id: 'what',   label: 'What is @interactive-os/aria-kernel?',  body: 'ARIA behavior infrastructure — axes, roving, gesture, patterns.' },
   { id: 'why',    label: 'Why ARIA-first?',       body: 'W3C/WHATWG specs are the canonical naming source.' },
   { id: 'styles', label: 'Bring my own styles?',  body: 'Tailwind utilities directly. No design tokens, no CSS-in-JS.' },
 ]

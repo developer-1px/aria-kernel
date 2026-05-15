@@ -1,6 +1,6 @@
 import { useReducer } from 'react'
-import { applyGesture, axisKeys, expandBranchOnActivate, fromTree, reduceSingleSelect } from '@p/aria-kernel'
-import { treeviewAxis, useTreeviewPattern } from '@p/aria-kernel/patterns'
+import { applyGesture, axisKeys, expandBranchOnActivate, fromTree, reduceSingleSelect } from '@interactive-os/aria-kernel'
+import { treeviewAxis, useTreeviewPattern } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Tree · Navigation',

@@ -1,5 +1,5 @@
 /**
- * @p/aria-kernel/patterns 공용 타입 — recipe 시그니처 통일을 위한 building blocks.
+ * @interactive-os/aria-kernel/patterns 공용 타입 — recipe 시그니처 통일을 위한 building blocks.
  * PATTERNS.md 의 통일 시그니처 참조.
  */
 

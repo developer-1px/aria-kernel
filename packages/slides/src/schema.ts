@@ -48,7 +48,7 @@ export const SAMPLE_DECK: DeckDoc = {
     },
     {
       title: 'Harness, not product UI',
-      body: 'apps/slides consumes @p/slides and @p/aria-kernel to expose integration gaps.',
+      body: 'apps/slides consumes @interactive-os/slides and @interactive-os/aria-kernel to expose integration gaps.',
       children: [],
     },
   ],

@@ -1,6 +1,6 @@
 // @ts-nocheck — pre-existing zod-crud API drift / virtual module, tracked in #132
-import { parentOf, ROOT } from '@p/aria-kernel'
-import { defineResource, writeResource } from '@p/resource'
+import { parentOf, ROOT } from '@interactive-os/aria-kernel'
+import { defineResource, writeResource } from '@interactive-os/resource'
 import { finderNavigate } from './nav'
 import {
   loadText,
@@ -8,7 +8,7 @@ import {
   getTree,
   subscribeTree,
 } from './data'
-import { highlightCode, renderMarkdown } from '@p/fs'
+import { highlightCode, renderMarkdown } from '@interactive-os/fs'
 import type { FsNode, ViewMode } from '../entities/types'
 
 /** Finder의 모든 데이터는 이 모듈의 Resource 정의를 통해서만 노출된다.

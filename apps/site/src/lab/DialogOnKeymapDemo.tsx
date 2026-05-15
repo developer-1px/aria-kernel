@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useDialogModalPattern } from '@p/aria-kernel/patterns'
+import { useDialogModalPattern } from '@interactive-os/aria-kernel/patterns'
 
 const HAYSTACK = ['alpha', 'banana', 'cherry', 'durian', 'elder', 'fig']
 

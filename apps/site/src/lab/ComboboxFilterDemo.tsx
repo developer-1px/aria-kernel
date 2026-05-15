@@ -1,5 +1,5 @@
-import type { UiEvent } from '@p/aria-kernel'
-import { useComboboxPattern, useComboboxReducer } from '@p/aria-kernel/patterns'
+import type { UiEvent } from '@interactive-os/aria-kernel'
+import { useComboboxPattern, useComboboxReducer } from '@interactive-os/aria-kernel/patterns'
 
 const FRUITS = [
   { id: 'apple', label: 'Apple' },

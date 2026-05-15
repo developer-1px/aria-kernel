@@ -1,4 +1,4 @@
-import { useTooltipPattern } from '@p/aria-kernel/patterns'
+import { useTooltipPattern } from '@interactive-os/aria-kernel/patterns'
 
 export function TooltipDelayDemo() {
   const { triggerProps, tipProps } = useTooltipPattern({ delayShow: 300, delayHide: 100 })

@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { windowsplitterAxis, windowsplitterPattern } from '@p/aria-kernel/patterns'
-import { axisKeys } from '@p/aria-kernel'
+import { windowsplitterAxis, windowsplitterPattern } from '@interactive-os/aria-kernel/patterns'
+import { axisKeys } from '@interactive-os/aria-kernel'
 
 export const meta = {
   title: 'Splitter · Vertical',

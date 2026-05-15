@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useComboboxDialogPattern, comboboxDialogKeys } from '@p/aria-kernel/patterns'
+import { useComboboxDialogPattern, comboboxDialogKeys } from '@interactive-os/aria-kernel/patterns'
 import { CalendarGrid, calendarGridKeys } from './_calendarGrid'
 
 export const meta = {

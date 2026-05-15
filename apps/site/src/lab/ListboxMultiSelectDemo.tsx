@@ -1,6 +1,6 @@
 import { useReducer, useMemo } from 'react'
-import { fromList, reduce, composeReducers, multiSelectToggle, type UiEvent } from '@p/aria-kernel'
-import { useListboxPattern } from '@p/aria-kernel/patterns'
+import { fromList, reduce, composeReducers, multiSelectToggle, type UiEvent } from '@interactive-os/aria-kernel'
+import { useListboxPattern } from '@interactive-os/aria-kernel/patterns'
 
 const listboxReducer = composeReducers(reduce, multiSelectToggle)
 

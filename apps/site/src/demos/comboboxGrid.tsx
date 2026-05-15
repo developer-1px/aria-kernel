@@ -1,5 +1,5 @@
-import { axisKeys } from '@p/aria-kernel'
-import { comboboxGridAxis, useComboboxGridPattern, useComboboxGridReducer } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@interactive-os/aria-kernel'
+import { comboboxGridAxis, useComboboxGridPattern, useComboboxGridReducer } from '@interactive-os/aria-kernel/patterns'
 
 export const meta = {
   title: 'Combobox · Grid Popup',

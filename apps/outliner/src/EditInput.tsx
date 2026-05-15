@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { KEYS } from '@p/aria-kernel'
+import { KEYS } from '@interactive-os/aria-kernel'
 
 /**
  * EditInput — 인라인 편집 primitive (contenteditable 기반).

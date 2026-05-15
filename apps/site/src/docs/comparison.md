@@ -1,6 +1,6 @@
 # Comparison
 
-`@p/aria-kernel` 가 다른 라이브러리와 어떻게 다른지 — 그리고 **왜 이 niche 가 메워야 했는지**를 설명합니다. 각 라이브러리는 자기 자리가 명확하므로, 이 글은 우열을 가리는 게 아니라 **빈 자리** 를 보여주려는 것입니다.
+`@interactive-os/aria-kernel` 가 다른 라이브러리와 어떻게 다른지 — 그리고 **왜 이 niche 가 메워야 했는지**를 설명합니다. 각 라이브러리는 자기 자리가 명확하므로, 이 글은 우열을 가리는 게 아니라 **빈 자리** 를 보여주려는 것입니다.
 
 ## 한눈에 보기
 
@@ -12,7 +12,7 @@
 | **Headless UI** | 무스타일 컴포넌트 | 라이브러리 결정 | 무스타일 | controlled props | callback per part |
 | **Ariakit** | 컴포넌트 + 일부 hook | 라이브러리 결정 | 시작 스타일 제공 | store API | callback per part |
 | **React Aria / RAC** | 컴포넌트(RAC) + hook(RA) | RAC 가 결정 / hook 은 자유 | 무스타일 | Collection iterator | `onAction`·`onSelectionChange` 등 |
-| **`@p/aria-kernel`** | 행동 인프라 (hook only) | 소비자가 결정 | 0건 | NormalizedData (3-store) | 단일 `onEvent(UiEvent)` |
+| **`@interactive-os/aria-kernel`** | 행동 인프라 (hook only) | 소비자가 결정 | 0건 | NormalizedData (3-store) | 단일 `onEvent(UiEvent)` |
 
 ## 빈 자리 — 왜 또 만들어야 했나
 
@@ -31,7 +31,7 @@
    ├──────────────────────────────────┤
    │ React Aria (hook 부분)           │  컴포넌트 + hook 둘 다
    ├──────────────────────────────────┤
-   │ @p/aria-kernel                      │  행동만 (hook + props getter)
+   │ @interactive-os/aria-kernel                      │  행동만 (hook + props getter)
    ├──────────────────────────────────┤
    │ WAI-ARIA / APG spec              │  명세
    └──────────────────────────────────┘
@@ -40,7 +40,7 @@
 
 이 사다리에서 **spec 바로 위, 컴포넌트 바로 아래** — 이 자리는 비어 있었습니다. 가장 비슷한 곳은 React Aria 의 hook 부분이지만, 그것도 자체 Collection iterator 와 callback set 어휘를 추가합니다.
 
-`@p/aria-kernel` 가 채우려는 자리는 한 줄로 표현됩니다.
+`@interactive-os/aria-kernel` 가 채우려는 자리는 한 줄로 표현됩니다.
 
 > **WAI-ARIA spec 의 행동만, 추가 어휘는 최소.**
 
@@ -57,7 +57,7 @@
 
 이게 잘 맞으면 편하지만, 디자이너가 "이 리스트는 grid 두 줄로, 항목 사이에 separator, 첫 항목은 sticky" 같은 변형을 요구하면 컴포넌트의 markup 기대를 깨야 합니다. 안 되는 건 아닌데 매번 우회 비용이 듭니다.
 
-`@p/aria-kernel` 는 markup 구조를 모릅니다. `<ul>` 을 쓰든 `<div role="listbox">` 를 쓰든, `<li>` 를 `<button>` 으로 바꾸든 동작합니다. 행동만 챙기고 markup 은 소비자에게.
+`@interactive-os/aria-kernel` 는 markup 구조를 모릅니다. `<ul>` 을 쓰든 `<div role="listbox">` 를 쓰든, `<li>` 를 `<button>` 으로 바꾸든 동작합니다. 행동만 챙기고 markup 은 소비자에게.
 
 ### 2. 어휘 통역 비용을 없애기 위해
 
@@ -65,7 +65,7 @@ W3C ARIA spec 에는 `role="listbox"` · `aria-selected` · `aria-activedescenda
 
 이중 어휘는 학습 비용이고, 검색 비용이고, LLM 추론 비용입니다. spec 을 읽다가 코드로 옮길 때 **매번 통역**해야 합니다.
 
-`@p/aria-kernel` 의 값 어휘(role · aria-\* · prop 키) 는 spec 그대로입니다. spec 페이지(`https://www.w3.org/WAI/ARIA/apg/patterns/listbox/`) 와 코드(`useListboxPattern`) 사이에 통역이 없습니다.
+`@interactive-os/aria-kernel` 의 값 어휘(role · aria-\* · prop 키) 는 spec 그대로입니다. spec 페이지(`https://www.w3.org/WAI/ARIA/apg/patterns/listbox/`) 와 코드(`useListboxPattern`) 사이에 통역이 없습니다.
 
 ### 3. 단일 데이터 인터페이스를 위해
 
@@ -78,7 +78,7 @@ W3C ARIA spec 에는 `role="listbox"` · `aria-selected` · `aria-activedescenda
 
 같은 화면 안에서 4가지 데이터 모양을 변환해 가며 props 를 채워야 합니다.
 
-`@p/aria-kernel` 는 다 같은 형태입니다.
+`@interactive-os/aria-kernel` 는 다 같은 형태입니다.
 
 ```ts
 { entities, relationships, meta }
@@ -92,7 +92,7 @@ listbox 도 tree 도 grid 도 combobox 도 이 한 형태. 트리에서 leaf 를
 
 여러 part 가 같이 사는 화면에서는 callback 이 5개 10개 늘어나고, 각자 다른 인자 형태로 옵니다. middleware (logging, undo/redo, replay, telemetry) 를 끼워 넣으려면 모든 callback 을 일일이 감싸야 합니다.
 
-`@p/aria-kernel` 는 한 채널입니다.
+`@interactive-os/aria-kernel` 는 한 채널입니다.
 
 ```ts
 onEvent(e: UiEvent)
@@ -124,7 +124,7 @@ onEvent(e: UiEvent)
 
 ### "자체 디자인 시스템 + 행동 인프라만 빌리려는 niche"
 
-→ `@p/aria-kernel`. 위 4가지 이유에 공감되면 적합한 자리입니다.
+→ `@interactive-os/aria-kernel`. 위 4가지 이유에 공감되면 적합한 자리입니다.
 
 ## 다음 단계
 

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { useControlState, type NormalizedData } from '@p/aria-kernel'
+import { useControlState, type NormalizedData } from '@interactive-os/aria-kernel'
 import { Nav } from '../examples/_navigationListWrapper'
 import type { SlotProps } from './slots'
 

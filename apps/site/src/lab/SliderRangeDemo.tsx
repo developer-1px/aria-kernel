@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { sliderMultithumbPattern } from '@p/aria-kernel/patterns'
+import { sliderMultithumbPattern } from '@interactive-os/aria-kernel/patterns'
 
 export function SliderRangeDemo() {
   const [values, setValues] = useState([20, 70])

@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { useComboboxReducer } from '@p/aria-kernel/patterns'
+import { useComboboxReducer } from '@interactive-os/aria-kernel/patterns'
 import { Combobox, comboboxWrapperKeys } from './_comboboxWrapper'
 
 const COUNTRIES = ['Argentina', 'Australia', 'Brazil', 'Canada', 'Denmark',

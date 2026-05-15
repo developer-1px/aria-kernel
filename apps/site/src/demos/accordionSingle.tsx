@@ -1,8 +1,8 @@
-import { axisKeys } from '@p/aria-kernel'
-import { accordionAxis, useAccordionPattern, useAccordionReducer } from '@p/aria-kernel/patterns'
+import { axisKeys } from '@interactive-os/aria-kernel'
+import { accordionAxis, useAccordionPattern, useAccordionReducer } from '@interactive-os/aria-kernel/patterns'
 
 const ITEMS = [
-  { id: 'a', label: 'What is @p/aria-kernel?' },
+  { id: 'a', label: 'What is @interactive-os/aria-kernel?' },
   { id: 'b', label: 'Why ARIA-first?' },
   { id: 'c', label: 'Bring my own styles?' },
 ]

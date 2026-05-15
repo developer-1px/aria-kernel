@@ -6,8 +6,9 @@
   "main": "src/index.ts",
   "exports": { ".": "./src/index.ts", "./*": "./src/*" },
   "dependencies": {
-    "@p/aria-kernel": "workspace:*",
-    "@p/slides": "workspace:*",
+    "@interactive-os/aria-kernel": "workspace:*",
+    "@interactive-os/resource": "workspace:*",
+    "@interactive-os/slides": "workspace:*",
     "zod-crud": "file:../../../zod-crud/packages/zod-crud"
   }
 }

@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { useReducer } from 'react'
-import { applyGesture, expandBranchOnActivate, fromTree, reduceSingleSelect } from '@p/aria-kernel'
-import type { TreeItem } from '@p/aria-kernel/patterns'
+import { applyGesture, expandBranchOnActivate, fromTree, reduceSingleSelect } from '@interactive-os/aria-kernel'
+import type { TreeItem } from '@interactive-os/aria-kernel/patterns'
 import { Tree, type TreeSlots, treeWrapperKeys } from './_treeWrapper'
 import type { SlotProps } from '../catalog/slots'
 

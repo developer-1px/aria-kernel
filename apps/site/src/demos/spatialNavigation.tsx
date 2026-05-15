@@ -1,4 +1,4 @@
-import { useSpatialNavigation, spatialNavigationKeys } from '@p/aria-kernel/roving'
+import { useSpatialNavigation, spatialNavigationKeys } from '@interactive-os/aria-kernel/roving'
 
 export const meta = {
   title: 'Spatial Navigation (TV)',

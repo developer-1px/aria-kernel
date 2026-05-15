@@ -1,11 +1,11 @@
 # Getting Started
 
-5분 안에 첫 화면을 띄운다. `@p/aria-kernel` 는 ARIA 행동 인프라 — 시각은 Tailwind utility class 가 직접 표현한다.
+5분 안에 첫 화면을 띄운다. `@interactive-os/aria-kernel` 는 ARIA 행동 인프라 — 시각은 Tailwind utility class 가 직접 표현한다.
 
 ## 설치
 
 ```bash
-npm install @p/aria-kernel
+npm install @interactive-os/aria-kernel
 npm install react@^19
 ```
 
@@ -17,14 +17,14 @@ npm install file:../ds/packages/aria-kernel
 
 ## 첫 import
 
-컬렉션 패턴은 `use<Pattern>Reducer` + `use<Pattern>Pattern` 두 줄. 둘 다 `@p/aria-kernel/patterns` 에서 끌어 쓴다.
+컬렉션 패턴은 `use<Pattern>Reducer` + `use<Pattern>Pattern` 두 줄. 둘 다 `@interactive-os/aria-kernel/patterns` 에서 끌어 쓴다.
 
 ```ts
-import { useListboxReducer, useListboxPattern } from '@p/aria-kernel/patterns'
+import { useListboxReducer, useListboxPattern } from '@interactive-os/aria-kernel/patterns'
 ```
 
-- `@p/aria-kernel/patterns` — APG recipe + 1:1 sibling reducer hook (`useListboxReducer`, `useTabsReducer`, ...)
-- `@p/aria-kernel` — core 어휘 (`NormalizedData`, `UiEvent`, axes, roving, gesture, `reduce*`, `from*`). escape / custom init 에서 직접 사용.
+- `@interactive-os/aria-kernel/patterns` — APG recipe + 1:1 sibling reducer hook (`useListboxReducer`, `useTabsReducer`, ...)
+- `@interactive-os/aria-kernel` — core 어휘 (`NormalizedData`, `UiEvent`, axes, roving, gesture, `reduce*`, `from*`). escape / custom init 에서 직접 사용.
 
 ## 데이터 만들기 — `fromList`
 
@@ -46,7 +46,7 @@ const seed = fromList([
 recipe 한 줄이 `rootProps`, `optionProps(id)`, `items` 를 돌려준다. markup 결정은 소비자.
 
 ```tsx
-import { useListboxReducer, useListboxPattern } from '@p/aria-kernel/patterns'
+import { useListboxReducer, useListboxPattern } from '@interactive-os/aria-kernel/patterns'
 
 const FRUITS = [
   { label: 'Apple' },

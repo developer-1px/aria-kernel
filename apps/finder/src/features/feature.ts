@@ -12,13 +12,13 @@ import {
   fromTree,
   pathAncestors,
   type NormalizedData,
-} from '@p/aria-kernel'
-import { defineFeature, type QuerySpec } from '@p/resource'
+} from '@interactive-os/aria-kernel'
+import { defineFeature, type QuerySpec } from '@interactive-os/resource'
 import {
   getTree, loadText, getImageUrl, sidebar as favItems, smartGroups, walk,
   tagGroups, tagItems, isTagPath,
 } from './data'
-import { tagFromPath } from '@p/fs'
+import { tagFromPath } from '@interactive-os/fs'
 import type { FsNode, ViewMode } from '../entities/types'
 import { extToIcon } from '../entities/types'
 

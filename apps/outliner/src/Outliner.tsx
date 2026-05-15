@@ -1,4 +1,4 @@
-import { useZodCrudResource } from '@p/resource/zod-crud'
+import { useZodCrudResource } from '@interactive-os/resource/zod-crud'
 import { outlinerSpec } from './outliner.spec'
 import { crud, resource } from './resource'
 import { normalize } from './normalize'

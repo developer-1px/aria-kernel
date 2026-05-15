@@ -1,5 +1,5 @@
-import type { UiEvent } from '@p/aria-kernel'
-import { useListboxPattern, useListboxReducer } from '@p/aria-kernel/patterns'
+import type { UiEvent } from '@interactive-os/aria-kernel'
+import { useListboxPattern, useListboxReducer } from '@interactive-os/aria-kernel/patterns'
 
 const COUNTRIES = [
   { id: 'br', label: 'Brazil' },

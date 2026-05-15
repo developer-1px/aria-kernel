@@ -1,5 +1,5 @@
-import type { UiEvent } from '@p/aria-kernel'
-import { useToolbarPattern, useToolbarReducer } from '@p/aria-kernel/patterns'
+import type { UiEvent } from '@interactive-os/aria-kernel'
+import { useToolbarPattern, useToolbarReducer } from '@interactive-os/aria-kernel/patterns'
 
 const ITEMS = [
   { id: 'bold', label: 'B' },

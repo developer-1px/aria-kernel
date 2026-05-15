@@ -112,20 +112,57 @@ importers:
         specifier: ^8.0.9
         version: 8.0.9(@types/node@24.12.2)(esbuild@0.27.7)(jiti@1.21.7)(tsx@4.21.0)(yaml@2.8.4)
 
-  apps/finder: {}
+  apps/finder:
+    dependencies:
+      '@interactive-os/aria-kernel':
+        specifier: workspace:*
+        version: link:../../packages/aria-kernel
+      '@interactive-os/fs':
+        specifier: workspace:*
+        version: link:../../packages/fs
+      '@interactive-os/resource':
+        specifier: workspace:*
+        version: link:../../packages/resource
 
-  apps/kanban: {}
+  apps/kanban:
+    dependencies:
+      '@interactive-os/aria-kernel':
+        specifier: workspace:*
+        version: link:../../packages/aria-kernel
+      '@interactive-os/resource':
+        specifier: workspace:*
+        version: link:../../packages/resource
 
-  apps/markdown: {}
+  apps/markdown:
+    dependencies:
+      '@interactive-os/fs':
+        specifier: workspace:*
+        version: link:../../packages/fs
 
-  apps/outliner: {}
+  apps/outliner:
+    dependencies:
+      '@interactive-os/aria-kernel':
+        specifier: workspace:*
+        version: link:../../packages/aria-kernel
+      '@interactive-os/resource':
+        specifier: workspace:*
+        version: link:../../packages/resource
 
   apps/site:
     dependencies:
-      '@p/aria-kernel':
+      '@interactive-os/aria-kernel':
         specifier: workspace:*
         version: link:../../packages/aria-kernel
-      '@p/source-viewer':
+      '@interactive-os/devtools':
+        specifier: workspace:*
+        version: link:../../packages/devtools
+      '@interactive-os/fs':
+        specifier: workspace:*
+        version: link:../../packages/fs
+      '@interactive-os/resource':
+        specifier: workspace:*
+        version: link:../../packages/resource
+      '@interactive-os/source-viewer':
         specifier: workspace:*
         version: link:../../packages/source-viewer
     devDependencies:
@@ -147,10 +184,13 @@ importers:
 
   apps/slides:
     dependencies:
-      '@p/aria-kernel':
+      '@interactive-os/aria-kernel':
         specifier: workspace:*
         version: link:../../packages/aria-kernel
-      '@p/slides':
+      '@interactive-os/resource':
+        specifier: workspace:*
+        version: link:../../packages/resource
+      '@interactive-os/slides':
         specifier: workspace:*
         version: link:../../packages/slides
       zod-crud:
@@ -204,16 +244,20 @@ importers:
 
   packages/fs: {}
 
-  packages/resource: {}
+  packages/resource:
+    dependencies:
+      '@interactive-os/aria-kernel':
+        specifier: workspace:*
+        version: link:../aria-kernel
 
   packages/slides:
     dependencies:
+      '@interactive-os/aria-kernel':
+        specifier: workspace:*
+        version: link:../aria-kernel
       '@interactive-os/keyboard':
         specifier: file:../../../keyboard/packages/keyboard
         version: file:../keyboard/packages/keyboard
-      '@p/aria-kernel':
-        specifier: workspace:*
-        version: link:../aria-kernel
       pptxgenjs:
         specifier: ^4.0.1
         version: 4.0.1
@@ -236,7 +280,7 @@ importers:
       '@babel/types':
         specifier: ^7.29.0
         version: 7.29.0
-      '@p/aria-kernel':
+      '@interactive-os/aria-kernel':
         specifier: workspace:*
         version: link:../aria-kernel
       react:

@@ -2,12 +2,12 @@ import {
   tree, getTree, subscribeTree, getImageUrl, loadText, walk,
   formatSize, formatDate, collectByAge,
   allTags, entriesByTag, tagPath, isTagPath as _isTagPath,
-} from '@p/fs'
-import type { FsNode } from '@p/fs'
+} from '@interactive-os/fs'
+import type { FsNode } from '@interactive-os/fs'
 import type { SidebarItem, SmartGroupItem, TagGroupItem } from '../entities/types'
 import { extToIcon } from '../entities/types'
 
-// fs primitives는 @p/fs 가 owner — finder는 re-export 만 (cross-app 호환).
+// fs primitives는 @interactive-os/fs 가 owner — finder는 re-export 만 (cross-app 호환).
 export {
   tree, getTree, subscribeTree, getImageUrl, loadText, walk,
   formatSize, formatDate, collectByAge,
@@ -73,6 +73,6 @@ void extToIcon
 
 export const sidebar: SidebarItem[] = [
   { id: 'root',     label: tree.name,           path: '/',                          icon: 'home' },
-  { id: 'headless', label: '@p/aria-kernel',       path: '/packages/aria-kernel/src',     icon: 'dir' },
+  { id: 'headless', label: '@interactive-os/aria-kernel',       path: '/packages/aria-kernel/src',     icon: 'dir' },
   { id: 'docs',     label: 'docs',              path: '/docs',                      icon: 'dir' },
 ]
