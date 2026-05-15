@@ -18,8 +18,8 @@ export interface PatternBaseOptions {
  * Items mapping stays inside each pattern because `selected` semantic differs
  * (listbox.selected vs toolbar.pressed vs tabs.current vs tree.expanded).
  *
- * Patterns that derive ids from a non-default source (tree/treegrid via
- * visibleFlat, listbox `groups` mode) call useRovingTabIndex directly.
+ * Patterns that derive ids from a non-default source (tree/treegrid visible
+ * order, listbox `groups` mode) call useRovingTabIndex directly.
  */
 export function usePatternBase(
   data: NormalizedData,

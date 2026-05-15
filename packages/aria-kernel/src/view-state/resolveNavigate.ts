@@ -6,12 +6,9 @@
  */
 import type { NavigateDir, NormalizedData } from '../intent/events'
 import { ROOT, getChildren } from '../intent/events'
-import { siblingsOf, parentOf } from '../input/keyboard/axes/index'
+import { enabledSiblings, parentOf } from '../input/keyboard/axes/index'
 import { visibleEnabled } from '../input/keyboard/axes/_visibleFlat'
 import { moveGrid, moveLinear } from '@interactive-os/keyboard-navigation'
-
-const enabledOf = (d: NormalizedData, ids: readonly string[]): string[] =>
-  ids.filter((id) => !d.entities[id]?.disabled)
 
 /**
  * focus + dir → next id. resolve 못하면 null (no-op).
@@ -23,7 +20,7 @@ export const resolveNavigate = (d: NormalizedData, dir: NavigateDir, from?: stri
 
   // sibling-based (vertical/horizontal 단일 부모 단)
   if (dir === 'next' || dir === 'prev' || dir === 'start' || dir === 'end') {
-    const sibs = enabledOf(d, siblingsOf(d, focus))
+    const sibs = enabledSiblings(d, focus)
     if (!sibs.length) return null
     if (dir === 'next')  return moveLinear(sibs, focus, 'next', { wrap: true })
     if (dir === 'prev')  return moveLinear(sibs, focus, 'previous', { wrap: true })
@@ -41,7 +38,7 @@ export const resolveNavigate = (d: NormalizedData, dir: NavigateDir, from?: stri
   }
 
   if (dir === 'firstChild') {
-    const kids = enabledOf(d, d.relationships[focus] ?? [])
+    const kids = getChildren(d, focus).filter((id) => !d.entities[id]?.disabled)
     return kids[0] ?? null
   }
 
