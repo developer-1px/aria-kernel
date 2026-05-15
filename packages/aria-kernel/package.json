@@ -159,6 +159,7 @@
     "clean": "rm -rf dist docs/api"
   },
   "dependencies": {
+    "@interactive-os/keyboard": "file:../../../keyboard/packages/keyboard",
     "zod": "^4.3.6"
   },
   "peerDependencies": {
