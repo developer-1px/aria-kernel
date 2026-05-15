@@ -8,7 +8,6 @@
     "build": "pnpm --filter @interactive-os/aria-kernel build",
     "test": "pnpm --filter @interactive-os/aria-kernel test",
     "typecheck": "pnpm --filter @interactive-os/aria-kernel typecheck",
-    "typedoc": "pnpm --filter @interactive-os/aria-kernel typedoc",
     "clean": "pnpm --filter @interactive-os/aria-kernel clean",
     "guard:chords": "node scripts/guardChordRegistry.mjs",
     "audit:axis": "node scripts/auditAxisCompleteness.mjs",
