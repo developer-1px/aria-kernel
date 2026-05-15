@@ -25,6 +25,9 @@ export { type KeyDescriptor, type TreeCommand, type TreeCommandDescriptor } from
 export { mergeRefs } from './mergeRefs'
 export { useRadioPattern, radioAxis, radioKeys, type RadioOptions } from './radio'
 export { useToolbarPattern, toolbarAxis, type ToolbarOptions } from './toolbar'
+export { progressbarPattern, type ProgressbarOptions } from './progressbar'
+export { tagsPattern, type Tag, type TagsOptions } from './tags'
+export { sortablePattern, type SortableItem, type SortableOptions } from './sortable'
 
 export { useMenuPattern, menuAxis, menuKeys, menuButtonTriggerKeys, type MenuOptions } from './menu'
 export { useMenuButtonPattern, menuButtonAxis, menuButtonKeys, type MenuButtonOptions, type MenuItem, type MenuItemKind, type MenuLevel } from './menuButton'
