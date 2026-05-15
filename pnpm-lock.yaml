@@ -162,6 +162,9 @@ importers:
       '@interactive-os/keyboard':
         specifier: file:../../../keyboard/packages/keyboard
         version: file:../keyboard/packages/keyboard
+      '@interactive-os/keyboard-navigation':
+        specifier: file:../../../keyboard-navigation/packages/keyboard-navigation
+        version: file:../keyboard-navigation/packages/keyboard-navigation
       '@types/react':
         specifier: ^19.0.0
         version: 19.2.14
@@ -633,6 +636,9 @@ packages:
   '@humanwhocodes/retry@0.4.3':
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
+
+  '@interactive-os/keyboard-navigation@file:../keyboard-navigation/packages/keyboard-navigation':
+    resolution: {directory: ../keyboard-navigation/packages/keyboard-navigation, type: directory}
 
   '@interactive-os/keyboard@file:../keyboard/packages/keyboard':
     resolution: {directory: ../keyboard/packages/keyboard, type: directory}
@@ -3531,6 +3537,8 @@ snapshots:
   '@humanwhocodes/module-importer@1.0.1': {}
 
   '@humanwhocodes/retry@0.4.3': {}
+
+  '@interactive-os/keyboard-navigation@file:../keyboard-navigation/packages/keyboard-navigation': {}
 
   '@interactive-os/keyboard@file:../keyboard/packages/keyboard': {}
 

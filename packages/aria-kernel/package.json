@@ -160,6 +160,7 @@
   },
   "dependencies": {
     "@interactive-os/keyboard": "file:../../../keyboard/packages/keyboard",
+    "@interactive-os/keyboard-navigation": "file:../../../keyboard-navigation/packages/keyboard-navigation",
     "zod": "^4.3.6"
   },
   "peerDependencies": {

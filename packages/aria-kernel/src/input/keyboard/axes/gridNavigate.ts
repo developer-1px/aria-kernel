@@ -2,6 +2,7 @@ import { fromKeyMap, type Axis } from './axis'
 import { parentOf } from './index'
 import { getChildren, type NormalizedData } from '../../../intent/events'
 import { INTENT_CHORDS } from './intentChords'
+import { findGridLocation } from '@interactive-os/keyboard-navigation'
 
 /**
  * gridNavigate — APG `/grid/` 2D 셀 단위 navigation. focus 는 cell 에 있다.
@@ -23,18 +24,24 @@ interface Coord {
   rowIdx: number
 }
 
+export const gridRows = (d: NormalizedData, gridId: string): string[][] =>
+  getChildren(d, gridId).map((rowId) => getChildren(d, rowId))
+
 export const gridCoord = (d: NormalizedData, id: string): Coord | null => {
   const rowId = parentOf(d, id)
   if (!rowId) return null
   const cellsInRow = getChildren(d, rowId)
-  const colIdx = cellsInRow.indexOf(id)
-  if (colIdx === -1) return null
   const gridId = parentOf(d, rowId)
   if (!gridId) return null
   const rows = getChildren(d, gridId)
-  const rowIdx = rows.indexOf(rowId)
-  if (rowIdx === -1) return null
-  return { cellsInRow, colIdx, rows, rowIdx }
+  const location = findGridLocation(gridRows(d, gridId), id)
+  if (!location) return null
+  return {
+    cellsInRow,
+    colIdx: location.columnIndex,
+    rows,
+    rowIdx: location.rowIndex,
+  }
 }
 
 export const gridNavigate: Axis = fromKeyMap([

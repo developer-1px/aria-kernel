@@ -1,4 +1,5 @@
 import { ROOT, getChildren, getExpanded, isDisabled, type NormalizedData } from '../../../intent/events'
+import { visibleTreeItems } from '@interactive-os/keyboard-navigation'
 
 /**
  * visibleFlat — DFS visible 순회 (collapse 반영). 자식이 펼쳐진 (`meta.expanded`)
@@ -10,10 +11,11 @@ export const visibleFlat = (
   exp: Set<string>,
   out: string[] = [],
 ): string[] => {
-  for (const id of getChildren(d, parent)) {
-    out.push(id)
-    if (exp.has(id)) visibleFlat(d, id, exp, out)
-  }
+  out.push(...visibleTreeItems({
+    roots: getChildren(d, parent),
+    children: (id) => getChildren(d, id),
+    isExpanded: (id) => exp.has(id),
+  }))
   return out
 }
 

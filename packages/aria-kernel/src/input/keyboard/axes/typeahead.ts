@@ -2,6 +2,7 @@ import { tagAxis, type Axis } from './axis'
 import type { UiEvent } from '../../../intent/events'
 import { getLabel, getTypeahead } from '../../../intent/events'
 import { isPrintable } from '@interactive-os/keyboard'
+import { findTypeaheadMatch } from '@interactive-os/keyboard-navigation'
 import { parseTrigger } from '../../../trigger'
 import { enabledSiblings } from './index'
 
@@ -29,8 +30,9 @@ export const typeahead: Axis = tagAxis((d, id, t) => {
   const now = Date.now()
   const { buf, deadline } = getTypeahead(d)
   const nextBuf = (now < deadline ? buf : '') + p.key.toLowerCase()
-  const match = enabledSiblings(d, id).find(
-    (sid) => getLabel(d, sid).toLowerCase().startsWith(nextBuf),
+  const match = findTypeaheadMatch(
+    enabledSiblings(d, id).map((sid) => ({ item: sid, label: getLabel(d, sid) })),
+    nextBuf,
   )
   const events: UiEvent[] = [{ type: 'typeahead', buf: nextBuf, deadline: now + WINDOW_MS }]
   if (match) events.push({ type: 'navigate', id: match })
