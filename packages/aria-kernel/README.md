@@ -117,17 +117,11 @@ declare module '@interactive-os/aria-kernel/layout/nodes' {
 
 위반은 버그 또는 정책 전환이지 개선이 아니다.
 
-## /lab — ARIA-punt 흡수 PoC
+## Harness
 
-소비자가 자체 구현하던 ad-hoc 코드(document mousedown · data.entities mutation · `<input onKeyDown>`) 가 kernel 어디에 흡수됐는지 5 PoC + 25 black-box test + 17 kernel hook test 로 가시화. `apps/site/src/lab/` (라우트 `/lab`).
-
-| Demo | 흡수 API | kernel test | lab test |
-|---|---|---|---|
-| `dialog-backdrop` | `backdropProps` | 4 | 5 |
-| `tabs-controlled` | `active` | 3 | 5 |
-| `menu-outside-close` | `onInteractOutside` | 4 | 5 |
-| `grid-edit-start` | `editStart` UiEvent + Enter chord | 3 | 5 |
-| `dialog-on-keymap` | `on` middleware | 3 | 5 |
+Demo routes and consumer apps are outside this package repo in
+`../aria-kernel-apps`. They consume this package through
+`@interactive-os/aria-kernel`.
 
 ## 빌드
 

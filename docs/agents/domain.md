@@ -1,19 +1,17 @@
-# Domain Docs — Multi-context
+# Domain Docs
 
-이 repo는 모노레포라 도메인 어휘가 패키지/앱 단위로 다르다.
+이 repo의 도메인 어휘는 `packages/aria-kernel` 하나에 집중한다.
 
 ## 진입점
 
 - 루트 `CONTEXT-MAP.md` — 어떤 컨텍스트들이 있는지 인덱스
-- 각 패키지의 `CONTEXT.md` — 그 패키지의 정본 어휘 + 정본 문서 포인터
+- `packages/aria-kernel/CONTEXT.md` — 정본 어휘 + 정본 문서 포인터
 
 ## 컨텍스트 목록
 
 `CONTEXT-MAP.md`가 정본. 요약:
 
-- `packages/aria-kernel/CONTEXT.md` — ARIA behavior infra (단 하나의 제품)
-- `packages/fs/CONTEXT.md` — 파일시스템 추상
-- `packages/devtools/CONTEXT.md` — 개발 도구
+- `packages/aria-kernel/CONTEXT.md` — ARIA behavior infra
 
 ## ADR
 
@@ -21,7 +19,7 @@
 
 ## 소비 규약
 
-스킬(`improve-codebase-architecture`·`diagnose`·`tdd`·`grill-with-docs` 등)이 어떤 패키지를 만질 때:
+스킬(`improve-codebase-architecture`·`diagnose`·`tdd`·`grill-with-docs` 등)이 패키지를 만질 때:
 
 1. 먼저 해당 패키지의 `CONTEXT.md`를 읽는다.
 2. 그 `CONTEXT.md`가 가리키는 정본 문서(`INVARIANTS.md`·`PATTERNS.md`·`spec.md`·`README.md`)를 읽는다.

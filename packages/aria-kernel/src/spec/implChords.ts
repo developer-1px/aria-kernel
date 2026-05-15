@@ -3,7 +3,7 @@
  *
  * Issue #123/#124 (EPIC #121). 본 모듈은 두 소비자가 공유:
  *   - apgCoverage.test.ts (drift 게이트)
- *   - site /coverage 라우트 (시각화)
+ *   - sibling harness /coverage route (visualization)
  *
  * 패턴마다 multiSelectable·orientation 등 옵션은 'maximum advertise' 측면 채택 —
  * 어떤 옵션 조합으로도 advertise 안 되는 chord 만 매트릭스 gap 으로 잡는다.
