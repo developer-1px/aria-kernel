@@ -1,7 +1,7 @@
 import { tagAxis, type Axis } from './axis'
 import type { UiEvent } from '../../../intent/events'
 import { getLabel, getTypeahead } from '../../../intent/events'
-import { isPrintable } from '../key'
+import { isPrintable } from '@interactive-os/keyboard'
 import { parseTrigger } from '../../../trigger'
 import { enabledSiblings } from './index'
 
@@ -19,7 +19,13 @@ const WINDOW_MS = 500
 export const typeahead: Axis = tagAxis((d, id, t) => {
   const p = parseTrigger(t)
   if (p.kind !== 'key') return null
-  if (!isPrintable(p)) return null
+  if (!isPrintable({
+    key: p.key,
+    ctrlKey: p.ctrl,
+    altKey: p.alt,
+    metaKey: p.meta,
+    shiftKey: p.shift,
+  })) return null
   const now = Date.now()
   const { buf, deadline } = getTypeahead(d)
   const nextBuf = (now < deadline ? buf : '') + p.key.toLowerCase()
