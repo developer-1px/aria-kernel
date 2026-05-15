@@ -5,7 +5,7 @@
  * 모든 등록된 binding 은 cheatsheet 로 enumerate 가능하며 (`?` UI),
  * 같은 normalized chord × scope 충돌은 register 시점에 throw.
  *
- * de facto: tinykeys 문법(`mod+s`, `Shift+/`) 그대로. `mod` = mac:Meta / 그 외:Ctrl.
+ * Shortcut matching and normalization come from `@interactive-os/keyboard`.
  *
  * @example
  * function Page() {
@@ -18,13 +18,14 @@
 
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
+import { parseShortcut, stringifyShortcut } from '@interactive-os/keyboard'
 
 import { onShortcut } from './useShortcut'
 
 export type Scope = string
 
 export interface ShortcutEntry {
-  /** tinykeys chord string. `mod+s`, `Shift+/`, `Escape` 등 */
+  /** `@interactive-os/keyboard` shortcut string. `Mod+s`, `Shift+/`, `Escape` 등 */
   chord: string
   /** group key for cheatsheet (e.g. 'page', 'dialog-modal', 'table') */
   scope: Scope
@@ -64,28 +65,17 @@ const createStore = (): RegistryStore => {
   }
 }
 
-const isMac = typeof navigator !== 'undefined' && /Mac|iP(hone|od|ad)/.test(navigator.platform)
-
-/** chord normalize — modifier 순서 무관 매칭. `mod`·`$mod` 는 platform 으로 치환 */
 const normalizeChord = (spec: string): string => {
-  const parts = spec.split('+')
-  const flags = { meta: false, ctrl: false, alt: false, shift: false }
-  let key = ''
-  parts.forEach((raw, i) => {
-    const isLast = i === parts.length - 1
-    const p = raw.trim().toLowerCase()
-    if (!isLast && (p === 'mod' || p === '$mod')) {
-      if (isMac) flags.meta = true; else flags.ctrl = true
-    } else if (!isLast && p === 'control') flags.ctrl = true
-    else if (!isLast && p in flags) flags[p as keyof typeof flags] = true
-    else key = raw.toLowerCase()
-  })
-  const mods: string[] = []
-  if (flags.meta) mods.push('meta')
-  if (flags.ctrl) mods.push('ctrl')
-  if (flags.alt) mods.push('alt')
-  if (flags.shift) mods.push('shift')
-  return [...mods, key].join('+')
+  return parseShortcut(spec)
+    .map((shortcut) => stringifyShortcut({
+      key: shortcut.key,
+      ctrlKey: shortcut.control,
+      altKey: shortcut.alt,
+      metaKey: shortcut.meta,
+      shiftKey: shortcut.shift,
+      modifierState: shortcut.altGraph ? { AltGraph: true } : undefined,
+    }))
+    .join(' ')
 }
 
 const RegistryCtx = createContext<RegistryStore | null>(null)

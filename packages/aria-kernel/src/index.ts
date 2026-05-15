@@ -49,7 +49,7 @@ export {
   composeAxes, axisKeys, tagAxis, parentOf, siblingsOf, enabledSiblings,
   navigate, activate, toggle, expand, escape, typeahead, treeNavigate, treeExpand,
   multiSelect, select, numericStep,
-  KEYS, matchChord, matchAnyChord, matchEventToChord, gridNavigate, gridMultiSelect,
+  KEYS, gridNavigate, gridMultiSelect,
   type Axis, type Chord, type KeyName,
 } from './input/keyboard/axes'
 export {

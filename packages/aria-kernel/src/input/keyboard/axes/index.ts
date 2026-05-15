@@ -1,6 +1,6 @@
 import { ROOT, type NormalizedData } from '../../../intent/events'
 
-export { composeAxes, fromKeyMap, tagAxis, axisKeys, type Axis, type KeyHandler, type KeyMap } from './axis'
+export { composeAxes, fromKeyMap, tagAxis, axisKeys, type Axis, type Chord, type KeyHandler, type KeyMap } from './axis'
 
 /**
  * parentOf — returns parent id, or ROOT sentinel if id is top-level.
@@ -39,7 +39,6 @@ export { gridMultiSelect } from './gridMultiSelect'
 export { escape } from './escape'
 export { openControl } from './openControl'
 export { pageNavigate } from './pageNavigate'
-export { matchChord, matchAnyChord, matchEventToChord, type Chord } from './chord'
 export { KEYS, type KeyName } from './keys'
 export { INTENT_CHORDS } from './intentChords'
 export {

@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef } from 'react'
-import { matchAnyChord } from '../input/keyboard/axes'
+import { matches } from '@interactive-os/keyboard'
 import { useDialogModalPattern, dialogModalKeys, type DialogModalOptions } from './dialogModal'
 import type { ItemProps, RootProps } from './types'
 
@@ -84,9 +84,8 @@ export function useComboboxDialogPattern(opts: ComboboxDialogOptions): ComboboxD
   }, [open, dialogRootRef, setOpen])
 
   const onKeyDown = (e: React.KeyboardEvent) => {
-    const ev = e as unknown as KeyboardEvent
     // Alt+ArrowDown / ArrowDown → open. APG combobox-datepicker.
-    if (matchAnyChord(ev, ['ArrowDown', 'Alt+ArrowDown'])) {
+    if (matches(e.nativeEvent, 'ArrowDown Alt+ArrowDown')) {
       if (!open) {
         e.preventDefault()
         setOpen(true)

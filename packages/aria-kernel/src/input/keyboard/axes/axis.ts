@@ -1,8 +1,9 @@
 import type { UiEvent, NormalizedData } from '../../../intent/events'
 import type { Trigger } from '../../../trigger'
 import { parseTrigger } from '../../../trigger'
-import { type Chord } from './chord'
 import { triggerMatches } from '../../../trigger'
+
+export type Chord = string
 
 /**
  * Axis — data 기반 APG 키/포인터 처리 primitive.
@@ -22,7 +23,7 @@ import { triggerMatches } from '../../../trigger'
  * 별도 probe 없이 chord 목록 추출 (`axisKeys(axis)` 는 key 부분만 추가 dedup).
  */
 export type Axis = ((d: NormalizedData, id: string, t: Trigger) => UiEvent[] | null) & {
-  /** axis 가 응답하는 chord 목록 (string tinykeys 형식). 직렬화 가능. */
+  /** axis 가 응답하는 shortcut 목록. 직렬화 가능. */
   readonly chords: readonly string[]
 }
 
@@ -89,7 +90,7 @@ export type KeyMapEntryRhs = UiEventTemplate | UiEventTemplate[] | KeyHandler
 /**
  * KeyMap — `[chord(s), handler|template]` tuple 의 선언적 배열.
  *
- * - chord 는 단일 tinykeys string 또는 string[] (합집합 — 어느 하나만 매치되면 hit)
+ * - chord 는 단일 shortcut string 또는 string[] (합집합 — 어느 하나만 매치되면 hit)
  * - 오른쪽 칸은 template (plain object/array) 또는 data-driven KeyHandler
  * - tuple 순서 = 우선순위 (앞쪽 항목 먼저 매칭, 첫 hit 의 결과 반환)
  * - chord 는 항상 `INTENT_CHORDS.X` 통과 — raw 리터럴 지양

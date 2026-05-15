@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState, type RefObject } from 'react'
+import { matches } from '@interactive-os/keyboard'
 import { escapeKeys } from '../input/keyboard/axes/escape'
 import { INTENT_CHORDS } from '../input/keyboard/axes/intentChords'
 import { bindGlobalKeyMap } from '../input/keyboard/key/bindGlobalKeyMap'
-import { matchAnyChord } from '../input/keyboard/axes/chord'
 import { useFocusTrap, focusTrapKeys } from './focusTrap'
 import type { ItemProps, RootProps } from './types'
 
@@ -119,7 +119,7 @@ export function useDialogModalPattern(opts: DialogModalOptions = {}): {
     const onKey = (e: KeyboardEvent) => {
       if (e.defaultPrevented) return
       for (const [chord, fn] of entries) {
-        if (matchAnyChord(e, [chord])) { e.preventDefault(); fn(); return }
+        if (matches(e, chord)) { e.preventDefault(); fn(); return }
       }
     }
     window.addEventListener('keydown', onKey)

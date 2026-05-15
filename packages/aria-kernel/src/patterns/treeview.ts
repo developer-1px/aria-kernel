@@ -1,11 +1,11 @@
 // editable 모드의 chord 어휘는 commands prop 으로 앱이 선언 (SSOT). default 제공.
 import { useCallback } from 'react'
+import { matches } from '@interactive-os/keyboard'
 import {
   ROOT, getChildren, getCollectionChildren, getLabel, isDisabled, getExpanded,
   type NormalizedData, type UiEvent,
 } from '../intent/events'
 import { activate, composeAxes, multiSelect, treeExpand, treeNavigate, typeahead } from '../input/keyboard/axes'
-import { matchEventToChord } from '../input/keyboard/axes/chord'
 import type { InsideEditableMode } from '../input/keyboard/key/insideEditable'
 import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from '../input/clipboard/usePatternClipboard'
 import { selectionFollowsFocus as applySelectionFollowsFocus } from '../input/gesture'
@@ -306,7 +306,7 @@ export function useTreeviewPattern(
   // 단일 chord dispatcher — commands 배열 순회. 매칭되면 preventDefault + runEffect.
   const dispatchCommandChord = (e: React.KeyboardEvent): boolean => {
     for (const desc of commands) {
-      if (matchEventToChord(e.nativeEvent, desc.chord)) {
+      if (matches(e.nativeEvent, desc.chord)) {
         e.preventDefault()
         runEffect(desc.effect, eventItemId(e) ?? focusId, data, containerId, relay)
         return true

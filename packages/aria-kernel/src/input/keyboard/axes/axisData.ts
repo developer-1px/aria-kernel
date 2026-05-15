@@ -10,8 +10,8 @@
 import type { UiEvent } from '../../../intent/events'
 import type { Trigger } from '../../../trigger'
 import { triggerMatches } from '../../../trigger'
-import type { Chord } from './chord'
-import { parseChord } from './chord'
+import { parseShortcut } from '@interactive-os/keyboard'
+import type { Chord } from './axis'
 import type { UiEventTemplate } from './axis'
 
 /** AxisEntry — `[chord(s), intent template(s)]` tuple. */
@@ -56,7 +56,10 @@ export const axisChords = (axis: AxisData): readonly Chord[] => {
 /** axisKeys — axis 의 chord 에서 key 부분만 추출 (display 용 dedup). */
 export const axisKeys = (axis: AxisData): readonly string[] => {
   const seen = new Set<string>()
-  for (const c of axisChords(axis)) seen.add(parseChord(c).key)
+  for (const c of axisChords(axis)) {
+    const [shortcut] = parseShortcut(c)
+    if (shortcut) seen.add(shortcut.key)
+  }
   return [...seen]
 }
 

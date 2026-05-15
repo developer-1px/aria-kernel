@@ -40,7 +40,7 @@ export {
 
 import { getChildren, getExpanded, type UiEvent, type NormalizedData } from '../../intent/events'
 import { INTENT_CHORDS } from '../keyboard/axes/intentChords'
-import { matchAnyChord } from '../keyboard/axes/chord'
+import { matches } from '@interactive-os/keyboard'
 
 /** GestureHelper — UiEvent 1개를 받아 0개 이상의 의도 이벤트로 분해/확장. */
 export type GestureHelper = (d: NormalizedData, e: UiEvent) => UiEvent[]
@@ -92,7 +92,7 @@ import type { KeyboardEvent as ReactKeyboardEvent, MouseEvent as ReactMouseEvent
 export const activateProps = (onActivate: () => void) => ({
   onClick: (_e: ReactMouseEvent) => onActivate(),
   onKeyDown: (e: ReactKeyboardEvent) => {
-    if (matchAnyChord(e.nativeEvent, INTENT_CHORDS.activate.trigger)) {
+    if (matches(e.nativeEvent, INTENT_CHORDS.activate.trigger.join(' '))) {
       e.preventDefault()
       onActivate()
     }

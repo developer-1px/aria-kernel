@@ -1,8 +1,9 @@
+import { matches } from '@interactive-os/keyboard'
 import {
   ROOT, getCollectionChildren, getLabel, isDisabled,
   type NormalizedData, type UiEvent, type ValueEvent,
 } from '../intent/events'
-import { matchAnyChord, toggle, axisKeys, INTENT_CHORDS } from '../input/keyboard/axes'
+import { toggle, axisKeys, INTENT_CHORDS } from '../input/keyboard/axes'
 import type { BaseItem, ItemProps, RootProps } from './types'
 
 /** checkbox keymap registry — `toggle` axis 의 chord SSOT 재활용. */
@@ -12,7 +13,7 @@ const CHECKBOX_CHORDS = INTENT_CHORDS.toggle.trigger
 export const checkboxKeys = (): readonly string[] => axisKeys(toggle)
 
 const handleCheckboxKey = (e: React.KeyboardEvent, action: () => void): void => {
-  if (!matchAnyChord(e as unknown as KeyboardEvent, CHECKBOX_CHORDS)) return
+  if (!matches(e.nativeEvent, CHECKBOX_CHORDS.join(' '))) return
   e.preventDefault()
   action()
 }

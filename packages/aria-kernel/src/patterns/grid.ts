@@ -1,4 +1,5 @@
 import { useCallback } from 'react'
+import { matches } from '@interactive-os/keyboard'
 import {
   ROOT,
   getChildren,
@@ -8,7 +9,7 @@ import {
   type NormalizedData,
   type UiEvent,
 } from '../intent/events'
-import { activate, composeAxes, gridNavigate, gridMultiSelect, matchAnyChord } from '../input/keyboard/axes'
+import { activate, composeAxes, gridNavigate, gridMultiSelect } from '../input/keyboard/axes'
 import { useGridDragSelectGesture } from '../input/gesture/useGridDragSelectGesture'
 
 /**
@@ -308,7 +309,7 @@ export function useGridPattern(
             onKeyDown: (e: React.KeyboardEvent) => {
               // cell-input(내부 editable) 안의 Enter/F2 는 input 의 commit 의도 — 셀의 editStart 재발화 금지.
               if (isEditable(e.target as Element | null)) return
-              if (matchAnyChord(e as unknown as KeyboardEvent, GRID_EDIT_CHORDS)) {
+              if (matches(e.nativeEvent, GRID_EDIT_CHORDS.join(' '))) {
                 e.preventDefault()
                 onEvent?.({ type: 'editStart', id })
               }

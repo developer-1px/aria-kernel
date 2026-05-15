@@ -12,8 +12,8 @@
  * pattern 별 edit-mode chord(Enter/Tab/Shift+Tab) 는 패턴 내부에 둔다 — 컨텍스트(findParent 등) 의존.
  */
 import type React from 'react'
+import { matches } from '@interactive-os/keyboard'
 import type { UiEvent } from '../../intent/events'
-import { matchEventToChord } from '../keyboard/axes/chord'
 import { routeInsideEditable, isEditable, type InsideEditableMode } from '../keyboard/key/insideEditable'
 import type { KeyDescriptor } from '../../patterns/types'
 
@@ -173,7 +173,7 @@ export function usePatternClipboard(args: UsePatternClipboardArgs): UsePatternCl
 
     // 1) builtin default chord 매칭 (disableBuiltinChords 면 skip — tree 가 자체 흡수)
     if (!disableBuiltinChords) for (const { chord, build } of DEFAULT_CHORDS) {
-      if (!matchEventToChord(ke, chord)) continue
+      if (!matches(ke, chord)) continue
       if (targetEditable && !HAS_MODIFIER.test(chord)) return
       const ev = build(activeId)
       const orig = () => { if (ev && onEvent) onEvent(ev) }
@@ -192,7 +192,7 @@ export function usePatternClipboard(args: UsePatternClipboardArgs): UsePatternCl
     for (const chord of userKeys) {
       if (consumed.has(chord)) continue
       if (!disableBuiltinChords && DEFAULT_CHORDS.some((d) => d.chord === chord)) continue
-      if (!matchEventToChord(ke, chord)) continue
+      if (!matches(ke, chord)) continue
       const noop = () => {}
       userMap[chord](ke as unknown as Event, noop)
       // user chord 는 default win 정책 밖 — preventDefault 책임도 user 에게

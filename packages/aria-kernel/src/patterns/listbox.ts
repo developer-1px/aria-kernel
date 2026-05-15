@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
+import { matches } from '@interactive-os/keyboard'
 import { ROOT, getChildren, getCollectionChildren, getLabel, isDisabled, type NormalizedData, type UiEvent } from '../intent/events'
-import { activate, composeAxes, multiSelect, navigate, typeahead, matchAnyChord } from '../input/keyboard/axes'
+import { activate, composeAxes, multiSelect, navigate, typeahead } from '../input/keyboard/axes'
 import type { InsideEditableMode } from '../input/keyboard/key/insideEditable'
 import { usePatternClipboard, type ClipboardOnMiddleware, type ClipboardSerializerOptions } from '../input/clipboard/usePatternClipboard'
 
@@ -197,12 +198,12 @@ export function useListboxPattern(
     ? (e: React.KeyboardEvent) => {
         const id = focusId
         if (id && id !== containerId) {
-          if (matchAnyChord(e as unknown as KeyboardEvent, LISTBOX_EDIT_INSERT)) {
+          if (matches(e.nativeEvent, LISTBOX_EDIT_INSERT.join(' '))) {
             e.preventDefault()
             relay({ type: 'insertAfter', siblingId: id })
             return
           }
-          if (matchAnyChord(e as unknown as KeyboardEvent, LISTBOX_EDIT_REMOVE)) {
+          if (matches(e.nativeEvent, LISTBOX_EDIT_REMOVE.join(' '))) {
             e.preventDefault()
             relay({ type: 'remove', id })
             return

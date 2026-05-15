@@ -6,8 +6,8 @@
  * 타이핑을 탈취하지 않는다 (useShortcut 의 가드 어휘 그대로 흡수).
  */
 
-import type { KeyMap, UiEventTemplate } from '../axes/axis'
-import { matchAnyChord, type Chord } from '../axes/chord'
+import { matches } from '@interactive-os/keyboard'
+import type { Chord, KeyMap, UiEventTemplate } from '../axes/axis'
 import type { UiEvent } from '../../../intent/events'
 import { isEditable } from './insideEditable'
 
@@ -26,7 +26,7 @@ export const bindGlobalKeyMap = (
     for (const [chord, rhs] of entries) {
       const strings = toChords(chord)
       if (strings.length === 0) continue
-      if (!matchAnyChord(e, strings)) continue
+      if (!matches(e, strings.join(' '))) continue
       // editable 안에서 modifier 없는 chord 는 탈취 금지
       const anyModified = strings.some(stringHasModifier)
       if (!anyModified && isEditable(e.target as Element | null)) return

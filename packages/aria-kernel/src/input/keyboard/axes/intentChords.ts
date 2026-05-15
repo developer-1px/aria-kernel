@@ -1,11 +1,11 @@
 /**
- * INTENT_CHORDS — axis 별 intent ↔ tinykeys string chord SSOT (PRD #38).
+ * INTENT_CHORDS — axis 별 intent ↔ `@interactive-os/keyboard` shortcut SSOT.
  *
- * 모든 chord 가 tinykeys string 형식. 100% 직렬화 가능, devtools/문서 가독.
+ * 모든 chord 가 string 형식. 100% 직렬화 가능, devtools/문서 가독.
  * KeyChord object 형식은 폐기됨 — string 만 정본.
  */
 
-import type { Chord } from './chord'
+import type { Chord } from './axis'
 
 export const INTENT_CHORDS = {
   activate: {
@@ -66,7 +66,7 @@ export const INTENT_CHORDS = {
     rangeDown:    'Shift+ArrowDown' as Chord,
   },
   multiSelect: {
-    toggle:    ['Space', 'Spacebar'] as readonly Chord[],
+    toggle:    ['Space'] as readonly Chord[],
     selectAll: ['Control+a', 'Control+A', 'Meta+a', 'Meta+A'] as readonly Chord[],
     rangeUp:   'Shift+ArrowUp' as Chord,
     rangeDown: 'Shift+ArrowDown' as Chord,
